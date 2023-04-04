@@ -1,3 +1,9 @@
+import FormCompanies from "./FormsCompanies";
+
 export default function SignUp() {
-  return <div></div>;
+  return (
+    <div className="flex justify-center">
+      <FormCompanies />
+    </div>
+  );
 }

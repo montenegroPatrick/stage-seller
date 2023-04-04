@@ -1,8 +1,9 @@
+import SignUp from "@/src/components/Forms/SignUp";
 
 export default function Home() {
   return (
-    <main >
-      
+    <main>
+      <SignUp />
     </main>
-  )
+  );
 }

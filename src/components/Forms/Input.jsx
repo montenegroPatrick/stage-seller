@@ -1,5 +1,6 @@
 "use client";
 
+import { Input } from "@material-tailwind/react";
 import { useState } from "react";
 
 export default function InputByUs({ name, inputRef, ...props }) {
@@ -10,7 +11,13 @@ export default function InputByUs({ name, inputRef, ...props }) {
   };
 
   return (
-    <input name={name} value={inputValue} onChange={handleChange} {...props} />
+    <Input
+      name={name}
+      value={inputValue}
+      ref={inputRef}
+      onChange={handleChange}
+      {...props}
+    />
   );
 }
 
