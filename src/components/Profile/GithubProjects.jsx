@@ -1,0 +1,101 @@
+"use client";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Typography,
+  Avatar,
+} from "@material-tailwind/react";
+import Link from "next/link";
+import { useState } from "react";
+
+export default function GithubProjects() {
+  // false data to try
+  const [indexProjectInView, setIndexProjectInView] = useState(1);
+  const repos = {
+    data: [
+      {
+        name: "test1",
+        description: "je suis le repo numéro 1",
+        topics: ["test1", "test1topic", "array"],
+      },
+      {
+        name: "test2",
+        description: "je suis le repo numéro 2",
+        topics: ["test1", "test1topic", "array"],
+      },
+      {
+        name: "test3",
+        description: "je suis le repo numéro 3",
+        topics: ["test1", "test1topic", "array"],
+      },
+    ],
+  };
+  return (
+    <section className="flex flex-row items-center justify-between w-full h-full group projectShadow dark:bg-blue-gray-900/50 rounded-3xl ">
+      {repos.data
+        .filter((repo, index) => {
+          return index === indexProjectInView;
+        })
+        .map((repo, index) => (
+          <>
+            <div
+              className="font-bold text-xl md:text-5xl lg:text-9xl text-black cursor-pointer hover:scale-110"
+              onClick={() => {
+                const indexRepos = Object.keys(repos.data);
+
+                if (indexProjectInView > 0) {
+                  setIndexProjectInView(indexProjectInView - 1);
+                } else {
+                  setIndexProjectInView(Math.max(...indexRepos));
+                }
+              }}
+            >
+              {" "}
+              {"<"}{" "}
+            </div>
+            <Link
+              href="#"
+              target="_blank"
+              className="h-full flex flex-col justify-center "
+            >
+              <div className=" bg-black3 p-2 rounded-3xl h-3/4 flex flex-col items-center justify-between gap-4 cursor-pointer">
+                <h1 className="text-2xl  text-white lg:uppercase font-semibold  ">
+                  {repo.name}
+                </h1>
+                <p className="lg:px-10 py-2 text-justify font-titilliumWeb italic text-md md:text-sm lg:text-xl text-white bg-green-900/[0.1] shadowBox w-full">
+                  {repo.description}
+                </p>
+                <ul className="flex flex-end flex-row flex-wrap">
+                  {repo.topics.map((topic) => (
+                    <div key={topic.id}>
+                      <li className="mt-3 text-white dark:text-white text-sm mr-2 bg-lime-50/[0.1] px-2 shadowBox rounded-xl">
+                        #{topic}
+                      </li>
+                    </div>
+                  ))}
+                </ul>
+              </div>
+            </Link>
+
+            <div
+              className="font-bold text-xl md:text-5xl lg:text-9xl text-black cursor-pointer duration-700"
+              onClick={() => {
+                console.log(indexProjectInView);
+                if (
+                  indexProjectInView === Math.max(...Object.keys(repos.data))
+                ) {
+                  setIndexProjectInView(0);
+                } else {
+                  setIndexProjectInView(indexProjectInView + 1);
+                }
+              }}
+            >
+              {" "}
+              {">"}{" "}
+            </div>
+          </>
+        ))}
+    </section>
+  );
+}
