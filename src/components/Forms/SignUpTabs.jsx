@@ -6,11 +6,11 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import FormCompanies from "./FormsCompanies";
+import SignUpForm from "./SignUpForm";
 
-export default function SignUp() {
+export default function SignUpTabs() {
   return (
-    <Tabs value="dashboard">
+    <Tabs value="students">
       <TabsHeader>
         <Tab value="companies">
           <div className="">Entreprises</div>
@@ -21,10 +21,10 @@ export default function SignUp() {
       </TabsHeader>
       <TabsBody>
         <TabPanel value="companies">
-          <FormCompanies role="companies" />
+          <SignUpForm role="companies" />
         </TabPanel>
         <TabPanel value="students">
-          <FormCompanies role="students" />
+          <SignUpForm role="students" />
         </TabPanel>
       </TabsBody>
     </Tabs>

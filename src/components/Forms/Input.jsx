@@ -1,11 +1,11 @@
 "use client";
 
 import { Input } from "@material-tailwind/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function InputByUs({ name, inputRef, ...props }) {
   const [inputValue, setInputValue] = useState("");
-
+  useEffect(() => {});
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };

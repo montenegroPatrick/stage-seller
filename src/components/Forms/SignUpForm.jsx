@@ -2,7 +2,6 @@
 import InputByUs from "./Input";
 import {
   Card,
-  Input,
   Checkbox,
   Button,
   Typography,
@@ -11,7 +10,8 @@ import {
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-export default function FormCompanies({ role }) {
+export default function SignUpForm({ role }) {
+  const [formChange, setFormChange] = useState("");
   const companyName = useRef(null);
   const companyNumber = useRef(null);
   const firstname = useRef(null);
@@ -30,18 +30,27 @@ export default function FormCompanies({ role }) {
   const mediumPassword =
     /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
 
+  useEffect(() => {
+    setIsErrorEmail(false);
+    setIsErrorVerifPassword(false);
+    if (emailInput.current !== null) {
+      !validEmail.test(emailInput.current.value) &&
+      emailInput.current.value !== ""
+        ? setIsErrorEmail(true)
+        : setIsErrorEmail(false);
+    }
+    if (passwordInput.current !== null) {
+      passwordInput.current.value !== passwordVerifInput.current.value
+        ? setIsErrorVerifPassword(true)
+        : setIsErrorVerifPassword(false);
+    }
+  }, [formChange]);
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (passwordInput.current.value !== passwordVerifInput.current.value) {
-      setIsErrorVerifPassword(true);
-    } else if (!validEmail.test(emailInput.current.value)) {
-      setIsErrorEmail(true);
-    } else {
-      setIsErrorEmail(false);
-      setIsErrorVerifPassword(false);
-      console.log("/todo fetch");
-      // fetch post > all value
-    }
+    setIsErrorEmail(false);
+    setIsErrorVerifPassword(false);
+    console.log("/todo fetch");
+    // fetch post > all value
   };
 
   return (
@@ -55,7 +64,12 @@ export default function FormCompanies({ role }) {
           Inscription
         </Typography>
       </CardHeader>
-      <form className="mt-8 mb-2 mx-2 " onSubmit={handleSubmit}>
+      <form
+        className="mt-8 mb-2 mx-2 "
+        onSubmit={handleSubmit}
+        onFocus={(event) => setFormChange(event.target.value)}
+        onChange={(event) => setFormChange(event.target.value)}
+      >
         <div className="mb-4 flex w-full flex-col gap-6">
           {role === "companies" ? (
             <>
