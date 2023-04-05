@@ -1,4 +1,4 @@
-export default function LayoutUser() {
+export default function LayoutUser({ children }) {
   //todo check if user is logged
-  return <div></div>;
+  return <div>{children}</div>;
 }
