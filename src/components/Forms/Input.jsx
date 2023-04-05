@@ -12,9 +12,10 @@ export default function InputByUs({ name, inputRef, ...props }) {
 
   return (
     <Input
+      variant="standard"
       name={name}
       value={inputValue}
-      ref={inputRef}
+      inputRef={inputRef}
       onChange={handleChange}
       {...props}
     />

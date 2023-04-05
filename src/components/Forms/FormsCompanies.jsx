@@ -6,49 +6,100 @@ import {
   Checkbox,
   Button,
   Typography,
+  CardHeader,
 } from "@material-tailwind/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-export default function FormCompanies() {
-  const emailInput = useRef();
-  const passwordInput = useRef();
-  const [isErrorPassword, setIsErrorPassword] = useState(false);
+export default function FormCompanies({ role }) {
+  const companyName = useRef(null);
+  const companyNumber = useRef(null);
+  const firstname = useRef(null);
+  const lastname = useRef(null);
+  const emailInput = useRef(null);
+  const passwordInput = useRef(null);
+  const [passwordValue, setPasswordValue] = useState("");
+  const [isErrorEmail, setIsErrorEmail] = useState(false);
   const [isErrorVerifPassword, setIsErrorVerifPassword] = useState(false);
-  const passwordVerifInput = useRef();
+  const passwordVerifInput = useRef(null);
   const [mentionLegal, setMentionLegal] = useState(false);
-  const [newsletters, setNewsletters] = useState(false);
-  useEffect(() => {});
-  console.log(emailInput.current.value);
+  const [labelPassword, setLabelPassword] = useState("password");
+
+  const validEmail = /[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]/;
+
+  const mediumPassword =
+    /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (passwordInput.current.value !== passwordVerifInput.current.value) {
       setIsErrorVerifPassword(true);
+    } else if (!validEmail.test(emailInput.current.value)) {
+      setIsErrorEmail(true);
+    } else {
+      setIsErrorEmail(false);
+      setIsErrorVerifPassword(false);
+      console.log("/todo fetch");
+      // fetch post > all value
     }
-    // check = mentionlegal must be true,
-    // password === passwordVerif
-    // emailInput need to be an valid email
-    // check password
   };
 
   return (
-    <Card
-      className="flex flex-col w-full mx-14 "
-      color="transparent"
-      shadow={true}
-    >
-      <Typography className="w-full mx-2" variant="h4" color="blue-gray">
-        Inscription
-      </Typography>
+    <Card className="flex flex-col w-full" color="transparent" shadow={true}>
+      <CardHeader
+        variant="gradient"
+        color="blue"
+        className="mb-4 grid h-28 place-items-center"
+      >
+        <Typography variant="h3" color="white">
+          Inscription
+        </Typography>
+      </CardHeader>
       <form className="mt-8 mb-2 mx-2 " onSubmit={handleSubmit}>
         <div className="mb-4 flex w-full flex-col gap-6">
-          <InputByUs className="w-full" inputRef={emailInput} label="Email" />
+          {role === "companies" ? (
+            <>
+              <InputByUs
+                className="w-full"
+                inputRef={companyName}
+                label="nom de l'entreprise"
+              />
+              <InputByUs
+                className="w-full"
+                inputRef={companyNumber}
+                label="numéro de siret"
+              />
+            </>
+          ) : (
+            <>
+              <InputByUs className="w-full" inputRef={lastname} label="name" />
+              <InputByUs
+                className="w-full"
+                inputRef={firstname}
+                label="prénom / surnom"
+              />
+            </>
+          )}
           <InputByUs
-            error={isErrorPassword}
+            error={isErrorEmail}
+            className="w-full"
+            inputRef={emailInput}
+            label="Email"
+          />
+          <InputByUs
             className="w-full"
             inputRef={passwordInput}
+            value={passwordValue}
             type="password"
-            label="Password"
+            label={labelPassword}
+            onChange={(event) => {
+              setPasswordValue(event.target.value);
+              mediumPassword.test(passwordValue)
+                ? setLabelPassword("bon")
+                : passwordValue !== ""
+                ? setLabelPassword("faible")
+                : setLabelPassword("password");
+            }}
           />
           <InputByUs
             error={isErrorVerifPassword}
@@ -75,10 +126,18 @@ export default function FormCompanies() {
             </Typography>
           }
           containerProps={{ className: "-ml-2.5" }}
+          onChange={() => setMentionLegal(!mentionLegal)}
+          checked={mentionLegal}
         />
-        <Button type="submit" className="mt-6" fullWidth>
-          Envoyer
-        </Button>
+        {mentionLegal ? (
+          <Button type="submit" className="mt-6" fullWidth>
+            Envoyer
+          </Button>
+        ) : (
+          <Button disabled={true} type="submit" className="mt-6" fullWidth>
+            Envoyer
+          </Button>
+        )}
         <Typography color="gray" className="mt-4 text-center font-normal">
           Déjà inscrit ?{" "}
           <Link
