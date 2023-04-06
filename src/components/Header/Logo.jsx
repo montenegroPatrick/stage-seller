@@ -12,8 +12,8 @@ export default function Logo() {
       onClick={() => router.push('/')}
       className="md:block cursor-pointer " 
       src="/logo_transparent.png" 
-      height="100" 
-      width="100" 
+      height={110} 
+      width={110} 
       alt="Logo"
     />
    );

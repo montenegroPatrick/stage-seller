@@ -4,6 +4,7 @@ export default function Container ({ children }) {
     <div
       className="
         max-w-[2520px]
+        min-w-full
         mx-auto
         xl:px-20 
         md:px-10
