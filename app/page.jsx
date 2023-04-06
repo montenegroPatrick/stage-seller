@@ -1,7 +1,14 @@
-import SignUpForm from "@/src/components/Forms/SignUpForm";
-import SignUpTabs from "@/src/components/Forms/SignUpTabs";
-import CardProfile from "@/src/components/Profile/cardProfile";
+
+import FirstLayout from "@/src/components/Layout/FirstLayout";
+import SecondLayout from "@/src/components/Layout/SecondLayout";
+import Container from "@/src/components/Container";
 
 export default function Home() {
-  return <main></main>;
+  return (
+    <main>
+      <FirstLayout />
+      <SecondLayout />
+    </main>
+  );
+
 }

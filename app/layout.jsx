@@ -1,5 +1,9 @@
-import "../src/assets/globals.css";
-import { inter, roboto } from "../src/assets/font";
+
+import { inter, roboto } from '@/src/assets/font';
+import '../src/assets/globals.css';
+
+import Header from '@/src/components/Header/Header';
+import Footer from '@/src/components/Footer/Footer';
 
 export const metadata = {
   title: "StageSeller",
@@ -8,8 +12,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${inter.variable}, ${roboto.variable}`} >
+      <body className='bg-whiteBody'><Header/>{children}<Footer/></body>
     </html>
   );
 }
