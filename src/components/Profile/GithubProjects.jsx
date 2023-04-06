@@ -15,16 +15,19 @@ export default function GithubProjects() {
   const repos = {
     data: [
       {
+        id: 1,
         name: "test1",
         description: "je suis le repo numéro 1",
         topics: ["test1", "test1topic", "array"],
       },
       {
+        id: 2,
         name: "test2",
         description: "je suis le repo numéro 2",
         topics: ["test1", "test1topic", "array"],
       },
       {
+        id: 3,
         name: "test3",
         description: "je suis le repo numéro 3",
         topics: ["test1", "test1topic", "array"],
@@ -43,6 +46,7 @@ export default function GithubProjects() {
               className="font-bold text-xl md:text-5xl lg:text-9xl text-black cursor-pointer hover:scale-110"
               onClick={() => {
                 const indexRepos = Object.keys(repos.data);
+                console.log(indexRepos);
 
                 if (indexProjectInView > 0) {
                   setIndexProjectInView(indexProjectInView - 1);
