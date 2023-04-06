@@ -11,7 +11,7 @@ import SignUpForm from "./SignUpForm";
 export default function SignUpTabs() {
   return (
     <Tabs value="students">
-      <TabsHeader>
+      <TabsHeader className="mb-16">
         <Tab value="companies">
           <div className="">Entreprises</div>
         </Tab>

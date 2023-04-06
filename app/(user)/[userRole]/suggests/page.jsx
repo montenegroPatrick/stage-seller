@@ -1,3 +1,10 @@
 export default function Suggests() {
-    return <div></div>;
-  }
+  //todo fetch user qui a le plus de point commun entre eux
+  return (
+    <div className="flex flex-wrap justify-center">
+      <CardProfile />
+      <CardProfile />
+      <CardProfile />
+    </div>
+  );
+}
