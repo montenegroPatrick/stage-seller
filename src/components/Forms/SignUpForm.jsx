@@ -1,4 +1,5 @@
 "use client";
+import { PostFetch } from "@/FetchFunctions/POST/PostFunctions";
 import InputByUs from "./Input";
 import {
   Card,
@@ -6,11 +7,13 @@ import {
   Button,
   Typography,
   CardHeader,
+  Alert,
 } from "@material-tailwind/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 export default function SignUpForm({ role }) {
+  const [errorMessage, setErrorMessage] = useState("");
   const [formChange, setFormChange] = useState("");
   const companyName = useRef(null);
   const companyNumber = useRef(null);
@@ -23,7 +26,9 @@ export default function SignUpForm({ role }) {
   const [isErrorVerifPassword, setIsErrorVerifPassword] = useState(false);
   const passwordVerifInput = useRef(null);
   const [mentionLegal, setMentionLegal] = useState(false);
-  const [labelPassword, setLabelPassword] = useState("password");
+  const [labelPassword, setLabelPassword] = useState(" * password");
+
+  // check if the all the fields are not empty
 
   const validEmail = /[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]/;
 
@@ -31,8 +36,10 @@ export default function SignUpForm({ role }) {
     /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
 
   useEffect(() => {
+    setErrorMessage("");
     setIsErrorEmail(false);
     setIsErrorVerifPassword(false);
+
     if (emailInput.current !== null) {
       !validEmail.test(emailInput.current.value) &&
       emailInput.current.value !== ""
@@ -45,22 +52,34 @@ export default function SignUpForm({ role }) {
         : setIsErrorVerifPassword(false);
     }
   }, [formChange]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsErrorEmail(false);
-    setIsErrorVerifPassword(false);
-    console.log("/todo fetch");
-    // fetch post > all value
+    // check if the fields are not empty
+    !emailInput.current.value || !passwordInput.current.value
+      ? setErrorMessage("Les champs obligatoire doivent être rempli")
+      : PostFetch({
+          email: emailInput.current.value,
+          password: passwordInput.current.value,
+          name:
+            role === "companies"
+              ? companyName.current.value
+              : lastname.current.value,
+          firstName: role === "students" && firstname.current.value,
+          companyNumber: role === "companies" && companyNumber.current.value,
+        })
+          .then((res) => res.data)
+          .catch((err) => console.log(err));
   };
 
   return (
     <Card className="flex flex-col w-full" color="transparent" shadow={true}>
       <CardHeader
-        variant="gradient"
+        variant="filled"
         color="blue"
-        className="mb-4 grid h-28 place-items-center"
+        className="mb-4 py-1 grid rounded-lg h-16 md:h-28 place-items-center"
       >
-        <Typography variant="h3" color="white">
+        <Typography variant="h4" color="white">
           Inscription
         </Typography>
       </CardHeader>
@@ -77,11 +96,13 @@ export default function SignUpForm({ role }) {
                 className="w-full"
                 inputRef={companyName}
                 label="nom de l'entreprise"
+                type="text"
               />
               <InputByUs
                 className="w-full"
                 inputRef={companyNumber}
                 label="numéro de siret"
+                type="text"
               />
             </>
           ) : (
@@ -91,6 +112,7 @@ export default function SignUpForm({ role }) {
                 className="w-full"
                 inputRef={firstname}
                 label="prénom / surnom"
+                type="text"
               />
             </>
           )}
@@ -98,7 +120,8 @@ export default function SignUpForm({ role }) {
             error={isErrorEmail}
             className="w-full"
             inputRef={emailInput}
-            label="Email"
+            label="* Email"
+            type="email"
           />
           <InputByUs
             className="w-full"
@@ -112,7 +135,7 @@ export default function SignUpForm({ role }) {
                 ? setLabelPassword("bon")
                 : passwordValue !== ""
                 ? setLabelPassword("faible")
-                : setLabelPassword("password");
+                : setLabelPassword("* password");
             }}
           />
           <InputByUs
@@ -120,7 +143,7 @@ export default function SignUpForm({ role }) {
             className="w-full"
             inputRef={passwordVerifInput}
             type="password"
-            label="password verification"
+            label="* password verification"
           />
         </div>
         <Checkbox
@@ -143,15 +166,21 @@ export default function SignUpForm({ role }) {
           onChange={() => setMentionLegal(!mentionLegal)}
           checked={mentionLegal}
         />
-        {mentionLegal ? (
-          <Button type="submit" className="mt-6" fullWidth>
-            Envoyer
-          </Button>
-        ) : (
-          <Button disabled={true} type="submit" className="mt-6" fullWidth>
-            Envoyer
-          </Button>
+        {errorMessage && (
+          <Alert className="duration-700" color="red">
+            {" "}
+            {errorMessage}{" "}
+          </Alert>
         )}
+        <Button
+          disabled={!mentionLegal}
+          type="submit"
+          className="mt-6"
+          fullWidth
+        >
+          s'inscrire
+        </Button>
+
         <Typography color="gray" className="mt-4 text-center font-normal">
           Déjà inscrit ?{" "}
           <Link
