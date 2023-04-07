@@ -76,10 +76,10 @@ export default function SignUpForm({ role }) {
     <Card className="flex flex-col w-full" color="transparent" shadow={true}>
       <CardHeader
         variant="filled"
-        color="blue"
-        className="mb-4 py-1 grid rounded-lg h-16 md:h-28 place-items-center"
+        color="black"
+        className="mb-4 py-1 grid rounded-lg h-16 md:h-28 place-items-center text-white bg-black3"
       >
-        <Typography variant="h4" color="white">
+        <Typography variant="h4" className="">
           Inscription
         </Typography>
       </CardHeader>
@@ -175,7 +175,7 @@ export default function SignUpForm({ role }) {
         <Button
           disabled={!mentionLegal}
           type="submit"
-          className="mt-6"
+          className="mt-6 bg-black3"
           fullWidth
         >
           s'inscrire

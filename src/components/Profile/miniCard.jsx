@@ -3,8 +3,8 @@ import Skills from "./skills";
 
 export default function MiniCard() {
   return (
-    <section className="bg-black3 rounded-lg p-3 mb-3">
-      <div className="flex gap-5 bg-black3 ">
+    <section className="bg-transparentrounded-lg p-3 mb-3">
+      <div className="flex gap-5 bg-transparent ">
         <Avatar
           size="lg"
           variant="rounded"

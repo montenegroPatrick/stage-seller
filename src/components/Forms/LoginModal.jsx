@@ -53,7 +53,7 @@ export default function LoginModal({
               Don&apos;t have an account?
               <Typography
                 as="a"
-                href="#signup"
+                href="/students/signUp"
                 variant="small"
                 color="gray"
                 className="ml-1 font-bold"

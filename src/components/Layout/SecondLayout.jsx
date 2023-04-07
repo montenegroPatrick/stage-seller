@@ -8,12 +8,10 @@ import Button from "../Buttons/Button";
 
 import { useRouter } from "next/navigation";
 
-
-
 export default function SecondLayout() {
   const router = useRouter();
   return (
-    <section className="bg-black1 min-h-screen flex items-center">
+    <section className="bg-black1 min-h-screen flex items-center rounded-xl">
       <Container>
         <div className=" bg-black2 min-w-full rounded flex flex-wrap justify-center 2xl:flex-nowrap shadow-lg shadow-black3/50 sm:p-2">
           <article className="bg-whiteSmoke border-black1 w-90vh h-50vh 2xl:h-70vh 2xl:w-1/2 m-4 rounded-lg flex">
@@ -34,7 +32,6 @@ export default function SecondLayout() {
               <Image
                 fill
                 src="/school.jpeg"
-                alt="school"
                 quality={100}
                 style={{
                   objectFit: "cover",
@@ -46,12 +43,10 @@ export default function SecondLayout() {
           </article>
 
           <article className="bg-whiteSmoke border-black1 w-90vh h-50vh 2xl:h-70vh 2xl:w-1/2 m-4 rounded-lg flex">
-
             <div className="shadow-sm shadow-transparent w-1/2 relative">
               <Image
                 fill
                 src="/company.jpeg"
-                alt="companies"
                 quality={100}
                 style={{
                   objectFit: "cover",

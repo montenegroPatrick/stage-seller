@@ -35,7 +35,7 @@ export default function GithubProjects() {
     ],
   };
   return (
-    <section className="flex flex-row items-center justify-between w-full h-full group projectShadow dark:bg-blue-gray-900/50 rounded-3xl ">
+    <section className="flex flex-row items-center justify-between w-full h-full group projectShadow  rounded-3xl ">
       {repos.data
         .filter((repo, index) => {
           return index === indexProjectInView;
@@ -43,7 +43,7 @@ export default function GithubProjects() {
         .map((repo, index) => (
           <>
             <div
-              className="font-bold text-xl md:text-5xl lg:text-9xl text-black cursor-pointer hover:scale-110"
+              className="font-bold text-xl md:text-5xl lg:text-9xl text-gray-200 cursor-pointer hover:scale-110"
               onClick={() => {
                 const indexRepos = Object.keys(repos.data);
                 console.log(indexRepos);
@@ -63,17 +63,17 @@ export default function GithubProjects() {
               target="_blank"
               className="h-full flex flex-col justify-center "
             >
-              <div className=" bg-black3 p-2 rounded-3xl h-3/4 flex flex-col items-center justify-between gap-4 cursor-pointer">
-                <h1 className="text-2xl  text-white lg:uppercase font-semibold  ">
+              <div className="  p-2 text-black3 rounded-3xl h-3/4 flex flex-col items-center justify-between gap-4 cursor-pointer">
+                <h1 className="text-2xl   lg:uppercase font-semibold  ">
                   {repo.name}
                 </h1>
-                <p className="lg:px-10 py-2 text-justify font-titilliumWeb italic text-md md:text-sm lg:text-xl text-white bg-green-900/[0.1] shadowBox w-full">
+                <p className="lg:px-10 py-2 text-justify font-titilliumWeb italic text-md md:text-sm lg:text-xl   shadowBox w-full">
                   {repo.description}
                 </p>
                 <ul className="flex flex-end flex-row flex-wrap">
                   {repo.topics.map((topic) => (
                     <div key={topic.id}>
-                      <li className="mt-3 text-white dark:text-white text-sm mr-2 bg-lime-50/[0.1] px-2 shadowBox rounded-xl">
+                      <li className="mt-3  dark:text-white text-sm mr-2 bg-lime-50/[0.1] px-2 shadowBox rounded-xl">
                         #{topic}
                       </li>
                     </div>
@@ -83,7 +83,8 @@ export default function GithubProjects() {
             </Link>
 
             <div
-              className="font-bold text-xl md:text-5xl lg:text-9xl text-black cursor-pointer duration-700"
+              className="font-bold text-xl md:text-5xl lg:text-9xl text-gray-200
+               cursor-pointer duration-700"
               onClick={() => {
                 console.log(indexProjectInView);
                 if (

@@ -7,8 +7,8 @@ import MatchHistoric from "./MatchHistoric";
 
 export default function StudentProfile() {
   return (
-    <div className=" m-2 flex flex-col lg:flex-row-reverse h-screen">
-      <section className="flex flex-row justify-between m-2 lg:w-7/12 h-1/3 lg:h-full">
+    <div className=" m-2 flex flex-col lg:flex-row-reverse h-85vh font-mono text-black3 bg-whiteSmoke">
+      <section className="flex flex-row justify-between  lg:w-7/12 h-1/3 lg:h-full">
         <div className="w-1/4 h-full md:w-2/6 lg:w-full overflow-hidden">
           <ImageProfile />
         </div>
@@ -35,7 +35,7 @@ export default function StudentProfile() {
           <div className=" items-center w-1/2">
             <GithubProjects />
           </div>
-          <div className=" h-48 items-center w-1/2 ">
+          <div className="overflow-hidden h-48 items-center w-1/2 ">
             <MatchHistoric />
           </div>
         </div>
