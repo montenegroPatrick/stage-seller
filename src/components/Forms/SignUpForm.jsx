@@ -1,5 +1,5 @@
 "use client";
-import { PostFetch } from "@/FetchFunctions/POST/PostFunctions";
+import { PostFetch } from "@/FetchFunctions/POST/postFunctions";
 import InputByUs from "./Input";
 import {
   Card,
