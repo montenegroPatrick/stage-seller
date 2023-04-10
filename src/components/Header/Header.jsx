@@ -25,11 +25,16 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-black1 fixed w-full h-15vh flex items-center justify-between mx-auto xl:px-20 md:px-10 sm:px-2 px-4 z-10">
-      <Logo />
+    <header className="bg-fixed bg-center bg-cover custom-img h-screen flex items-center justify-center" >
+      {/* <Logo />
       <Button onClick={() => setOpen(!open)} openModal={handleOpen}>Se Connecter</Button>
-      <LoginModal open={open} handleOpen={handleOpen} emailInput={emailInput} passwordInput={passwordInput} handleSubmit={handleSubmit}/>
-
+      <LoginModal open={open} handleOpen={handleOpen} emailInput={emailInput} passwordInput={passwordInput} handleSubmit={handleSubmit}/> */}
+    <div className="absolute top-0 right-0 left-0 bottom-0 bg-black/70 z-[2]" />
+    <div className="p-5 text-whiteSmoke lg:ml-[-5rem] lg:mt-[-5rem] z-[2]">
+      <h2 className="text-5xl font-jetbrains">Trouvez votre stagiaire</h2>
+      <p className="py-5 text-xl">Choisissez parmis nos élèves le collaborateur avec qui ça matchera !</p>
+      <button className="px-8 py-2 border mt-2">Commencer</button>
+    </div>
     </header>
   );
 }

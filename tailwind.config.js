@@ -42,6 +42,8 @@ module.exports = withMT({
       fontFamily: {
         sans: ["var(--font-inter)"],
         mono: ["var(--font-roboto)"],
+        chivo: ["var(--font-chivo)"],
+        jetbrains: ["var(--font-jetbrains)"]
       },
     },
     plugins: [],
