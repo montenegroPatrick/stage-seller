@@ -12,6 +12,7 @@ export default function LogIn() {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const handleChange = (event) => {
@@ -25,6 +26,7 @@ export default function LogIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const { email, password } = input;
+    setIsLoading(true);
     fetch("http://anis-farsi-server.eddi.cloud/api/login", {
       method: "POST",
       headers: {
@@ -37,6 +39,7 @@ export default function LogIn() {
       }),
     })
       .then((res) => {
+        setIsLoading(false);
         if (!res.ok) {
           if (res.status === "401") {
             setErrorMessage("email ou mot de passe faux");
@@ -147,7 +150,7 @@ export default function LogIn() {
                     aria-hidden="true"
                   />
                 </span>
-                Sign in
+                {isLoading ? "loading..." : "sign in"}
               </button>
               {errorMessage && (
                 <Alert
