@@ -3,7 +3,6 @@
 import Image from "next/image";
 
 // Components
-import Container from "../Container";
 import Button from "../Buttons/Button";
 
 import { useRouter } from "next/navigation";

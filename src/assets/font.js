@@ -8,11 +8,7 @@ import {
 
 //Roboto
 export const roboto = Roboto({
-  weight: "300",
-  weight: "400",
-  weight: "500",
-  weight: "700",
-  weight: "900",
+  weight: ["300", "400", "500", "700"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-roboto",
@@ -41,7 +37,7 @@ export const jetBrains = JetBrains_Mono({
 
 //Lobster
 export const lobster = Lobster({
-  weight: "400",
+  weight: ["400"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-lobster",
