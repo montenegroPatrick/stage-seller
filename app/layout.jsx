@@ -1,9 +1,8 @@
-import { inter, roboto } from "@/src/assets/font";
+import { inter, roboto, chivo, jetBrains, lobster } from "@/src/assets/font";
 import "../src/assets/globals.css";
 
-import Header from "@/src/components/Header/Header";
 import Footer from "@/src/components/Footer/Footer";
-import Container from "@/src/components/Container";
+import NavBar from "@/src/components/Header/NavBar";
 
 export const metadata = {
   title: "StageSeller",
@@ -11,11 +10,16 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+
   return (
-    <html lang="en" className={`${inter.variable}, ${roboto.variable}`}>
-      <body className="bg-whiteBody">
-        <Header />
-        <Container>{children}</Container>
+    <html
+      lang="en"
+      className={`${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable}`}
+    >
+      <body className="bg-whiteBody font-chivo">
+        <NavBar />
+        {children}
         <Footer />
       </body>
     </html>

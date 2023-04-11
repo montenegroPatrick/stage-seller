@@ -1,4 +1,3 @@
-import axios from 
 
 /**
  * Sends a POST request for log the user
