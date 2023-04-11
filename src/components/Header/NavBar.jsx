@@ -11,12 +11,11 @@ import { usePathname } from "next/navigation";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useSelectedLayoutSegments } from "next/navigation";
 export default function NavBar() {
-
-  const pathName = usePathname()
+  const pathName = usePathname();
   console.log(pathName);
 
-const segment = useSelectedLayoutSegments()
-console.log(segment);
+  const segment = useSelectedLayoutSegments();
+  console.log(segment);
 
   const [mobileNav, setMobileNav] = useState(false);
   const [color, setColor] = useState("transparent");
@@ -42,7 +41,7 @@ console.log(segment);
   return (
     <header
       style={{ backgroundColor: `${color}` }}
-      className="fixed left-0 top-0 w-full z-10 ease-in duration-300"
+      className="fixed  left-0 top-0 w-full z-10 ease-in duration-300"
     >
       <div className="max-w-[1240px] m-auto flex justify-between py-2 px-4 text-whiteSmoke items-center">
         <Link href="/">

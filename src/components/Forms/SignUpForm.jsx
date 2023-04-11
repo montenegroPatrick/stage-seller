@@ -1,6 +1,6 @@
 "use client";
-import { PostFetch } from "@/FetchFunctions/POST/postFunctions";
-import InputByUs from "./Input";
+
+import { PostSignUp } from "@/FetchFunctions/POST/PostFunctions";
 import {
   Card,
   Checkbox,
@@ -8,29 +8,38 @@ import {
   Typography,
   CardHeader,
   Alert,
+  Input,
 } from "@material-tailwind/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export default function SignUpForm({ role }) {
+  const [input, setInput] = useState(
+    role === "companies"
+      ? {
+          companyName: "",
+          companyNumber: "",
+          email: "",
+          password: "",
+          verifyPassword: "",
+        }
+      : {
+          firstname: "",
+          lastname: "",
+          email: "",
+          password: "",
+          verifyPassword: "",
+        }
+  );
   const [errorMessage, setErrorMessage] = useState("");
-  const [formChange, setFormChange] = useState("");
-  const companyName = useRef(null);
-  const companyNumber = useRef(null);
-  const firstname = useRef(null);
-  const lastname = useRef(null);
-  const emailInput = useRef(null);
-  const passwordInput = useRef(null);
-  const [passwordValue, setPasswordValue] = useState("");
+  const [disable, setDisable] = useState(true);
   const [isErrorEmail, setIsErrorEmail] = useState(false);
   const [isErrorVerifPassword, setIsErrorVerifPassword] = useState(false);
-  const passwordVerifInput = useRef(null);
   const [mentionLegal, setMentionLegal] = useState(false);
   const [labelPassword, setLabelPassword] = useState(" * password");
-
+  const router = useRouter();
   // check if the all the fields are not empty
-
-  const validEmail = /[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]/;
 
   const mediumPassword =
     /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
@@ -39,37 +48,51 @@ export default function SignUpForm({ role }) {
     setErrorMessage("");
     setIsErrorEmail(false);
     setIsErrorVerifPassword(false);
+    setDisable(false);
 
-    if (emailInput.current !== null) {
-      !validEmail.test(emailInput.current.value) &&
-      emailInput.current.value !== ""
-        ? setIsErrorEmail(true)
-        : setIsErrorEmail(false);
+    for (const key in input) {
+      input[key] === "" ? setDisable(true) : setDisable(false);
     }
-    if (passwordInput.current !== null) {
-      passwordInput.current.value !== passwordVerifInput.current.value
-        ? setIsErrorVerifPassword(true)
-        : setIsErrorVerifPassword(false);
-    }
-  }, [formChange]);
+    mentionLegal === false ? setDisable(true) : setDisable(false);
+    console.log("map");
 
-  const handleSubmit = (event) => {
+    if (input.password !== input.verifyPassword) {
+      setIsErrorVerifPassword(true);
+    } else {
+      setIsErrorVerifPassword(false);
+    }
+    if (input.password === mediumPassword) {
+      setLabelPassword("fort");
+    }
+  }, [input, mentionLegal]);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setInput((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // check if the fields are not empty
-    !emailInput.current.value || !passwordInput.current.value
-      ? setErrorMessage("Les champs obligatoire doivent être rempli")
-      : PostFetch({
-          email: emailInput.current.value,
-          password: passwordInput.current.value,
-          name:
-            role === "companies"
-              ? companyName.current.value
-              : lastname.current.value,
-          firstName: role === "students" && firstname.current.value,
-          companyNumber: role === "companies" && companyNumber.current.value,
-        })
-          .then((res) => res.data)
-          .catch((err) => console.log(err));
+    if (!input.email || !input.password) {
+      setErrorMessage("Les champs obligatoire doivent être rempli");
+    } else {
+      const postResult = await PostSignUp({
+        email: input.email,
+        password: input.password,
+        companyName: role === "companies" ? input.companyName : null,
+        lastname: role === "students" ? input.lastname : null,
+        companyNumber: role === "companies" ? input.companyNumber : null,
+        firstName: role === "students" ? input.firstname : null,
+      });
+      console.log(postResult);
+      if (postResult.status === 200) {
+        const { id } = postResult;
+        router.push(`/${role}/profil/${id}`);
+      }
+      console.log(postResult);
+      setErrorMessage("erreur");
+    }
   };
 
   return (
@@ -83,65 +106,77 @@ export default function SignUpForm({ role }) {
           Inscription
         </Typography>
       </CardHeader>
-      <form
-        className="mt-8 mb-2 mx-2 "
-        onSubmit={handleSubmit}
-        onFocus={(event) => setFormChange(event.target.value)}
-        onChange={(event) => setFormChange(event.target.value)}
-      >
+      <form className="mt-8 mb-2 mx-2 " onSubmit={handleSubmit}>
         <div className="mb-4 flex w-full flex-col gap-6">
           {role === "companies" ? (
             <>
-              <InputByUs
+              <Input
                 className="w-full"
-                inputRef={companyName}
                 label="nom de l'entreprise"
+                name="companyName"
+                value={input.companyName}
+                onChange={handleChange}
                 type="text"
               />
-              <InputByUs
+              <Input
                 className="w-full"
-                inputRef={companyNumber}
+                value={input.companyNumber}
+                name="companyNumber"
+                onChange={handleChange}
                 label="numéro de siret"
                 type="text"
               />
             </>
           ) : (
             <>
-              <InputByUs className="w-full" inputRef={lastname} label="name" />
-              <InputByUs
+              <Input
                 className="w-full"
-                inputRef={firstname}
+                label="nom"
+                name="lastname"
+                value={input.lastname}
+                onChange={handleChange}
+              />
+              <Input
+                className="w-full"
+                name="firstname"
+                onChange={handleChange}
+                value={input.firstname}
                 label="prénom / surnom"
                 type="text"
               />
             </>
           )}
-          <InputByUs
+          <Input
             error={isErrorEmail}
+            name="email"
             className="w-full"
-            inputRef={emailInput}
+            value={input.email}
+            onChange={handleChange}
             label="* Email"
             type="email"
           />
-          <InputByUs
+          <Input
+            name="password"
             className="w-full"
-            inputRef={passwordInput}
-            value={passwordValue}
+            value={input.password}
             type="password"
+            onChange={handleChange}
             label={labelPassword}
-            onChange={(event) => {
-              setPasswordValue(event.target.value);
-              mediumPassword.test(passwordValue)
-                ? setLabelPassword("bon")
-                : passwordValue !== ""
-                ? setLabelPassword("faible")
-                : setLabelPassword("* password");
-            }}
+            // onChange={(event) => {
+            //   setPasswordValue(event.target.value);
+            //   mediumPassword.test(passwordValue)
+            //     ? setLabelPassword("bon")
+            //     : passwordValue !== ""
+            //     ? setLabelPassword("faible")
+            //     : setLabelPassword("* password");
+            // }}
           />
-          <InputByUs
+          <Input
+            name="verifyPassword"
             error={isErrorVerifPassword}
             className="w-full"
-            inputRef={passwordVerifInput}
+            onChange={handleChange}
+            value={input.verifyPassword}
             type="password"
             label="* password verification"
           />
@@ -168,12 +203,11 @@ export default function SignUpForm({ role }) {
         />
         {errorMessage && (
           <Alert className="duration-700" color="red">
-            {" "}
-            {errorMessage}{" "}
+            {errorMessage}
           </Alert>
         )}
         <Button
-          disabled={!mentionLegal}
+          disabled={disable}
           type="submit"
           className="mt-6 bg-black3"
           fullWidth

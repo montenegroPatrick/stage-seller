@@ -10,16 +10,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-
-
   return (
     <html
       lang="en"
       className={`${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable}`}
     >
-      <body className="bg-whiteBody font-chivo">
+      <body className="bg-black1 font-chivo">
         <NavBar />
-        {children}
+        <main className="mt-[10vh]">{children}</main>
         <Footer />
       </body>
     </html>
