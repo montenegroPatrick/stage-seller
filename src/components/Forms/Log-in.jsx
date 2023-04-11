@@ -1,9 +1,8 @@
-import { LockClosedIcon } from '@heroicons/react/20/solid'
+import { LockClosedIcon } from "@heroicons/react/20/solid";
 
 export default function LogIn() {
   return (
     <>
-      
       <div className="flex h-[100vh] items-center justify-center p-4 bg-black1">
         <div className="w-full max-w-md space-y-8 bg-white p-8 sm:p-14 rounded-lg">
           <div>
@@ -11,8 +10,11 @@ export default function LogIn() {
               Connexion
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
-              ou{' '}
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+              ou{" "}
+              <a
+                href="#"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+              >
                 créer un compte
               </a>
             </p>
@@ -58,13 +60,19 @@ export default function LogIn() {
                   type="checkbox"
                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                <label
+                  htmlFor="remember-me"
+                  className="ml-2 block text-sm text-gray-900"
+                >
                   Se souvenir de moi
                 </label>
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500 underline">
+                <a
+                  href="#"
+                  className="font-medium text-indigo-600 hover:text-indigo-500 underline"
+                >
                   Mot de passe oublié
                 </a>
               </div>
@@ -76,7 +84,10 @@ export default function LogIn() {
                 className="group relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
+                  <LockClosedIcon
+                    className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+                    aria-hidden="true"
+                  />
                 </span>
                 Sign in
               </button>
@@ -85,5 +96,5 @@ export default function LogIn() {
         </div>
       </div>
     </>
-  )
+  );
 }

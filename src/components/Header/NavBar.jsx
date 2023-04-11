@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 export default function NavBar() {
-
   const [mobileNav, setMobileNav] = useState(false);
   const [color, setColor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
@@ -33,7 +32,7 @@ export default function NavBar() {
   }, []);
 
   return (
-    <div
+    <header
       style={{ backgroundColor: `${color}` }}
       className="fixed left-0 top-0 w-full z-10 ease-in duration-300"
     >
@@ -58,7 +57,9 @@ export default function NavBar() {
           >
             {">"} La méthode O'Clock {"<"}
           </Link>
-          <Button>Se connecter</Button>
+          <Link href="/sign-in">
+            <Button>Se connecter</Button>
+          </Link>
         </div>
 
         {/* Mobile Menu */}
@@ -84,12 +85,12 @@ export default function NavBar() {
           </Link>
           <Link
             className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
-            href="/login"
+            href="/sign-in"
           >
             Se connecter
           </Link>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
