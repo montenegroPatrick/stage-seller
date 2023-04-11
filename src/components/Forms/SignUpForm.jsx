@@ -38,8 +38,9 @@ export default function SignUpForm({ role }) {
   const [isErrorVerifPassword, setIsErrorVerifPassword] = useState(false);
   const [mentionLegal, setMentionLegal] = useState(false);
   const [labelPassword, setLabelPassword] = useState(" * password");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  // check if the all the fields are not empty
+  // check if the all the fields are πnot empty
 
   const mediumPassword =
     /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
@@ -77,21 +78,26 @@ export default function SignUpForm({ role }) {
     if (!input.email || !input.password) {
       setErrorMessage("Les champs obligatoire doivent être rempli");
     } else {
-      const postResult = await PostSignUp({
-        email: input.email,
-        password: input.password,
-        companyName: role === "companies" ? input.companyName : null,
-        lastname: role === "students" ? input.lastname : null,
-        companyNumber: role === "companies" ? input.companyNumber : null,
-        firstName: role === "students" ? input.firstname : null,
-      });
-      console.log(postResult);
-      if (postResult.status === 200) {
-        const { id } = postResult;
-        router.push(`/${role}/profil/${id}`);
+      setIsLoading(true);
+      try {
+        const postResult = await PostSignUp({
+          email: input.email,
+          password: input.password,
+          companyName: role === "companies" ? input.companyName : null,
+          lastname: role === "students" ? input.lastname : null,
+          companyNumber: role === "companies" ? input.companyNumber : null,
+          firstName: role === "students" ? input.firstname : null,
+        });
+        setIsLoading(false);
+        console.log("post", postResult);
+        if (postResult.status === 200) {
+          const { id } = postResult;
+          router.push(`/${role}/profil/${id}`);
+        }
+      } catch (error) {
+        console.log("error", error);
+        setErrorMessage("erreur");
       }
-      console.log(postResult);
-      setErrorMessage("erreur");
     }
   };
 
@@ -212,13 +218,13 @@ export default function SignUpForm({ role }) {
           className="mt-6 bg-black3"
           fullWidth
         >
-          s'inscrire
+          {isLoading ? "loading..." : "s'inscrire"}
         </Button>
 
         <Typography color="gray" className="mt-4 text-center font-normal">
           Déjà inscrit ?{" "}
           <Link
-            href="#"
+            href="/sign-in"
             className="font-medium text-blue-500 transition-colors hover:text-blue-700"
           >
             log in

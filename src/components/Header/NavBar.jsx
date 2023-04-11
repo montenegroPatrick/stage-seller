@@ -12,10 +12,10 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useSelectedLayoutSegments } from "next/navigation";
 export default function NavBar() {
   const pathName = usePathname();
-  console.log(pathName);
+  //  console.log(pathName);
 
   const segment = useSelectedLayoutSegments();
-  console.log(segment);
+  // console.log(segment);
 
   const [mobileNav, setMobileNav] = useState(false);
   const [color, setColor] = useState("transparent");

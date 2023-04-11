@@ -4,8 +4,7 @@
  * @param {string} user  - student or company
  */
 export default async function getAllUsers(user) {
-    const res = await fetch(`url${user}`)
+  const res = await fetch(`url${user}`);
 
-    return  res.json()
-
+  return res.json();
 }

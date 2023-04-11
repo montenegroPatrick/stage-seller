@@ -1,4 +1,4 @@
-import { Cookies } from "js-cookie";
+import Cookies from "js-cookie";
 import { notFound } from "next/navigation";
 /**
  * Sends a POST request to register a user and sets JWT cookie on successful response.
@@ -11,25 +11,27 @@ export const PostSignUp = async (data) => {
     const res = await fetch(
       "http://anis-farsi-server.eddi.cloud/api/register",
       {
+        headers: {
+          "content-type": "application/json",
+          Origin: "http://localhost:3000/",
+        },
         method: "POST",
-        body: data,
-        mode: "no-cors",
+        body: JSON.stringify(data),
       }
     );
     if (!res.ok) {
-      console.log(res.status);
-      return res;
+      throw res;
     } else if (res.status === 404) {
       notFound();
     } else {
       const response = await res.json();
       const { token } = response;
-      console.log(response);
+
       Cookies.set("jwt", token, { httpOnly: true });
       return response;
     }
   } catch (error) {
-    console.log(error);
+    console.log("catch", error);
     return error;
   }
 };
