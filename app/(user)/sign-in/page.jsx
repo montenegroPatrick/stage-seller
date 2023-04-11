@@ -1,5 +1,9 @@
+import LogIn from "@/src/components/Forms/Log-in";
+
 export default function SignIn() {
-  return (<div>
-    
-  </div>);
+  return (
+    <div>
+      <LogIn />
+    </div>
+  );
 }

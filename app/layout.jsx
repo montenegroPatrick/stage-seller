@@ -1,4 +1,4 @@
-import { inter, roboto, chivo, jetBrains } from "@/src/assets/font";
+import { inter, roboto, chivo, jetBrains, lobster } from "@/src/assets/font";
 import "../src/assets/globals.css";
 
 import Header from "@/src/components/Header/Header";
@@ -15,12 +15,11 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable}`}
+      className={`${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable}`}
     >
       <body className="bg-whiteBody font-chivo">
         <NavBar />
-        <Header />
-        <Container>{children}</Container>
+        {children}
         <Footer />
       </body>
     </html>
