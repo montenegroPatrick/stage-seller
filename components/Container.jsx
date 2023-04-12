@@ -1,7 +1,7 @@
 export default function Container({ children }) {
   return (
     <div
-      className="
+      className="p
         max-w-[2520px]
         min-w-full
         mx-auto

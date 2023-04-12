@@ -34,7 +34,7 @@ export default function StudentProfilSettings({ isSettings, setIsSettings }) {
   const { lastname, firstname, localisation } = input;
 
   return (
-    <div className="m-2 flex w-full flex-col lg:flex-row-reverse h-85vh font-mono text-black3 bg-transparent">
+    <div className=" m-2 flex w-full flex-col lg:flex-row-reverse h-85vh font-mono bg-transparent">
       <section className="flex flex-row justify-between  lg:w-96 h-1/3 lg:h-full">
         <div className="w-1/4 h-full md:w-2/6 lg:w-full overflow-hidden">
           <ImageProfile

@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 
 export default function middleware(req) {
   let response = NextResponse.next();
-  console.log("reqqqqqqqqquest", req);
-  req.headers.set("mode", "no-cors");
+  response.headers.set("youhou", "je suis le token");
+  console.log("middleware res", response.cookies);
   const token = req.cookies.get("jwt");
   token && req.headers.set("authorization", token);
   //   if (!token) {

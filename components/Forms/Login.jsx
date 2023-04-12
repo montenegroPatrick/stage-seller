@@ -27,34 +27,46 @@ export default function LogIn() {
     setIsLoading(true);
     event.preventDefault();
     const { email, password } = input;
-    fetch("http://franck-roger-server.eddi.cloud/api/login", {
+    fetch("/api/login", {
       method: "POST",
+
       headers: {
         "Content-Type": "application/json",
-        Origin: "http://localhost:3000/",
       },
-      body: JSON.stringify({
+      body: {
         email,
         password,
-      }),
-    })
-      .then((res) => {
-        setIsLoading(false);
-        if (!res.ok) {
-          if (res.status === "401") {
-            setErrorMessage("email ou mot de passe faux");
-          }
-          setErrorMessage(`problème server ${res.status}`);
-          throw new Error(`error ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        Cookies.set("jwt", data.token, { httpOnly: true });
-        const role = data.user.student === null ? "companies" : "students";
-        router.push(`/${role}/profil/${data.user.id}`);
-      })
-      .catch((err) => console.log("error", err));
+      },
+    });
+    // fetch("http://anis-farsi-server.eddi.cloud/api/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Origin: "http://localhost:3000/",
+    //   },
+    //   body: JSON.stringify({
+    //     email,
+    //     password,
+    //   }),
+    // })
+    //   .then((res) => {
+    //     setIsLoading(false);
+    //     if (!res.ok) {
+    //       if (res.status === "401") {
+    //         setErrorMessage("email ou mot de passe faux");
+    //       }
+    //       setErrorMessage(`problème server ${res.status}`);
+    //       throw new Error(`error ${res.status}`);
+    //     }
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data.token);
+    //     Cookies.set("jwt", data.token, { httpOnly: true });
+    //     const role = data.user.student === null ? "companies" : "students";
+    //     router.push(`/${role}/profil/${data.user.id}`);
+    //   })
+    //   .catch((err) => console.log("error", err));
   };
 
   return (

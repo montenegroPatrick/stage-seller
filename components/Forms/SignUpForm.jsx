@@ -79,25 +79,26 @@ export default function SignUpForm({ role }) {
       setErrorMessage("Les champs obligatoire doivent être rempli");
     } else {
       setIsLoading(true);
-      try {
-        const postResult = await PostSignUp({
-          email: input.email,
-          password: input.password,
-          companyName: role === "companies" ? input.companyName : null,
-          lastname: role === "students" ? input.lastname : null,
-          companyNumber: role === "companies" ? input.companyNumber : null,
-          firstName: role === "students" ? input.firstname : null,
-        });
-        setIsLoading(false);
-        console.log("post", postResult);
-        if (postResult.status === 200) {
-          const { id } = postResult;
-          router.push(`/${role}/profil/${id}`);
-        }
-      } catch (error) {
-        console.log("error", error);
-        setErrorMessage("erreur");
-      }
+      fetch("/api/login", { method: "GET" });
+      //   try {
+      //     const postResult = await PostSignUp({
+      //       email: input.email,
+      //       password: input.password,
+      //       companyName: role === "companies" ? input.companyName : null,
+      //       lastname: role === "students" ? input.lastname : null,
+      //       companyNumber: role === "companies" ? input.companyNumber : null,
+      //       firstName: role === "students" ? input.firstname : null,
+      //     });
+      //     setIsLoading(false);
+      //     console.log("post", postResult);
+      //     if (postResult.status === 200) {
+      //       const { id } = postResult;
+      //       router.push(`/${role}/profil/${id}`);
+      //     }
+      //   } catch (error) {
+      //     console.log("error", error);
+      //     setErrorMessage("erreur");
+      //   }
     }
   };
 

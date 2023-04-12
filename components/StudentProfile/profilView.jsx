@@ -5,10 +5,14 @@ import StudentProfilSettings from "./StudentProfileSettings";
 import StudentProfile from "./StudentProfile";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import getCookie from "@/FetchFunctions/getCookies";
 
 export default function ProfilView({ user, id }) {
   const [isTheUserProfil, setIsTheUserProfil] = useState(false);
   const router = useRouter();
+  const token = getCookie();
+
+  // console.log(user);
   // if (!user) {
   //   router.push("/");
   // }
@@ -20,15 +24,15 @@ export default function ProfilView({ user, id }) {
   const [isSettings, setIsSettings] = useState(false);
   console.log(isSettings);
   return (
-    <div>
-      {isTheUserProfil && (
-        <button
-          className=" flex flex-col p-3"
-          onClick={() => setIsSettings(!isSettings)}
-        >
-          <FiSettings />
-        </button>
-      )}
+    <div className="text-whiteSmoke">
+      {/* {isTheUserProfil && ( */}
+      <button
+        className=" flex flex-col p-3"
+        onClick={() => setIsSettings(!isSettings)}
+      >
+        <FiSettings />
+      </button>
+      {/* )} */}
       {isSettings ? (
         <StudentProfilSettings
           isSettings={isSettings}
