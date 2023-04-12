@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import Skills from "./skills";
 
-export default function ImageProfile() {
+export default function ImageProfile({ isSettings, setShowSettings, show }) {
   return (
     <Card className=" lg:relative grid h-full w-full items-end justify-center text-center">
       <CardHeader
@@ -21,7 +21,12 @@ export default function ImageProfile() {
         <Typography variant="h5" className=" text-gray-400">
           Name firstName
         </Typography>
-        <Skills classes="flex " />
+        <Skills
+          isSettings={isSettings}
+          setShowSettings={setShowSettings}
+          show={show}
+          classes="flex "
+        />
       </CardBody>
     </Card>
   );
