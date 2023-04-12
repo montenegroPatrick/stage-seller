@@ -4,10 +4,10 @@ import Hero from "@/src/components/Header/Hero";
 
 export default function Home() {
   return (
-    <main>
+    <section>
       <Hero />
       <SecondLayout />
-    </main>
+    </section>
   );
 
 }

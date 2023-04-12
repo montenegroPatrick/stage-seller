@@ -1,13 +1,17 @@
+"use client";
 import GithubProjects from "./GithubProjects";
 import ImageProfile from "./ImageProfile";
 import ProfileDescription from "./ProfileDescription";
 import StageDescription from "./StageDescription";
 import Skills from "./Skills";
 import MatchHistoric from "./MatchHistoric";
+import { FiSettings } from "react-icons/fi";
+import { useRef, useState } from "react";
+import StudentProfilSettings from "./StudentProfileSettings";
 
 export default function StudentProfile() {
   return (
-    <div className=" m-2 flex flex-col lg:flex-row-reverse h-85vh font-mono text-black3 bg-whiteSmoke">
+    <div className="m-2 flex flex-col lg:flex-row-reverse h-85vh font-mono text-black3 bg-whiteSmoke">
       <section className="flex flex-row justify-between  lg:w-7/12 h-1/3 lg:h-full">
         <div className="w-1/4 h-full md:w-2/6 lg:w-full overflow-hidden">
           <ImageProfile />

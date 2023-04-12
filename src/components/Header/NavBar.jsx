@@ -7,17 +7,20 @@ import Button from "../Buttons/Button";
 //Dependancies anc hooks
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { useSelectedLayoutSegments } from "next/navigation";
+
+import getUser from "@/FetchFunctions/GET/getUser";
+import { useSearchParams } from "next/navigation";
+
 export default function NavBar() {
-
-  const pathName = usePathname()
-  console.log(pathName);
-
-const segment = useSelectedLayoutSegments()
-console.log(segment);
-
+  const params = useSearchParams("");
+  const id = params.get("id");
+  let user;
+  useEffect(() => {
+    user = async () => id && params.id && (await getUser(params.id));
+  }, [params]);
+  // console.log(segment);
   const [mobileNav, setMobileNav] = useState(false);
   const [color, setColor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
@@ -42,7 +45,7 @@ console.log(segment);
   return (
     <header
       style={{ backgroundColor: `${color}` }}
-      className="fixed left-0 top-0 w-full z-10 ease-in duration-300"
+      className="fixed  left-0 top-0 w-full z-10 ease-in duration-300"
     >
       <div className="max-w-[1240px] m-auto flex justify-between py-2 px-4 text-whiteSmoke items-center">
         <Link href="/">
@@ -65,9 +68,20 @@ console.log(segment);
           >
             {">"} La méthode O'Clock {"<"}
           </Link>
-          <Link href="/sign-in">
-            <Button>Se connecter</Button>
-          </Link>
+          {user ? (
+            <>
+              <Link href={`/${user.type}/profil/${user.id}`}>
+                <Button>{`${user.lastname} ${user.firstname}`}</Button>
+              </Link>
+              <Link href="/logout">
+                <Button>Se déconnecter</Button>
+              </Link>
+            </>
+          ) : (
+            <Link href="/sign-in">
+              <Button>Se connecter</Button>
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu */}
@@ -88,15 +102,36 @@ console.log(segment);
           <Link
             className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
             href="https://oclock.io/"
+            onClick={handleNav}
           >
             La méthode O'Clock
           </Link>
-          <Link
-            className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
-            href="/sign-in"
-          >
-            Se connecter
-          </Link>
+          {user ? (
+            <>
+              <Link
+                onClick={handleNav}
+                className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
+                href={`/${user.type}/profil/${user.id}`}
+              >
+                {`${user.lastname} ${user.firstname}`}
+              </Link>
+              <Link
+                onClick={handleNav}
+                className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
+                href="/logout"
+              >
+                Se déconnecter
+              </Link>
+            </>
+          ) : (
+            <Link
+              onClick={handleNav}
+              className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
+              href="/sign-in"
+            >
+              Se connecter
+            </Link>
+          )}
         </div>
       </div>
     </header>
