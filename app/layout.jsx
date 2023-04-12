@@ -1,12 +1,9 @@
-import { inter, roboto, chivo, jetBrains, lobster } from "@/src/assets/font";
-import "../src/assets/globals.css";
+import { inter, roboto, chivo, jetBrains, lobster } from "@/assets/font";
+import "@/assets/globals.css";
 
-
-
-import Footer from "@/src/components/Footer/Footer";
-import NavBar from "@/src/components/Header/NavBar";
+import Footer from "@/components/Footer/Footer";
+import NavBar from "@/components/Header/NavBar";
 import getUser from "@/FetchFunctions/GET/getUser";
-
 
 export const metadata = {
   title: "StageSeller",

@@ -1,12 +1,11 @@
 import { notFound } from "next/navigation";
-import getUser from "@/FetchFunctions/GET/getUser";
-import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
+import NavBarMarginContainer from "@/components/NavBarMarginContainer";
 
-import CompanyProfile from "@/src/components/Profile/CompanyProfile";
+import CompanyProfile from "@/components/CompanyProfile/CompanyProfile";
 
 import getUser from "@/FetchFunctions/GET/getUser";
 import { cookies, headers } from "next/headers";
-import ProfilView from "@/src/components/Profile/profilView";
+import ProfilView from "@/components/studentProfile/profilView";
 
 async function Profil({ params }) {
   const cookieStore = cookies();
@@ -26,9 +25,12 @@ async function Profil({ params }) {
   // }
   //todo fetch user with id get on params
   return (
-    <NavBarMarginContainer bg="bg-gradient-to-br from-blue-400 to-purple-800 bg-repeat bg-opacity-5" height="min-h-[calc(100vh-4rem)]">
-      {params.userRole === "students" ? ( 
-        <ProfilView student={user} />
+    <NavBarMarginContainer
+      bg="bg-gradient-to-br from-blue-400 to-purple-800 bg-repeat bg-opacity-5"
+      height="min-h-[calc(100vh-4rem)]"
+    >
+      {params.userRole === "students" ? (
+        <ProfilView id={params.id} student={user} />
       ) : (
         <CompanyProfile company="user" />
       )}

@@ -1,4 +1,4 @@
-import CardProfile from "@/app/components/StudentProfile/CardProfile";
+import CardProfile from "@/components/StudentProfile/CardProfile";
 
 export default function Suggests() {
   //todo fetch user qui a le plus de point commun entre eux

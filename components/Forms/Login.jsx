@@ -5,7 +5,7 @@ import { Alert } from "@material-tailwind/react";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function LogIn() {
   const [input, setInput] = useState({
@@ -17,17 +17,17 @@ export default function LogIn() {
   const router = useRouter();
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setInput((prev) => ({ ...prev, [name]: value }));
   };
   useEffect(() => {
     setErrorMessage("");
   }, [input]);
   const handleSubmit = (event) => {
+    setErrorMessage("");
+    setIsLoading(true);
     event.preventDefault();
     const { email, password } = input;
-    setIsLoading(true);
-    fetch("http://anis-farsi-server.eddi.cloud/api/login", {
+    fetch("http://franck-roger-server.eddi.cloud/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,6 @@ export default function LogIn() {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         Cookies.set("jwt", data.token, { httpOnly: true });
         const role = data.user.student === null ? "companies" : "students";
         router.push(`/${role}/profil/${data.user.id}`);

@@ -49,13 +49,13 @@ export default function SignUpForm({ role }) {
     setErrorMessage("");
     setIsErrorEmail(false);
     setIsErrorVerifPassword(false);
-    setDisable(false);
-
+    setDisable(true);
     for (const key in input) {
-      input[key] === "" ? setDisable(true) : setDisable(false);
+      console.log(input[key]);
+      if (input[key] !== "") {
+        setDisable(false);
+      }
     }
-    mentionLegal === false ? setDisable(true) : setDisable(false);
-    console.log("map");
 
     if (input.password !== input.verifyPassword) {
       setIsErrorVerifPassword(true);

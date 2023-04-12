@@ -11,9 +11,8 @@ import StudentProfilSettings from "./StudentProfileSettings";
 
 export default function StudentProfile() {
   return (
-    <div className="m-2 flex flex-col lg:flex-row-reverse min-h-[calc(100vh-4rem)] font-mono text-black3 bg-whiteSmoke">
+    <div className="m-2 flex flex-col w-full lg:flex-row-reverse min-h-[calc(100vh-4rem)] font-mono text-black3 bg-transparent">
       <section className="flex flex-row justify-between lg:w-7/12 h-[15vh] sm:h-[25vh] md:h-[30vh] lg:h-[calc(100vh-4rem)]">
-
         <div className="w-1/4 h-full md:w-2/6 lg:w-full overflow-hidden">
           <ImageProfile />
         </div>

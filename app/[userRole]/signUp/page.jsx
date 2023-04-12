@@ -1,4 +1,4 @@
-import SignUpTabs from "@/app/components/Forms/SignUpTabs";
+import SignUpTabs from "@/components/Forms/SignUpTabs";
 
 export const metadata = {
   title: "Inscription",
@@ -6,7 +6,7 @@ export const metadata = {
 };
 export default function SignUp({ params }) {
   return (
-    <div className="flex justify-center items-center bg-black1 ">
+    <div className=" bg-black1 ">
       <SignUpTabs userRole={params.userRole} />
     </div>
   );

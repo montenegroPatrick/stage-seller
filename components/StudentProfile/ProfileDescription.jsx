@@ -1,15 +1,14 @@
 "use client";
 import { Typography } from "@material-tailwind/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function StageDescription({ isSettings, setIsSettings }) {
+export default function ProfileDescription({ isSettings, setIsSettings }) {
   const router = useRouter();
   const [input, setInput] = useState({
-    description: "description de ce que tu recherche",
-    date: "date au format DD/MM/YYYY",
-    localisation:
-      "lieu du stage veuillez écrire un lieu ou vous souhaitez faire le stage",
+    cvLink: "le lien vers ton cv",
+    description: "présente toi en quelque mot",
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,44 +23,37 @@ export default function StageDescription({ isSettings, setIsSettings }) {
   };
   if (isSettings) {
     return (
-      <div className="p-5 flex flex-col gap-2 lg:w-7/12 float-right">
+      <form
+        className="flex flex-col gap-2  p-5 lg:w-7/12 "
+        onSubmit={handleSubmit}
+      >
         <input
-          type="text"
-          value={input.description}
+          className="rounded-xl p-2 border-white bg-transparent border-2 "
           onChange={handleChange}
+          value={input.cvLink}
+          name="cvLink"
+        />
+        <input
+          onChange={handleChange}
+          className="rounded-xl p-2 border-white bg-transparent border-2 "
+          value={input.description}
           name="description"
         />
-        <ul className="grid place-content-end">
-          <input
-            type="text"
-            value={input.date}
-            onChange={handleChange}
-            name="date"
-          />
-          <input
-            type="text"
-            value={input.localisation}
-            onChange={handleChange}
-            name="localisation"
-          />
-          // checkbox
-        </ul>
-      </div>
+        <button hidden type="submit"></button>
+      </form>
     );
   }
   return (
-    <div className="p-5 flex flex-col gap-2 lg:w-7/12 float-right">
+    <article className="flex flex-col gap-2  p-5 lg:w-7/12 ">
+      <Link className="font-bold italic" href="#">
+        lien vers le CV
+      </Link>
       <Typography variant="paragraph" className="">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci
         numquam similique atque praesentium voluptatibus repellat rerum sunt
         pariatur omnis quo cupiditate fuga consequatur expedita a veniam, quae
         blanditiis quos sed.
       </Typography>
-      <ul className="grid place-content-end">
-        <li>date</li>
-        <li>remote</li>
-        <li>lieu</li>
-      </ul>
-    </div>
+    </article>
   );
 }

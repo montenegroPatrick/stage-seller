@@ -1,7 +1,7 @@
 "use client";
 //Components
-import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
-import CardProfile from "@/app/components/StudentProfile/CardProfile";
+import NavBarMarginContainer from "@/components/NavBarMarginContainer";
+import CardProfile from "@/components/StudentProfile/CardProfile";
 
 //Dependancies and hooks
 import { usePathname } from "next/navigation";

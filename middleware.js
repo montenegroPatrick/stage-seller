@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 
 export default function middleware(req) {
   let response = NextResponse.next();
-  //   console.log("req", req);
+  console.log("reqqqqqqqqquest", req);
+  req.headers.set("mode", "no-cors");
   const token = req.cookies.get("jwt");
   token && req.headers.set("authorization", token);
   //   if (!token) {

@@ -34,8 +34,8 @@ export default function StudentProfilSettings({ isSettings, setIsSettings }) {
   const { lastname, firstname, localisation } = input;
 
   return (
-    <div className="m-2 flex flex-col lg:flex-row-reverse h-85vh font-mono text-black3 bg-whiteSmoke">
-      <section className="flex flex-row justify-between  lg:w-7/12 h-1/3 lg:h-full">
+    <div className="m-2 flex w-full flex-col lg:flex-row-reverse h-85vh font-mono text-black3 bg-transparent">
+      <section className="flex flex-row justify-between  lg:w-96 h-1/3 lg:h-full">
         <div className="w-1/4 h-full md:w-2/6 lg:w-full overflow-hidden">
           <ImageProfile
             isSettings={isSettings}
@@ -49,21 +49,21 @@ export default function StudentProfilSettings({ isSettings, setIsSettings }) {
           className="lg:hidden px-10 flex flex-col gap-1  "
         >
           <input
-            className="rounded-xl  border-white bg-transparent border-2 "
+            className="rounded-xl p-2 border-white bg-transparent border-2  "
             onChange={handleChange}
             name="lastname"
             value={lastname}
           />
 
           <input
-            className="rounded-xl  border-white bg-transparent border-2 "
+            className="rounded-xl p-2 border-white bg-transparent border-2 "
             onChange={handleChange}
             name="firstname"
             value={firstname}
           />
 
           <input
-            className="rounded-xl  border-white bg-transparent border-2 "
+            className="rounded-xl p-2 border-white bg-transparent border-2 "
             onChange={handleChange}
             name="localisation"
             value={localisation}
