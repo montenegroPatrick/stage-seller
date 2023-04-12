@@ -1,8 +1,8 @@
 import { inter, roboto, chivo, jetBrains, lobster } from "@/src/assets/font";
 import "../src/assets/globals.css";
 
-import Footer from "@/src/components/Footer/Footer";
-import NavBar from "@/src/components/Header/NavBar";
+import Footer from "@/app/components/Footer/Footer";
+import NavBar from "@/app/components/Header/NavBar";
 
 export const metadata = {
   title: "StageSeller",
@@ -17,7 +17,8 @@ export default function RootLayout({ children }) {
     >
       <body className="bg-black1 font-chivo">
         <NavBar />
-        <main className="mt-[10vh]">{children}</main>
+        {/* <main className="mt-[10vh]"></main> */}
+        {children}
         <Footer />
       </body>
     </html>

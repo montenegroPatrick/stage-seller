@@ -33,7 +33,6 @@ export default function SecondLayout() {
           className="rounded-xl"
           alt="Photo d'une salle de classe"
         />
-        {/* </div> */}
       </article>
 
       <article className="w-90vh h-70vh 2xl:w-1/2 m-4 rounded-lg flex relative">
@@ -63,7 +62,6 @@ export default function SecondLayout() {
           </Button>
         </div>
       </article>
-      {/* </div> */}
     </section>
   );
 }

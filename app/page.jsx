@@ -1,13 +1,11 @@
-
-import SecondLayout from "@/src/components/Layout/SecondLayout";
-import Hero from "@/src/components/Header/Hero";
+import SecondLayout from "@/app/components/Layout/SecondLayout";
+import Hero from "@/app/components/Header/Hero";
 
 export default function Home() {
   return (
-    <section>
+    <div>
       <Hero />
       <SecondLayout />
-    </section>
+    </div>
   );
-
 }

@@ -1,7 +1,7 @@
 "use client";
 
 //Components
-import Logo from "./Logo";
+import Logo from "../Logo";
 import Button from "../Buttons/Button";
 
 //Dependancies anc hooks
@@ -41,9 +41,9 @@ export default function NavBar() {
   return (
     <header
       style={{ backgroundColor: `${color}` }}
-      className="fixed  left-0 top-0 w-full z-10 ease-in duration-300"
+      className="fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-10 ease-in duration-300"
     >
-      <div className="max-w-[1240px] m-auto flex justify-between py-2 px-4 text-whiteSmoke items-center">
+      <div className="max-w-[1240px] h-[3.5rem] sm:h-[4rem] m-auto flex justify-between py-2 px-4 text-whiteSmoke items-center">
         <Link href="/">
           <h1
             style={{ color: `${textColor}` }}
