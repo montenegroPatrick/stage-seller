@@ -16,7 +16,7 @@ export default function CardProfile({ user }) {
 
   return (
     // <Link href={`/${user.role}/profile/${user.id}`}>
-    <Card className="max-w-[100%] h-[20rem] m-5 overflow-hidden">
+    <Card className="max-w-[100%] h-[20rem] m-3 overflow-hidden p-2 mx-auto">
       <CardHeader
         floated={false}
         shadow={false}
@@ -28,13 +28,13 @@ export default function CardProfile({ user }) {
         </Typography>
       </CardHeader>
       <CardBody className="flex flex-row gap-2">
-        <Image width="100" height="100" src={undefined} alt="" />
+        <Image width="100" height="100" src='/chien-smoking.jpg' alt="" />
         <div className="flex flex-col gap-2">
           <Typography variant="h6" color="blue-gray">
             name of stage looking for
           </Typography>
           <Typography
-            variant="p"
+            variant="paragraph"
             color="gray"
             className="mt-3 pl-2 font-normal"
           >

@@ -1,5 +1,8 @@
-import CompanyProfile from "@/src/components/Profile/CompanyProfile";
 import { notFound } from "next/navigation";
+import getUser from "@/FetchFunctions/GET/getUser";
+import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
+
+import CompanyProfile from "@/src/components/Profile/CompanyProfile";
 
 import getUser from "@/FetchFunctions/GET/getUser";
 import { cookies, headers } from "next/headers";
@@ -23,13 +26,13 @@ async function Profil({ params }) {
   // }
   //todo fetch user with id get on params
   return (
-    <div>
-      {params.userRole === "students" ? (
+    <NavBarMarginContainer bg="bg-gradient-to-br from-blue-400 to-purple-800 bg-repeat bg-opacity-5" height="min-h-[calc(100vh-4rem)]">
+      {params.userRole === "students" ? ( 
         <ProfilView student={user} />
       ) : (
-        <CompanyProfile company={user} />
+        <CompanyProfile company="user" />
       )}
-    </div>
+    </NavBarMarginContainer>
   );
 }
 

@@ -6,7 +6,7 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import CardProfile from "./cardProfile";
+import CardProfile from "./CardProfile";
 import MiniCard from "./miniCard";
 
 export default function MatchHistoric() {

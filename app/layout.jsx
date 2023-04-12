@@ -1,9 +1,12 @@
 import { inter, roboto, chivo, jetBrains, lobster } from "@/src/assets/font";
 import "../src/assets/globals.css";
 
+
+
 import Footer from "@/src/components/Footer/Footer";
 import NavBar from "@/src/components/Header/NavBar";
 import getUser from "@/FetchFunctions/GET/getUser";
+
 
 export const metadata = {
   title: "StageSeller",
@@ -17,7 +20,7 @@ export default function RootLayout({ children }) {
     >
       <body className="bg-black1 font-chivo">
         <NavBar />
-        <main className="">{children}</main>
+        {children}
         <Footer />
       </body>
     </html>
