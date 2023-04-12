@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     >
       <body className="bg-black1 font-chivo">
         <NavBar />
-        <main className="mt-[10vh]">{children}</main>
+        <main className="">{children}</main>
         <Footer />
       </body>
     </html>

@@ -44,7 +44,7 @@ export default function LogIn() {
           if (res.status === "401") {
             setErrorMessage("email ou mot de passe faux");
           }
-          setErrorMessage("problème server");
+          setErrorMessage(`problème server ${res.status}`);
           throw new Error(`error ${res.status}`);
         }
         return res.json();

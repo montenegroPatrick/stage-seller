@@ -1,9 +1,9 @@
-import StudentProfile from "@/src/components/Profile/StudentProfile";
 import CompanyProfile from "@/src/components/Profile/CompanyProfile";
 import { notFound } from "next/navigation";
 
 import getUser from "@/FetchFunctions/GET/getUser";
 import { cookies, headers } from "next/headers";
+import ProfilView from "@/src/components/Profile/profilView";
 
 async function Profil({ params }) {
   const cookieStore = cookies();
@@ -25,7 +25,7 @@ async function Profil({ params }) {
   return (
     <div>
       {params.userRole === "students" ? (
-        <StudentProfile student={user} />
+        <ProfilView student={user} />
       ) : (
         <CompanyProfile company={user} />
       )}
