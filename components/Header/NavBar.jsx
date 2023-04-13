@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
-import useParams, { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Cookies from "js-cookie";
 import { useQuery } from "@tanstack/react-query";
 export const baseUrl = "http://franck-roger-server.eddi.cloud/api/";
@@ -19,7 +19,10 @@ export function getToken() {
   const cookieStore = Cookies;
   return cookieStore.get("jwt");
 }
-export async function getUser(id) {
+
+export async function getUser() {
+  const id = cookieStore.get("user-id");
+
   if (!getToken()) {
     console.log("token not found");
   }
@@ -32,16 +35,20 @@ export async function getUser(id) {
   });
   return user.json();
 }
+
 export default function NavBar() {
   const [mobileNav, setMobileNav] = useState(false);
   const [color, setColor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
   const path = usePathname();
-  const id = path.slice(-1);
+  //const id = path.slice(-1);
   const handleNav = () => {
     setMobileNav(!mobileNav);
   };
-  const { data } = useQuery({ queryKey: ["user"], queryFn: () => getUser(id) });
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => getUser(),
+  });
 
   console.log("navbar", data);
   useEffect(() => {

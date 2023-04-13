@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import cookie from "cookie";
 import { NextResponse } from "next/server";
+
 export default function LogIn() {
   const [input, setInput] = useState({
     email: "",
@@ -52,7 +53,9 @@ export default function LogIn() {
       })
       .then((data) => {
         Cookies.set("jwt", data.token);
+        Cookies.set("user-id", data.user.id);
         console.log(data.user.id);
+        //router.push(`/${data.user.type}`)
       })
       .catch((err) => console.log("error", err));
   };

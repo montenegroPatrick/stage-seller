@@ -10,4 +10,6 @@ export async function middleware(request, res) {
     //       { status: 401, headers: { "content-type": "application/json" } }
     //     );
   }
+  const coo = request.cookies.get("jwt");
+  console.log("cookie", coo);
 }

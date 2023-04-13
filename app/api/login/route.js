@@ -26,15 +26,9 @@ export async function POST(req, res) {
       //console.log(data);
       req.cookies.set("jwt", `${data.token}`);
       const instance = headers();
-
       //   let response = NextResponse.next();
       //   // Set a cookie to hide the banner
       //   response.cookies.set("jwt", data.token);
     })
     .catch((err) => console.log("error", err));
-}
-
-export async function GET(req) {
-  const cookiesStore = cookies();
-  const coookies = cookiesStore.getAll();
 }
