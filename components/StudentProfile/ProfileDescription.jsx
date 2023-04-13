@@ -18,7 +18,7 @@ export default function ProfileDescription({ isSettings, setIsSettings }) {
     // todo fetch put avec les nouvelles data
     event.preventDefault();
     setIsSettings(!isSettings);
-    console.log("submit");
+
     router.refresh();
   };
   if (isSettings) {

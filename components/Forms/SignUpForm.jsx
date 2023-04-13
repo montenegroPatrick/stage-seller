@@ -51,7 +51,6 @@ export default function SignUpForm({ role }) {
     setIsErrorVerifPassword(false);
     setDisable(true);
     for (const key in input) {
-      console.log(input[key]);
       if (input[key] !== "") {
         setDisable(false);
       }

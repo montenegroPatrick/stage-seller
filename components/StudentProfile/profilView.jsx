@@ -6,6 +6,8 @@ import StudentProfile from "./StudentProfile";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import getCookie from "@/FetchFunctions/getCookies";
+import { NextResponse } from "next/server";
+import Cookies from "js-cookie";
 
 export default function ProfilView({ user, id }) {
   const [isTheUserProfil, setIsTheUserProfil] = useState(false);
@@ -22,7 +24,7 @@ export default function ProfilView({ user, id }) {
   //   }
   // }
   const [isSettings, setIsSettings] = useState(false);
-  console.log(isSettings);
+
   return (
     <div className="text-whiteSmoke">
       {/* {isTheUserProfil && ( */}

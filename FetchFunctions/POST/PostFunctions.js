@@ -31,7 +31,6 @@ export const PostSignUp = async (data) => {
       return response;
     }
   } catch (error) {
-    console.log("catch", error);
     return error;
   }
 };

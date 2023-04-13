@@ -20,7 +20,7 @@ export default function StageDescription({ isSettings, setIsSettings }) {
     // todo fetch put avec les nouvelles data
     event.preventDefault();
     setIsSettings(!isSettings);
-    console.log("submit");
+
     router.refresh();
   };
   if (isSettings) {

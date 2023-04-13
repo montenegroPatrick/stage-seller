@@ -26,7 +26,7 @@ export default function StudentProfilSettings({ isSettings, setIsSettings }) {
     // todo fetch put avec les nouvelles data
     event.preventDefault();
     setIsSettings(!isSettings);
-    console.log("submit");
+
     router.refresh();
   };
 

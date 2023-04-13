@@ -10,25 +10,40 @@ import { useEffect, useState } from "react";
 
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
-import getUser from "@/FetchFunctions/GET/getUser";
-import { useSearchParams } from "next/navigation";
+import useParams, { usePathname } from "next/navigation";
+import Cookies from "js-cookie";
+import { useQuery } from "@tanstack/react-query";
+export const baseUrl = "http://franck-roger-server.eddi.cloud/api/";
 
+export function getToken() {
+  const cookieStore = Cookies;
+  return cookieStore.get("jwt");
+}
+export async function getUser(id) {
+  if (!getToken()) {
+    console.log("token not found");
+  }
+  const token = getToken();
+  const user = await fetch(`${baseUrl}users/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return user.json();
+}
 export default function NavBar() {
-  const params = useSearchParams("");
-  const id = params.get("id");
-  let user;
-  useEffect(() => {
-    user = async () => id && params.id && (await getUser(params.id));
-  }, [params]);
-  // console.log(segment);
   const [mobileNav, setMobileNav] = useState(false);
   const [color, setColor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
-
+  const path = usePathname();
+  const id = path.slice(-1);
   const handleNav = () => {
     setMobileNav(!mobileNav);
   };
+  const { data } = useQuery({ queryKey: ["user"], queryFn: () => getUser(id) });
 
+  console.log("navbar", data);
   useEffect(() => {
     const changeColor = () => {
       if (window.scrollY >= 90) {
@@ -68,10 +83,10 @@ export default function NavBar() {
           >
             {">"} La méthode O'Clock {"<"}
           </Link>
-          {user ? (
+          {data ? (
             <>
-              <Link href={`/${user.type}/profil/${user.id}`}>
-                <Button>{`${user.lastname} ${user.firstname}`}</Button>
+              <Link href={`/${data.type}/profil/${data.id}`}>
+                <Button>{`${data.lastName} ${data.firstName}`}</Button>
               </Link>
               <Link href="/logout">
                 <Button>Se déconnecter</Button>
@@ -106,14 +121,14 @@ export default function NavBar() {
           >
             La méthode O'Clock
           </Link>
-          {user ? (
+          {data ? (
             <>
               <Link
                 onClick={handleNav}
                 className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
-                href={`/${user.type}/profil/${user.id}`}
+                href={`/${data.type}/profil/${data.id}`}
               >
-                {`${user.lastname} ${user.firstname}`}
+                {`${data.lastName} ${data.firstName}`}
               </Link>
               <Link
                 onClick={handleNav}

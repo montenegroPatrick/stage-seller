@@ -19,7 +19,6 @@ export default function ModalSettingsSkills({ showSettings }) {
   }, [showSettings]);
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
     //update settings
     //if ok
     setOpen(!open);

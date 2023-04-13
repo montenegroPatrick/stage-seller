@@ -46,7 +46,6 @@ export default function GithubProjects() {
               className="font-bold text-xl md:text-5xl lg:text-9xl text-gray-200 cursor-pointer hover:scale-110"
               onClick={() => {
                 const indexRepos = Object.keys(repos.data);
-                console.log(indexRepos);
 
                 if (indexProjectInView > 0) {
                   setIndexProjectInView(indexProjectInView - 1);
@@ -86,7 +85,6 @@ export default function GithubProjects() {
               className="font-bold text-xl md:text-5xl lg:text-9xl text-gray-200
                cursor-pointer duration-700"
               onClick={() => {
-                console.log(indexProjectInView);
                 if (
                   indexProjectInView === Math.max(...Object.keys(repos.data))
                 ) {

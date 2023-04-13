@@ -6,12 +6,17 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-
+import cookie from "cookie";
+import { NextResponse } from "next/server";
 export default function LogIn() {
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
+  const response = NextResponse.next();
+
+  response.cookies.set("cookie", "cookie motha fucka");
+
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
@@ -22,51 +27,34 @@ export default function LogIn() {
   useEffect(() => {
     setErrorMessage("");
   }, [input]);
+
   const handleSubmit = (event) => {
     setErrorMessage("");
     setIsLoading(true);
     event.preventDefault();
     const { email, password } = input;
-    fetch("/api/login", {
+    fetch("http://franck-roger-server.eddi.cloud/api/login", {
       method: "POST",
-
       headers: {
         "Content-Type": "application/json",
       },
-      body: {
-        email,
-        password,
-      },
-    });
-    // fetch("http://anis-farsi-server.eddi.cloud/api/login", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Origin: "http://localhost:3000/",
-    //   },
-    //   body: JSON.stringify({
-    //     email,
-    //     password,
-    //   }),
-    // })
-    //   .then((res) => {
-    //     setIsLoading(false);
-    //     if (!res.ok) {
-    //       if (res.status === "401") {
-    //         setErrorMessage("email ou mot de passe faux");
-    //       }
-    //       setErrorMessage(`problème server ${res.status}`);
-    //       throw new Error(`error ${res.status}`);
-    //     }
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data.token);
-    //     Cookies.set("jwt", data.token, { httpOnly: true });
-    //     const role = data.user.student === null ? "companies" : "students";
-    //     router.push(`/${role}/profil/${data.user.id}`);
-    //   })
-    //   .catch((err) => console.log("error", err));
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          if (res.status === "401") {
+            console.log("401");
+          }
+          console.log("erreur", res.status);
+          throw new Error(`error ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        Cookies.set("jwt", data.token);
+        console.log(data.user.id);
+      })
+      .catch((err) => console.log("error", err));
   };
 
   return (
