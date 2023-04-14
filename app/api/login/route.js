@@ -14,18 +14,17 @@ export async function POST(req) {
 
   if (!res.ok) return undefined;
 
-  
   const data = await res.json();
   const token = data.token;
-  console.log(data)
-  return {
+  console.log(data);
+  return NextResponse({
     statusCode: 200,
     body: {
       message: "Authentication succeeded",
-      data
+      data,
     },
     headers: {
       "Set-Cookie": `accessToken=${token}; HttpOnly; Max-Age=86400; Path=/`,
     },
-  };
+  });
 }

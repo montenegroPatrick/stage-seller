@@ -1,16 +1,16 @@
-import { baseUrl } from "./baseUrl"
+import { baseUrl } from "./baseUrl";
 export default async function getAllUsers(role, token) {
-    const res = await fetch(`${baseUrl}users/type/${role}`,{
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    if(!res.ok){ 
-        throw new Error ('La requête a échouée')
-    }
+  const res = await fetch(`${baseUrl}users/type/${role}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  // if (!res.ok) {
+  //   throw new Error("La requête a échouée", res.status, res.ok);
+  // }
 
-    return res.json()
+  return res.json();
 }
 
 //`http://franck-roger-server.eddi.cloud/api/users/type/${role}`

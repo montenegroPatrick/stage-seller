@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import cookie from "cookie";
 import { NextResponse } from "next/server";
+import { baseUrl } from "@/lib/baseUrl";
 
 export default function LogIn() {
   const [input, setInput] = useState({
@@ -34,7 +35,7 @@ export default function LogIn() {
     setIsLoading(true);
     event.preventDefault();
     const { email, password } = input;
-    fetch("/api/login", {
+    fetch(`${baseUrl}login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,10 +43,9 @@ export default function LogIn() {
       body: JSON.stringify({ email, password }),
     })
       .then((res) => {
-        setIsLoading(false)
+        setIsLoading(false);
         if (!res.ok) {
           if (res.status === "401") {
-            
             console.log("401");
           }
           console.log("erreur", res.status);
@@ -54,14 +54,19 @@ export default function LogIn() {
         return res.json();
       })
       .then((data) => {
-        setIsLoading(false)
+        setIsLoading(false);
         Cookies.set("jwt", data.token);
         Cookies.set("user-id", data.user.id);
-        console.log(data.user.id);
-        
-        router.push(`/${data.user.type}`)
+        console.log(data.user);
+        const role = data.user.company ? "companies" : "students";
+        // todo dynamiser le role grace à la nouvelle api
+
+        router.push(`/students/profil/${data.user.id}`);
+        //${role}/profil/${data.user.id}
       })
-      .catch((err) => console.log("error", err));
+      .catch((err) => {
+        throw new Error(err);
+      });
   };
 
   return (

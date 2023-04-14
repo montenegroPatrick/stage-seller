@@ -1,6 +1,7 @@
 "use client";
 
 import { PostSignUp } from "@/FetchFunctions/POST/PostFunctions";
+import { baseUrl } from "@/lib/baseUrl";
 import {
   Card,
   Checkbox,
@@ -10,6 +11,7 @@ import {
   Alert,
   Input,
 } from "@material-tailwind/react";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -74,30 +76,35 @@ export default function SignUpForm({ role }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // check if the fields are not empty
+    const type = role === "companies" ? "COMPANY" : "STUDENT";
     if (!input.email || !input.password) {
       setErrorMessage("Les champs obligatoire doivent être rempli");
     } else {
       setIsLoading(true);
-      fetch("/api/login", { method: "GET" });
-      //   try {
-      //     const postResult = await PostSignUp({
-      //       email: input.email,
-      //       password: input.password,
-      //       companyName: role === "companies" ? input.companyName : null,
-      //       lastname: role === "students" ? input.lastname : null,
-      //       companyNumber: role === "companies" ? input.companyNumber : null,
-      //       firstName: role === "students" ? input.firstname : null,
-      //     });
-      //     setIsLoading(false);
-      //     console.log("post", postResult);
-      //     if (postResult.status === 200) {
-      //       const { id } = postResult;
-      //       router.push(`/${role}/profil/${id}`);
-      //     }
-      //   } catch (error) {
-      //     console.log("error", error);
-      //     setErrorMessage("erreur");
-      //   }
+      fetch(`${baseUrl}register`, {
+        headers: {
+          "content-type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({ ...input, type }),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            setIsLoading(false);
+            throw new Error(res.status);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setIsLoading(false);
+          Cookies.set("jwt", data.user.token);
+          Cookies.set("user-id", data.user.id);
+          router.push(`/students/profil/${id}`);
+          return data;
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
     }
   };
 

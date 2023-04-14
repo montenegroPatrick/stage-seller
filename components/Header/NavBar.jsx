@@ -15,31 +15,34 @@ import { usePathname } from "next/navigation";
 
 import { useQuery } from "@tanstack/react-query";
 
-
 import { getUser } from "@/lib/getUser";
-
+import { useRouter } from "next/navigation";
 
 export default function NavBar() {
   const id = Cookies.get("user-id");
-  const token = Cookies.get('jwt')
-
+  const token = Cookies.get("jwt");
+  const router = useRouter();
   const [mobileNav, setMobileNav] = useState(false);
   const [color, setColor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
-  //const path = usePathname();
+  const [data, setData] = useState(null);
+  const path = usePathname();
   //const id = path.slice(-1);
+
   const handleNav = () => {
     setMobileNav(!mobileNav);
   };
 
-    const { data, isLoading, isError } = useQuery({
-      queryKey: ["user"],
-      queryFn: () => getUser(token, id),
-    });
-  
+  // const { data, isLoading, isError } = useQuery({
+  //   queryKey: ["user"],
+  //   queryFn: () => getUser(token, id),
+  // });
+  // console.log("navbar", data);
+  const getData = async () => getUser(token, id).then((user) => setData(user));
 
- // console.log("navbar", data);
+  console.log("navBar", data);
   useEffect(() => {
+    getData();
     const changeColor = () => {
       if (window.scrollY >= 90) {
         setColor("#ffffff");
@@ -50,8 +53,15 @@ export default function NavBar() {
       }
     };
     window.addEventListener("scroll", changeColor);
-  }, []);
-
+  }, [path]);
+  const handleLogout = () => {
+    Cookies.remove("user-id");
+    Cookies.remove("jwt");
+    router.push("/");
+    router.refresh();
+    handleNav();
+    setData(null);
+  };
   return (
     <header
       style={{ backgroundColor: `${color}` }}
@@ -80,12 +90,17 @@ export default function NavBar() {
           </Link>
           {data ? (
             <>
-              <Link href={`/${data.type}/profil/${data.id}`}>
+              <Link href={`/students/profil/${data.id}`}>
                 <Button>{`${data.lastName} ${data.firstName}`}</Button>
               </Link>
               <Link href="/logout">
-                <Button>Se déconnecter</Button>
+                <Button>liste des types</Button>
               </Link>
+              <Link href="/logout">
+                <Button>Suggestions by stageSeller</Button>
+              </Link>
+
+              <Button onClick={handleLogout}>Se déconnecter</Button>
             </>
           ) : (
             <Link href="/sign-in">
@@ -126,9 +141,9 @@ export default function NavBar() {
                 {`${data.lastName} ${data.firstName}`}
               </Link>
               <Link
-                onClick={handleNav}
+                onClick={handleLogout}
                 className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
-                href="/logout"
+                href="/"
               >
                 Se déconnecter
               </Link>
