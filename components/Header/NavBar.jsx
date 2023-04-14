@@ -67,7 +67,7 @@ export default function NavBar() {
       style={{ backgroundColor: `${color}` }}
       className="fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-10 ease-in duration-300"
     >
-      <div className="max-w-[1240px] h-[3.5rem] sm:h-[4rem] m-auto flex justify-between py-2 px-4 text-whiteSmoke items-center">
+      <div className="max-w-[1240px] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 text-whiteSmoke items-center">
         <Link href="/">
           <h1
             style={{ color: `${textColor}` }}
@@ -94,7 +94,7 @@ export default function NavBar() {
                 <Button>{`${data.lastName} ${data.firstName}`}</Button>
               </Link>
               <Link href="/logout">
-                <Button>liste des types</Button>
+                <Button className="p-0 mr-1">liste des types</Button>
               </Link>
               <Link href="/logout">
                 <Button>Suggestions by stageSeller</Button>

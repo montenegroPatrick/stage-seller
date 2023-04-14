@@ -1,10 +1,18 @@
 "use client";
+
 import { Typography } from "@material-tailwind/react";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-export default function ProfileDescription({ isSettings, setIsSettings }) {
+import { updateUser } from "@/lib/updateUser";
+export default function ProfileDescription({
+  isSettings,
+  setIsSettings,
+  student,
+}) {
+  console.log(student);
+  const token = Cookies.get("jwt");
   const router = useRouter();
   const [input, setInput] = useState({
     cvLink: "le lien vers ton cv",
@@ -14,12 +22,12 @@ export default function ProfileDescription({ isSettings, setIsSettings }) {
     const { name, value } = event.target;
     setInput((prev) => ({ ...prev, [name]: value }));
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     // todo fetch put avec les nouvelles data
     event.preventDefault();
+    await updateUser(token, student.id, input);
     setIsSettings(!isSettings);
-
-    router.refresh();
+    //router.refresh();
   };
   if (isSettings) {
     return (
@@ -45,14 +53,8 @@ export default function ProfileDescription({ isSettings, setIsSettings }) {
   }
   return (
     <article className="flex flex-col gap-2  p-5 lg:w-7/12 ">
-      <Link className="font-bold italic" href="#">
-        lien vers le CV
-      </Link>
       <Typography variant="paragraph" className="">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-        numquam similique atque praesentium voluptatibus repellat rerum sunt
-        pariatur omnis quo cupiditate fuga consequatur expedita a veniam, quae
-        blanditiis quos sed.
+        {student.description}
       </Typography>
     </article>
   );

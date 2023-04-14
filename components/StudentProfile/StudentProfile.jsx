@@ -5,11 +5,8 @@ import ProfileDescription from "./ProfileDescription";
 import StageDescription from "./StageDescription";
 import Skills from "./Skills";
 import MatchHistoric from "./MatchHistoric";
-import { FiSettings } from "react-icons/fi";
-import { useRef, useState } from "react";
-import StudentProfilSettings from "./StudentProfileSettings";
 
-export default function StudentProfile() {
+export default function StudentProfile({ id, student }) {
   return (
     <div className="m-2 flex flex-col w-full lg:flex-row-reverse min-h-[calc(100vh-4rem)] font-mono text-black3 bg-transparent">
       <section className="flex flex-row justify-between lg:w-7/12 h-[15vh] sm:h-[25vh] md:h-[30vh] lg:h-[calc(100vh-4rem)]">
@@ -18,29 +15,31 @@ export default function StudentProfile() {
         </div>
         {/* image de profile en background avec dessus nom prenom lieu skills  */}
         <div className="lg:hidden px-10">
-          <h2>name</h2>
-          <h3>firstname</h3>
-          <h4>lieux</h4>
+          <h2>{student.lastName}</h2>
+          <h3>{student.firstName}</h3>
+          <h4>{student.city}</h4>
         </div>
       </section>
-      <Skills classes="flex flex-col gap-1 lg:hidden" />
-
+      <Skills
+        classes="flex flex-col gap-1 lg:hidden"
+        userId={id}
+        skills={student.skills}
+      />
       <section className="grow  flex flex-col">
-        {/* cv link / profile description / stage description / mathHistoric / githubProject / */}
         <div className="w-full p-5 flex flex-col gap-5 lg:justify-between grow">
           <article className="text-left">
-            <ProfileDescription />
+            <ProfileDescription student={student} />
           </article>
           <article className="lg:text-right">
-            <StageDescription />
+            <StageDescription stage={student.stage} />
           </article>
         </div>
         <div className=" hidden lg:flex w-full h-1/3 max-h-[100rem]">
           <div className=" items-center w-1/2">
-            <GithubProjects />
+            <GithubProjects github={student.github} />
           </div>
           <div className="overflow-hidden h-48 items-center w-1/2 ">
-            <MatchHistoric />
+            <MatchHistoric userId={id} />
           </div>
         </div>
       </section>

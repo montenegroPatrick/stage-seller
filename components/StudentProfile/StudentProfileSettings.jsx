@@ -9,14 +9,21 @@ import { FiSettings } from "react-icons/fi";
 import { useRef, useState } from "react";
 import StudentProfile from "./StudentProfile";
 import { useRouter } from "next/navigation";
+import updateUser from "@/FetchFunctions/PUT/updateUser";
+import Cookies from "js-cookie";
 
-export default function StudentProfilSettings({ isSettings, setIsSettings }) {
+export default function StudentProfilSettings({
+  isSettings,
+  setIsSettings,
+  student,
+}) {
+  const token = Cookies.get("jwt");
   // todo mettre les données récupérer de la bdd
   const router = useRouter();
   const [input, setInput] = useState({
-    lastname: "lastname",
-    firstname: "firstname",
-    localisation: "localisation",
+    lastname: student.lastName,
+    firstname: student.firstName,
+    localisation: student.city,
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,6 +31,7 @@ export default function StudentProfilSettings({ isSettings, setIsSettings }) {
   };
   const handleSubmit = (event) => {
     // todo fetch put avec les nouvelles data
+    updateUser(token, student.id, input);
     event.preventDefault();
     setIsSettings(!isSettings);
 
@@ -84,13 +92,16 @@ export default function StudentProfilSettings({ isSettings, setIsSettings }) {
           <article className="text-left">
             <ProfileDescription
               isSettings={isSettings}
+              setIsSettings={setIsSettings}
               setShowSettings={setShowSettings}
+              student={student}
             />
           </article>
           <article className="lg:text-right">
             <StageDescription
               isSettings={isSettings}
               setIsSettings={setIsSettings}
+              student={student}
             />
           </article>
         </div>
@@ -99,12 +110,14 @@ export default function StudentProfilSettings({ isSettings, setIsSettings }) {
             <GithubProjects
               isSettings={isSettings}
               setShowSettings={setShowSettings}
+              student={student}
             />
           </div>
           <div className="overflow-hidden h-48 items-center w-1/2 ">
             <MatchHistoric
               isSettings={isSettings}
               setShowSettings={setShowSettings}
+              student={student}
             />
           </div>
         </div>

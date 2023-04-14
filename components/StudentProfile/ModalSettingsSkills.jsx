@@ -9,23 +9,36 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
+import Image from "next/image";
+import { getSkills } from "@/lib/getSkills";
+import { usePathname } from "next/navigation";
+import Cookies from "js-cookie";
 
-export default function ModalSettingsSkills({ showSettings }) {
+export default function ModalSettingsSkills({ showSettings, userId }) {
+  const token = Cookies.get("jwt");
   const [open, setOpen] = useState(false);
-  const [skills, setSkills] = useState(["skills"]);
+  const [userSkills, setUserSkills] = useState([]);
+  const [skillsList, setskillsList] = useState([]);
   const handleOpen = () => setOpen(!open);
+  const path = usePathname();
+  const test = "blibli";
+  const getSkillsData = async () =>
+    getSkills(token).then((skills) => setskillsList(skills));
+  console.log(skillsList);
   useEffect(() => {
+    getSkillsData();
     showSettings && handleOpen();
   }, [showSettings]);
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    //update settings
-    //if ok
+
     setOpen(!open);
   };
+
   const handleChange = (event) => {
-    const skillsArray = [...skills, event];
-    setSkills(skillsArray);
+    const userSkillsArray = [...userSkills, event];
+    setUserSkills(userSkillsArray);
   };
   return (
     <Fragment>
@@ -43,13 +56,14 @@ export default function ModalSettingsSkills({ showSettings }) {
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <DialogBody divider>
-            {skills.map((skill, index) => (
+            {userSkills.map((skill, index) => (
               <Avatar
                 key={index}
                 variant="rounded"
+                size="xxl"
                 alt={skill}
-                src={`https://clipground.com/images/logo-${skill}-clipart-1.jpg`}
-                className="border-2 w-7 h-7 border-whiteSmoke hover:z-10"
+                src={`https://img.shields.io/badge/-${skill}-black?style=for-the-badge&logo=${skill}&logoColor=61DAFB&color=#505050`}
+                className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
               />
             ))}
             <div className="p-5 w-72">
@@ -64,10 +78,12 @@ export default function ModalSettingsSkills({ showSettings }) {
                   unmount: { y: 25 },
                 }}
               >
-                {/* todo : map on skills table */}
-                <Option value="react">react</Option>
-                <Option value="Next">Next</Option>
-                <Option value="Symphony">Symphony</Option>
+                {skillsList &&
+                  skillsList.map((skill, index) => (
+                    <Option key={index} value={skill.name}>
+                      {skill.name}
+                    </Option>
+                  ))}
               </Select>
             </div>
           </DialogBody>

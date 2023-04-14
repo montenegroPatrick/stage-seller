@@ -21,10 +21,12 @@ export default function SignUpForm({ role }) {
     role === "companies"
       ? {
           companyName: "",
-          companyNumber: "",
+          siret: "",
           email: "",
           password: "",
           verifyPassword: "",
+          address: "",
+          city: "",
         }
       : {
           firstname: "",
@@ -32,8 +34,11 @@ export default function SignUpForm({ role }) {
           email: "",
           password: "",
           verifyPassword: "",
+          address: "",
+          city: "",
         }
   );
+  const [postCode, setPostCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [disable, setDisable] = useState(true);
   const [isErrorEmail, setIsErrorEmail] = useState(false);
@@ -81,14 +86,20 @@ export default function SignUpForm({ role }) {
       setErrorMessage("Les champs obligatoire doivent être rempli");
     } else {
       setIsLoading(true);
+      const numberPostCode = Number(postCode);
       fetch(`${baseUrl}register`, {
         headers: {
           "content-type": "application/json",
         },
         method: "POST",
-        body: JSON.stringify({ ...input, type }),
+        body: JSON.stringify({
+          ...input,
+          postCode: numberPostCode,
+          type,
+        }),
       })
         .then((res) => {
+          console.log(res.ok);
           if (!res.ok) {
             setIsLoading(false);
             throw new Error(res.status);
@@ -100,10 +111,6 @@ export default function SignUpForm({ role }) {
           Cookies.set("jwt", data.user.token);
           Cookies.set("user-id", data.user.id);
           router.push(`/students/profil/${id}`);
-          return data;
-        })
-        .catch((err) => {
-          throw new Error(err);
         });
     }
   };
@@ -133,8 +140,8 @@ export default function SignUpForm({ role }) {
               />
               <Input
                 className="w-full"
-                value={input.companyNumber}
-                name="companyNumber"
+                value={input.siret}
+                name="siret"
                 onChange={handleChange}
                 label="numéro de siret"
                 type="text"
@@ -167,6 +174,30 @@ export default function SignUpForm({ role }) {
             onChange={handleChange}
             label="* Email"
             type="email"
+          />
+          <Input
+            name="address"
+            className="w-full"
+            value={input.address}
+            onChange={handleChange}
+            label="* adresse postale"
+            type="text"
+          />
+          <Input
+            name="city"
+            className="w-full"
+            value={input.city}
+            onChange={handleChange}
+            label="* city"
+            type="text"
+          />
+          <Input
+            name="postCode"
+            className="w-full"
+            value={postCode}
+            onChange={(event) => setPostCode(event.target.value)}
+            label="* code postale"
+            type="number"
           />
           <Input
             name="password"
