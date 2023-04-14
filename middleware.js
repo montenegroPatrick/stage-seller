@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function middleware(request, res) {
-  if (request.nextUrl.pathname.startsWith("/api/login")) {
-    //console.log("midd", response.cookies);
-    //   if (!token) {
-    //     // Respond with JSON indicating an error message
-    //     return new NextResponse(
-    //       JSON.stringify({ success: false, message: "authentication failed" }),
-    //       { status: 401, headers: { "content-type": "application/json" } }
-    //     );
+
+export async function middleware(request, res) { 
+  const cookie = request.cookies.get('jwt');
+  if(!cookie){return NextResponse.redirect(new URL('/', request.url));
   }
-  const coo = request.cookies.get("jwt");
-  console.log("cookie", coo);
+  
+  
+  }
+
+
+export const config = {
+  matcher: ['/companies/:path*/:path*', '/students/:path*/:path*'],
 }

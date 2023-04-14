@@ -34,7 +34,7 @@ export default function LogIn() {
     setIsLoading(true);
     event.preventDefault();
     const { email, password } = input;
-    fetch("http://franck-roger-server.eddi.cloud/api/login", {
+    fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,8 +42,10 @@ export default function LogIn() {
       body: JSON.stringify({ email, password }),
     })
       .then((res) => {
+        setIsLoading(false)
         if (!res.ok) {
           if (res.status === "401") {
+            
             console.log("401");
           }
           console.log("erreur", res.status);
@@ -52,10 +54,12 @@ export default function LogIn() {
         return res.json();
       })
       .then((data) => {
+        setIsLoading(false)
         Cookies.set("jwt", data.token);
         Cookies.set("user-id", data.user.id);
         console.log(data.user.id);
-        //router.push(`/${data.user.type}`)
+        
+        router.push(`/${data.user.type}`)
       })
       .catch((err) => console.log("error", err));
   };

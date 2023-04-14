@@ -5,52 +5,40 @@ import Logo from "../Logo";
 import Button from "../Buttons/Button";
 
 //Dependancies anc hooks
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 import { usePathname } from "next/navigation";
-import Cookies from "js-cookie";
+
 import { useQuery } from "@tanstack/react-query";
-export const baseUrl = "http://franck-roger-server.eddi.cloud/api/";
 
-export function getToken() {
-  const cookieStore = Cookies;
-  return cookieStore.get("jwt");
-}
 
-export async function getUser() {
-  const id = cookieStore.get("user-id");
+import { getUser } from "@/lib/getUser";
 
-  if (!getToken()) {
-    console.log("token not found");
-  }
-  const token = getToken();
-  const user = await fetch(`${baseUrl}users/${id}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return user.json();
-}
 
 export default function NavBar() {
+  const id = Cookies.get("user-id");
+  const token = Cookies.get('jwt')
+
   const [mobileNav, setMobileNav] = useState(false);
   const [color, setColor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
-  const path = usePathname();
+  //const path = usePathname();
   //const id = path.slice(-1);
   const handleNav = () => {
     setMobileNav(!mobileNav);
   };
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["user"],
-    queryFn: () => getUser(),
-  });
 
-  console.log("navbar", data);
+    const { data, isLoading, isError } = useQuery({
+      queryKey: ["user"],
+      queryFn: () => getUser(token, id),
+    });
+  
+
+ // console.log("navbar", data);
   useEffect(() => {
     const changeColor = () => {
       if (window.scrollY >= 90) {

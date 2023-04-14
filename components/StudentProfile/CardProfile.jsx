@@ -11,11 +11,15 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CardProfile({ user }) {
+export default function ProfileCarte({user}) {
   //TODO regarder si le user.role est company ou student pour éventuellement changer des champs dynaiquement
-
+  console.log('user dans card profil', user)
+  const {lastName, firstName, companyName, id, email, city, postCode, profilImage, description} = user
+  const role = companyName ? "students" : "companies";
+  
+  console.log(role)
   return (
-    // <Link href={`/${user.role}/profile/${user.id}`}>
+     <Link href={`/${role}/profil/${id}`}>
     <Card className="max-w-[100%] h-[20rem] m-3 overflow-hidden p-2 mx-auto">
       <CardHeader
         floated={false}
@@ -24,11 +28,11 @@ export default function CardProfile({ user }) {
         className="m-0 grid place-content-center rounded-none h-fit "
       >
         <Typography variant="h4" className="p-1 ">
-          lastname firstName / company name
+          { role === "companies" ?`${lastName} / ${firstName}` : `${companyName}`  }
         </Typography>
       </CardHeader>
       <CardBody className="flex flex-row gap-2">
-        <Image width="100" height="100" src='/chien-smoking.jpg' alt="" />
+        <Image width="100" height="100" src={profilImage ? profilImage : "chien-smoking.jpg"} alt="" />
         <div className="flex flex-col gap-2">
           <Typography variant="h6" color="blue-gray">
             name of stage looking for
@@ -38,7 +42,7 @@ export default function CardProfile({ user }) {
             color="gray"
             className="mt-3 pl-2 font-normal"
           >
-            mini description
+            {!description ? "Pas de description" : description}
           </Typography>
         </div>
       </CardBody>
@@ -64,11 +68,11 @@ export default function CardProfile({ user }) {
           </Tooltip>
         </div>
         <div>
-          <Typography className="font-normal">lieux</Typography>
+          <Typography className="font-normal">{city}</Typography>
           <Typography className="font-normal">remote</Typography>
         </div>
       </CardFooter>
     </Card>
-    // </Link>
+    </Link>
   );
 }

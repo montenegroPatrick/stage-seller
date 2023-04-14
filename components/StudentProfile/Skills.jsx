@@ -14,12 +14,12 @@ export default function Skills({ classes, isSettings, setShowSettings, show }) {
           src="https://clipground.com/images/logo-javascript-clipart-1.jpg"
           className="border-2 w-7 h-7 border-whiteSmoke hover:z-10"
         />
-        <Avatar
+        {/* <Avatar
           variant="rounded"
           alt="javascript"
           src="https://clipground.com/images/logo-javascript-clipart-1.jpg"
           className="border-2 w-7 h-7 border-whiteSmoke hover:z-10"
-        />
+        /> */}
         {isSettings && (
           <>
             <div
