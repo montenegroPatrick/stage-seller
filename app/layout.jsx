@@ -15,9 +15,9 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable}`}
+      className={` ${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable}`}
     >
-      <body className="bg-black1 font-chivo">
+      <body className="font-chivo bg-gray-400">
         <ReactQueryWrapper>
           <NavBar />
           {children}

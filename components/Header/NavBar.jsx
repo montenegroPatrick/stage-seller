@@ -23,7 +23,7 @@ export default function NavBar() {
   const token = Cookies.get("jwt");
   const router = useRouter();
   const [mobileNav, setMobileNav] = useState(false);
-  const [color, setColor] = useState("transparent");
+  const [color, setColor] = useState("bg-gray-800");
   const [textColor, setTextColor] = useState("white");
   const [data, setData] = useState(null);
   const path = usePathname();
@@ -40,7 +40,6 @@ export default function NavBar() {
   // console.log("navbar", data);
   const getData = async () => getUser(token, id).then((user) => setData(user));
 
-  console.log("navBar", data);
   useEffect(() => {
     getData();
     const changeColor = () => {
@@ -64,25 +63,24 @@ export default function NavBar() {
   };
   return (
     <header
-      style={{ backgroundColor: `${color}` }}
-      className="fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-10 ease-in duration-300"
+      //style={{ backgroundColor: `${color}` }}
+      className={`${path === "/" ? 'bg-gray-800/50' : 'bg-gray-800'} fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-10 ease-in duration-300 `}
     >
-      <div className="max-w-[1240px] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 text-whiteSmoke items-center">
+      <div className="max-w-[1240px] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 text-whiteSmoke items-center m-auto">
         <Link href="/">
           <h1
-            style={{ color: `${textColor}` }}
-            className="font-lobster text-4xl"
+            //
+            className="font-lobster text-4xl  text-white "
           >
             StageSeller
           </h1>
         </Link>
         {/* <Logo /> */}
         <div
-          style={{ color: `${textColor}` }}
           className="hidden md:flex md:items-center hover:text-indigo-700 ease-in duration-300"
         >
           <Link
-            className="px-10 font-jetbrains"
+            className="px-10 font-jetbrains text-white"
             target="_blank"
             href="https://oclock.io/methode"
           >

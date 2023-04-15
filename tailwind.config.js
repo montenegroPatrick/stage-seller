@@ -39,6 +39,7 @@ module.exports = withMT({
         "90vh": "90vh",
         "95vh": "95vh",
       },
+
       fontFamily: {
         sans: ["var(--font-inter)"],
         mono: ["var(--font-roboto)"],

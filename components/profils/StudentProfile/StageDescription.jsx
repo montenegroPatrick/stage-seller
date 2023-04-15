@@ -1,8 +1,9 @@
 "use client";
-import getToken from "@/lib/getToken";
+
 import { Typography } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 export default function StageDescription({
   isSettings,
@@ -24,7 +25,7 @@ export default function StageDescription({
   const handleSubmit = async (event) => {
     // todo fetch put avec les nouvelles data
     event.preventDefault();
-    await updateUser(getToken(), currentUser.id, input);
+    await updateUser(token, currentUser.id, input);
     setIsSettings(!isSettings);
   };
   if (isSettings) {

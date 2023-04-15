@@ -3,7 +3,7 @@ import { cookies, headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const body = req.body;
+  const body = req.json();
   const res = await fetch("http://franck-roger-server.eddi.cloud/api/login", {
     method: "POST",
     headers: {
