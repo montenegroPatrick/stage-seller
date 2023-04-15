@@ -94,14 +94,14 @@ export default function StudentProfilSettings({
               isSettings={isSettings}
               setIsSettings={setIsSettings}
               setShowSettings={setShowSettings}
-              student={student}
+              currentUser={student}
             />
           </article>
           <article className="lg:text-right">
             <StageDescription
               isSettings={isSettings}
               setIsSettings={setIsSettings}
-              student={student}
+              currentUser={student}
             />
           </article>
         </div>
@@ -111,7 +111,7 @@ export default function StudentProfilSettings({
               setIsSettings={setIsSettings}
               isSettings={isSettings}
               setShowSettings={setShowSettings}
-              student={student}
+              currentUser={student}
             />
           </div>
           <div className="overflow-hidden h-48 items-center w-1/2 ">

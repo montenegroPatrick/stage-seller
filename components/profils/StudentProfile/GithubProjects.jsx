@@ -9,11 +9,15 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 
-export default function GithubProjects({ isSettings, setIsSettings, student }) {
+export default function GithubProjects({
+  isSettings,
+  setIsSettings,
+  currentUser,
+}) {
   // false data to try
   const [indexProjectInView, setIndexProjectInView] = useState(1);
   const [input, setInput] = useState({
-    github: student.github,
+    github: currentUser.github,
     githubApi: "",
   });
   // const repos = {
@@ -45,7 +49,7 @@ export default function GithubProjects({ isSettings, setIsSettings, student }) {
   const handleSubmit = async (event) => {
     // todo fetch put avec les nouvelles data
     event.preventDefault();
-    await updateUser(token, student.id, input);
+    await updateUser(token, currentUser.id, input);
     setIsSettings(!isSettings);
     //router.refresh();
   };

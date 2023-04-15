@@ -2,7 +2,7 @@ import { baseUrl } from "./baseUrl";
 
 export async function updateUser(token, id, data) {
   const res = await fetch(`${baseUrl}users/${id}`, {
-    method: "PATH",
+    method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
     },

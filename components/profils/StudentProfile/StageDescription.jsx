@@ -1,4 +1,5 @@
 "use client";
+import getToken from "@/lib/getToken";
 import { Typography } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -6,14 +7,14 @@ import { useState } from "react";
 export default function StageDescription({
   isSettings,
   setIsSettings,
-  student,
+  currentUser,
 }) {
   const router = useRouter();
   const [input, setInput] = useState({
-    description: student.stages.description,
-    date: student.stages.date,
-    duration: student.stages.duration,
-    location: student.stages.location,
+    description: currentUser.stages.description,
+    date: currentUser.stages.date,
+    duration: currentUser.stages.duration,
+    location: currentUser.stages.location,
     remote: false,
   });
   const handleChange = (event) => {
@@ -23,7 +24,7 @@ export default function StageDescription({
   const handleSubmit = async (event) => {
     // todo fetch put avec les nouvelles data
     event.preventDefault();
-    await updateUser(token, student.id, input);
+    await updateUser(getToken(), currentUser.id, input);
     setIsSettings(!isSettings);
   };
   if (isSettings) {
@@ -80,16 +81,16 @@ export default function StageDescription({
   return (
     <div className="p-5 flex flex-col gap-2 lg:w-7/12 float-right">
       <Typography variant="paragraph" className="">
-        {student.stages.description}
+        {currentUser.stages.description}
       </Typography>
       <ul className="grid place-content-end">
-        <li>{student.stages.start_date}</li>
+        <li>{currentUser.stages.start_date}</li>
         <li>
-          {student.remote
+          {currentUser.remote
             ? "je préfère être en télétravail"
             : "je préfère le présentiel"}
         </li>
-        <li>{student.location}</li>
+        <li>{currentUser.location}</li>
       </ul>
     </div>
   );

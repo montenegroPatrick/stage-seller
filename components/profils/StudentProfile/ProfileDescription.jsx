@@ -9,14 +9,14 @@ import { updateUser } from "@/lib/updateUser";
 export default function ProfileDescription({
   isSettings,
   setIsSettings,
-  student,
+  currentUser,
 }) {
-  console.log(student);
+  console.log(currentUser);
   const token = Cookies.get("jwt");
   const router = useRouter();
   const [input, setInput] = useState({
     // cvLink: "le lien vers ton cv",
-    description: student.description,
+    description: currentUser.description,
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -25,7 +25,7 @@ export default function ProfileDescription({
   const handleSubmit = async (event) => {
     // todo fetch put avec les nouvelles data
     event.preventDefault();
-    await updateUser(token, student.id, input);
+    await updateUser(token, currentUser.id, input);
     setIsSettings(!isSettings);
     //router.refresh();
   };
@@ -54,7 +54,7 @@ export default function ProfileDescription({
   return (
     <article className="flex flex-col gap-2  p-5 lg:w-7/12 ">
       <Typography variant="paragraph" className="">
-        {student.description}
+        {currentUser.description}
       </Typography>
     </article>
   );
