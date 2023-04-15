@@ -3,29 +3,35 @@ import { Typography } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function StageDescription({ isSettings, setIsSettings }) {
+export default function StageDescription({
+  isSettings,
+  setIsSettings,
+  student,
+}) {
   const router = useRouter();
   const [input, setInput] = useState({
-    description: "description de ce que tu recherche",
-    date: "date au format DD/MM/YYYY",
-    localisation:
-      "lieu du stage veuillez écrire un lieu ou vous souhaitez faire le stage",
+    description: student.stages.description,
+    date: student.stages.date,
+    duration: student.stages.duration,
+    location: student.stages.location,
     remote: false,
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
     setInput((prev) => ({ ...prev, [name]: value }));
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     // todo fetch put avec les nouvelles data
     event.preventDefault();
+    await updateUser(token, student.id, input);
     setIsSettings(!isSettings);
-
-    router.refresh();
   };
   if (isSettings) {
     return (
-      <div className="p-5 flex flex-col gap-2 lg:w-7/12 float-right">
+      <form
+        onSubmit={handleSubmit}
+        className="p-5 flex flex-col gap-2 lg:w-7/12 float-right"
+      >
         <input
           className="rounded-xl p-2 border-white bg-transparent border-2 "
           type="text"
@@ -41,11 +47,18 @@ export default function StageDescription({ isSettings, setIsSettings }) {
           name="date"
         />
         <input
+          className="rounded-xl w-full p-2 border-white bg-transparent border-2 "
+          type="text"
+          value={input.duration}
+          onChange={handleChange}
+          name="duration"
+        />
+        <input
           className="rounded-xl p-2 border-white bg-transparent border-2 "
           type="text"
-          value={input.localisation}
+          value={input.location}
           onChange={handleChange}
-          name="localisation"
+          name="location"
         />
         <div className="flex justify-between rounded-xl p-2 border-white bg-transparent border-2 ">
           <label htmlFor="remote">
@@ -60,21 +73,23 @@ export default function StageDescription({ isSettings, setIsSettings }) {
             }
           />
         </div>
-      </div>
+        <button hidden type="submit"></button>
+      </form>
     );
   }
   return (
     <div className="p-5 flex flex-col gap-2 lg:w-7/12 float-right">
       <Typography variant="paragraph" className="">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-        numquam similique atque praesentium voluptatibus repellat rerum sunt
-        pariatur omnis quo cupiditate fuga consequatur expedita a veniam, quae
-        blanditiis quos sed.
+        {student.stages.description}
       </Typography>
       <ul className="grid place-content-end">
-        <li>date</li>
-        <li>remote</li>
-        <li>lieu</li>
+        <li>{student.stages.start_date}</li>
+        <li>
+          {student.remote
+            ? "je préfère être en télétravail"
+            : "je préfère le présentiel"}
+        </li>
+        <li>{student.location}</li>
       </ul>
     </div>
   );

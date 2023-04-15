@@ -9,10 +9,11 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import Image from "next/image";
+
 import { getSkills } from "@/lib/getSkills";
-import { usePathname } from "next/navigation";
+
 import Cookies from "js-cookie";
+import updateUser from "@/FetchFunctions/PUT/updateUser";
 
 export default function ModalSettingsSkills({ showSettings, userId }) {
   const token = Cookies.get("jwt");
@@ -20,8 +21,7 @@ export default function ModalSettingsSkills({ showSettings, userId }) {
   const [userSkills, setUserSkills] = useState([]);
   const [skillsList, setskillsList] = useState([]);
   const handleOpen = () => setOpen(!open);
-  const path = usePathname();
-  const test = "blibli";
+
   const getSkillsData = async () =>
     getSkills(token).then((skills) => setskillsList(skills));
   console.log(skillsList);
@@ -32,7 +32,8 @@ export default function ModalSettingsSkills({ showSettings, userId }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    const updateSkills = await updateUser(token, userId, userSkills);
+    // todo les conditions de updateSkills
     setOpen(!open);
   };
 
@@ -97,7 +98,7 @@ export default function ModalSettingsSkills({ showSettings, userId }) {
             >
               <span>Cancel</span>
             </Button>
-            <Button variant="gradient" color="green" type="submit">
+            <Button variant="gradient" color="blue" type="submit">
               <span>Confirm Change</span>
             </Button>
           </DialogFooter>

@@ -1,12 +1,12 @@
 import { notFound, redirect } from "next/navigation";
 //Components
 import NavBarMarginContainer from "@/components/NavBarMarginContainer";
-import CompanyProfile from "@/components/CompanyProfile/CompanyProfile";
-import ProfilView from "@/components/studentProfile/profilView";
+import CompanyProfile from "@/components/profils/CompanyProfile/CompanyProfile";
+import ProfilView from "@/components/profils/StudentProfile/profilView";
 import getAllUsers from "@/lib/getAllUsers";
 import { getUser } from "@/lib/getUser";
 import { cookies } from "next/headers";
-import StudentProfile from "@/components/StudentProfile/StudentProfile";
+import StudentProfile from "@/components/profils/StudentProfile/StudentProfile";
 // export const dynamic = "auto";
 //export const dynamicParams = true;
 //export const fetchCache = "auto";

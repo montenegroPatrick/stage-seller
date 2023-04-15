@@ -1,5 +1,4 @@
-
-import NavBarMarginContainer from "../NavBarMarginContainer";
+import NavBarMarginContainer from "../../NavBarMarginContainer";
 import CompanyNameAvatar from "./CompanyNameAvatar";
 import CompanySkills from "./CompanySkills";
 

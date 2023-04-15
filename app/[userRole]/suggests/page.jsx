@@ -1,4 +1,4 @@
-import CardProfile from "@/components/StudentProfile/CardProfile";
+import CardProfile from "@/components/profils/StudentProfile/CardProfile";
 import Caroussel from "@/components/Carousel";
 import NavBarMarginContainer from "@/components/NavBarMarginContainer";
 

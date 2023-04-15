@@ -15,8 +15,8 @@ export default function ProfileDescription({
   const token = Cookies.get("jwt");
   const router = useRouter();
   const [input, setInput] = useState({
-    cvLink: "le lien vers ton cv",
-    description: "présente toi en quelque mot",
+    // cvLink: "le lien vers ton cv",
+    description: student.description,
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -35,12 +35,12 @@ export default function ProfileDescription({
         className="flex flex-col gap-2  p-5 lg:w-7/12 "
         onSubmit={handleSubmit}
       >
-        <input
+        {/* <input
           className="rounded-xl p-2 border-white bg-transparent border-2 "
           onChange={handleChange}
           value={input.cvLink}
           name="cvLink"
-        />
+        /> */}
         <input
           onChange={handleChange}
           className="rounded-xl p-2 border-white bg-transparent border-2 "

@@ -108,17 +108,14 @@ export default function StudentProfilSettings({
         <div className=" hidden lg:flex w-full h-1/3 max-h-[100rem]">
           <div className=" items-center w-1/2">
             <GithubProjects
+              setIsSettings={setIsSettings}
               isSettings={isSettings}
               setShowSettings={setShowSettings}
               student={student}
             />
           </div>
           <div className="overflow-hidden h-48 items-center w-1/2 ">
-            <MatchHistoric
-              isSettings={isSettings}
-              setShowSettings={setShowSettings}
-              student={student}
-            />
+            <MatchHistoric currentUser={student} />
           </div>
         </div>
       </section>

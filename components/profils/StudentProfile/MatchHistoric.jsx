@@ -9,7 +9,8 @@ import {
 import CardProfile from "./CardProfile";
 import MiniCard from "./miniCard";
 
-export default function MatchHistoric() {
+export default function MatchHistoric({ currentUser }) {
+  //todo map des likes in like out match de l'utilisateur
   return (
     <Tabs value="like in">
       <TabsHeader>
