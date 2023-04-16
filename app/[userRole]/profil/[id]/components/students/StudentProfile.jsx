@@ -6,7 +6,7 @@ import StageDescription from "./StageDescription";
 import Skills from "./Skills";
 import MatchHistoric from "./MatchHistoric";
 import { useEffect, useState } from "react";
-import Tuto from "../tuto";
+import Tuto from "./Tuto";
 
 export default function StudentProfile({ id, student }) {
   const [openTuto, setOpenTuto] = useState(false);

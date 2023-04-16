@@ -1,8 +1,8 @@
 "use client";
 
 //Components
-import Logo from "../Logo";
-import Button from "../Buttons/Button";
+import Logo from "./Logo";
+import Button from "../utilsComponents/Buttons/Button";
 
 //Dependancies anc hooks
 import Cookies from "js-cookie";
@@ -40,7 +40,7 @@ export default function NavBar() {
   // console.log("navbar", data);
   const getData = async () => getUser(token, id).then((user) => setData(user));
 
-  useEffect(() => {
+  useEffect(async () => {
     getData();
     const changeColor = () => {
       if (window.scrollY >= 90) {
@@ -53,6 +53,7 @@ export default function NavBar() {
     };
     window.addEventListener("scroll", changeColor);
   }, [path]);
+
   const handleLogout = () => {
     Cookies.remove("user-id");
     Cookies.remove("jwt");
@@ -64,7 +65,9 @@ export default function NavBar() {
   return (
     <header
       //style={{ backgroundColor: `${color}` }}
-      className={`${path === "/" ? 'bg-gray-800/50' : 'bg-gray-800'} fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-10 ease-in duration-300 `}
+      className={`${
+        path === "/" ? "bg-gray-800/50" : "bg-gray-800"
+      } fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-10 ease-in duration-300 `}
     >
       <div className="max-w-[1240px] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 text-whiteSmoke items-center m-auto">
         <Link href="/">
@@ -76,9 +79,7 @@ export default function NavBar() {
           </h1>
         </Link>
         {/* <Logo /> */}
-        <div
-          className="hidden md:flex md:items-center hover:text-indigo-700 ease-in duration-300"
-        >
+        <div className="hidden md:flex md:items-center hover:text-indigo-700 ease-in duration-300">
           <Link
             className="px-10 font-jetbrains text-white"
             target="_blank"

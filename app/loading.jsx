@@ -1,6 +1,6 @@
 "use client";
 
-import NavBarMarginContainer from "@/components/NavBarMarginContainer";
+import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
 
 export default function Loading() {
   return (

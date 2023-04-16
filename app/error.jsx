@@ -1,6 +1,6 @@
 "use client"; // Error components must be Client components
 
-import NavBarMarginContainer from "@/components/NavBarMarginContainer";
+import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
 import { useEffect } from "react";
 
 export default function Error({ error, reset }) {
@@ -20,7 +20,7 @@ export default function Error({ error, reset }) {
             () => reset()
           }
         >
-         Rafraîchir
+          Rafraîchir
         </button>
       </div>
     </NavBarMarginContainer>

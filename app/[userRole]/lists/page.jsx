@@ -1,6 +1,6 @@
 //Componants
-import NavBarMarginContainer from "@/components/NavBarMarginContainer";
-import CardProfile from "@/components/profils/StudentProfile/CardProfile";
+import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
+import CardProfile from "@/app/[userRole]/lists/components/CardProfile";
 //Dependancies
 import { cookies } from "next/headers";
 import Cookies from "js-cookie";

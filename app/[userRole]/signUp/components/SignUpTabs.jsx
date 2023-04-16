@@ -7,7 +7,7 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import SignUpForm from "./SignUpForm";
-import NavBarMarginContainer from "../NavBarMarginContainer";
+import NavBarMarginContainer from "../../../components/NavBarMarginContainer";
 
 export default function SignUpTabs({ userRole }) {
   return (

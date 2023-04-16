@@ -7,9 +7,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import getCookie from "@/FetchFunctions/getCookies";
 
-export default function ProfilView({ student, id }) {
+export default function StudentProfilView({ student, id }) {
   const [isSettings, setIsSettings] = useState(false);
-  console.log("profileView", student);
+  //console.log("profileView", student);
   return (
     <div className="text-whiteSmoke">
       <button

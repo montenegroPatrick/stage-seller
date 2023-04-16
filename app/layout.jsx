@@ -1,8 +1,8 @@
 import { inter, roboto, chivo, jetBrains, lobster } from "@/assets/font";
 import "@/assets/globals.css";
 
-import Footer from "@/components/Footer/Footer";
-import NavBar from "@/components/Header/NavBar";
+import Footer from "@/app/components/Footer";
+import NavBar from "@/app/components/NavBar";
 
 import ReactQueryWrapper from "./reactQuerryWrapper";
 

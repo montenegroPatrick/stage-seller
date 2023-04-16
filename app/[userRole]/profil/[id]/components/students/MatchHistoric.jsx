@@ -6,8 +6,8 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import CardProfile from "./CardProfile";
-import MiniCard from "./miniCard";
+import CardProfile from "../../../../lists/components/CardProfile";
+import MiniCard from "./MiniCard";
 
 export default function MatchHistoric({ currentUser }) {
   //todo map des likes in like out match de l'utilisateur

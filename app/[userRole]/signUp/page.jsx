@@ -1,4 +1,4 @@
-import SignUpTabs from "@/components/Forms/SignUpTabs";
+import SignUpTabs from "@/app/[userRole]/signUp/components/SignUpTabs";
 
 export const metadata = {
   title: "Inscription",

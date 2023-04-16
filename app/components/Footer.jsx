@@ -1,6 +1,6 @@
 "use client";
 import { Typography } from "@material-tailwind/react";
-import Logo from "../Logo";
+import Logo from "./Logo";
 
 export default function Footer() {
   return (
@@ -41,8 +41,8 @@ export default function Footer() {
     //     </ul>
     //   </div>
     // </footer>
-    <footer aria-label="Site Footer" className="bg-indigo-700">
-      <div className="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8">
+    <footer aria-label="Site Footer" className="bg-gray-800">
+      <div className="mx-auto max-w-screen-xl px-4 py-2">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="flex justify-center text-teal-600 sm:justify-start">
             <Logo />

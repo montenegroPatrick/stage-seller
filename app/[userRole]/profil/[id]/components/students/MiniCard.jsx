@@ -1,5 +1,5 @@
 import { Avatar, Typography } from "@material-tailwind/react";
-import Skills from "./skills";
+import Skills from "./Skills";
 
 export default function MiniCard() {
   return (

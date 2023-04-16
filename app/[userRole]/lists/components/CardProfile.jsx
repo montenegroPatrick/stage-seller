@@ -10,7 +10,7 @@
 // } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
-import LikeButton from "@/components/Buttons/LikeButton";
+import LikeButton from "@/app/[userRole]/lists/components/LikeButton";
 
 export default function ProfileCarte({ user }) {
   //TODO regarder si le user.role est company ou student pour éventuellement changer des champs dynamiquement
@@ -100,7 +100,7 @@ export default function ProfileCarte({ user }) {
     <div  className="relative">
       <a
         href="#"
-        className="relative block overflow-hidden rounded-lg bg-whiteSmoke border border-gray-500 p-4 sm:p-6 lg:p-8 mt-4 "
+        className="relative block overflow-hidden rounded-lg bg-whiteSmoke border border-gray-500 p-4 sm:p-6 lg:p-8 mt-4 mx-2"
       >
         <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
 
@@ -125,11 +125,14 @@ export default function ProfileCarte({ user }) {
           </div>
         </div>
 
-        <div className="mt-4 min-w-[18rem] max-w-xs">
-          <p className="max-w-[40ch]  text-sm text-gray-700 overflow-auto">
+        <div className="mt-4 min-w-[18rem] max-w-sm">
+          <p className="w-full max-h-[5rem] text-sm text-gray-700 overflow-y-auto">
             {description ? description : "Pas de descripttion"}
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
             illum provident a, ipsa maiores deleniti consectetur nobis et eaque.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
+            illum provident a, ipsa maiores deleniti consectetur nobis et eaque.  
           </p>
         </div>
 
@@ -140,22 +143,22 @@ export default function ProfileCarte({ user }) {
           </div>
 
           <div className="flex flex-wrap w-1/2">
-            <span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
               Live
             </span>
-            <span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
               Live
             </span>
-            <span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
               Live
             </span>
-            <span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
               Live
             </span>
-            <span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
               Live
             </span>
-            <span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
               Live
             </span>
           </div>

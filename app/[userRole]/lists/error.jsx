@@ -1,6 +1,6 @@
 "use client"; // Error components must be Client components
 
-import NavBarMarginContainer from "@/components/NavBarMarginContainer";
+import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -13,8 +13,7 @@ export default function Error({ error, reset }) {
   //   console.error(error);
   // }, [error]);
   const userId = Cookies.get("u-id");
-  
-  
+
   return (
     <NavBarMarginContainer classes="h-[calc(100vh-4rem)] bg-white">
       <div className="flex flex-col items-center">

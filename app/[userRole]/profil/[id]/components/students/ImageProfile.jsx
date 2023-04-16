@@ -6,7 +6,7 @@ import {
   Typography,
   Avatar,
 } from "@material-tailwind/react";
-import Skills from "./skills";
+import Skills from "./Skills";
 
 export default function ImageProfile({ isSettings, setShowSettings, show }) {
   return (

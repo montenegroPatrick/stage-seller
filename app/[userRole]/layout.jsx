@@ -1,4 +1,4 @@
-import NavBar from "@/components/Header/NavBar";
+import NavBar from "@/app/components/NavBar";
 import { headers, cookies } from "next/headers";
 
 export default function LayoutUserRole({ params, children }) {
