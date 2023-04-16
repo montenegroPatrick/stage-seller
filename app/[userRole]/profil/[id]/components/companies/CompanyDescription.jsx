@@ -1,6 +1,6 @@
 export default function CompanyDescription() {
   return (
-    <div className="w-[90%] flex flex-col justify-center bg-white/30 rounded-xl p-5 mx-auto my-5 ">
+    <div className="w-[90%] flex flex-col justify-center bg-magenta rounded-xl p-5 mx-auto my-5 ">
       <h2 className="font-lobster text-2xl sm:text-3xl 2xl:text-4xl text-center text-white font-medium">
         Description
       </h2>

@@ -7,14 +7,14 @@ import CompanyDescription from "./CompanyDescription";
 export default function () {
   return (
     <section className="flex flex-col justify-center md:flex-row min-h-[calc(100vh-4rem)] font-mono mx-2 sm:mx-4 md:mx-6 2xl:mx-24">
-      <div className="w-[100%] md:w-[50%] mx-auto my-5 ">
+      <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col items-between">
         <CompanyNameAvatar />
-        <div className="w-[90%] mt-5 flex flex-col xl:flex-row justify-between bg-white/30 border-l-purple-200 rounded-xl p-5 mx-auto">
+        <div className="w-[90%] mt-5 flex flex-col xl:flex-row justify-between bg-magenta border-l-purple-200 rounded-xl p-5 mx-auto">
           <CompanySkills />
           <CompanyStage />
         </div>
       </div>
-      <div className="w-[100%] md:w-[50%] mx-auto my-5">
+      <div className="w-[100%] md:w-[50%] mx-auto my-5 ">
         <CompanyDescription />
         <CompanyMatch />
       </div>

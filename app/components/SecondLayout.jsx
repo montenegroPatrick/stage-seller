@@ -12,7 +12,7 @@ export default function SecondLayout() {
   return (
     <section
       id="commencer"
-      className="bg-white min-h-screen w-full flex flex-wrap lg:flex-nowrap items-center font-jetbrains"
+      className=" min-h-screen w-full flex flex-wrap lg:flex-nowrap items-center font-jetbrains"
     >
       <article className="w-90vh h-70vh 2xl:w-1/2 m-4 flex relative rounded-xl">
         <div className="absolute top-0 right-0 left-0 bottom-0 bg-black/70 z-[1] rounded-xl" />

@@ -53,7 +53,7 @@ async function Profil({ params }) {
   }
 
   return (
-    <NavBarMarginContainer classes="bg-black1 min-h-[calc(100vh-4rem)] ">
+    <NavBarMarginContainer classes="bg-max-w-[1240px] min-h-[calc(100vh-4rem)] ">
       {params.userRole === "students" ? (
         <StudentProfilView id={params.id} student={userProfilePage} />
       ) : (
