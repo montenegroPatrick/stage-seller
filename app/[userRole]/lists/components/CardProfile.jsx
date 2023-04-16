@@ -100,7 +100,7 @@ export default function ProfileCarte({ user }) {
     <div  className="relative">
       <a
         href="#"
-        className="relative block overflow-hidden rounded-lg bg-whiteSmoke border border-gray-500 p-4 sm:p-6 lg:p-8 mt-4 mx-2"
+        className="relative block overflow-hidden rounded-lg bg-gray-300 border border-gray-500 p-4 sm:p-6 lg:p-8 mt-4 mx-2"
       >
         <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
 
@@ -111,7 +111,7 @@ export default function ProfileCarte({ user }) {
               {/* {role === "students" ? `${lastName}  ${firstName}` : `${companyName}`} */}
             </h3>
 
-            <p className="mt-1 text-xs font-medium text-gray-600">
+            <p className="mt-1 text-xs font-medium text-green-600">
               Paris, 75002
             </p>
           </div>
@@ -126,7 +126,7 @@ export default function ProfileCarte({ user }) {
         </div>
 
         <div className="mt-4 min-w-[18rem] max-w-sm">
-          <p className="w-full max-h-[5rem] text-sm text-gray-700 overflow-y-auto">
+          <p className="w-full max-h-[5rem] text-sm text-gray-700 bg-white overflow-y-auto">
             {description ? description : "Pas de descripttion"}
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
             illum provident a, ipsa maiores deleniti consectetur nobis et eaque.
@@ -138,8 +138,8 @@ export default function ProfileCarte({ user }) {
 
         <dl className="mt-6 flex gap-4 sm:gap-6">
           <div className="flex flex-col flex-wrap w-1/2">
-            <dt className="text-sm font-medium text-gray-600">Remote</dt>
-            <dd className="text-xs text-gray-500">Du 25 Avril au 25 Mai </dd>
+            <dt className="text-sm font-medium text-gray-800">Remote friendly</dt>
+            <dd className="text-xs text-red-900">Du 25 Avril au 25 Mai </dd>
           </div>
 
           <div className="flex flex-wrap w-1/2">
