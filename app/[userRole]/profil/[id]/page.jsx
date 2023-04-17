@@ -23,7 +23,10 @@ export default async function Profil({ params }) {
 
   const userProfilePage = await getUser(token, params.id);
 
-  console.log("user page profil", userProfilePage);
+  // console.log(
+  //   "user page profil <oooooooOOoOOOoOoOo></oooooooOOoOOOoOoOo>",
+  //   userProfilePage
+  // );
 
   // if it's not the profil user return the profil who's clicked
   if (!userProfilePage) {

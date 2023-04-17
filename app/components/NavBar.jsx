@@ -22,7 +22,7 @@ export default function NavBar() {
   const router = useRouter();
   const [mobileNav, setMobileNav] = useState(false);
   const [color, setColor] = useState("bg-gray-800");
-  const [textColor, setTextColor] = useState("white");
+  const [textColor, setTextColor] = useState("black");
   const [data, setData] = useState(null);
   const path = usePathname();
   //const id = path.slice(-1);
@@ -76,7 +76,7 @@ export default function NavBar() {
             </span>
           </h1>
         </Link>
-        <div className="hidden md:flex md:items-center hover:text-indigo-700 ease-in duration-300">
+        <div className="hidden lg:flex lg:items-center text-[0.8rem] px-3 text-black3 hover:text-indigo-700 ease-in duration-300">
           <Link
             className="px-10 font-jetbrains text-black"
             target="_blank"
@@ -86,14 +86,29 @@ export default function NavBar() {
           </Link>
           {data ? (
             <>
-              <Link href={`/students/profil/${data.id}`}>
-                <Button>{`${data.lastName} ${data.firstName}`}</Button>
+              <Link
+                className="px-2"
+                href={`/${
+                  data.type === "STUDENT" ? "students" : "companies"
+                }/profil/${data.id}`}
+              >
+                {`${data.lastName} ${data.firstName}`}
               </Link>
-              <Link href="/logout">
-                <Button className="p-0 mr-1">liste des types</Button>
+              <Link
+                className="px-2"
+                href={`${
+                  data.type === "STUDENT" ? "companies" : "students"
+                }/lists`}
+              >
+                liste des types
               </Link>
-              <Link href="/logout">
-                <Button>Suggestions by stageSeller</Button>
+              <Link
+                className="px-2"
+                href={`${
+                  data.type === "STUDENT" ? "companies" : "students"
+                }/suggests`}
+              >
+                Suggestions by stageSeller
               </Link>
 
               <Button onClick={handleLogout}>Se déconnecter</Button>
@@ -106,7 +121,7 @@ export default function NavBar() {
         </div>
 
         {/* Mobile Menu */}
-        <div onClick={handleNav} className="block md:hidden z-10">
+        <div onClick={handleNav} className="block lg:hidden z-10">
           {mobileNav ? (
             <AiOutlineClose size={20} style={{ color: `${textColor}` }} />
           ) : (
@@ -116,8 +131,8 @@ export default function NavBar() {
         <div
           className={
             mobileNav
-              ? "md:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
-              : "md:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
+              ? "lg:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
+              : "lg:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
           }
         >
           <Link

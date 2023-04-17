@@ -18,7 +18,7 @@ export default function StudentProfile({ id, student }) {
     }
   }, [student.tuto]);
   return (
-    <div className="m-2 flex flex-col w-full lg:flex-row-reverse min-h-[calc(100vh-4rem)] font-mono text-whiteSmoke bg-transparent">
+    <div className="m-2 flex flex-col w-full lg:flex-row-reverse min-h-[calc(100vh-4rem)] font-mono text-black3 bg-transparent">
       <section className="flex flex-row justify-between lg:w-1/2 h-[15vh] sm:h-[25vh] md:h-[30vh] lg:h-[calc(100vh-4rem)]">
         <Tuto openTuto={openTuto} type="student" />
         <div className="w-1/4 h-full md:w-2/6  lg:w-full overflow-hidden">

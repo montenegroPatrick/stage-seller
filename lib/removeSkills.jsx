@@ -1,13 +1,12 @@
+import axios from "axios";
 import { baseUrl } from "./baseUrl";
 
 export async function removeSkills(token, id, data) {
   // console.log("je fetch");
-  const res = await fetch(`${baseUrl}users/${id}/skill`, {
-    method: "DELETE",
+  const res = await axios.delete(`${baseUrl}users/${id}/skill`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(data),
   });
   if (!res.ok) {
     switch (res.status) {

@@ -1,15 +1,15 @@
+import axios from "axios";
 import { baseUrl } from "./baseUrl";
 export default async function getAllUsers(role, token) {
-  // const res = await fetch(`${baseUrl}users/type/${role}`, {
-  //   method: "GET",
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // });
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-   if (!res.ok) throw new Error("La requête a échouée");
-
-  return res.json();
+  console.log(role);
+  const res = await axios
+    .get(`${baseUrl}/users/type/${role}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);
+  return res;
 }
 
 //`http://franck-roger-server.eddi.cloud/api/users/type/${role}`

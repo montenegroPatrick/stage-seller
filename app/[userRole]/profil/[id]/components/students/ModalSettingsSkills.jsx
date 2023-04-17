@@ -1,3 +1,4 @@
+"use client";
 import { Fragment, useEffect, useState } from "react";
 import {
   Button,
@@ -17,12 +18,9 @@ import { updateUser } from "@/lib/updateUser";
 import { addSkills } from "@/lib/addSkills";
 import { RxCross2 } from "react-icons/rx";
 
-export default function ModalSettingsSkills({
-  showSettings,
-  userId,
-  studentsSkills,
-}) {
+export default function ModalSettingsSkills({ showSettings, studentsSkills }) {
   const token = Cookies.get("jwt");
+  const userId = Cookies.get("user-id");
   const [open, setOpen] = useState(false);
   const [userSkills, setUserSkills] = useState(
     studentsSkills ? studentsSkills : []
@@ -48,7 +46,7 @@ export default function ModalSettingsSkills({
       setOpen(!open);
     } else {
       setIsLoading(false);
-      setErrorMessage(response);
+      setErrorMessage(response.message);
     }
     // todo les conditions de updateSkills
   };
@@ -134,9 +132,9 @@ export default function ModalSettingsSkills({
             </Button>
             <Button variant="gradient" color="blue" type="submit">
               {isLoading ? (
-                <span>Confirm Change</span>
-              ) : (
                 <span>Loading...</span>
+              ) : (
+                <span>Confirm Change</span>
               )}
             </Button>
           </DialogFooter>

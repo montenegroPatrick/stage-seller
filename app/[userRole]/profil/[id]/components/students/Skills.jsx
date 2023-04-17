@@ -11,7 +11,6 @@ export default function Skills({
   setShowSettings,
   show,
   skills,
-  userId,
 }) {
   return (
     <section className={classes}>
@@ -37,11 +36,7 @@ export default function Skills({
               </div>
               <p>SKILLS</p>
             </div>
-            <ModalSettingsSkills
-              userId={userId}
-              showSettings={show}
-              skills={skills}
-            />
+            <ModalSettingsSkills showSettings={show} skills={skills} />
           </>
         )}
       </div>

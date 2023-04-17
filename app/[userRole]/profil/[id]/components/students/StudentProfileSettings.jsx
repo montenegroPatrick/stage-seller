@@ -22,24 +22,24 @@ export default function StudentProfilSettings({
   const token = Cookies.get("jwt");
   // todo mettre les données récupérer de la bdd
   const router = useRouter();
-  console.log(student);
+  // console.log(student);
   const [input, setInput] = useState({
-    lastname: student.lastName,
-    firstname: student.firstName,
-    localisation: student.city,
-    github: "",
-    githubApi: "",
-    profileImage: "",
-    description: "",
+    lastname: student.lastName ?? "",
+    firstname: student.firstName ?? "",
+    localisation: student.city ?? "",
+    github: student.github ?? "",
+    githubApi: student.githubApi ?? "",
+    profileImage: student.profileImage ?? "",
+    description: student.description ?? "",
   });
   const [inputStages, setInputStages] = useState({
-    description: "",
-    start_date: "",
-    duration: "",
-    location: "",
-    isRemoteFriendly: false,
-    isTravelFriendly: false,
-    Skills: [],
+    description: student.stages.description ?? "",
+    start_date: student.stages.start_date ?? "",
+    duration: student.stages.duration ?? "",
+    location: student.stages.location ?? "",
+    isRemoteFriendly: student.stages.isRemoteFriendly ?? false,
+    isTravelFriendly: student.stages.isTravelFriendly ?? false,
+    Skills: student.skills ?? [],
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -52,7 +52,7 @@ export default function StudentProfilSettings({
   const handleSubmit = async (event) => {
     // todo fetch put avec les nouvelles data
     event.preventDefault();
-    console.log(input);
+    //console.log(input);
     const responseUserUpdate = await updateUser(token, student.id, input);
     switch (responseUserUpdate) {
       case 204:
@@ -72,30 +72,29 @@ export default function StudentProfilSettings({
       default:
         break;
     }
-    // const responseStagesUpdate = await updateStages(
-    //   token,
-    //   input.stages,
-    //   student.id
-    // );
-    // switch (responseStagesUpdate) {
-    //   case 422:
-    //     break;
-    //   case 401:
-    //     break;
-    //   case 204:
-    //     setIsSettings(!isSettings);
-    //     router.refresh();
-    //     break;
-    //   case 500:
-    //     return;
-    //     break;
-    //   case 404:
-    //     return;
-    //     break;
-    //   default:
-    //     break;
-    // }
-    // console.log(sendForm);
+    const responseStagesUpdate = await updateStages(
+      token,
+      inputStages,
+      student.id
+    );
+    switch (responseStagesUpdate) {
+      case 422:
+        break;
+      case 401:
+        break;
+      case 204:
+        setIsSettings(!isSettings);
+        router.refresh();
+        break;
+      case 500:
+        return;
+        break;
+      case 404:
+        return;
+        break;
+      default:
+        break;
+    }
   };
   const [showSettings, setShowSettings] = useState(false);
   const { lastname, firstname, localisation } = input;
