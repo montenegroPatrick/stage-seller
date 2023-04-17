@@ -1,5 +1,6 @@
-import SecondLayout from "@/app/components/Layout/SecondLayout";
-import Hero from "@/app/components/Header/Hero";
+import SecondLayout from "@/app/components/SecondLayout";
+import Hero from "@/app/components/Hero";
+import NavBar from "@/app/components/NavBar";
 
 export default function Home() {
   return (

@@ -1,5 +1,5 @@
-export default function NavBarMarginContainer({ children, bg, height}) {
+export default function NavBarMarginContainer({ children, classes }) {
   return (
-    <div className={`mt-[3.5rem] sm:mt-[4rem] ${bg} ${height}`}>{children}</div>
+    <div className={`mt-[3.5rem] sm:mt-[4rem] ${classes}`}>{children}</div>
   );
 }

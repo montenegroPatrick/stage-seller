@@ -11,6 +11,10 @@
   "dependencies": {
     "@heroicons/react": "^2.0.17",
     "@material-tailwind/react": "^1.4.2",
+    "@splidejs/react-splide": "^0.7.12",
+    "@tanstack/react-query": "^4.29.1",
+    "cookie": "^0.5.0",
+    "daisyui": "^2.51.5",
     "eslint": "8.37.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "13.2.4",
@@ -21,6 +25,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
+    "react-query": "^3.39.3",
     "tw-elements": "^1.0.0-beta1"
   },
   "devDependencies": {

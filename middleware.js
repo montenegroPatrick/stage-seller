@@ -1,16 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export default function middleware(req) {
-  let response = NextResponse.next();
-  //   console.log("req", req);
-  const token = req.cookies.get("jwt");
-  token && req.headers.set("authorization", token);
-  //   if (!token) {
-  //     // Respond with JSON indicating an error message
-  //     return new NextResponse(
-  //       JSON.stringify({ success: false, message: "authentication failed" }),
-  //       { status: 401, headers: { "content-type": "application/json" } }
-  //     );
-  //   }
-  return response;
+export async function middleware(request, res) {
+  const cookie = request.cookies.get("jwt");
+  // if (!cookie) {
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
 }
+
+export const config = {
+  matcher: ["/companies/:path*/:path*", "/students/:path*/:path*"],
+};

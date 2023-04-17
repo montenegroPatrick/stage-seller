@@ -1,12 +1,7 @@
+import NavBar from "@/app/components/NavBar";
 import { headers, cookies } from "next/headers";
 
 export default function LayoutUserRole({ params, children }) {
-  console.log(params.userRole);
-  // await fetch (user)
-  const cook = cookies();
-  console.log(cook);
-  const header = headers();
-  console.log(header);
   // if(!user) => redirect to (component ou page SignUp) à voir
 
   // if (role) => you ok to see this pages

@@ -1,12 +1,13 @@
-import CardProfile from "@/app/components/StudentProfile/CardProfile";
+import CardProfile from "@/app/[userRole]/lists/components/CardProfile";
+import Caroussel from "@/app/utilsComponents/Carousel";
+import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
 
 export default function Suggests() {
   //todo fetch user qui a le plus de point commun entre eux
+
   return (
-    <div className="flex flex-wrap justify-center">
-      <CardProfile />
-      <CardProfile />
-      <CardProfile />
-    </div>
+    <NavBarMarginContainer className="">
+      <Caroussel />
+    </NavBarMarginContainer>
   );
 }
