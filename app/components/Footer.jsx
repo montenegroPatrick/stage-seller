@@ -41,14 +41,14 @@ export default function Footer() {
     //     </ul>
     //   </div>
     // </footer>
-    <footer aria-label="Site Footer" className="bg-gray-800">
+    <footer aria-label="Site Footer" className="bg-black border-t border-magenta">
       <div className="mx-auto max-w-screen-xl px-4 py-2">
         <div className="sm:flex sm:items-center sm:justify-between">
-          <div className="flex justify-center text-teal-600 sm:justify-start">
+          <div className="flex justify-center text-white sm:justify-start">
             <Logo />
           </div>
 
-          <p className="mt-4 text-center text-sm text-gray-500 lg:mt-0 lg:text-right">
+          <p className="mt-4 text-center text-sm text-white lg:mt-0 lg:text-right ">
             Copyright &copy; 2022. All rights reserved.
           </p>
         </div>

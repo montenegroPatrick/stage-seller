@@ -1,4 +1,4 @@
-import { inter, roboto, chivo, jetBrains, lobster } from "@/assets/font";
+import { inter, roboto, chivo, jetBrains, lobster, baskerville } from "@/assets/font";
 import "@/assets/globals.css";
 
 import Footer from "@/app/components/Footer";
@@ -15,9 +15,9 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={` ${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable}`}
+      className={` ${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable} ${baskerville.variable}`}
     >
-      <body className="font-chivo bg-palePink">
+      <body className="font-chivo gradient bg-white">
         <ReactQueryWrapper>
           <NavBar />
           {children}

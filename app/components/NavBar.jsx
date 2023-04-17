@@ -68,16 +68,14 @@ export default function NavBar() {
       className=
        " fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-10 ease-in duration-300 bg-white"
     >
-      <div className="max-w-[1240px] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 text-whiteSmoke items-center m-auto border-b-2 border-black">
+      <div className="max-w-[80vw] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 text-whiteSmoke items-center m-auto border-b border-black">
         <Link href="/">
           <h1
-            //
-            className="font-lobster text-4xl  text-black "
+            className="font-lobster text-4xl  text-black"
           >
-            StageSeller
+            Stage <span className="bg-black tracking-wide text-white text-2xl text-medium font-lobster px-1">Seller</span>
           </h1>
         </Link>
-        {/* <Logo /> */}
         <div className="hidden md:flex md:items-center hover:text-indigo-700 ease-in duration-300">
           <Link
             className="px-10 font-jetbrains text-black"

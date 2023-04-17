@@ -14,7 +14,7 @@ import StudentProfile from "@/app/[userRole]/profil/[id]/components/students/Stu
 
 async function Profil({ params }) {
   const cookieStore = cookies();
-  // const id = cookieStore.get('user-id')?.value;
+  const connectedUserId = cookieStore.get('user-id')?.value;
   const token = cookieStore.get("jwt")?.value;
 
   // if (!params.id || !token) {
@@ -36,7 +36,7 @@ async function Profil({ params }) {
         {params.userRole === "students" ? (
           <StudentProfile id={params.id} student={otherUser} />
         ) : (
-          <CompanyProfile company={otherUser} />
+          <CompanyProfile connectedUserId={connectedUserId} {...otherUser} />
         )}
       </NavBarMarginContainer>
     );
@@ -53,11 +53,11 @@ async function Profil({ params }) {
   }
 
   return (
-    <NavBarMarginContainer classes="bg-max-w-[1240px] min-h-[calc(100vh-4rem)] ">
+    <NavBarMarginContainer classes="max-w-[80vw] min-h-[calc(100vh-4rem)] mx-auto">
       {params.userRole === "students" ? (
         <StudentProfilView id={params.id} student={userProfilePage} />
       ) : (
-        <CompanyProfile company={userProfilePage} />
+        <CompanyProfile connectedUserId={connectedUserId} company={userProfilePage} />
       )}
     </NavBarMarginContainer>
   );

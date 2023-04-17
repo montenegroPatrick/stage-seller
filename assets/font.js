@@ -4,6 +4,7 @@ import {
   Chivo,
   JetBrains_Mono,
   Lobster,
+  Libre_Baskerville
 } from "next/font/google";
 
 //Roboto
@@ -41,4 +42,13 @@ export const lobster = Lobster({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-lobster",
+});
+
+
+//Libre Baskerville
+export const baskerville = Libre_Baskerville({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-baskerville",
 });

@@ -21,13 +21,13 @@ export default async function Lists({ params }) {
 
   return (
     <NavBarMarginContainer classes="min-h-[calc(100vh-4rem)]">
-      <div className="flex flex-col items-center mb-20 bg-white">
-        <h2 className="bg-white font-chivo text-4xl sm:text-4xl md:text-5xl text-black text-center py-6 px-8">
+      <div className="flex flex-col items-center mb-20 bg-white scrolling-animation">
+        <h2 className="bg-white font-baskerville text-4xl sm:text-4xl md:text-5xl text-black text-center py-6 px-8">
           {role === "students"
             ? "Nos étudiants"
             : "Nos entreprises"}
         </h2>
-        <div className="w-full max-w-[1240px] bg-black h-[2px]"/>
+        <div className="w-full max-w-[80vw] bg-black h-[1px]"/>
       </div>
       <div className="flex flex-wrap justify-around">
         {users &&

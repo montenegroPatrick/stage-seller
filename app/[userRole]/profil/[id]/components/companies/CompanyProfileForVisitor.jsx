@@ -32,7 +32,7 @@ export default function ({
       <section className="flex flex-col justify-center md:flex-row w-full font-mono">
         <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col items-between">
           <CompanyNameAvatar name={companyName} picture={picture} />
-          <div className="w-full flex flex-col xl:flex-row justify-between px-5 mx-auto bg-palePink">
+          <div className="w-full mt-5 flex flex-col xl:flex-row justify-between rounded-xl p-5 mx-auto">
             <CompanySkills skills={skills} />
             <CompanyStage />
           </div>
