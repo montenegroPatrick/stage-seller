@@ -97,16 +97,16 @@ export default function ProfileCarte({ user }) {
     //     </Link>
     //   </div>
     // </Card>
-    <div  className="relative">
+    <div  className="relative hover:scale-105 ">
       <a
         href="#"
-        className="relative block overflow-hidden rounded-lg bg-gray-300 border border-gray-500 p-4 sm:p-6 lg:p-8 mt-4 mx-2"
+        className="relative block overflow-hidden rounded-lg bg-white border border-blackNext p-4 sm:p-6 lg:p-8 mt-4 mx-2"
       >
         <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
 
         <div className="sm:flex sm:justify-between sm:gap-4">
           <div>
-            <h3 className="text-lg font-bold text-blue-800 sm:text-xl ">
+            <h3 className="text-lg font-bold text-blackNext sm:text-3xl ">
               Kechiche Younes
               {/* {role === "students" ? `${lastName}  ${firstName}` : `${companyName}`} */}
             </h3>
@@ -126,7 +126,7 @@ export default function ProfileCarte({ user }) {
         </div>
 
         <div className="mt-4 min-w-[18rem] max-w-sm">
-          <p className="w-full max-h-[5rem] text-sm text-gray-700 bg-white overflow-y-auto">
+          <p className="w-full max-h-[5rem] text-sm text-gray-700 bg-white overflow-y-auto rounded-lg py-2 px-2 border border-black">
             {description ? description : "Pas de descripttion"}
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
             illum provident a, ipsa maiores deleniti consectetur nobis et eaque.
@@ -143,22 +143,22 @@ export default function ProfileCarte({ user }) {
           </div>
 
           <div className="flex flex-wrap w-1/2">
-            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-magenta px-2.5 py-0.5 text-sm text-white w-fit m-0.5">
               Live
             </span>
-            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-magenta px-2.5 py-0.5 text-sm text-white w-fit m-0.5">
               Live
             </span>
-            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-magenta px-2.5 py-0.5 text-sm text-white w-fit m-0.5">
               Live
             </span>
-            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-magenta px-2.5 py-0.5 text-sm text-white w-fit m-0.5">
               Live
             </span>
-            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-magenta px-2.5 py-0.5 text-sm text-white w-fit m-0.5">
               Live
             </span>
-            <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 w-fit m-0.5">
+            <span className="whitespace-nowrap rounded-full bg-magenta px-2.5 py-0.5 text-sm text-white w-fit m-0.5">
               Live
             </span>
           </div>

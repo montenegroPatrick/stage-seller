@@ -11,15 +11,13 @@ import { cookies } from "next/headers";
 export default function ({
   companyName,
   description,
-  siret,
   city,
   zipCode,
-  profilImage,
+  picture,
   skills,
   id,
-  stages,
-  connectedUserId,
-  email
+  stage,
+  connectedUserId
 }) {
 
   
@@ -33,10 +31,10 @@ export default function ({
       </div>
       <section className="flex flex-col justify-center md:flex-row w-full font-mono">
         <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col items-between">
-          <CompanyNameAvatar name={companyName} picture={profilImage} />
-          <div className="w-full flex flex-col xl:flex-row justify-between px-5 mx-auto bg-palePink">
+          <CompanyNameAvatar name={companyName} picture={picture} />
+          <div className="w-full mt-5 flex flex-col xl:flex-row justify-between rounded-xl p-5 mx-auto">
             <CompanySkills skills={skills} />
-            <CompanyStage stages={stages}/>
+            <CompanyStage />
           </div>
         </div>
         <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l md:border-black">

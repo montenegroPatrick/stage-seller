@@ -10,3 +10,33 @@ html {
 .custom-img {
   background-image: url(https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80);
 }
+
+
+/* Title effect */
+.scrolling-animation {
+  position: relative;
+  background-color: white;
+  color: black;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.scrolling-animation:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: inherit;
+  transform: translateX(0%);
+  animation: scrolling 3s ease-out forwards;
+}
+
+@keyframes scrolling {
+  to {
+    transform: translateX(-100%);
+  }
+}
+/* ************ */
+

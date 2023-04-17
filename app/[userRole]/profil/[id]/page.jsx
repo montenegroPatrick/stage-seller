@@ -11,7 +11,11 @@ import { baseUrl } from "@/lib/baseUrl";
 
 export default async function Profil({ params }) {
   const cookieStore = cookies();
+
   const id = cookieStore.get("user-id")?.value;
+
+ // const connectedUserId = cookieStore.get('user-id')?.value;
+
   const token = cookieStore.get("jwt")?.value;
 
   if (!id || !token) {
@@ -40,7 +44,7 @@ export default async function Profil({ params }) {
         {params.userRole === "students" ? (
           <StudentProfile id={params.id} student={otherUser} />
         ) : (
-          <CompanyProfile company={otherUser} />
+          <CompanyProfile connectedUserId={connectedUserId} {...otherUser} />
         )}
       </NavBarMarginContainer>
     );
@@ -57,11 +61,11 @@ export default async function Profil({ params }) {
   }
 
   return (
-    <NavBarMarginContainer classes="bg-black1 min-h-[calc(100vh-4rem)] ">
+    <NavBarMarginContainer classes="max-w-[80vw] min-h-[calc(100vh-4rem)] mx-auto">
       {params.userRole === "students" ? (
         <StudentProfilView id={params.id} student={userProfilePage} />
       ) : (
-        <CompanyProfile company={userProfilePage} />
+        <CompanyProfile connectedUserId={connectedUserId} company={userProfilePage} />
       )}
     </NavBarMarginContainer>
   );
