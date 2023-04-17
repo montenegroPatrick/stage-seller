@@ -1,23 +1,14 @@
 import { baseUrl } from "./baseUrl";
 
 export async function getUser(token, id) {
-  const res = await fetch(`${baseUrl}users/${id}`, {
-    next: { revalidate: false },
-    method: "GET",
+  const response = await fetch(`${baseUrl}users/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  });
-  if (!res.ok) {
-    switch (res.status) {
-      case 302:
-        console.log(res.status);
-        return res.json();
-        break;
+  })
+    .then((res) => res.json())
+    .then((data) => data)
+    .catch((err) => err);
 
-      default:
-        break;
-    }
-  }
-  return res;
+  return response;
 }

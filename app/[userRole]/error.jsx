@@ -18,6 +18,7 @@ export default function Error({ error, reset }) {
   const userId = Cookies.get("user-id");
   const token = Cookies.get("jwt");
   const userData = getUser(token, userId).then((res) => res);
+  const role = userData.type === "STUDENT" ? "students" : "companies";
   return (
     <NavBarMarginContainer classes="h-[calc(100vh-4rem)] bg-white">
       <div className="flex flex-col items-center">
@@ -47,7 +48,7 @@ export default function Error({ error, reset }) {
             className="bg-blue-700 py-3 px-5 rounded-full text-white"
             onClick={
               // Attempt to recover by trying to re-render the segment
-              () => router.push(`/${res.type}/sign-up`)
+              () => router.push(`/${role}/sign-up`)
             }
           >
             Retour au formulaire
