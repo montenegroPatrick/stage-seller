@@ -1,13 +1,13 @@
 "use client";
-import postUserLogin from "@/FetchFunctions/POST/postUserLogin";
+
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { Alert } from "@material-tailwind/react";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import cookie from "cookie";
-import { NextResponse } from "next/server";
+
 import { baseUrl } from "@/lib/baseUrl";
 
 export default function LogIn() {
@@ -15,25 +15,23 @@ export default function LogIn() {
     email: "",
     password: "",
   });
-  const response = NextResponse.next();
-
-  response.cookies.set("cookie", "cookie motha fucka");
-
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setInput((prev) => ({ ...prev, [name]: value }));
   };
+
   useEffect(() => {
     setErrorMessage("");
   }, [input]);
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     setErrorMessage("");
     setIsLoading(true);
-    event.preventDefault();
     const { email, password } = input;
     fetch(`${baseUrl}login`, {
       method: "POST",
@@ -45,10 +43,19 @@ export default function LogIn() {
       .then((res) => {
         setIsLoading(false);
         if (!res.ok) {
-          if (res.status === "401") {
-            console.log("401");
+          switch (res.status) {
+            case "422":
+              setErrorMessage("");
+              break;
+            case "401":
+              setErrorMessage("");
+              break;
+
+            default:
+              setErrorMessage("");
+              break;
           }
-          console.log("erreur", res.status);
+
           throw new Error(`error ${res.status}`);
         }
         return res.json();
@@ -57,15 +64,16 @@ export default function LogIn() {
         setIsLoading(false);
         Cookies.set("jwt", data.token);
         Cookies.set("user-id", data.user.id);
-        console.log(data.user);
-        const role = data.user.company ? "companies" : "students";
+        //console.log(data.user);
         // todo dynamiser le role grace à la nouvelle api
+        const role =
+          data.user.type.toLowerCase() === "student" ? "students" : "companies";
 
-        router.push(`/students/profil/${data.user.id}`);
-        //${role}/profil/${data.user.id}
+        router.push(`/${role}/profil/${data.user.id}`);
       })
       .catch((err) => {
-        throw new Error(err);
+        setIsLoading(false);
+        setErrorMessage(err);
       });
   };
 

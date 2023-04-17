@@ -1,6 +1,7 @@
 import { baseUrl } from "./baseUrl";
 
 export async function updateUser(token, id, data) {
+  // console.log("je fetch");
   const res = await fetch(`${baseUrl}users/${id}`, {
     method: "PUT",
     headers: {
@@ -9,9 +10,7 @@ export async function updateUser(token, id, data) {
     body: JSON.stringify(data),
   });
   if (!res.ok) {
-    console.log(res);
-    undefined;
+    return res.status;
   }
-  console.log(res.status, res);
-  return res.json();
+  return res.status;
 }

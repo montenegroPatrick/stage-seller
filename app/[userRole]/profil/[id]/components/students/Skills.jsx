@@ -27,12 +27,15 @@ export default function Skills({
           ))}
         {isSettings && (
           <>
-            <div
-              onClick={() => setShowSettings(!show)}
-              className="px-1 rounded-md overflow-hidden bg-gray-500 w-fit"
-            >
-              {" "}
-              +{" "}
+            <div className="flex gap-2">
+              <div
+                onClick={() => setShowSettings(!show)}
+                className="px-1 rounded-md overflow-hidden bg-gray-500 w-fit"
+              >
+                {" "}
+                +{" "}
+              </div>
+              <p>SKILLS</p>
             </div>
             <ModalSettingsSkills
               userId={userId}

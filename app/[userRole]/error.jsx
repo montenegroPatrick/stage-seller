@@ -1,9 +1,10 @@
 "use client"; // Error components must be Client components
 
 import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { getUser } from "@/lib/getUser";
 
 export default function Error({ error, reset }) {
   const router = useRouter();
@@ -13,7 +14,10 @@ export default function Error({ error, reset }) {
   //   console.error(error);
   // }, [error]);
 
-  const userId = Cookies.get("u-id");
+  const path = usePathname();
+  const userId = Cookies.get("user-id");
+  const token = Cookies.get("jwt");
+  const userData = getUser(token, userId).then((res) => res);
   return (
     <NavBarMarginContainer classes="h-[calc(100vh-4rem)] bg-white">
       <div className="flex flex-col items-center">
@@ -33,7 +37,7 @@ export default function Error({ error, reset }) {
             className="bg-blue-700 py-3 px-5 rounded-full text-white"
             onClick={
               // Attempt to recover by trying to re-render the segment
-              () => router.push(`/${role}/profil/${UserId}`)
+              () => router.push(path)
             }
           >
             Revenir sur la page de profil
@@ -43,7 +47,7 @@ export default function Error({ error, reset }) {
             className="bg-blue-700 py-3 px-5 rounded-full text-white"
             onClick={
               // Attempt to recover by trying to re-render the segment
-              () => router.push(`/${role}/sign-up`)
+              () => router.push(`/${res.type}/sign-up`)
             }
           >
             Retour au formulaire

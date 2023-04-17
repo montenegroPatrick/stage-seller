@@ -18,10 +18,10 @@ export default function StudentProfile({ id, student }) {
     }
   }, [student.tuto]);
   return (
-    <div className="m-2 flex flex-col w-full lg:flex-row-reverse min-h-[calc(100vh-4rem)] font-mono text-black3 bg-transparent">
-      <section className="flex flex-row justify-between lg:w-7/12 h-[15vh] sm:h-[25vh] md:h-[30vh] lg:h-[calc(100vh-4rem)]">
+    <div className="m-2 flex flex-col w-full lg:flex-row-reverse min-h-[calc(100vh-4rem)] font-mono text-whiteSmoke bg-transparent">
+      <section className="flex flex-row justify-between lg:w-1/2 h-[15vh] sm:h-[25vh] md:h-[30vh] lg:h-[calc(100vh-4rem)]">
         <Tuto openTuto={openTuto} type="student" />
-        <div className="w-1/4 h-full md:w-2/6 lg:w-full overflow-hidden">
+        <div className="w-1/4 h-full md:w-2/6  lg:w-full overflow-hidden">
           <ImageProfile />
         </div>
         {/* image de profile en background avec dessus nom prenom lieu skills  */}
@@ -39,15 +39,15 @@ export default function StudentProfile({ id, student }) {
       <section className="grow  flex flex-col">
         <div className="w-full p-5 flex flex-col gap-5 lg:justify-between grow">
           <article className="text-left">
-            <ProfileDescription student={student} />
+            <ProfileDescription currentUser={student} />
           </article>
           <article className="lg:text-right">
-            <StageDescription stage={student.stage} />
+            <StageDescription currentUser={student} />
           </article>
         </div>
         <div className=" hidden lg:flex w-full h-1/3 max-h-[100rem]">
           <div className=" items-center w-1/2">
-            <GithubProjects github={student.github} />
+            <GithubProjects currentUser={student} />
           </div>
           <div className="overflow-hidden h-48 items-center w-1/2 ">
             <MatchHistoric currentUser={student} />

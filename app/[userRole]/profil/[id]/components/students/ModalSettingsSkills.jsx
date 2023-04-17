@@ -13,18 +13,27 @@ import {
 import { getSkills } from "@/lib/getSkills";
 
 import Cookies from "js-cookie";
-import updateUser from "@/FetchFunctions/PUT/updateUser";
+import { updateUser } from "@/lib/updateUser";
+import { addSkills } from "@/lib/addSkills";
+import { RxCross2 } from "react-icons/rx";
 
-export default function ModalSettingsSkills({ showSettings, userId }) {
+export default function ModalSettingsSkills({
+  showSettings,
+  userId,
+  studentsSkills,
+}) {
   const token = Cookies.get("jwt");
   const [open, setOpen] = useState(false);
-  const [userSkills, setUserSkills] = useState([]);
-  const [skillsList, setskillsList] = useState([]);
+  const [userSkills, setUserSkills] = useState(
+    studentsSkills ? studentsSkills : []
+  );
+  const [skillsList, setSkillsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const handleOpen = () => setOpen(!open);
 
   const getSkillsData = async () =>
-    getSkills(token).then((skills) => setskillsList(skills));
-  console.log(skillsList);
+    getSkills(token).then((skills) => setSkillsList(skills));
   useEffect(() => {
     getSkillsData();
     showSettings && handleOpen();
@@ -32,18 +41,37 @@ export default function ModalSettingsSkills({ showSettings, userId }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const updateSkills = await updateUser(token, userId, userSkills);
+    setIsLoading(true);
+    const response = await addSkills(token, userId, userSkills);
+    if (response) {
+      setIsLoading(false);
+      setOpen(!open);
+    } else {
+      setIsLoading(false);
+      setErrorMessage(response);
+    }
     // todo les conditions de updateSkills
-    setOpen(!open);
   };
 
   const handleChange = (event) => {
-    const userSkillsArray = [...userSkills, event];
-    setUserSkills(userSkillsArray);
+    if (userSkills.includes(event)) {
+      setUserSkills(userSkills);
+    } else {
+      const userSkillsArray = [...userSkills, event];
+      setUserSkills(userSkillsArray);
+    }
+  };
+  const handleRemoveEvent = (event) => {
+    console.log(event.target.parentElement.firstChild);
+    const newArraySkills = [...userSkills];
+    // newArraySkills.remove(event.target.parentElement.firstChild);
+    setUserSkills(newArraySkills);
   };
   return (
     <Fragment>
       <Dialog
+        className="text-[0.2rem]"
+        size="xl"
         open={open}
         handler={handleOpen}
         animate={{
@@ -57,17 +85,22 @@ export default function ModalSettingsSkills({ showSettings, userId }) {
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <DialogBody divider>
-            {userSkills.map((skill, index) => (
-              <Avatar
-                key={index}
-                variant="rounded"
-                size="xxl"
-                alt={skill}
-                src={`https://img.shields.io/badge/-${skill}-black?style=for-the-badge&logo=${skill}&logoColor=61DAFB&color=#505050`}
-                className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
-              />
-            ))}
-            <div className="p-5 w-72">
+            <div className="flex flex-row">
+              {userSkills.map((skill, index) => (
+                <div className="flex ">
+                  <Avatar
+                    key={index}
+                    variant="rounded"
+                    size="xxl"
+                    alt={skill}
+                    src={`https://img.shields.io/badge/-${skill}-black?style=for-the-badge&logo=${skill}&logoColor=61DAFB&color=white`}
+                    className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
+                  />
+                  <RxCross2 onClick={handleRemoveEvent} />
+                </div>
+              ))}
+            </div>
+            <div className="py-5 ">
               <Select
                 multiple
                 variant="static"
@@ -86,6 +119,7 @@ export default function ModalSettingsSkills({ showSettings, userId }) {
                     </Option>
                   ))}
               </Select>
+              {errorMessage && <p>{errorMessage}</p>}
             </div>
           </DialogBody>
 
@@ -99,7 +133,11 @@ export default function ModalSettingsSkills({ showSettings, userId }) {
               <span>Cancel</span>
             </Button>
             <Button variant="gradient" color="blue" type="submit">
-              <span>Confirm Change</span>
+              {isLoading ? (
+                <span>Confirm Change</span>
+              ) : (
+                <span>Loading...</span>
+              )}
             </Button>
           </DialogFooter>
         </form>

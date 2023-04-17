@@ -1,7 +1,7 @@
 "use client";
 
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-
+import { Splide, SplideSlide } from "splide-nextjs/react-splide";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 export default function Caroussel() {
   const options = {
     perPage: 2,

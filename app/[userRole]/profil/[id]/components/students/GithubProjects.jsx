@@ -1,11 +1,6 @@
 "use client";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-  Avatar,
-} from "@material-tailwind/react";
+
+import { Input } from "@material-tailwind/react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -13,74 +8,76 @@ export default function GithubProjects({
   isSettings,
   setIsSettings,
   currentUser,
+  handleSubmit,
+  handleChange,
+  input,
 }) {
   // false data to try
   const [indexProjectInView, setIndexProjectInView] = useState(1);
-  const [input, setInput] = useState({
-    github: currentUser.github,
-    githubApi: "",
-  });
-  // const repos = {
-  //   data: [
-  //     {
-  //       id: 1,
-  //       name: "test1",
-  //       description: "je suis le repo numéro 1",
-  //       topics: ["test1", "test1topic", "array"],
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "test2",
-  //       description: "je suis le repo numéro 2",
-  //       topics: ["test1", "test1topic", "array"],
-  //     },
-  //     {
-  //       id: 3,
-  //       name: "test3",
-  //       description: "je suis le repo numéro 3",
-  //       topics: ["test1", "test1topic", "array"],
-  //     },
-  //   ],
+  const repos = {
+    data: [
+      {
+        id: 1,
+        name: "test1",
+        description: "je suis le repo numéro 1",
+        topics: ["test1", "test1topic", "array"],
+      },
+      {
+        id: 2,
+        name: "test2",
+        description: "je suis le repo numéro 2",
+        topics: ["test1", "test1topic", "array"],
+      },
+      {
+        id: 3,
+        name: "test3",
+        description: "je suis le repo numéro 3",
+        topics: ["test1", "test1topic", "array"],
+      },
+    ],
+  };
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setInput((prev) => ({ ...prev, [name]: value }));
   // };
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setInput((prev) => ({ ...prev, [name]: value }));
-  };
-  const handleSubmit = async (event) => {
-    // todo fetch put avec les nouvelles data
-    event.preventDefault();
-    await updateUser(token, currentUser.id, input);
-    setIsSettings(!isSettings);
-    //router.refresh();
-  };
+  // const handleSubmit = async (event) => {
+  //   // todo fetch put avec les nouvelles data
+  //   event.preventDefault();
+  //   await updateUser(token, currentUser.id, input);
+  //   setIsSettings(!isSettings);
+  //   //router.refresh();
+  // };
   return (
     <section className="flex flex-row items-center justify-between w-full h-full group projectShadow  rounded-3xl ">
       {isSettings ? (
-        <form onSubmit={handleSubmit}>
+        <div className="w-full flex flex-col gap-2 my-2">
           {" "}
-          <input
+          <Input
+            className="rounded-xl  mb-2 p-2 border-white bg-transparent border-2 "
             type="text"
             value={input.github}
             onChange={handleChange}
             name="github"
+            label="lien de ton profil github"
           />{" "}
-          <input
+          <Input
+            className="rounded-xl  mb-2 p-2 border-white bg-transparent border-2 "
             type="text"
             value={input.githubApi}
             onChange={handleChange}
             name="githubApi"
+            label="API de ton github"
           />{" "}
-          <button hidden type="submit"></button>
-        </form>
+        </div>
       ) : (
         repos.data
           .filter((repo, index) => {
             return index === indexProjectInView;
           })
           .map((repo, index) => (
-            <>
+            <div key={repo.id} className="flex items-center text-whiteSmoke">
               <div
-                className="font-bold text-xl md:text-5xl lg:text-9xl text-gray-200 cursor-pointer hover:scale-110"
+                className="font-bold text-md md:text-xl lg:text-7xl text-whiteSmoke cursor-pointer hover:scale-110"
                 onClick={() => {
                   const indexRepos = Object.keys(repos.data);
 
@@ -99,7 +96,7 @@ export default function GithubProjects({
                 target="_blank"
                 className="h-full flex flex-col justify-center "
               >
-                <div className="  p-2 text-black3 rounded-3xl h-3/4 flex flex-col items-center justify-between gap-4 cursor-pointer">
+                <div className="  p-2 text-whiteSmoke rounded-3xl h-3/4 flex flex-col items-center justify-between gap-4 cursor-pointer">
                   <h1 className="text-2xl   lg:uppercase font-semibold  ">
                     {repo.name}
                   </h1>
@@ -119,7 +116,7 @@ export default function GithubProjects({
               </Link>
 
               <div
-                className="font-bold text-xl md:text-5xl lg:text-9xl text-gray-200
+                className="font-bold text-xl md:text-5xl lg:text-7xl text-gray-200
                cursor-pointer duration-700"
                 onClick={() => {
                   if (
@@ -134,7 +131,7 @@ export default function GithubProjects({
                 {" "}
                 {">"}{" "}
               </div>
-            </>
+            </div>
           ))
       )}
     </section>

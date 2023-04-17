@@ -5,12 +5,14 @@ import ProfileDescription from "./ProfileDescription";
 import StageDescription from "./StageDescription";
 import Skills from "./Skills";
 import MatchHistoric from "./MatchHistoric";
-import { FiSettings } from "react-icons/fi";
-import { useRef, useState } from "react";
-import StudentProfile from "./StudentProfile";
+
+import { useState } from "react";
+
 import { useRouter } from "next/navigation";
-import updateUser from "@/FetchFunctions/PUT/updateUser";
 import Cookies from "js-cookie";
+import { updateUser } from "@/lib/updateUser";
+import { Input } from "@material-tailwind/react";
+import { updateStages } from "@/lib/updateStages";
 
 export default function StudentProfilSettings({
   isSettings,
@@ -20,105 +22,172 @@ export default function StudentProfilSettings({
   const token = Cookies.get("jwt");
   // todo mettre les données récupérer de la bdd
   const router = useRouter();
+  console.log(student);
   const [input, setInput] = useState({
     lastname: student.lastName,
     firstname: student.firstName,
     localisation: student.city,
+    github: "",
+    githubApi: "",
+    profileImage: "",
+    description: "",
+  });
+  const [inputStages, setInputStages] = useState({
+    description: "",
+    start_date: "",
+    duration: "",
+    location: "",
+    isRemoteFriendly: false,
+    isTravelFriendly: false,
+    Skills: [],
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
     setInput((prev) => ({ ...prev, [name]: value }));
   };
-  const handleSubmit = (event) => {
-    // todo fetch put avec les nouvelles data
-    updateUser(token, student.id, input);
-    event.preventDefault();
-    setIsSettings(!isSettings);
-
-    router.refresh();
+  const handleChangeStages = (event) => {
+    const { name, value } = event.target;
+    setInputStages((prev) => ({ ...prev, [name]: value }));
   };
-
+  const handleSubmit = async (event) => {
+    // todo fetch put avec les nouvelles data
+    event.preventDefault();
+    console.log(input);
+    const responseUserUpdate = await updateUser(token, student.id, input);
+    switch (responseUserUpdate) {
+      case 204:
+        setIsSettings(!isSettings);
+        router.refresh();
+        break;
+      case 422:
+        break;
+      case 401:
+        break;
+      case 500:
+        return;
+        break;
+      case 404:
+        return;
+        break;
+      default:
+        break;
+    }
+    // const responseStagesUpdate = await updateStages(
+    //   token,
+    //   input.stages,
+    //   student.id
+    // );
+    // switch (responseStagesUpdate) {
+    //   case 422:
+    //     break;
+    //   case 401:
+    //     break;
+    //   case 204:
+    //     setIsSettings(!isSettings);
+    //     router.refresh();
+    //     break;
+    //   case 500:
+    //     return;
+    //     break;
+    //   case 404:
+    //     return;
+    //     break;
+    //   default:
+    //     break;
+    // }
+    // console.log(sendForm);
+  };
   const [showSettings, setShowSettings] = useState(false);
   const { lastname, firstname, localisation } = input;
 
   return (
-    <div className=" m-2 flex w-full flex-col lg:flex-row-reverse h-85vh font-mono bg-transparent">
-      <section className="flex flex-row justify-between  lg:w-96 h-1/3 lg:h-full">
+    <form
+      onSubmit={handleSubmit}
+      className=" flex flex-col lg:justify-around h-screen w-full lg:gap-5 min-h-[calc(100vh-4rem)] font-mono text-whiteSmoke bg-blue"
+    >
+      <div className="flex lg:flex-col h-screen gap-5 ">
         <div className="w-1/4 h-full md:w-2/6 lg:w-full overflow-hidden">
           <ImageProfile
             isSettings={isSettings}
             setShowSettings={setShowSettings}
             show={showSettings}
+            student={student}
           />
         </div>
-        {/* image de profile en background avec dessus nom prenom lieu skills  */}
-        <form
-          onSubmit={handleSubmit}
-          className="lg:hidden px-10 flex flex-col gap-1  "
-        >
-          <input
-            className="rounded-xl p-2 border-white bg-transparent border-2  "
-            onChange={handleChange}
-            name="lastname"
-            value={lastname}
-          />
+        <Skills
+          isSettings={isSettings}
+          studentSkills={student.skills}
+          show={showSettings}
+          setShowSettings={setShowSettings}
+          classes="flex flex-col py-2 gap-1 lg:hidden "
+        />
+        <section className="flex flex-row flex-wrap  justify-between lg:w-full h-1/3 lg:h-full">
+          {/* image de profile en background avec dessus nom prenom lieu skills  */}
+          <div className="flex flex-col gap-2 items-center lg:w-screen">
+            <p className="p-2 ">Information personnelle</p>
+            <Input
+              className="rounded-xl p-2 border-white bg-transparent border-2  "
+              onChange={handleChange}
+              name="lastname"
+              value={lastname}
+              label="ton nom de famille"
+            />
 
-          <input
-            className="rounded-xl p-2 border-white bg-transparent border-2 "
-            onChange={handleChange}
-            name="firstname"
-            value={firstname}
-          />
+            <Input
+              className="rounded-xl p-2 border-white bg-transparent border-2 "
+              onChange={handleChange}
+              name="firstname"
+              value={firstname}
+              label="ton prénom"
+            />
 
-          <input
-            className="rounded-xl p-2 border-white bg-transparent border-2 "
-            onChange={handleChange}
-            name="localisation"
-            value={localisation}
-          />
-          <button type="submit" hidden></button>
-        </form>
-      </section>
-      <Skills
-        isSettings={isSettings}
-        show={showSettings}
-        setShowSettings={setShowSettings}
-        classes="flex flex-col gap-1 lg:hidden"
-      />
-
-      <section className="grow  flex flex-col">
+            <Input
+              className="rounded-xl p-2 border-white bg-transparent border-2 "
+              onChange={handleChange}
+              name="localisation"
+              value={localisation}
+              label="ta ville"
+            />
+            <p className="p-2">description</p>
+          </div>
+        </section>
+      </div>
+      <section className="flex flex-col ">
         {/* cv link / profile description / stage description / mathHistoric / githubProject / */}
-        <div className="w-full p-5 flex flex-col gap-5 lg:justify-between grow">
-          <article className="text-left">
-            <ProfileDescription
-              isSettings={isSettings}
-              setIsSettings={setIsSettings}
-              setShowSettings={setShowSettings}
-              currentUser={student}
-            />
-          </article>
-          <article className="lg:text-right">
-            <StageDescription
-              isSettings={isSettings}
-              setIsSettings={setIsSettings}
-              currentUser={student}
-            />
-          </article>
+        <div className="flex flex-col gap-2 h-full flex-wrap lg:w-full justify-between">
+          <ProfileDescription
+            isSettings={isSettings}
+            setIsSettings={setIsSettings}
+            setShowSettings={setShowSettings}
+            currentUser={student}
+            input={input}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+          <StageDescription
+            isSettings={isSettings}
+            setIsSettings={setIsSettings}
+            currentUser={student}
+            setInput={setInputStages}
+            input={inputStages}
+            handleChange={handleChangeStages}
+          />
         </div>
-        <div className=" hidden lg:flex w-full h-1/3 max-h-[100rem]">
-          <div className=" items-center w-1/2">
+        <div className="lg:flex w-full h-1/3 max-h-[100rem]">
+          <div className="items-center w-full">
             <GithubProjects
               setIsSettings={setIsSettings}
               isSettings={isSettings}
               setShowSettings={setShowSettings}
               currentUser={student}
+              input={input}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
             />
-          </div>
-          <div className="overflow-hidden h-48 items-center w-1/2 ">
-            <MatchHistoric currentUser={student} />
           </div>
         </div>
       </section>
-    </div>
+      <button type="submit" hidden></button>
+    </form>
   );
 }

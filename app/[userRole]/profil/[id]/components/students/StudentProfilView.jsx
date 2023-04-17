@@ -4,12 +4,10 @@ import { FiSettings } from "react-icons/fi";
 import StudentProfilSettings from "./StudentProfileSettings";
 import StudentProfile from "./StudentProfile";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import getCookie from "@/FetchFunctions/getCookies";
 
 export default function StudentProfilView({ student, id }) {
   const [isSettings, setIsSettings] = useState(false);
-  //console.log("profileView", student);
+
   return (
     <div className="text-whiteSmoke">
       <button
