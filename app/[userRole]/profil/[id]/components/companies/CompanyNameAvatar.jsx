@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function CompanyNameAvatar() {
   return (
     <div className="w-full flex flex-col justify-center border-l-purple-200 p-5 mt-5 border-dotted border-b border-black">
-      <h2 className="text-2xl sm:text-3xl 2xl:text-4xl text-center text-blackNext font-baskerville">Nom de l'entreprise</h2>
+      <h2 className="text-2xl sm:text-3xl 2xl:text-4xl text-center text-blueDark font-baskerville">Nom de l'entreprise</h2>
       <p className="text-center text-lg text-magenta">Paris, 75002</p>
       <div className="w-[100%] py-5">
         <Image

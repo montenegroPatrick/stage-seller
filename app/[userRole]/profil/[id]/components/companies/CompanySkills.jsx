@@ -7,14 +7,14 @@ export default function CompanySkills() {
         Skills de l'entreprise
       </h2>
       <div className="mt-5 w-full bg-white mx-auto rounded-xl flex flex-wrap justify-evenly py-4 px-2 gap-[6px]">
-        <Skills bgColor={'bg-blackNext'}>Javascript</Skills>
-        <Skills bgColor={'bg-blackNext'}>PHP</Skills>
-        <Skills bgColor={'bg-blackNext'}>Javascript</Skills>
-        <Skills bgColor={'bg-blackNext'}>Javascript</Skills>
-        <Skills bgColor={'bg-blackNext'}>Javascript</Skills>
-        <Skills bgColor={'bg-blackNext'}>Javascript</Skills>
-        <Skills bgColor={'bg-blackNext'}>Javascript</Skills>
-        <Skills bgColor={'bg-blackNext'}>Javascript</Skills>
+        <Skills bgColor={'bg-blueDark'}>Javascript</Skills>
+        <Skills bgColor={'bg-blueDark'}>PHP</Skills>
+        <Skills bgColor={'bg-blueDark'}>Javascript</Skills>
+        <Skills bgColor={'bg-blueDark'}>Javascript</Skills>
+        <Skills bgColor={'bg-blueDark'}>Javascript</Skills>
+        <Skills bgColor={'bg-blueDark'}>Javascript</Skills>
+        <Skills bgColor={'bg-blueDark'}>Javascript</Skills>
+        <Skills bgColor={'bg-blueDark'}>Javascript</Skills>
       </div>
     </div>
   );

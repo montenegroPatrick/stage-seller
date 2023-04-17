@@ -12,9 +12,8 @@ const skills = ['Php', 'Javascript', 'React']
       <article className="flex flex-col 2xl:flex-row mt-5 w-full border border-black rounded-md p-2">
         <div className=" flex flex-wrap gap-2">
           {skills.map((skill) => 
-            <Skills bgColor="bg-blackNext">{skill}</Skills>
+            <Skills key={skill.id} bgColor="bg-blueDark">{skill}</Skills>
           )}
-          
         </div>
         <div className="text-center font-jetbrains">
           <p className="font-md p-1 text-magenta">À partir du 25 Mai</p>

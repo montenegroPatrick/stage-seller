@@ -1,7 +1,7 @@
 "use client";
 import PropTypes from "prop-types";
 
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Button from "@/app/utilsComponents/Buttons/Button";
 
@@ -13,22 +13,19 @@ export default function CardMatch({
   id,
   companyName,
 }) {
+  const router = useRouter();
+
   return (
-    <div className=" my-2 border border-black rounded-lg flex flex-col justify-center items-center lg:flex-row text-blackNext px-4 py-4 lg:justify-around">
+    <div className=" my-2 border border-black rounded-lg flex flex-col justify-center items-center lg:flex-row text-blackNext px-4 py-4 lg:justify-around bg-gray-300">
       <div className="font-jetbrains font-medium">
-        <h3 className="text-2xl">
+        <h3 className="text-xl">
           Kechiche Younes{firstName} {lastName}
         </h3>
-        <p className="text-lg text-blue-500">
+        <p className="text-md text-blue-500">
           Paris{city}, {zipCode}75002
         </p>
       </div>
-      <Link
-        
-        href="/download"
-      >
-        <Button>Voir le profil</Button>
-      </Link>
+      <Button onClick={router.push("/")}>Voir le profil</Button>
     </div>
   );
 }
