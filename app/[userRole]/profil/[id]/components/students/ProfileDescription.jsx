@@ -14,7 +14,7 @@ export default function ProfileDescription({
   input,
   handleChange,
 }) {
-  console.log(currentUser);
+  // console.log(currentUser);
   if (isSettings) {
     return (
       <Input

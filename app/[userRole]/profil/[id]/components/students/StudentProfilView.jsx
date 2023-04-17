@@ -9,7 +9,7 @@ export default function StudentProfilView({ student, id }) {
   const [isSettings, setIsSettings] = useState(false);
 
   return (
-    <div className="text-whiteSmoke">
+    <div className="text-black3">
       <button
         className=" flex flex-col p-3"
         onClick={() => setIsSettings(!isSettings)}

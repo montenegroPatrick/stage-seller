@@ -13,8 +13,6 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 import { usePathname } from "next/navigation";
 
-import { useQuery } from "@tanstack/react-query";
-
 import { getUser } from "@/lib/getUser";
 import { useRouter } from "next/navigation";
 
@@ -24,7 +22,7 @@ export default function NavBar() {
   const router = useRouter();
   const [mobileNav, setMobileNav] = useState(false);
   const [color, setColor] = useState("bg-gray-800");
-  const [textColor, setTextColor] = useState("white");
+  const [textColor, setTextColor] = useState("black");
   const [data, setData] = useState(null);
   const path = usePathname();
   //const id = path.slice(-1);
@@ -44,16 +42,16 @@ export default function NavBar() {
     if (token && id) {
       getData();
     }
-    const changeColor = () => {
-      if (window.scrollY >= 90) {
-        setColor("#ffffff");
-        setTextColor("#000000");
-      } else {
-        setColor("transparent");
-        setTextColor("#ffffff");
-      }
-    };
-    window.addEventListener("scroll", changeColor);
+    // const changeColor = () => {
+    //   if (window.scrollY >= 90) {
+    //     setColor("#ffffff");
+    //     setTextColor("#000000");
+    //   } else {
+    //     setColor("transparent");
+    //     setTextColor("#ffffff");
+    //   }
+    // };
+    // window.addEventListener("scroll", changeColor);
   }, [path]);
 
   const handleLogout = () => {
@@ -67,35 +65,52 @@ export default function NavBar() {
   return (
     <header
       //style={{ backgroundColor: `${color}` }}
-      className=
-       " fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-10 ease-in duration-300 bg-white"
+      className=" fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-10 ease-in duration-300 bg-white"
     >
-      <div className="max-w-[80vw] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 text-whiteSmoke items-center m-auto border-b border-black">
+      <div className="w-full 2xl:w-[90vw] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 text-whiteSmoke items-center m-auto border-b border-black">
         <Link href="/">
-          <h1
-            className="font-lobster text-4xl  text-black"
-          >
-            Stage <span className="bg-black tracking-wide text-white text-2xl text-medium font-lobster px-1">Seller</span>
+          <h1 className="font-lobster flex items-end text-3xl 2xl:text-4xl text-black w-24">
+            Stage{" "}
+            <span className="bg-black tracking-wide text-white text-xl 2xl:text-2xl text-medium font-lobster px-0.5">
+              Seller
+            </span>
           </h1>
         </Link>
-        <div className="hidden md:flex md:items-center hover:text-indigo-700 ease-in duration-300">
-          <Link
-            className="px-10 font-jetbrains text-black"
-            target="_blank"
-            href="https://oclock.io/methode"
-          >
-            {">"} La méthode O'Clock {"<"}
-          </Link>
+        <div className="hidden w-[85%] xl:justify-between xl:flex xl:items-center text-black3 ">
           {data ? (
             <>
-              <Link href={`/students/profil/${data.id}`}>
-                <Button>{`${data.lastName} ${data.firstName}`}</Button>
+              <Link
+                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
+                target="_blank"
+                href="https://oclock.io/methode"
+              >
+                La méthode O'Clock
               </Link>
-              <Link href="/logout">
-                <Button className="p-0 mr-1">liste des types</Button>
+              <Link
+                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
+                href={`/${
+                  data.type === "STUDENT" ? "students" : "companies"
+                }/profil/${data.id}`}
+              >
+                {`${data.lastName}`}
               </Link>
-              <Link href="/logout">
-                <Button>Suggestions by stageSeller</Button>
+              <Link
+                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
+                href={`${
+                  data.type === "STUDENT" ? "companies" : "students"
+                }/lists`}
+              >
+                {data.type === "STUDENT"
+                  ? "Toutes les entreprises"
+                  : "Tous les étudiants"}
+              </Link>
+              <Link
+                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
+                href={`${
+                  data.type === "STUDENT" ? "companies" : "students"
+                }/suggests`}
+              >
+                Suggestions by stageSeller
               </Link>
 
               <Button onClick={handleLogout}>Se déconnecter</Button>
@@ -108,7 +123,7 @@ export default function NavBar() {
         </div>
 
         {/* Mobile Menu */}
-        <div onClick={handleNav} className="block md:hidden z-10">
+        <div onClick={handleNav} className="block xl:hidden z-10">
           {mobileNav ? (
             <AiOutlineClose size={20} style={{ color: `${textColor}` }} />
           ) : (
@@ -118,8 +133,8 @@ export default function NavBar() {
         <div
           className={
             mobileNav
-              ? "md:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
-              : "md:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
+              ? "xl:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
+              : "xl:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
           }
         >
           <Link
@@ -132,15 +147,33 @@ export default function NavBar() {
           {data ? (
             <>
               <Link
+                className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
+                href={`${
+                  data.type === "STUDENT" ? "companies" : "students"
+                }/lists`}
+              >
+                {data.type === "STUDENT"
+                  ? "Toutes les entreprises"
+                  : "Tous les étudiants"}
+              </Link>
+              <Link
+                className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
+                href={`${
+                  data.type === "STUDENT" ? "companies" : "students"
+                }/suggests`}
+              >
+                Suggestions by stageSeller
+              </Link>
+              <Link
                 onClick={handleNav}
-                className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
+                className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
                 href={`/${data.type}/profil/${data.id}`}
               >
                 {`${data.lastName} ${data.firstName}`}
               </Link>
               <Link
                 onClick={handleLogout}
-                className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
+                className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
                 href="/"
               >
                 Se déconnecter
@@ -149,7 +182,7 @@ export default function NavBar() {
           ) : (
             <Link
               onClick={handleNav}
-              className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
+              className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
               href="/sign-in"
             >
               Se connecter

@@ -35,9 +35,6 @@ export default function LogIn() {
     const { email, password } = input;
     fetch(`${baseUrl}login`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({ email, password }),
     })
       .then((res) => {
@@ -64,7 +61,7 @@ export default function LogIn() {
         setIsLoading(false);
         Cookies.set("jwt", data.token);
         Cookies.set("user-id", data.user.id);
-        //console.log(data.user);
+        console.log(data.user);
         // todo dynamiser le role grace à la nouvelle api
         const role =
           data.user.type.toLowerCase() === "student" ? "students" : "companies";
@@ -72,6 +69,7 @@ export default function LogIn() {
         router.push(`/${role}/profil/${data.user.id}`);
       })
       .catch((err) => {
+        console.log(err);
         setIsLoading(false);
         setErrorMessage(err);
       });

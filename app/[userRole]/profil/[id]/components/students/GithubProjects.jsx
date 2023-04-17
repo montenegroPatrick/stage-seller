@@ -48,7 +48,7 @@ export default function GithubProjects({
   //   //router.refresh();
   // };
   return (
-    <section className="flex flex-row items-center justify-between w-full h-full group projectShadow  rounded-3xl ">
+    <section className="flex flex-row items-center justify-between w-full h-full group projectShadow rounded-3xl ">
       {isSettings ? (
         <div className="w-full flex flex-col gap-2 my-2">
           {" "}
@@ -75,9 +75,9 @@ export default function GithubProjects({
             return index === indexProjectInView;
           })
           .map((repo, index) => (
-            <div key={repo.id} className="flex items-center text-whiteSmoke">
+            <div key={repo.id} className="flex items-center">
               <div
-                className="font-bold text-md md:text-xl lg:text-7xl text-whiteSmoke cursor-pointer hover:scale-110"
+                className="font-bold text-md md:text-xl lg:text-7xl cursor-pointer hover:scale-110"
                 onClick={() => {
                   const indexRepos = Object.keys(repos.data);
 
@@ -96,7 +96,7 @@ export default function GithubProjects({
                 target="_blank"
                 className="h-full flex flex-col justify-center "
               >
-                <div className="  p-2 text-whiteSmoke rounded-3xl h-3/4 flex flex-col items-center justify-between gap-4 cursor-pointer">
+                <div className="  p-2 rounded-3xl h-3/4 flex flex-col items-center justify-between gap-4 cursor-pointer">
                   <h1 className="text-2xl   lg:uppercase font-semibold  ">
                     {repo.name}
                   </h1>

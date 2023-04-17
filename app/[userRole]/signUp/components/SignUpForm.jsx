@@ -1,6 +1,5 @@
 "use client";
 
-import { PostSignUp } from "@/FetchFunctions/POST/PostFunctions";
 import { baseUrl } from "@/lib/baseUrl";
 import {
   Card,
@@ -11,10 +10,11 @@ import {
   Alert,
   Input,
 } from "@material-tailwind/react";
+import axios from "axios";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SignUpForm({ role }) {
   const [input, setInput] = useState(
@@ -87,40 +87,23 @@ export default function SignUpForm({ role }) {
     } else {
       setIsLoading(true);
       const numberPostCode = Number(postCode);
-      fetch(`${baseUrl}register`, {
-        headers: {
-          "content-type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({
-          ...input,
-          postCode: numberPostCode,
-          type,
-        }),
-      })
-        .then((res) => {
-          if (!res.ok) {
-            switch (res.status) {
-              case "422":
-                setErrorMessage("");
-                break;
-              case "401":
-                setErrorMessage("");
-                break;
-              default:
-                setErrorMessage("");
-                break;
-            }
-            setIsLoading(false);
+      axios
+        .post(
+          `${baseUrl}register`,
+          { ...input, postCode: numberPostCode, type },
+          {
+            headers: {
+              "content-type": "application/json",
+            },
           }
-          return res.json();
-        })
+        )
         .then((data) => {
+          console.log(data);
           setIsLoading(false);
-          Cookies.set("jwt", data.user.token);
-          Cookies.set("user-id", data.user.id);
-          const role = data.user.type.toLowerCase();
-          router.push(`/${role}/profil/${data.user.id}`);
+          Cookies.set("jwt", data.data.token);
+          Cookies.set("user-id", data.data.user.id);
+          const role = data.data.user.type.toLowerCase();
+          router.push(`/${role}/profil/${data.data.user.id}`);
         });
     }
   };
