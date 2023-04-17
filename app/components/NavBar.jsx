@@ -40,8 +40,10 @@ export default function NavBar() {
   // console.log("navbar", data);
   const getData = async () => getUser(token, id).then((user) => setData(user));
 
-  useEffect(async () => {
-    getData();
+  useEffect(() => {
+    if (token && id) {
+      getData();
+    }
     const changeColor = () => {
       if (window.scrollY >= 90) {
         setColor("#ffffff");

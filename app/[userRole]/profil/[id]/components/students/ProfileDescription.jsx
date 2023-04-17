@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography } from "@material-tailwind/react";
+import { Input, Typography } from "@material-tailwind/react";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,51 +10,28 @@ export default function ProfileDescription({
   isSettings,
   setIsSettings,
   currentUser,
+  handleSubmit,
+  input,
+  handleChange,
 }) {
   console.log(currentUser);
-  const token = Cookies.get("jwt");
-  const router = useRouter();
-  const [input, setInput] = useState({
-    // cvLink: "le lien vers ton cv",
-    description: currentUser.description,
-  });
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setInput((prev) => ({ ...prev, [name]: value }));
-  };
-  const handleSubmit = async (event) => {
-    // todo fetch put avec les nouvelles data
-    event.preventDefault();
-    await updateUser(token, currentUser.id, input);
-    setIsSettings(!isSettings);
-    //router.refresh();
-  };
   if (isSettings) {
     return (
-      <form
-        className="flex flex-col gap-2  p-5 lg:w-7/12 "
-        onSubmit={handleSubmit}
-      >
-        {/* <input
-          className="rounded-xl p-2 border-white bg-transparent border-2 "
-          onChange={handleChange}
-          value={input.cvLink}
-          name="cvLink"
-        /> */}
-        <input
-          onChange={handleChange}
-          className="rounded-xl p-2 border-white bg-transparent border-2 "
-          value={input.description}
-          name="description"
-        />
-        <button hidden type="submit"></button>
-      </form>
+      <Input
+        onChange={handleChange}
+        className="rounded-xl p-2 border-white bg-transparent border-2  "
+        value={input.description}
+        name="description"
+        label="description de ta personnalité"
+      />
     );
   }
   return (
-    <article className="flex flex-col gap-2  p-5 lg:w-7/12 ">
+    <article className=" text-left flex flex-col gap-2 p-5 lg:w-7/12 ">
       <Typography variant="paragraph" className="">
-        {currentUser.description}
+        {currentUser.description
+          ? currentUser.description
+          : "votre description apparaitra ici. cliquer sur le boutton settings pour la modifier"}
       </Typography>
     </article>
   );

@@ -10,32 +10,7 @@ html {
 .custom-img {
   background-image: url(https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80);
 }
-.wrapper {
-  position: relative;
-  height: 420px; 
-  margin-top: 30px;
-  overflow-x: hidden;
-}
-.splide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: calc(125vw + 30px);
-}
-.slide{
-  padding: 0 0 0 30px;
 
-}
-.card{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  height: 420px;
-  padding: 60px 40px;
-  border-radius: 10px;
-  background: white;
-}
 
 /* Title effect */
 .scrolling-animation {
@@ -64,3 +39,4 @@ html {
   }
 }
 /* ************ */
+

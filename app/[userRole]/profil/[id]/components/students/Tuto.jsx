@@ -15,9 +15,6 @@ export default function Tuto({ openTuto, type }) {
 
   return (
     <Fragment>
-      <Button onClick={handleOpen} variant="gradient">
-        Open Dialog
-      </Button>
       <Dialog
         open={open}
         handler={handleOpen}

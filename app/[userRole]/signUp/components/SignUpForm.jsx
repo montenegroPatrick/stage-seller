@@ -99,10 +99,19 @@ export default function SignUpForm({ role }) {
         }),
       })
         .then((res) => {
-          console.log(res.ok);
           if (!res.ok) {
+            switch (res.status) {
+              case "422":
+                setErrorMessage("");
+                break;
+              case "401":
+                setErrorMessage("");
+                break;
+              default:
+                setErrorMessage("");
+                break;
+            }
             setIsLoading(false);
-            throw new Error(res.status);
           }
           return res.json();
         })
@@ -110,7 +119,8 @@ export default function SignUpForm({ role }) {
           setIsLoading(false);
           Cookies.set("jwt", data.user.token);
           Cookies.set("user-id", data.user.id);
-          router.push(`/students/profil/${id}`);
+          const role = data.user.type.toLowerCase();
+          router.push(`/${role}/profil/${data.user.id}`);
         });
     }
   };

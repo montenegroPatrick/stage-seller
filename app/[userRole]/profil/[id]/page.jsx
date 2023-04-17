@@ -7,30 +7,38 @@ import getAllUsers from "@/lib/getAllUsers";
 import { getUser } from "@/lib/getUser";
 import { cookies } from "next/headers";
 import StudentProfile from "@/app/[userRole]/profil/[id]/components/students/StudentProfile";
-// export const dynamic = "auto";
-//export const dynamicParams = true;
-//export const fetchCache = "auto";
-// export const preferredRegion = "auto";
+import { baseUrl } from "@/lib/baseUrl";
 
-async function Profil({ params }) {
+export default async function Profil({ params }) {
   const cookieStore = cookies();
-  const connectedUserId = cookieStore.get('user-id')?.value;
+
+  const id = cookieStore.get("user-id")?.value;
+
+ // const connectedUserId = cookieStore.get('user-id')?.value;
+
   const token = cookieStore.get("jwt")?.value;
 
-  // if (!params.id || !token) {
-  //   redirect("/login");
-  // }
-  //const userData = getUser(token, params.id);
-  //const userProfilePage = await userData;
-  const userProfilePage = {};
-  console.log("user page profil", userProfilePage);
-  const role = userProfilePage.companyName === null ? "students" : "companies";
+  if (!id || !token) {
+    redirect("/sign-in");
+  }
+  const res = await fetch(`${baseUrl}users/${id}`, {
+    next: { revalidate: 0 },
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const userProfilePage = await res.json();
 
+  console.log("user page profil", userProfilePage);
+  const role = userProfilePage.type === "STUDENT" ? "students" : "companies";
+
+  // if it's not the profil user return the profil who's clicked
   if (params.userRole !== role) {
     const users = await getAllUsers(params.userRole, token);
     console.log("tous les user sur la page profil ", users);
     const otherUser = users && users.filter((user) => user.id === params.id);
-    // ce return est quand on clique sur une carte
+
     return (
       <NavBarMarginContainer classes="bg-gradient-to-br from-blue-400 to-purple-800 bg-repeat bg-opacity-5 min-h-[calc(100vh-4rem)] ">
         {params.userRole === "students" ? (
@@ -62,5 +70,3 @@ async function Profil({ params }) {
     </NavBarMarginContainer>
   );
 }
-
-export default Profil;

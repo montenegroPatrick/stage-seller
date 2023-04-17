@@ -8,5 +8,5 @@ export async function middleware(request, res) {
 }
 
 export const config = {
-  matcher: ["/companies/:path*/:path*", "/students/:path*/:path*"],
+  matcher: ["/company/:path*/:path*", "/students/:path*/:path*"],
 };
