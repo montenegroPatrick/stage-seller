@@ -1,4 +1,3 @@
-
 //Components
 import CompanyMatch from "./CompanyMatch";
 import CompanyStage from "./CompanyStage";
@@ -8,21 +7,7 @@ import CompanyDescription from "./CompanyDescription";
 
 import { cookies } from "next/headers";
 
-export default function ({
-  companyName,
-  description,
-  siret,
-  city,
-  zipCode,
-  profilImage,
-  skills,
-  id,
-  stages,
-  connectedUserId,
-  email
-}) {
-
-  
+export default function companyProfile({ company }) {
   return (
     <>
       <div className="sticky flex flex-col items-center scrolling-animation">
@@ -33,10 +18,10 @@ export default function ({
       </div>
       <section className="flex flex-col justify-center md:flex-row w-full font-mono">
         <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col items-between">
-          <CompanyNameAvatar name={companyName} picture={profilImage} />
+          <CompanyNameAvatar company={company} />
           <div className="w-full flex flex-col xl:flex-row justify-between px-5 mx-auto bg-palePink">
-            <CompanySkills skills={skills} />
-            <CompanyStage stages={stages}/>
+            <CompanySkills company={company} />
+            <CompanyStage company={company} />
           </div>
         </div>
         <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l md:border-black">

@@ -11,6 +11,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import LikeButton from "@/app/[userRole]/lists/components/LikeButton";
+import {
+  Avatar,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Tooltip,
+  Typography,
+} from "@material-tailwind/react";
 
 export default function ProfileCarte({ user }) {
   //TODO regarder si le user.role est company ou student pour éventuellement changer des champs dynamiquement
@@ -43,7 +52,9 @@ export default function ProfileCarte({ user }) {
     //     <Typography variant="h4" className="p-1 text-blue-600 ">
     //       {role === "students" ? `${lastName}  ${firstName}` : `${companyName}`}
     //     </Typography>
-    //     <p className="text-end">{city}Paris,75002{postCode}</p>
+    //     <p className="text-end">
+    //       {city}Paris,75002{postCode}
+    //     </p>
     //   </CardHeader>
     //   <CardBody className="flex flex-row gap-2">
     //     <Image
@@ -97,7 +108,7 @@ export default function ProfileCarte({ user }) {
     //     </Link>
     //   </div>
     // </Card>
-    <div  className="relative hover:scale-105 ">
+    <div className="relative hover:scale-105 ">
       <a
         href="#"
         className="relative block overflow-hidden rounded-lg bg-white border border-blackNext p-4 sm:p-6 lg:p-8 mt-4 mx-2"
@@ -107,8 +118,9 @@ export default function ProfileCarte({ user }) {
         <div className="sm:flex sm:justify-between sm:gap-4">
           <div>
             <h3 className="text-lg font-bold text-blackNext sm:text-3xl ">
-              Kechiche Younes
-              {/* {role === "students" ? `${lastName}  ${firstName}` : `${companyName}`} */}
+              {role === "students"
+                ? `${lastName}  ${firstName}`
+                : `${companyName}`}
             </h3>
 
             <p className="mt-1 text-xs font-medium text-green-600">
@@ -118,8 +130,8 @@ export default function ProfileCarte({ user }) {
 
           <div className="hidden sm:block sm:shrink-0">
             <img
-              alt="Paul Clapton"
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+              alt={profilImage}
+              src={profilImage}
               className="h-16 w-16 rounded-lg object-cover shadow-sm"
             />
           </div>
@@ -127,18 +139,15 @@ export default function ProfileCarte({ user }) {
 
         <div className="mt-4 min-w-[18rem] max-w-sm">
           <p className="w-full max-h-[5rem] text-sm text-gray-700 bg-white overflow-y-auto rounded-lg py-2 px-2 border border-black">
-            {description ? description : "Pas de descripttion"}
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
-            illum provident a, ipsa maiores deleniti consectetur nobis et eaque.
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
-            illum provident a, ipsa maiores deleniti consectetur nobis et eaque.  
+            {description ? description : "Pas de description"}
           </p>
         </div>
 
         <dl className="mt-6 flex gap-4 sm:gap-6">
           <div className="flex flex-col flex-wrap w-1/2">
-            <dt className="text-sm font-medium text-gray-800">Remote friendly</dt>
+            <dt className="text-sm font-medium text-gray-800">
+              Remote friendly
+            </dt>
             <dd className="text-xs text-red-900">Du 25 Avril au 25 Mai </dd>
           </div>
 

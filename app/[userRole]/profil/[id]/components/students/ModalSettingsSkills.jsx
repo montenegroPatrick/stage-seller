@@ -11,11 +11,11 @@ import {
   Option,
 } from "@material-tailwind/react";
 
-import { getSkills } from "@/lib/getSkills";
+import { getSkills } from "@/lib/skills/getSkills";
 
 import Cookies from "js-cookie";
-import { updateUser } from "@/lib/updateUser";
-import { addSkills } from "@/lib/addSkills";
+import { updateUser } from "@/lib/users/updateUser";
+import { addSkills } from "@/lib/users/addSkills";
 import { RxCross2 } from "react-icons/rx";
 
 export default function ModalSettingsSkills({ showSettings, studentsSkills }) {
@@ -25,6 +25,7 @@ export default function ModalSettingsSkills({ showSettings, studentsSkills }) {
   const [userSkills, setUserSkills] = useState(
     studentsSkills ? studentsSkills : []
   );
+  // skill List fixed who's get with the function getSkills
   const [skillsList, setSkillsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -40,6 +41,8 @@ export default function ModalSettingsSkills({ showSettings, studentsSkills }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
+    // todo the api execpted the ID of the skills
+
     const response = await addSkills(token, userId, userSkills);
     if (response) {
       setIsLoading(false);
@@ -48,10 +51,9 @@ export default function ModalSettingsSkills({ showSettings, studentsSkills }) {
       setIsLoading(false);
       setErrorMessage(response.message);
     }
-    // todo les conditions de updateSkills
   };
-
   const handleChange = (event) => {
+    console.log(event);
     if (userSkills.includes(event)) {
       setUserSkills(userSkills);
     } else {
@@ -60,8 +62,9 @@ export default function ModalSettingsSkills({ showSettings, studentsSkills }) {
     }
   };
   const handleRemoveEvent = (event) => {
-    console.log(event.target.parentElement.firstChild);
+    // console.log(event.target.parentElement.firstChild);
     const newArraySkills = [...userSkills];
+    newArraySkills.filter((skill) => skill.id !== event.target.id);
     // newArraySkills.remove(event.target.parentElement.firstChild);
     setUserSkills(newArraySkills);
   };
@@ -100,6 +103,7 @@ export default function ModalSettingsSkills({ showSettings, studentsSkills }) {
             </div>
             <div className="py-5 ">
               <Select
+                error={errorMessage}
                 multiple
                 variant="static"
                 aria-multiselectable
@@ -111,8 +115,8 @@ export default function ModalSettingsSkills({ showSettings, studentsSkills }) {
                 }}
               >
                 {skillsList &&
-                  skillsList.map((skill, index) => (
-                    <Option key={index} value={skill.name}>
+                  skillsList.map((skill) => (
+                    <Option key={skill.id} value={skill.name}>
                       {skill.name}
                     </Option>
                   ))}

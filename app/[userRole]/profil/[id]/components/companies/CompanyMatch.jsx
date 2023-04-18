@@ -3,19 +3,17 @@ import { useState } from "react";
 
 import CardMatch from "./CardMatch";
 
-export default function CompanyMatch() {
+export default function CompanyMatch({ company }) {
   const [activeTab, setActiveTab] = useState("tabs-like");
 
-  
   return (
-    <div className= " mx-auto w-full  border-t  md:border-t-0  border-black">
+    <div className=" mx-auto w-full  border-t  md:border-t-0  border-black">
       <div className="rounded-t-lg">
         <div className="flex justify-around items-center px-5 py-8 border-b border-black">
           <div className="">
             <h3 className="text-2xl sm:text-3xl 2xl:text-4xl leading-6 text-blueDark text-center font-baskerville">
               Vos interactions
             </h3>
-
           </div>
         </div>
         <div className="px-4 py-2 sm:p-2">
@@ -50,7 +48,7 @@ export default function CompanyMatch() {
                 onClick={() => setActiveTab("tabs-match")}
               >
                 Match
-              </button> 
+              </button>
             </nav>
           </div>
         </div>
@@ -64,11 +62,8 @@ export default function CompanyMatch() {
           <CardMatch />
           <CardMatch />
           <CardMatch />
-          
-          
         </div>
         <div
-          
           className={`opacity-${
             activeTab === "tabs-liked" ? "100" : "0 hidden"
           } transition-opacity duration-150 ease-linear data-[te-tab-active]:block`}
@@ -76,9 +71,8 @@ export default function CompanyMatch() {
           Tab 2 content button version
         </div>
         <div
-          
           className={`opacity-${
-            activeTab === "tabs-match" ? "100" : "0 hidden" 
+            activeTab === "tabs-match" ? "100" : "0 hidden"
           } transition-opacity duration-150 ease-linear data-[te-tab-active]:block`}
         >
           Tab 3 content button version

@@ -1,4 +1,4 @@
-export default function CompanyDescription() {
+export default function CompanyDescription({ company }) {
   return (
     <div className="w-full flex flex-col justify-center items-center bg-rhubard p-5 mx-auto border-dotted border-b border-black px-auto mb-5 md:mb-0">
       <h2 className="font-baskerville text-2xl sm:text-3xl 2xl:text-4xl text-center text-white">

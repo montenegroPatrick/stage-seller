@@ -1,8 +1,8 @@
 import axios from "axios";
-import { baseUrl } from "./baseUrl";
+import { baseUrl } from "../baseUrl";
 
 export async function getSkills(token) {
-  const res = await axios
+  const response = await axios
     .get(`${baseUrl}skills`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -10,5 +10,5 @@ export async function getSkills(token) {
     })
     .then((res) => res.data)
     .catch((err) => err);
-  return res;
+  return response;
 }

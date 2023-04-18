@@ -25,7 +25,7 @@ export default function CardMatch({
           Paris{city}, {zipCode}75002
         </p>
       </div>
-      <Button onClick={router.push("/")}>Voir le profil</Button>
+      <Button onClick={() => router.push("/")}>Voir le profil</Button>
     </div>
   );
 }

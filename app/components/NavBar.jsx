@@ -13,7 +13,7 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 import { usePathname } from "next/navigation";
 
-import { getUser } from "@/lib/getUser";
+import { getUser } from "@/lib/users/getUser";
 import { useRouter } from "next/navigation";
 
 export default function NavBar() {
@@ -22,7 +22,7 @@ export default function NavBar() {
   const router = useRouter();
   const [mobileNav, setMobileNav] = useState(false);
   const [color, setColor] = useState("bg-gray-800");
-  const [textColor, setTextColor] = useState("black");
+  const [textColor, setTextColor] = useState("#000000");
   const [data, setData] = useState(null);
   const path = usePathname();
   //const id = path.slice(-1);
@@ -37,6 +37,7 @@ export default function NavBar() {
   // });
   // console.log("navbar", data);
   const getData = async () => getUser(token, id).then((user) => setData(user));
+  console.log("dataNavBar", data);
 
   useEffect(() => {
     if (token && id) {
@@ -48,7 +49,7 @@ export default function NavBar() {
         setTextColor("#000000");
       } else {
         setColor("transparent");
-        setTextColor("#ffffff");
+        setTextColor("#000000");
       }
     };
     window.addEventListener("scroll", changeColor);
@@ -67,7 +68,7 @@ export default function NavBar() {
       //style={{ backgroundColor: `${color}` }}
       className=" fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-10 ease-in duration-300 bg-white"
     >
-      <div className="max-w-[80vw] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 text-whiteSmoke items-center m-auto border-b border-black">
+      <div className="max-w-[90vw] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-1 text-whiteSmoke items-center m-auto border-b border-black">
         <Link href="/">
           <h1 className="font-lobster text-4xl  text-black">
             Stage{" "}
@@ -92,7 +93,9 @@ export default function NavBar() {
                   data.type === "STUDENT" ? "students" : "companies"
                 }/profil/${data.id}`}
               >
-                {`${data.lastName} ${data.firstName}`}
+                {data.type !== "COMPANY"
+                  ? `${data.lastName} ${data.firstName}`
+                  : data.companyName}
               </Link>
               <Link
                 className="px-2"
@@ -147,9 +150,13 @@ export default function NavBar() {
               <Link
                 onClick={handleNav}
                 className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
-                href={`/${data.type}/profil/${data.id}`}
+                href={`/${
+                  data.type === "STUDENT" ? "students" : "companies"
+                }/profil/${data.id}`}
               >
-                {`${data.lastName} ${data.firstName}`}
+                {data.type !== "COMPANY"
+                  ? `${data.lastName} ${data.firstName}`
+                  : data.companyName}
               </Link>
               <Link
                 onClick={handleLogout}

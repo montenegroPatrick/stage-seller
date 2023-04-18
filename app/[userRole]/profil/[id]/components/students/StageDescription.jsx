@@ -1,10 +1,8 @@
 "use client";
 
 import { Checkbox, Input, Typography } from "@material-tailwind/react";
-import { useRouter } from "next/navigation";
+import Skills from "./Skills";
 import { useState } from "react";
-import { updateUser } from "@/lib/updateUser";
-import Cookies from "js-cookie";
 
 export default function StageDescription({
   isSettings,
@@ -26,9 +24,10 @@ export default function StageDescription({
   //   await updateUser(token, currentUser.id, input);
   //   setIsSettings(!isSettings);
   // };
+  const [showSettings, setShowSettings] = useState(false);
   if (isSettings) {
     return (
-      <div className=" flex flex-col gap-2 ">
+      <div className=" flex flex-col gap-2  ">
         <Input
           className="rounded-xl  mb-2 p-2 border-white bg-transparent border-2 "
           type="text"
@@ -39,19 +38,19 @@ export default function StageDescription({
         />
         <Input
           className="rounded-xl mb-2 w-full p-2 border-white bg-transparent border-2 "
-          type="text"
-          value={input.start_date}
+          type="date"
+          value={input.starDate}
           onChange={handleChange}
-          name="start_date"
+          name="startDate"
           label="la date de début de stage"
         />
         <Input
           className="rounded-xl w-full p-2 border-white bg-transparent border-2 "
-          type="text"
+          type="number"
           value={input.duration}
           onChange={handleChange}
           name="duration"
-          label="la durée souhaitée"
+          label="la durée souhaitée en mois"
         />
         <Input
           className="rounded-xl p-2 border-white bg-transparent border-2 "
@@ -76,11 +75,17 @@ export default function StageDescription({
             }
           />
         </div>
+        <Skills
+          show={showSettings}
+          skills={input.skills}
+          isSettings={isSettings}
+          setShowSettings={setShowSettings}
+        />
       </div>
     );
   }
   return (
-    <div className="p-5 flex flex-col gap-4 lg:w-7/12 float-right">
+    <div className="p-5 flex flex-col gap-4 lg:w-7/12 float-right shadows-text rounded-lg ">
       <Typography variant="paragraph" className="">
         {currentUser.stages.description
           ? currentUser.stages.description

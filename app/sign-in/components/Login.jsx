@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import cookie from "cookie";
 
 import { baseUrl } from "@/lib/baseUrl";
+import axios from "axios";
 
 export default function LogIn() {
   const [input, setInput] = useState({
@@ -33,31 +34,9 @@ export default function LogIn() {
     setErrorMessage("");
     setIsLoading(true);
     const { email, password } = input;
-    fetch(`${baseUrl}login`, {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-    })
-      .then((res) => {
-        setIsLoading(false);
-        if (!res.ok) {
-          switch (res.status) {
-            case "422":
-              setErrorMessage("");
-              break;
-            case "401":
-              setErrorMessage("");
-              break;
-
-            default:
-              setErrorMessage("");
-              break;
-          }
-
-          throw new Error(`error ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
+    axios
+      .post(`${baseUrl}login`, { email, password })
+      .then(({ data }) => {
         setIsLoading(false);
         Cookies.set("jwt", data.token);
         Cookies.set("user-id", data.user.id);
@@ -65,13 +44,12 @@ export default function LogIn() {
         // todo dynamiser le role grace à la nouvelle api
         const role =
           data.user.type.toLowerCase() === "student" ? "students" : "companies";
-
         router.push(`/${role}/profil/${data.user.id}`);
       })
       .catch((err) => {
-        console.log(err);
         setIsLoading(false);
-        setErrorMessage(err);
+        //console.log(err);
+        setErrorMessage(err.message);
       });
   };
 

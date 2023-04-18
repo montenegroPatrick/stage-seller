@@ -4,7 +4,7 @@ import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
-import { getUser } from "@/lib/getUser";
+import { getUser } from "@/lib/users/getUser";
 
 export default function Error({ error, reset }) {
   const router = useRouter();

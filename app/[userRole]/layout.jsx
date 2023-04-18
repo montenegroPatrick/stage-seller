@@ -13,5 +13,5 @@ export default function LayoutUserRole({ params, children }) {
       </div>
     );
   }
-  return <div>{children}</div>;
+  return <div className="">{children}</div>;
 }

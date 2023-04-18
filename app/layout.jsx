@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={` ${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable} ${baskerville.variable}`}
     >
-      <body className="font-chivo gradient bg-white">
+      <body className="font-chivo gradient bg-white ">
         <ReactQueryWrapper>
           <NavBar />
           {children}
