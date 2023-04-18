@@ -43,16 +43,16 @@ export default function NavBar() {
     if (token && id) {
       getData();
     }
-    const changeColor = () => {
-      if (window.scrollY >= 90) {
-        setColor("#ffffff");
-        setTextColor("#000000");
-      } else {
-        setColor("transparent");
-        setTextColor("#000000");
-      }
-    };
-    window.addEventListener("scroll", changeColor);
+    // const changeColor = () => {
+    //   if (window.scrollY >= 90) {
+    //     setColor("#ffffff");
+    //     setTextColor("#000000");
+    //   } else {
+    //     setColor("transparent");
+    //     setTextColor("#ffffff");
+    //   }
+    // };
+    // window.addEventListener("scroll", changeColor);
   }, [path]);
 
   const handleLogout = () => {
@@ -68,27 +68,27 @@ export default function NavBar() {
       //style={{ backgroundColor: `${color}` }}
       className=" fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-10 ease-in duration-300 bg-white"
     >
-      <div className="max-w-[90vw] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-1 text-whiteSmoke items-center m-auto border-b border-black">
+      <div className="w-full 2xl:w-[90vw] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 text-whiteSmoke items-center m-auto border-b border-black">
         <Link href="/">
-          <h1 className="font-lobster text-4xl  text-black">
+          <h1 className="font-lobster flex items-end text-3xl 2xl:text-4xl text-black w-24">
             Stage{" "}
-            <span className="bg-black tracking-wide text-white text-2xl text-medium font-lobster px-1">
+            <span className="bg-black tracking-wide text-white text-xl 2xl:text-2xl text-medium font-lobster px-0.5">
               Seller
             </span>
           </h1>
         </Link>
-        <div className="hidden lg:flex lg:items-center text-[0.8rem] px-3 text-black3 hover:text-indigo-700 ease-in duration-300">
-          <Link
-            className="px-10 font-jetbrains text-black"
-            target="_blank"
-            href="https://oclock.io/methode"
-          >
-            {">"} La méthode O'Clock {"<"}
-          </Link>
+        <div className={data ? ` hidden w-[85%] xl:justify-between xl:flex xl:items-center text-black3 ` : 'hidden xl:justify-between xl:flex xl:items-center text-black3 '}>
           {data ? (
             <>
               <Link
-                className="px-2"
+                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
+                target="_blank"
+                href="https://oclock.io/methode"
+              >
+                La méthode O'Clock
+              </Link>
+              <Link
+                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
                 href={`/${
                   data.type === "STUDENT" ? "students" : "companies"
                 }/profil/${data.id}`}
@@ -98,15 +98,17 @@ export default function NavBar() {
                   : data.companyName}
               </Link>
               <Link
-                className="px-2"
+                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
                 }/lists`}
               >
-                liste des types
+                {data.type === "STUDENT"
+                  ? "Toutes les entreprises"
+                  : "Tous les étudiants"}
               </Link>
               <Link
-                className="px-2"
+                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
                 }/suggests`}
@@ -117,14 +119,14 @@ export default function NavBar() {
               <Button onClick={handleLogout}>Se déconnecter</Button>
             </>
           ) : (
-            <Link href="/sign-in">
+            <Link href="/sign-in" >
               <Button>Se connecter</Button>
             </Link>
           )}
         </div>
 
         {/* Mobile Menu */}
-        <div onClick={handleNav} className="block lg:hidden z-10">
+        <div onClick={handleNav} className="block xl:hidden z-10">
           {mobileNav ? (
             <AiOutlineClose size={20} style={{ color: `${textColor}` }} />
           ) : (
@@ -134,8 +136,8 @@ export default function NavBar() {
         <div
           className={
             mobileNav
-              ? "lg:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
-              : "lg:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
+              ? "xl:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
+              : "xl:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center flex-col w-full h-screen bg-black text-center ease-in duration-300"
           }
         >
           <Link
@@ -147,6 +149,24 @@ export default function NavBar() {
           </Link>
           {data ? (
             <>
+              <Link
+                className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
+                href={`${
+                  data.type === "STUDENT" ? "companies" : "students"
+                }/lists`}
+              >
+                {data.type === "STUDENT"
+                  ? "Toutes les entreprises"
+                  : "Tous les étudiants"}
+              </Link>
+              <Link
+                className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
+                href={`${
+                  data.type === "STUDENT" ? "companies" : "students"
+                }/suggests`}
+              >
+                Suggestions by stageSeller
+              </Link>
               <Link
                 onClick={handleNav}
                 className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
@@ -160,7 +180,7 @@ export default function NavBar() {
               </Link>
               <Link
                 onClick={handleLogout}
-                className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
+                className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
                 href="/"
               >
                 Se déconnecter
@@ -169,7 +189,7 @@ export default function NavBar() {
           ) : (
             <Link
               onClick={handleNav}
-              className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
+              className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
               href="/sign-in"
             >
               Se connecter

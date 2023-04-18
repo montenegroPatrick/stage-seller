@@ -11,12 +11,12 @@ export default function CompanyMatch({ company }) {
       <div className="rounded-t-lg">
         <div className="flex justify-around items-center px-5 py-8 border-b border-black">
           <div className="">
-            <h3 className="text-2xl sm:text-3xl 2xl:text-4xl leading-6 text-blueDark text-center font-baskerville">
+            <h3 className="underline text-2xl sm:text-3xl 2xl:text-4xl leading-6 text-blackNext text-center font-baskerville">
               Vos interactions
             </h3>
           </div>
         </div>
-        <div className="px-4 py-2 sm:p-2">
+        <div className="px-4 py-2 sm:p-2 font-chivo">
           <div className="">
             <nav className="flex justify-around border-b border-black pb-1">
               <button
