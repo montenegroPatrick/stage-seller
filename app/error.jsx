@@ -10,9 +10,9 @@ export default function Error({ error, reset }) {
   }, [error]);
 
   return (
-    <NavBarMarginContainer classes="bg-white h-[calc(100vh-4rem)]">
+    <NavBarMarginContainer classes="bg-rhubard h-[calc(100vh-4rem)]">
       <div className="flex flex-col items-center">
-        <h2 className="text-4xl py-20vh">Something went wrong!</h2>
+        <h2 className="text-4xl py-20vh text-white">Something went wrong!</h2>
         <button
           className="bg-red-700 py-3 px-5 rounded-full text-white mb-5"
           onClick={
