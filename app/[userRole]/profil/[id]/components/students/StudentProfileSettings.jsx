@@ -10,9 +10,9 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import { updateUser } from "@/lib/updateUser";
+import { updateUser } from "@/lib/users/updateUser";
 import { Input } from "@material-tailwind/react";
-import { updateStages } from "@/lib/updateStages";
+import { updateStages } from "@/lib/stages/addOrUpdateStages";
 
 export default function StudentProfilSettings({
   isSettings,
@@ -34,7 +34,7 @@ export default function StudentProfilSettings({
   });
   const [inputStages, setInputStages] = useState({
     description: student.stages.description ?? "",
-    start_date: student.stages.start_date ?? "",
+    startDate: student.stages.start_date ?? "",
     duration: student.stages.duration ?? "",
     location: student.stages.location ?? "",
     isRemoteFriendly: student.stages.isRemoteFriendly ?? false,
@@ -47,55 +47,23 @@ export default function StudentProfilSettings({
   };
   const handleChangeStages = (event) => {
     const { name, value } = event.target;
+
     setInputStages((prev) => ({ ...prev, [name]: value }));
   };
   const handleSubmit = async (event) => {
     // todo fetch put avec les nouvelles data
     event.preventDefault();
     //console.log(input);
+    const duration = Number(inputStages.duration);
     const responseUserUpdate = await updateUser(token, student.id, input);
-    switch (responseUserUpdate) {
-      case 204:
-        setIsSettings(!isSettings);
-        router.refresh();
-        break;
-      case 422:
-        break;
-      case 401:
-        break;
-      case 500:
-        return;
-        break;
-      case 404:
-        return;
-        break;
-      default:
-        break;
-    }
-    const responseStagesUpdate = await updateStages(
+
+    const createOrUpdateStages = await updateStages(
       token,
-      inputStages,
-      student.id
+      { ...inputStages, duration, skills: [1, 4] },
+      student
     );
-    switch (responseStagesUpdate) {
-      case 422:
-        break;
-      case 401:
-        break;
-      case 204:
-        setIsSettings(!isSettings);
-        router.refresh();
-        break;
-      case 500:
-        return;
-        break;
-      case 404:
-        return;
-        break;
-      default:
-        break;
-    }
   };
+
   const [showSettings, setShowSettings] = useState(false);
   const { lastname, firstname, localisation } = input;
 
@@ -105,7 +73,7 @@ export default function StudentProfilSettings({
       className=" flex flex-col lg:justify-around h-screen w-full lg:gap-5 min-h-[calc(100vh-4rem)] font-mono text-whiteSmoke bg-blue"
     >
       <div className="flex lg:flex-col h-screen gap-5 ">
-        <div className="w-1/4 h-full md:w-2/6 lg:w-full overflow-hidden">
+        <div className="w-1/4 min-w-[25%] h-[60%] md:w-2/6 lg:w-full overflow-hidden">
           <ImageProfile
             isSettings={isSettings}
             setShowSettings={setShowSettings}
@@ -118,12 +86,12 @@ export default function StudentProfilSettings({
           studentSkills={student.skills}
           show={showSettings}
           setShowSettings={setShowSettings}
-          classes="flex flex-col py-2 gap-1 lg:hidden "
+          classes="flex flex-col py-2 gap-1 lg:hidden text-black3"
         />
         <section className="flex flex-row flex-wrap  justify-between lg:w-full h-1/3 lg:h-full">
           {/* image de profile en background avec dessus nom prenom lieu skills  */}
-          <div className="flex flex-col gap-2 items-center lg:w-screen">
-            <p className="p-2 ">Information personnelle</p>
+          <div className="flex flex-col gap-2 items-center text-black3 lg:w-screen">
+            <p className="p-2 text-black3">Information personnelle</p>
             <Input
               className="rounded-xl p-2 border-white bg-transparent border-2  "
               onChange={handleChange}

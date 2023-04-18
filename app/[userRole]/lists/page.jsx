@@ -4,15 +4,13 @@ import CardProfile from "@/app/[userRole]/lists/components/CardProfile";
 //Dependancies
 import { cookies } from "next/headers";
 //Fetch function
-import getAllUsers from "@/lib/getAllUsers";
+import getAllUsers from "@/lib/users/getAllUsers";
 
 export default async function Lists({ params }) {
   const token = cookies().get("jwt")?.value;
   const role = params.userRole;
-  const roleUserCardsToFetch = role === "companies" ? "company" : "student";
-  roleUserCardsToFetch, token;
 
-  const usersData = getAllUsers(roleUserCardsToFetch, token);
+  const usersData = getAllUsers(token);
   const users = await usersData;
   console.log("lists page", users);
   return (

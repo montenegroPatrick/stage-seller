@@ -4,10 +4,10 @@ import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
 import CompanyProfileForUser from "@/app/[userRole]/profil/[id]/components/companies/CompanyProfileForUser";
 import CompanyProfileForVisitor from "@/app/[userRole]/profil/[id]/components/companies/CompanyProfileForUser";
 import StudentProfilView from "@/app/[userRole]/profil/[id]/components/students/StudentProfilView";
-import getAllUsers from "@/lib/getAllUsers";
+import getAllUsers from "@/lib/users/getAllUsers";
 import { cookies } from "next/headers";
 import StudentProfile from "@/app/[userRole]/profil/[id]/components/students/StudentProfile";
-import { getUser } from "@/lib/getUser";
+import { getUser } from "@/lib/users/getUser";
 
 export default async function Profil({ params }) {
   //Verification user
@@ -56,7 +56,7 @@ export default async function Profil({ params }) {
   //si on est l'user connecter on peut faire getUser sinon il faut un getProfilCompany fetch('/api/users/type/company') => !role.filter ((user)=> user.id === params.id)
 
   return (
-    <NavBarMarginContainer classes="max-w-[80vw] min-h-[calc(100vh-4rem)] mx-auto">
+    <NavBarMarginContainer classes="max-w-[95vw] min-h-[calc(100vh-4rem)] mx-auto">
       {params.userRole === "students" ? (
         <StudentProfilView id={params.id} student={userProfilePage} />
       ) : (

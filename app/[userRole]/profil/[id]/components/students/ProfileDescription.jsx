@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { updateUser } from "@/lib/updateUser";
+import { updateUser } from "@/lib/users/updateUser";
 export default function ProfileDescription({
   isSettings,
   setIsSettings,
@@ -27,7 +27,7 @@ export default function ProfileDescription({
     );
   }
   return (
-    <article className=" text-left flex flex-col gap-2 p-5 lg:w-7/12 ">
+    <article className=" text-left flex flex-col gap-2 p-5 lg:w-7/12 shadows-text rounded-lg">
       <Typography variant="paragraph" className="">
         {currentUser.description
           ? currentUser.description

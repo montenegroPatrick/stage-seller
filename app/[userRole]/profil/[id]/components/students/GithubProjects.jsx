@@ -48,7 +48,7 @@ export default function GithubProjects({
   //   //router.refresh();
   // };
   return (
-    <section className="flex flex-row items-center justify-between w-full h-full group projectShadow rounded-3xl ">
+    <section className="flex flex-row items-center justify-center w-full h-full group projectShadow rounded-3xl shadows-text ">
       {isSettings ? (
         <div className="w-full flex flex-col gap-2 my-2">
           {" "}
@@ -100,13 +100,13 @@ export default function GithubProjects({
                   <h1 className="text-2xl   lg:uppercase font-semibold  ">
                     {repo.name}
                   </h1>
-                  <p className="lg:px-10 py-2 text-justify font-titilliumWeb italic text-md md:text-sm lg:text-xl   shadowBox w-full">
+                  <p className="lg:px-10 py-2 text-center font-titilliumWeb italic text-md md:text-sm lg:text-xl   shadowBox w-full">
                     {repo.description}
                   </p>
                   <ul className="flex flex-end flex-row flex-wrap">
                     {repo.topics.map((topic) => (
                       <div key={topic.id}>
-                        <li className="mt-3  dark:text-white text-sm mr-2 bg-lime-50/[0.1] px-2 shadowBox rounded-xl">
+                        <li className="mt-3  dark:text-white text-sm  bg-lime-50/[0.1] px-2 shadowBox rounded-xl">
                           #{topic}
                         </li>
                       </div>
@@ -116,7 +116,7 @@ export default function GithubProjects({
               </Link>
 
               <div
-                className="font-bold text-xl md:text-5xl lg:text-7xl text-gray-200
+                className="font-bold text-xl md:text-5xl lg:text-7xl
                cursor-pointer duration-700"
                 onClick={() => {
                   if (

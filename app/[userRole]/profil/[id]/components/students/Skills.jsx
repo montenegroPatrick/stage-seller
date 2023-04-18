@@ -2,7 +2,7 @@
 import { Avatar } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import ModalSettingsSkills from "./ModalSettingsSkills";
-import { getSkills } from "@/lib/getSkills";
+import { getSkills } from "@/lib/skills/getSkills";
 import { usePathname } from "next/navigation";
 
 export default function Skills({

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseUrl } from "./baseUrl";
+import { baseUrl } from "../baseUrl";
 
 export async function getUser(token, id) {
   const response = await axios
@@ -14,7 +14,7 @@ export async function getUser(token, id) {
       }
       return res.data;
     })
-    .catch((err) => err.response.data);
+    .catch((err) => err);
 
   return response;
 }

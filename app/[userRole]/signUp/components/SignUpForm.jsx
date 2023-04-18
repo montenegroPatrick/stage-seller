@@ -98,7 +98,7 @@ export default function SignUpForm({ role }) {
           }
         )
         .then((data) => {
-          console.log(data);
+         // console.log(data);
           setIsLoading(false);
           Cookies.set("jwt", data.data.token);
           Cookies.set("user-id", data.data.user.id);

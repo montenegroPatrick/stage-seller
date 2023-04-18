@@ -1,9 +1,22 @@
+"use client";
 import { Avatar, Typography } from "@material-tailwind/react";
 import Skills from "./Skills";
+import { useEffect, useState } from "react";
 
-export default function MiniCard() {
+export default function MiniCard({ likeArray }) {
+  const [user, setUser] = useState();
+  const users = async () =>
+    await getAllUsers(token).then((data) => setUser(data));
+  const userForCard = user.filter(
+    (user) => user.id === likeArray.map((like) => like.receiver.id)
+  );
+  console.log(user);
+  useEffect(() => {
+    users();
+  }, []);
+  console.log("userForMiniCard", userForCard);
   return (
-    <section className="bg-transparentrounded-lg p-3 mb-3">
+    <section className="bg-transparent rounded-lg p-3 mb-3">
       <div className="flex gap-5 bg-transparent ">
         <Avatar
           size="lg"

@@ -11,7 +11,13 @@ html {
   background-image: url(https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80);
 }
 
-
+/* shadows boxes*/
+.shadows-text{
+  box-shadow:
+  13.5px 18.9px 12px rgba(0, 0, 0, 0.101),
+  25px 35px 22px rgba(0, 0, 0, 0.31)
+;
+}
 /* Title effect */
 .scrolling-animation {
   position: relative;

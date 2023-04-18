@@ -24,7 +24,7 @@ export default function ImageProfile({
       </CardHeader>
       <CardBody className="hidden lg:block relative px-6 md:px-12">
         <Typography variant="h5" className=" text-gray-400">
-          {/* {`${student.firstName} ${student.lastName}`} */}
+          {`${student.firstName} ${student.lastName}`}
         </Typography>
         <Skills
           isSettings={isSettings}
