@@ -62,7 +62,7 @@ export default async function Profil({ params }) {
       ) : (
         <CompanyProfileForUser
           connectedUserId={connectedUserId}
-          company={otherUser}
+          userProfilePage={userProfilePage}
         />
       )}
     </NavBarMarginContainer>
