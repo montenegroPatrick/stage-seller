@@ -76,7 +76,7 @@ export default function NavBar() {
             </span>
           </h1>
         </Link>
-        <div className="hidden w-[85%] xl:justify-between xl:flex xl:items-center text-black3 ">
+        <div className={data ? ` hidden w-[85%] xl:justify-between xl:flex xl:items-center text-black3 ` : 'hidden xl:justify-between xl:flex xl:items-center text-black3 '}>
           {data ? (
             <>
               <Link
@@ -116,7 +116,7 @@ export default function NavBar() {
               <Button onClick={handleLogout}>Se déconnecter</Button>
             </>
           ) : (
-            <Link href="/sign-in">
+            <Link href="/sign-in" >
               <Button>Se connecter</Button>
             </Link>
           )}

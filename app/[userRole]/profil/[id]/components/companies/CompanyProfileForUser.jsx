@@ -1,3 +1,5 @@
+'use client'
+
 //Components
 import CompanyMatch from "./CompanyMatch";
 import CompanyStage from "./CompanyStage";
@@ -5,10 +7,17 @@ import CompanySkills from "./CompanySkills";
 import CompanyNameAvatar from "./CompanyNameAvatar";
 import CompanyDescription from "./CompanyDescription";
 
+import { useState } from "react";
 
-export default function CompanyProfileForVisitor({ otherUser }) {
+export default function CompanyProfileForUser({ userPersonnalPage }) {
 
-const {companyName,
+const [nameSettings, setNameSettings] = useState(false)
+const [skillSettings, setSkillSettings] = useState(false)
+const [stageSettings, setStageSettings] = useState(false)
+const [descriptionSettings, setDescriptionSettings] = useState(false)
+const [userData, setUserData] = useState(userPersonnalPage)
+
+const {company,
   description,
   siret,
   city,
@@ -18,7 +27,7 @@ const {companyName,
   id,
   stages,
   connectedUserId,
-  email} = otherUser
+  email} = userPersonnalPage
 
   return (
     <>
@@ -30,14 +39,14 @@ const {companyName,
       </div>
       <section className="flex flex-col md:flex-row font-mono w-full 2xl:w-[90vw] mx-auto">
         <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col">
-          <CompanyNameAvatar companyName={companyName} picture={profilImage} city={city} postCode={postCode}/>
+          <CompanyNameAvatar companyName={companyName} picture={profilImage} city={city} postCode={postCode} openSettings={setNameSettings} />
           <div className="w-full flex flex-col xl:flex-row justify-between px-5 mx-auto bg-magenta">
-            <CompanySkills skills={skills} />
-            <CompanyStage stages={stages} />
+            <CompanySkills skills={skills} openSettings={setSkillSettings}/>
+            <CompanyStage stages={stages} openSettings={setStageSettings}/>
           </div>
         </div>
         <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l md:border-black">
-          <CompanyDescription description={description}/>
+          <CompanyDescription description={description} openSettings={setDescriptionSettings}/>
           <CompanyMatch />
         </div>
       </section>
