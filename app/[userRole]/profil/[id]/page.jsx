@@ -7,6 +7,7 @@ import getAllUsers from "@/lib/users/getAllUsers";
 import { cookies } from "next/headers";
 import StudentProfile from "@/app/[userRole]/profil/[id]/components/students/StudentProfile";
 import { getUser } from "@/lib/users/getUser";
+import { Suspense } from "react";
 
 export default async function Profil({ params }) {
   const cookieStore = cookies();
@@ -36,7 +37,7 @@ export default async function Profil({ params }) {
 
   const role = userProfilePage.type === "STUDENT" ? "students" : "companies";
   if (role && params.userRole !== role) {
-    const users = await getAllUsers(params.userRole, token);
+    const users = await getAllUsers(token);
     const otherUser = users && users.filter((user) => user.id === params.id);
 
     return (
@@ -57,14 +58,16 @@ export default async function Profil({ params }) {
 
   return (
     <NavBarMarginContainer classes="max-w-[95vw] min-h-[calc(100vh-4rem)] mx-auto">
-      {params.userRole === "students" ? (
-        <StudentProfilView id={params.id} student={userProfilePage} />
-      ) : (
-        <CompanyProfile
-          connectedUserId={connectedUserId}
-          company={userProfilePage}
-        />
-      )}
+      <Suspense fallback={<h1>chargement...</h1>}>
+        {params.userRole === "students" ? (
+          <StudentProfilView id={params.id} student={userProfilePage} />
+        ) : (
+          <CompanyProfile
+            connectedUserId={connectedUserId}
+            company={userProfilePage}
+          />
+        )}
+      </Suspense>
     </NavBarMarginContainer>
   );
 }

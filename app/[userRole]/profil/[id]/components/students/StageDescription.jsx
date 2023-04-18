@@ -76,9 +76,11 @@ export default function StageDescription({
           />
         </div>
         <Skills
+          stages={true}
           show={showSettings}
           skills={input.skills}
           isSettings={isSettings}
+          setInputStages={setInput}
           setShowSettings={setShowSettings}
         />
       </div>
