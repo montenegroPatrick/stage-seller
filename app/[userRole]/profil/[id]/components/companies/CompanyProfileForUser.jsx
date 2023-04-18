@@ -15,7 +15,7 @@ const [nameSettings, setNameSettings] = useState(false)
 const [skillSettings, setSkillSettings] = useState(false)
 const [stageSettings, setStageSettings] = useState(false)
 const [descriptionSettings, setDescriptionSettings] = useState(false)
-
+const [userData, setUserData] = useState(userPersonnalPage)
 
 const {company,
   description,
