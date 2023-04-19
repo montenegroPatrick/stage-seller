@@ -10,7 +10,7 @@ export default function CompanyMatch({ company }) {
     <div className=" mx-auto w-full border-black">
       <div className="rounded-t-lg">
         <div className="flex justify-around items-center px-5 py-8 border-b border-black">
-          <div className="">
+          <div>
             <h3 className="underline text-2xl sm:text-3xl 2xl:text-4xl leading-6 text-blackNext text-center font-baskerville">
               Vos interactions
             </h3>

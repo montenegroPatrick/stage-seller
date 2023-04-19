@@ -25,7 +25,12 @@ export default function CompanyStage({ stages }) {
           <p className="font-md p-1 text-magenta">À partir du {stages.date}</p>
         </div>
       </article>
-      <SettingButton top='0' right='0'/>
+      <div
+        onClick={() => setSettings(!settings)}
+        className="absolute top-0 right-0"
+      >
+        <SettingButton />
+      </div>
     </div>
   );
 }

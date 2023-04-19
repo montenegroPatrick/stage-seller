@@ -37,7 +37,7 @@ const {companyName,
           </div>
         </div>
         <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l-2 md:border-black">
-          <CompanyDescription description={description}/>
+          <CompanyDescription description={description} />
           <CompanyMatch />
         </div>
       </section>

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 //Components
 import CompanyMatch from "./CompanyMatch";
@@ -10,24 +10,27 @@ import CompanyDescription from "./CompanyDescription";
 import { useState } from "react";
 
 export default function CompanyProfileForUser({ userProfilePage }) {
+  const [userData, setUserData] = useState(userProfilePage);
 
-const [nameSettings, setNameSettings] = useState(false)
-const [skillSettings, setSkillSettings] = useState(false)
-const [stageSettings, setStageSettings] = useState(false)
-const [descriptionSettings, setDescriptionSettings] = useState(false)
-const [userData, setUserData] = useState(userProfilePage)
+  const {
+    companyName,
+    description,
+    siret,
+    city,
+    postCode,
+    profilImage,
+    skills,
+    id,
+    stages,
+    connectedUserId,
+    email,
+  } = userProfilePage;
 
-const {companyName,
-  description,
-  siret,
-  city,
-  postCode,
-  profilImage,
-  skills,
-  id,
-  stages,
-  connectedUserId,
-  email} = userProfilePage
+  const handleSubmit = (newData) => {
+    const newDataUser = { ...userData, ...newData };
+    setUserData(newDataUser);
+    console.log(newDataUser);
+  };
 
   return (
     <>
@@ -39,14 +42,23 @@ const {companyName,
       </div>
       <section className="flex flex-col md:flex-row font-mono w-full 2xl:w-[90vw] mx-auto">
         <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col">
-          <CompanyNameAvatar companyName={companyName} picture={profilImage} city={city} postCode={postCode} openSettings={setNameSettings} />
+          <CompanyNameAvatar
+            companyName={companyName}
+            picture={profilImage}
+            city={city}
+            postCode={postCode}
+            submitForm={handleSubmit}
+          />
           <div className="w-full flex flex-col xl:flex-row justify-between px-5 mx-auto">
-            <CompanySkills skills={skills} openSettings={setSkillSettings}/>
-            <CompanyStage stages={stages} openSettings={setStageSettings}/>
+            <CompanySkills skills={skills} submitForm={handleSubmit}/>
+            <CompanyStage stages={stages} submitForm={handleSubmit}/>
           </div>
         </div>
         <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l-2 border-magenta">
-          <CompanyDescription description={description} openSettings={setDescriptionSettings}/>
+          <CompanyDescription
+            description={description}
+            submitForm={handleSubmit}
+          />
           <CompanyMatch />
         </div>
       </section>
