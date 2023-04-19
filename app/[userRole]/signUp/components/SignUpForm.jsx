@@ -88,22 +88,21 @@ export default function SignUpForm({ role }) {
       setIsLoading(true);
       const numberPostCode = Number(postCode);
       axios
-        .post(
-          `${baseUrl}register`,
-          { ...input, postCode: numberPostCode, type },
-          {
-            headers: {
-              "content-type": "application/json",
-            },
-          }
-        )
-        .then((data) => {
-         // console.log(data);
+        .post(`${baseUrl}register`, {
+          ...input,
+          postCode: numberPostCode,
+          type,
+        })
+        .then(({ headers, data }) => {
           setIsLoading(false);
-          Cookies.set("jwt", data.data.token);
-          Cookies.set("user-id", data.data.user.id);
-          const role = data.data.user.type.toLowerCase();
-          router.push(`/${role}/profil/${data.data.user.id}`);
+          Cookies.set("jwt", headers["authorization"]);
+          Cookies.set("user-id", data.user.id);
+          const role =
+            data.user.type.toLowerCase() === "student"
+              ? "students"
+              : "companies";
+          Cookies.set("roleUser", role);
+          router.push(`/${role}/profil/${data.user.id}`);
         });
     }
   };

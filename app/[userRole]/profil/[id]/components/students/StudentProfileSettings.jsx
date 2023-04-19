@@ -12,7 +12,10 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { updateUser } from "@/lib/users/updateUser";
 import { Input } from "@material-tailwind/react";
-import { updateStages } from "@/lib/stages/addOrUpdateStages";
+import {
+  addOrUpdateStages,
+  updateStages,
+} from "@/lib/stages/addOrUpdateStages";
 
 export default function StudentProfilSettings({
   isSettings,
@@ -22,7 +25,7 @@ export default function StudentProfilSettings({
   const token = Cookies.get("jwt");
   // todo mettre les données récupérer de la bdd
   const router = useRouter();
-  // console.log(student);
+
   const [input, setInput] = useState({
     lastname: student.lastName ?? "",
     firstname: student.firstName ?? "",
@@ -39,7 +42,7 @@ export default function StudentProfilSettings({
     location: student.stages.location ?? "",
     isRemoteFriendly: student.stages.isRemoteFriendly ?? false,
     isTravelFriendly: student.stages.isTravelFriendly ?? false,
-    Skills: student.skills ?? [],
+    skills: student.stages.map((stage) => stage.skills) ?? [],
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -47,7 +50,6 @@ export default function StudentProfilSettings({
   };
   const handleChangeStages = (event) => {
     const { name, value } = event.target;
-
     setInputStages((prev) => ({ ...prev, [name]: value }));
   };
   const handleSubmit = async (event) => {
@@ -57,9 +59,9 @@ export default function StudentProfilSettings({
     const duration = Number(inputStages.duration);
     const responseUserUpdate = await updateUser(token, student.id, input);
 
-    const createOrUpdateStages = await updateStages(
+    const createOrUpdateStages = await addOrUpdateStages(
       token,
-      { ...inputStages, duration, skills: [1, 4] },
+      { ...inputStages, duration },
       student
     );
   };
@@ -82,9 +84,11 @@ export default function StudentProfilSettings({
           />
         </div>
         <Skills
+          stages={false}
           isSettings={isSettings}
-          studentSkills={student.skills}
+          student={student}
           show={showSettings}
+          setInputStages={setInputStages}
           setShowSettings={setShowSettings}
           classes="flex flex-col py-2 gap-1 lg:hidden text-black3"
         />

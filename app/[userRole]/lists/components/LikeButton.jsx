@@ -1,19 +1,41 @@
 "use client";
 import PropTypes from "prop-types";
-import setLike from "@/lib/matches/setLike";
+import setLike from "@/lib/matches/setLike.jsx";
 import Cookies from "js-cookie";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import getLikeFromMe from "@/lib/users/getLikeFromMe";
+import Loading from "@/app/loading";
 
 export default function LikeButton({ userReceivingId }) {
   const token = Cookies.get("jwt");
-  const [isLike, setLiking] = useState(false);
+  const [isLike, setIsLike] = useState(false);
+  const [likes, setLikes] = useState();
+
+  useEffect(() => {
+    const getLikes = async () =>
+      await getLikeFromMe(token).then((data) => {
+        data.map(() => {
+          setIsLike(true);
+        });
+        setLikes(data);
+      });
+    getLikes();
+    console.log("Alllike", likes);
+  }, []);
 
   const handleClick = () => {
     const data = { receiver: userReceivingId };
-    setLike(data, token);
-    setLiking(!isLike);
+    if (!isLike) {
+      setLike(data, token);
+    } else {
+      //todo remove like
+    }
+    setIsLike(!isLike);
   };
+  if (!likes) {
+    return <Loading />;
+  }
 
   return (
     <>

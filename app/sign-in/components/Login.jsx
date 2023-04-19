@@ -36,20 +36,19 @@ export default function LogIn() {
     const { email, password } = input;
     axios
       .post(`${baseUrl}login`, { email, password })
-      .then(({ data }) => {
+      .then(({ headers, data }) => {
         setIsLoading(false);
-        Cookies.set("jwt", data.token);
-        Cookies.set("user-id", data.user.id);
-        console.log(data.user);
+        Cookies.set("jwt", headers["authorization"]);
+        Cookies.set("user-id", data.id);
         // todo dynamiser le role grace à la nouvelle api
         const role =
           data.user.type.toLowerCase() === "student" ? "students" : "companies";
+        Cookies.set("roleUser", role);
         router.push(`/${role}/profil/${data.user.id}`);
       })
-      .catch((err) => {
+      .catch(({ response }) => {
         setIsLoading(false);
-        //console.log(err);
-        setErrorMessage(err.message);
+        setErrorMessage(response.data.error);
       });
   };
 

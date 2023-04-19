@@ -8,6 +8,7 @@ import getAllUsers from "@/lib/users/getAllUsers";
 import { cookies } from "next/headers";
 import StudentProfile from "@/app/[userRole]/profil/[id]/components/students/StudentProfile";
 import { getUser } from "@/lib/users/getUser";
+import { Suspense } from "react";
 
 export default async function Profil({ params }) {
   //Verification user
@@ -16,10 +17,11 @@ export default async function Profil({ params }) {
   const connectedUserId = cookieStore.get("user-id")?.value;
   const token = cookieStore.get("jwt")?.value;
   
-  //zadujpaizufjaz
-   if (!id || !token) {
-     redirect("/sign-in");
-   }
+
+  if (!params.id || !token) {
+    redirect("/sign-in");
+  }
+  console.log(params.id);
 
   const userProfilePage = await getUser(token, params.id);
 
@@ -29,6 +31,7 @@ export default async function Profil({ params }) {
    );
 
   //if it's not the profil user return the profil who's clicked
+  
   if (!userProfilePage) {
     console.log("no user je suis dans la page de profil ");
     redirect("/");
@@ -36,7 +39,7 @@ export default async function Profil({ params }) {
 
   const role = userProfilePage.type === "STUDENT" ? "students" : "companies";
   if (role && params.userRole !== role) {
-    const users = await getAllUsers(params.userRole, token);
+    const users = await getAllUsers(token);
     const otherUser = users && users.filter((user) => user.id === params.id);
 
     return (
@@ -57,14 +60,16 @@ export default async function Profil({ params }) {
 
   return (
     <NavBarMarginContainer classes="max-w-[95vw] min-h-[calc(100vh-4rem)] mx-auto">
-      {params.userRole === "students" ? (
-        <StudentProfilView id={params.id} student={userProfilePage} />
-      ) : (
-        <CompanyProfileForUser
-          connectedUserId={connectedUserId}
-          company={otherUser}
-        />
-      )}
+      <Suspense fallback={<h1>chargement...</h1>}>
+        {params.userRole === "students" ? (
+          <StudentProfilView id={params.id} student={userProfilePage} />
+        ) : (
+          <CompanyProfile
+            connectedUserId={connectedUserId}
+            userProfilePage={userProfilePage}
+          />
+        )}
+      </Suspense>
     </NavBarMarginContainer>
   );
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ModalSettingsSkills from "./ModalSettingsSkills";
 import { getSkills } from "@/lib/skills/getSkills";
 import { usePathname } from "next/navigation";
+import ModalSettingsSkillsStages from "./ModalSettingsSkillsStage";
 
 export default function Skills({
   classes,
@@ -11,6 +12,8 @@ export default function Skills({
   setShowSettings,
   show,
   skills,
+  stages,
+  setInputStages,
 }) {
   return (
     <section className={classes}>
@@ -36,7 +39,21 @@ export default function Skills({
               </div>
               <p>SKILLS</p>
             </div>
-            <ModalSettingsSkills showSettings={show} skills={skills} />
+            {stages ? (
+              <ModalSettingsSkillsStages
+                stages={stages}
+                showSettings={show}
+                skills={skills}
+                setInputStages={setInputStages}
+              />
+            ) : (
+              <ModalSettingsSkills
+                stages={stages}
+                showSettings={show}
+                skills={skills}
+                setInputStages={setInputStages}
+              />
+            )}
           </>
         )}
       </div>
