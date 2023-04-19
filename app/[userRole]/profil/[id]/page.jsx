@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
 //Components
 import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
-import CompanyProfile from "@/app/[userRole]/profil/[id]/components/companies/CompanyProfile";
+import CompanyProfileForUser from "@/app/[userRole]/profil/[id]/components/companies/CompanyProfileForUser";
+import CompanyProfileForVisitor from "@/app/[userRole]/profil/[id]/components/companies/CompanyProfileForUser";
 import StudentProfilView from "@/app/[userRole]/profil/[id]/components/students/StudentProfilView";
 import getAllUsers from "@/lib/users/getAllUsers";
 import { cookies } from "next/headers";
@@ -10,26 +11,27 @@ import { getUser } from "@/lib/users/getUser";
 import { Suspense } from "react";
 
 export default async function Profil({ params }) {
+  //Verification user
   const cookieStore = cookies();
-
   const id = cookieStore.get("user-id")?.value;
-
   const connectedUserId = cookieStore.get("user-id")?.value;
-
   const token = cookieStore.get("jwt")?.value;
-  //zadujpaizufjaz
+  
+
   if (!params.id || !token) {
     redirect("/sign-in");
   }
   console.log(params.id);
+
   const userProfilePage = await getUser(token, params.id);
 
-  // console.log(
-  //   "user page profil <oooooooOOoOOOoOoOo></oooooooOOoOOOoOoOo>",
-  //   userProfilePage
-  // );
+   console.log(
+     "user page profil <oooooooOOoOOOoOoOo></oooooooOOoOOOoOoOo>",
+     userProfilePage
+   );
 
-  // if it's not the profil user return the profil who's clicked
+  //if it's not the profil user return the profil who's clicked
+  
   if (!userProfilePage) {
     console.log("no user je suis dans la page de profil ");
     redirect("/");
@@ -41,20 +43,20 @@ export default async function Profil({ params }) {
     const otherUser = users && users.filter((user) => user.id === params.id);
 
     return (
-      <NavBarMarginContainer classes="bg-gradient-to-br from-blue-400 to-purple-800 bg-repeat bg-opacity-5 min-h-[calc(100vh-4rem)] ">
+      <NavBarMarginContainer classes="min-h-[calc(100vh-4rem)] ">
         {params.userRole === "students" ? (
           <StudentProfile id={params.id} student={otherUser} />
         ) : (
-          <CompanyProfile
+          <CompanyProfileForVisitor
             connectedUserId={connectedUserId}
-            company={otherUser}
+            otherUser={otherUser}
           />
         )}
       </NavBarMarginContainer>
     );
   }
 
-  // si on est l'user connecter on peut faire getUser sinon il faut un getProfilCompany fetch('/api/users/type/company') => !role.filter ((user)=> user.id === params.id)
+  //si on est l'user connecter on peut faire getUser sinon il faut un getProfilCompany fetch('/api/users/type/company') => !role.filter ((user)=> user.id === params.id)
 
   return (
     <NavBarMarginContainer classes="max-w-[95vw] min-h-[calc(100vh-4rem)] mx-auto">
@@ -64,7 +66,7 @@ export default async function Profil({ params }) {
         ) : (
           <CompanyProfile
             connectedUserId={connectedUserId}
-            company={userProfilePage}
+            userProfilePage={userProfilePage}
           />
         )}
       </Suspense>

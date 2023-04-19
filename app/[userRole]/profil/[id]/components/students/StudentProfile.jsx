@@ -18,8 +18,8 @@ export default function StudentProfile({ id, student }) {
     }
   }, [student.tuto]);
   return (
-    <div className="m-2 flex flex-col w-full lg:flex-row-reverse min-h-[calc(100vh-4rem)] font-mono text-black3 bg-transparent">
-      <section className="flex flex-row-reverse justify-between  lg:w-[30%] h-[15vh] sm:h-[25vh] md:h-[30vh] lg:h-[calc(100vh-4rem)]">
+    <div className=" flex flex-col w-full lg:flex-row-reverse min-h-[calc(100vh-4rem)] font-mono text-black3 bg-gradient-to-br from-blue-400 to-purple-800 bg-repeat bg-opacity-5 ">
+      <section className="flex flex-row justify-between lg:w-1/2 h-[15vh] sm:h-[25vh] md:h-[30vh] lg:h-[calc(100vh-4rem)]">
         <Tuto openTuto={openTuto} type="student" />
         <div className="w-1/4 h-full md:w-2/6 lg:w-full ">
           <ImageProfile student={student} />
