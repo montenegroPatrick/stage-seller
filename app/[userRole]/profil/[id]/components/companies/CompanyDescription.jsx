@@ -47,24 +47,6 @@ export default function CompanyDescription({ description, submitForm }) {
               Valider
             </button>
           </div>
-          {/* <InputFormCompany widthDesktop='40' widthMobile="80" value={userDescription} handleChange={handleChange} type="text" placeHolder="Description" height="h-6"/> */}
-          {/* <label
-            htmlFor="description"
-            className="relative block w-full overflow-hidden my-5 rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
-          >
-            <input
-              type="text"
-              name="description"
-              onChange={handleChange}
-              value={userDescription}
-              placeholder="Description"
-              className="peer my-3 h-8 w-[80vw] md:w-[40vw] border-none bg-transparent p-0 placeholder-transparent text-sm focus:border-transparent focus:outline-none focus:ring-0 sm:text-lg"
-            />
-
-            <span className="absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
-              Description
-            </span>
-          </label> */}
         </form>
       ) : (
         <p className="my-8 px-12 xl:text-lg 2xl:text-xl xl:px-18 text-blackNext dark:text-gray-400 first-letter:text-4xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100 first-letter:mr-1 first-letter:float-left">

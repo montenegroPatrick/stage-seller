@@ -14,16 +14,23 @@ export default function CompanyStage({ stages }) {
         Profil recherché
       </h2>
       <article className="flex flex-col 2xl:flex-row mt-5 w-full border-2 border-black rounded-lg py-4 px-2">
-        <div className=" flex flex-wrap justify-center gap-2">
+       
+          <ul className="flex flex-wrap justify-center gap-2">
           {skills.map((skill, index) => (
+            <li>
             <Skills key={index} bgColor="bg-blueDark">
               {skill}
             </Skills>
+            </li>
           ))}
-        </div>
+          </ul>
         <div className="text-center font-jetbrains">
           <p className="font-md p-1 text-magenta">À partir du {stages.date}</p>
         </div>
+      </article>
+      
+      <article>
+      <h3 className="text-xl underline">Description du stage proposé</h3>
       </article>
       <div
         onClick={() => setSettings(!settings)}

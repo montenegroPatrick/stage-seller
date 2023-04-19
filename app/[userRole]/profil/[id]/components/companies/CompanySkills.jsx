@@ -9,7 +9,7 @@ import { getSkills } from "@/lib/skills/getSkills";
 
 export default function CompanySkills({ skills, submitForm }) {
   const token = Cookies.get("jwt");
-  const [allSkills, setAllSkills] = useState([]);
+  const [allSkills, setAllSkills] = useState(["React", "Php", "Python", "tailwind"]);
   const [settings, setSettings] = useState(false);
   const [userSkills, setUserSkills] = useState(skills);
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -55,7 +55,7 @@ export default function CompanySkills({ skills, submitForm }) {
               submitForm({skills: [...selectedSkills]});
             }}
           >
-            <ul>
+            <ul className="flex flex-wrap justify-center">
               {allSkills.map((skill) => (
                 <li key={skill}>
                   <label className="text-lg mx-auto px-4 text-paleKaki font-medium">
