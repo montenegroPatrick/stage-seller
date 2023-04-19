@@ -25,7 +25,7 @@ export default function StudentProfilSettings({
   const token = Cookies.get("jwt");
   // todo mettre les données récupérer de la bdd
   const router = useRouter();
-  // console.log(student);
+
   const [input, setInput] = useState({
     lastname: student.lastName ?? "",
     firstname: student.firstName ?? "",
@@ -50,7 +50,6 @@ export default function StudentProfilSettings({
   };
   const handleChangeStages = (event) => {
     const { name, value } = event.target;
-
     setInputStages((prev) => ({ ...prev, [name]: value }));
   };
   const handleSubmit = async (event) => {

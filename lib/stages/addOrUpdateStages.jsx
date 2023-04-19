@@ -2,7 +2,6 @@ import axios from "axios";
 import { baseUrl } from "../baseUrl";
 
 export async function addOrUpdateStages(token, data, student) {
-  console.log(student);
   const response =
     student.stages.length !== 0
       ? await axios

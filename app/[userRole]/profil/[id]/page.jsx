@@ -18,10 +18,10 @@ export default async function Profil({ params }) {
 
   const token = cookieStore.get("jwt")?.value;
   //zadujpaizufjaz
-  if (!id || !token) {
+  if (!params.id || !token) {
     redirect("/sign-in");
   }
-
+  console.log(params.id);
   const userProfilePage = await getUser(token, params.id);
 
   // console.log(

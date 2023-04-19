@@ -23,11 +23,17 @@ export default function MatchHistoric({ currentUser }) {
   console.log(matches, likeSend, likeRecieve);
   // data
   const getMatches = async () =>
-    getUserMatches(token).then((data) => setMatches(data));
+    getUserMatches(token).then((res) => {
+      setMatches(res);
+    });
   const getLikeSend = async () =>
-    getLikeFromMe(token).then((data) => setLikeSend(data));
+    getLikeFromMe(token).then((res) => {
+      setLikeSend(res);
+    });
   const getLikeRecieve = async () =>
-    getLikeToMe(token).then((data) => setLikeRecieve(data));
+    getLikeToMe(token).then((res) => {
+      setLikeRecieve(res);
+    });
 
   useEffect(() => {
     getMatches();
@@ -44,23 +50,14 @@ export default function MatchHistoric({ currentUser }) {
           <Tab value="match">Match</Tab>
         </TabsHeader>
 
-        <TabsBody className="w-full h-1/3 overflow-scroll">
+        <TabsBody className="w-full h-full scroll-smooth">
           <TabPanel value="like in">
-            {likeSend.map((like) => (
-              <MiniCard objectLike={like} />
-            ))}
-            <MiniCard />
+            {<MiniCard objectLike={likeSend} />}
           </TabPanel>
-          <TabPanel className="h-56" value="like out">
-            {likeRecieve.map((like) => (
-              <MiniCard objectLike={like} />
-            ))}
+          <TabPanel value="like out">
+            {<MiniCard objectLike={likeRecieve} />}
           </TabPanel>
-          <TabPanel value="match">
-            {matches.map((like) => (
-              <MiniCard objectLike={like} />
-            ))}
-          </TabPanel>
+          <TabPanel value="match">{<MiniCard objectLike={matches} />}</TabPanel>
         </TabsBody>
       </Tabs>
     </Suspense>

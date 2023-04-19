@@ -8,12 +8,7 @@ export async function getUser(token, id) {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => {
-      if (res.status === 302) {
-        return res.data;
-      }
-      return res.data;
-    })
+    .then((res) => res.data)
     .catch((err) => err);
 
   return response;
