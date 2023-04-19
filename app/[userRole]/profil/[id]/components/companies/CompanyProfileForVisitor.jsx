@@ -36,7 +36,7 @@ const {companyName,
             <CompanyStage stages={stages} />
           </div>
         </div>
-        <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l md:border-black">
+        <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l-2 md:border-black">
           <CompanyDescription description={description}/>
           <CompanyMatch />
         </div>

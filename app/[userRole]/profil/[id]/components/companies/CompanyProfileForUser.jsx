@@ -9,15 +9,15 @@ import CompanyDescription from "./CompanyDescription";
 
 import { useState } from "react";
 
-export default function CompanyProfileForUser({ userPersonnalPage }) {
+export default function CompanyProfileForUser({ userProfilePage }) {
 
 const [nameSettings, setNameSettings] = useState(false)
 const [skillSettings, setSkillSettings] = useState(false)
 const [stageSettings, setStageSettings] = useState(false)
 const [descriptionSettings, setDescriptionSettings] = useState(false)
-const [userData, setUserData] = useState(userPersonnalPage)
+const [userData, setUserData] = useState(userProfilePage)
 
-const {company,
+const {companyName,
   description,
   siret,
   city,
@@ -27,7 +27,7 @@ const {company,
   id,
   stages,
   connectedUserId,
-  email} = userPersonnalPage
+  email} = userProfilePage
 
   return (
     <>
@@ -40,12 +40,12 @@ const {company,
       <section className="flex flex-col md:flex-row font-mono w-full 2xl:w-[90vw] mx-auto">
         <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col">
           <CompanyNameAvatar companyName={companyName} picture={profilImage} city={city} postCode={postCode} openSettings={setNameSettings} />
-          <div className="w-full flex flex-col xl:flex-row justify-between px-5 mx-auto bg-magenta">
+          <div className="w-full flex flex-col xl:flex-row justify-between px-5 mx-auto">
             <CompanySkills skills={skills} openSettings={setSkillSettings}/>
             <CompanyStage stages={stages} openSettings={setStageSettings}/>
           </div>
         </div>
-        <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l md:border-black">
+        <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l-2 border-magenta">
           <CompanyDescription description={description} openSettings={setDescriptionSettings}/>
           <CompanyMatch />
         </div>
