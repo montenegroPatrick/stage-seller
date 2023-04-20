@@ -26,7 +26,6 @@ export default function ModalSettingsSkillsStages({
   setInputStages,
 }) {
   const token = Cookies.get("jwt");
-  const userId = Cookies.get("user-id");
   const [open, setOpen] = useState(false);
   const [stageSkills, setStageSkills] = useState(
     student ? student.stages.map((stage) => stage.skills) : []
@@ -53,13 +52,17 @@ export default function ModalSettingsSkillsStages({
 
   const handleChange = (event) => {
     if (stageSkills.includes(event)) {
-      setStageSkills(stageSkills);
+      const newSkillsArray = stageSkills.filter((skill) => skill !== event);
+
+      setStageSkills(newSkillsArray);
     } else {
       const userSkillsArray = [...stageSkills, event];
       setStageSkills(userSkillsArray);
-      const dataSkillUpdate = stageSkills.map((skillName) =>
+
+      const dataSkillUpdate = userSkillsArray.map((skillName) =>
         skillsList.filter((skill) => skill.name === skillName)
       );
+      console.log(dataSkillUpdate);
       const skillIds = [];
       dataSkillUpdate.map((object) =>
         object.map((data) => skillIds.push(data.id))
@@ -67,13 +70,6 @@ export default function ModalSettingsSkillsStages({
       console.log(skillIds);
       setInputStages((prev) => ({ ...prev, skills: skillIds }));
     }
-  };
-  const handleRemoveEvent = (event) => {
-    // console.log(event.target.parentElement.firstChild);
-    //const newArraySkills = [...stageSkills];
-    //newArraySkills.filter((skill) => skill.id !== event.target.id);
-    // newArraySkills.remove(event.target.parentElement.firstChild);
-    //setStageSkills(newArraySkills);
   };
   return (
     <Fragment>
@@ -104,7 +100,6 @@ export default function ModalSettingsSkillsStages({
                     src={`https://img.shields.io/badge/-${skill}-black?style=for-the-badge&logo=${skill}&logoColor=61DAFB&color=white`}
                     className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
                   />
-                  <RxCross2 onClick={handleRemoveEvent} />
                 </div>
               ))}
             </div>
