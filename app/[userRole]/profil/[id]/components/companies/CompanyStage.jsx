@@ -20,7 +20,7 @@ export default function CompanyStage({ stages }) {
 
   return (
     <div className="w-full xl:w-[50%] flex flex-col items-center rounded-xl px-2 py-5 mx-auto my-5 bg-white relative">
-      <h2 className="text-3xl 2xl:text-4xl text-black text-center font-normal">
+      <h2 className="text-3xl 2xl:text-4xl text-black text-center">
         Profil recherché
       </h2>
 

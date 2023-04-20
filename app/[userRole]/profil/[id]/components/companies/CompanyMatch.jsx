@@ -11,7 +11,7 @@ export default function CompanyMatch({ company }) {
       <div className="rounded-t-lg">
         <div className="flex justify-around items-center px-5 py-8 border-b border-black">
           <div>
-            <h3 className="text-3xl 2xl:text-4xl leading-6 text-black text-center font-normal">
+            <h3 className="text-3xl 2xl:text-4xl leading-6 text-black text-center">
               VOS INTERACTIONS
             </h3>
           </div>
