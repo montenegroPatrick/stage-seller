@@ -6,16 +6,20 @@ import SettingButton from "./SettingButton";
 import { updateStages } from "@/lib/stages/addOrUpdateStages";
 
 export default function CompanyStage({ stages, setMessage }) {
-  const [stage] = stages;
-  const {
-    id,
-    description,
-    start_date,
-    location,
-    is_remote_friendly,
-    duration,
-    skills,
-  } = stage;
+  console.log(stages);
+  if(stages.length > 1){
+    const [stage] = stages;
+    const {
+      id,
+      description,
+      start_date,
+      location,
+      is_remote_friendly,
+      duration,
+      skills,
+    } = stage;
+  }
+  
 
   const [settings, setSettings] = useState(false);
   const [stageSkills, setStageSkills] = useState(skills);
