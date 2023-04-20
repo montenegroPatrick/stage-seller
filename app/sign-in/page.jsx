@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function SignIn() {
   return (
-    <div>
+    <div className="w-screen h-screen">
       <LogIn />
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { LockClosedIcon } from "@heroicons/react/20/solid";
-import { Alert } from "@material-tailwind/react";
+import { Alert, Input } from "@material-tailwind/react";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,8 @@ import cookie from "cookie";
 
 import { baseUrl } from "@/lib/baseUrl";
 import axios from "axios";
+import Logo from "@/app/components/Logo";
+import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
 
 export default function LogIn() {
   const [input, setInput] = useState({
@@ -39,7 +41,7 @@ export default function LogIn() {
       .then(({ headers, data }) => {
         setIsLoading(false);
         Cookies.set("jwt", headers["authorization"]);
-        Cookies.set("user-id", data.id);
+        Cookies.set("user-id", data.user.id);
         // todo dynamiser le role grace à la nouvelle api
         const role =
           data.user.type.toLowerCase() === "student" ? "students" : "companies";
@@ -53,11 +55,12 @@ export default function LogIn() {
   };
 
   return (
-    <>
-      <div className="flex h-[100vh] items-center justify-center p-4 bg-black1">
-        <div className="w-full max-w-md space-y-8 bg-white p-8 sm:p-14 rounded-lg">
+    <NavBarMarginContainer>
+      <div className="flex w-full h-screen items-center justify-center p-4 bg-black1 ">
+        <div className="w-full h-full bg-black text-whiteSmoke p-8 sm:p-14 rounded-lg flex flex-col items-center">
+          <Logo />
           <div>
-            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-600">
               Connexion
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
@@ -72,39 +75,27 @@ export default function LogIn() {
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
-            <div className="-space-y-px rounded-md shadow-sm">
-              <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Adresse mail
-                </label>
-                <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  value={input.email}
-                  onChange={handleChange}
-                  autoComplete="email"
-                  required
-                  className="relative block w-full rounded-t-md border-0 py-1.5 pl-1 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Adresse mail"
-                />
-              </div>
-              <div>
-                <label htmlFor="password" className="sr-only">
-                  Mot de passe
-                </label>
-                <input
-                  value={input.password}
-                  onChange={handleChange}
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="relative block w-full rounded-b-md border-0 py-1.5 pl-1 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="Mot de passe"
-                />
-              </div>
+            <div className="flex flex-col gap-2">
+              <Input
+                name="email"
+                type="email"
+                value={input.email}
+                label="email"
+                onChange={handleChange}
+                autoComplete="email"
+                required
+              />
+
+              <Input
+                value={input.password}
+                onChange={handleChange}
+                label="password"
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+              />
             </div>
 
             <div className="flex items-center justify-between">
@@ -117,7 +108,7 @@ export default function LogIn() {
                 />
                 <label
                   htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
+                  className="ml-2 block text-sm text-gray-600 mr-2"
                 >
                   Se souvenir de moi
                 </label>
@@ -160,6 +151,6 @@ export default function LogIn() {
           </form>
         </div>
       </div>
-    </>
+    </NavBarMarginContainer>
   );
 }

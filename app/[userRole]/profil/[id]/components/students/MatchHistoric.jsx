@@ -20,21 +20,20 @@ export default function MatchHistoric({ currentUser }) {
   const [matches, setMatches] = useState([]);
   const [likeSend, setLikeSend] = useState([]);
   const [likeRecieve, setLikeRecieve] = useState([]);
-  console.log(matches, likeSend, likeRecieve);
+
   // data
   const getMatches = async () =>
     getUserMatches(token).then((res) => {
-      setMatches(res);
+      setMatches(res.data);
     });
   const getLikeSend = async () =>
     getLikeFromMe(token).then((res) => {
-      setLikeSend(res);
+      setLikeSend(res.data);
     });
   const getLikeRecieve = async () =>
     getLikeToMe(token).then((res) => {
-      setLikeRecieve(res);
+      setLikeRecieve(res.data);
     });
-
   useEffect(() => {
     getMatches();
     getLikeSend();
@@ -42,24 +41,30 @@ export default function MatchHistoric({ currentUser }) {
   }, []);
 
   return (
-    <Suspense fallback={<h1>loading data</h1>}>
-      <Tabs value="like in">
-        <TabsHeader>
-          <Tab value="like in">like in</Tab>
-          <Tab value="like out">like out</Tab>
-          <Tab value="match">Match</Tab>
-        </TabsHeader>
+    <Tabs value="like in">
+      <TabsHeader>
+        <Tab value="like in">like in</Tab>
+        <Tab value="like out">like out</Tab>
+        <Tab value="match">Match</Tab>
+      </TabsHeader>
 
-        <TabsBody className="w-full h-full scroll-smooth">
-          <TabPanel value="like in">
-            {<MiniCard objectLike={likeSend} />}
-          </TabPanel>
-          <TabPanel value="like out">
-            {<MiniCard objectLike={likeRecieve} />}
-          </TabPanel>
-          <TabPanel value="match">{<MiniCard objectLike={matches} />}</TabPanel>
-        </TabsBody>
-      </Tabs>
-    </Suspense>
+      <TabsBody className="w-full h-full scroll-smooth">
+        <TabPanel value="like in">
+          {likeSend.map((like) => (
+            <MiniCard objectLike={like} />
+          ))}
+        </TabPanel>
+        <TabPanel value="like out">
+          {likeRecieve.map((like) => (
+            <MiniCard objectLike={like} />
+          ))}
+        </TabPanel>
+        <TabPanel value="match">
+          {matches.map((matches) => (
+            <MiniCard objectLike={matches} />
+          ))}
+        </TabPanel>
+      </TabsBody>
+    </Tabs>
   );
 }

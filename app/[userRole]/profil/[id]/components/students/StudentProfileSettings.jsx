@@ -16,6 +16,9 @@ import {
   addOrUpdateStages,
   updateStages,
 } from "@/lib/stages/addOrUpdateStages";
+import Button from "@/app/utilsComponents/Buttons/Button";
+import { RxCrossCircled } from "react-icons/rx";
+import { GrValidate } from "react-icons/gr";
 
 export default function StudentProfilSettings({
   isSettings,
@@ -52,29 +55,42 @@ export default function StudentProfilSettings({
     const { name, value } = event.target;
     setInputStages((prev) => ({ ...prev, [name]: value }));
   };
+  // const checkInputNotEmpty = (inputObject) => {
+  //   for (const input of inputObject) {
+  //     if (input === "") {
+  //       return false;
+  //     } else {
+  //       return true;
+  //     }
+  //   }
+  // };
   const handleSubmit = async (event) => {
     // todo fetch put avec les nouvelles data
+
     event.preventDefault();
     //console.log(input);
-    const duration = Number(inputStages.duration);
-    const responseUserUpdate = await updateUser(token, student.id, input);
 
+    const responseUserUpdate = await updateUser(token, student.id, input);
+  };
+
+  const handleSubmitStages = async (event) => {
+    event.preventDefault();
+    const duration = Number(inputStages.duration);
     const createOrUpdateStages = await addOrUpdateStages(
       token,
       { ...inputStages, duration },
       student
     );
   };
-
   const [showSettings, setShowSettings] = useState(false);
   const { lastname, firstname, localisation } = input;
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className=" flex flex-col lg:justify-around h-screen w-full lg:gap-5 min-h-[calc(100vh-4rem)] font-mono text-whiteSmoke bg-blue"
-    >
-      <div className="flex lg:flex-col h-screen gap-5 ">
+    <div className=" flex flex-col lg:justify-around h-screen w-full lg:gap-5 min-h-[calc(100vh-4rem)] font-mono text-black3 bg-blue">
+      <form
+        onSubmit={handleSubmit}
+        className="flex lg:flex-col h-screen gap-5 "
+      >
         <div className="w-1/4 min-w-[25%] h-[60%] md:w-2/6 lg:w-full overflow-hidden">
           <ImageProfile
             isSettings={isSettings}
@@ -84,57 +100,83 @@ export default function StudentProfilSettings({
           />
         </div>
         <Skills
-          stages={false}
+          stage={false}
           isSettings={isSettings}
           student={student}
+          skills={student.skills}
           show={showSettings}
-          setInputStages={setInputStages}
+          setInput={setInput}
           setShowSettings={setShowSettings}
           classes="flex flex-col py-2 gap-1 lg:hidden text-black3"
         />
-        <section className="flex flex-row flex-wrap  justify-between lg:w-full h-1/3 lg:h-full">
+        <div className="flex flex-row flex-wrap  justify-between lg:w-full h-1/3 lg:h-full">
           {/* image de profile en background avec dessus nom prenom lieu skills  */}
-          <div className="flex flex-col gap-2 items-center text-black3 lg:w-screen">
-            <p className="p-2 text-black3">Information personnelle</p>
+          <div className="flex flex-col gap-4 items-center border-4 p-5 rounded-xl lg:w-screen">
+            <p className="p-2 ">Information personnelle</p>
             <Input
-              className="rounded-xl p-2 border-white bg-transparent border-2  "
+              error={lastname === ""}
+              icon={
+                lastname !== "" ? (
+                  <GrValidate className="text-green" />
+                ) : (
+                  <RxCrossCircled className="text-red" />
+                )
+              }
               onChange={handleChange}
               name="lastname"
               value={lastname}
               label="ton nom de famille"
             />
-
             <Input
-              className="rounded-xl p-2 border-white bg-transparent border-2 "
+              error={firstname === ""}
+              icon={
+                firstname !== "" ? (
+                  <GrValidate className="text-green" />
+                ) : (
+                  <RxCrossCircled className="text-red" />
+                )
+              }
               onChange={handleChange}
               name="firstname"
               value={firstname}
               label="ton prénom"
             />
-
             <Input
-              className="rounded-xl p-2 border-white bg-transparent border-2 "
+              error={localisation === ""}
+              icon={
+                localisation !== "" ? (
+                  <GrValidate className="text-green" />
+                ) : (
+                  <RxCrossCircled className="text-red" />
+                )
+              }
               onChange={handleChange}
               name="localisation"
               value={localisation}
               label="ta ville"
             />
             <p className="p-2">description</p>
+
+            <ProfileDescription
+              isSettings={isSettings}
+              setIsSettings={setIsSettings}
+              setShowSettings={setShowSettings}
+              currentUser={student}
+              input={input}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
           </div>
-        </section>
-      </div>
+          <Button type="submit">Confirmer</Button>
+        </div>
+      </form>
       <section className="flex flex-col ">
         {/* cv link / profile description / stage description / mathHistoric / githubProject / */}
-        <div className="flex flex-col gap-2 h-full flex-wrap lg:w-full justify-between">
-          <ProfileDescription
-            isSettings={isSettings}
-            setIsSettings={setIsSettings}
-            setShowSettings={setShowSettings}
-            currentUser={student}
-            input={input}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
+        <form
+          onSubmit={handleSubmitStages}
+          className="flex flex-col gap-2 h-full flex-wrap items-center lg:w-full justify-between"
+        >
+          <p>stage description</p>
           <StageDescription
             isSettings={isSettings}
             setIsSettings={setIsSettings}
@@ -143,10 +185,11 @@ export default function StudentProfilSettings({
             input={inputStages}
             handleChange={handleChangeStages}
           />
-        </div>
+          <Button type="submit">Confirmer</Button>
+        </form>
         <div className="lg:flex w-full h-1/3 max-h-[100rem]">
           <div className="items-center w-full">
-            <GithubProjects
+            {/* <GithubProjects
               setIsSettings={setIsSettings}
               isSettings={isSettings}
               setShowSettings={setShowSettings}
@@ -154,11 +197,10 @@ export default function StudentProfilSettings({
               input={input}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
-            />
+            /> */}
           </div>
         </div>
       </section>
-      <button type="submit" hidden></button>
-    </form>
+    </div>
   );
 }
