@@ -4,7 +4,12 @@ import {
   Chivo,
   JetBrains_Mono,
   Lobster,
-  Libre_Baskerville
+  Libre_Baskerville,
+  Bebas_Neue,
+  Abril_Fatface,
+  PT_Mono,
+  Quicksand,
+  Raleway
 } from "next/font/google";
 
 //Roboto
@@ -51,4 +56,46 @@ export const baskerville = Libre_Baskerville({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-baskerville",
+});
+
+
+//Libre Bebas Neue
+export const bebasNeue = Bebas_Neue({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-bebasNeue",
+});
+
+//Libre Bebas Neue
+export const abril = Abril_Fatface({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-abril",
+});
+
+//Libre PT
+export const pt = PT_Mono({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-pt",
+});
+
+//Libre QuickSand
+export const quickSand = Quicksand({
+  weight: ["300","400","500",'600'],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-quickSand",
+});
+
+//Libre Raleway
+export const raleWay = Raleway({
+  weight: ["100","200","300","400","500",'600', "700"],
+  style: ['normal', 'italic'],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-raleWay",
 });

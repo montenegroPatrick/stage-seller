@@ -15,12 +15,12 @@ export default function CardMatch({
   const router = useRouter();
 
   return (
-    <div className=" my-2 border border-black rounded-lg flex flex-col justify-center items-center lg:flex-row text-blackNext px-4 py-4 lg:justify-around bg-gray-300">
-      <div className="font-chivo font-medium">
+    <div className=" my-2 border border-black rounded-lg flex flex-col justify-center items-center lg:flex-row text-black px-4 py-2 lg:justify-around bg-graySand">
+      <div>
         <h3 className="text-xl">
           Kechiche Younes{firstName} {lastName}
         </h3>
-        <p className="text-md text-green-500">
+        <p className="text-md text-teal-800 italic">
           Paris{city}, {postCode}75002
         </p>
       </div>
