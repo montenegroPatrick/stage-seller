@@ -49,7 +49,7 @@ export default function StudentProfile({ id, student }) {
           <div className=" items-center w-full lg:w-1/2">
             <GithubProjects currentUser={student} />
           </div>
-          <div className="overflow-hidden h-48 items-center w-full lg:w-1/2 ">
+          <div className="overflow-hidden  overflow-y-scroll h-full items-center w-full lg:w-1/2 ">
             <MatchHistoric currentUser={student} />
           </div>
         </div>

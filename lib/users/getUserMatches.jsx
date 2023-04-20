@@ -7,8 +7,8 @@ export default async function getUserMatches(token) {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => res.data)
+    .then((res) => res)
     .catch((err) => err);
-  console.log("matches", response);
+
   return response;
 }

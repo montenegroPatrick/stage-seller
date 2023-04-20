@@ -6,28 +6,34 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import getUserMatches from "@/lib/users/getUserMatches";
 import getLikeFromMe from "@/lib/users/getLikeFromMe";
 import getLikeToMe from "@/lib/users/getLikeToMe";
 import Cookies from "js-cookie";
 import MiniCard from "./MiniCard";
+import Loading from "@/app/loading";
 
 export default function MatchHistoric({ currentUser }) {
   //todo map des likes in like out match de l'utilisateur
   const token = Cookies.get("jwt");
-  const [matches, setMatches] = useState();
-  const [likeSend, setLikeSend] = useState();
-  const [likeRecieve, setLikeRecieve] = useState();
-  console.log(matches, likeSend, likeRecieve);
+  const [matches, setMatches] = useState([]);
+  const [likeSend, setLikeSend] = useState([]);
+  const [likeRecieve, setLikeRecieve] = useState([]);
+
   // data
   const getMatches = async () =>
-    await getUserMatches(token).then((data) => setMatches(data));
+    getUserMatches(token).then((res) => {
+      setMatches(res.data);
+    });
   const getLikeSend = async () =>
-    await getLikeFromMe(token).then((data) => setLikeSend(data));
+    getLikeFromMe(token).then((res) => {
+      setLikeSend(res.data);
+    });
   const getLikeRecieve = async () =>
-    await getLikeToMe(token).then((data) => setLikeRecieve(data));
-
+    getLikeToMe(token).then((res) => {
+      setLikeRecieve(res.data);
+    });
   useEffect(() => {
     getMatches();
     getLikeSend();
@@ -35,23 +41,28 @@ export default function MatchHistoric({ currentUser }) {
   }, []);
 
   return (
-    <Tabs value="I'd like" className="p-5">
+    <Tabs value="like in">
       <TabsHeader>
-        <Tab value="I'd like">I'd like</Tab>
-        <Tab value="like from">like from</Tab>
-        <Tab value="matches">matches</Tab>
+        <Tab value="like in">like in</Tab>
+        <Tab value="like out">like out</Tab>
+        <Tab value="match">Match</Tab>
       </TabsHeader>
 
-      <TabsBody className="w-full h-1/3 overflow-scroll">
-        <TabPanel value="I'd like">
-          {likeSend && likeSend.map((like) => <MiniCard likeArray={like} />)}
+      <TabsBody className="w-full h-full scroll-smooth">
+        <TabPanel value="like in">
+          {likeSend.map((like) => (
+            <MiniCard objectLike={like} />
+          ))}
         </TabPanel>
-        <TabPanel className="h-56" value="like from">
-          {likeRecieve &&
-            likeRecieve.map((like) => <MiniCard likeArray={like} />)}
+        <TabPanel value="like out">
+          {likeRecieve.map((like) => (
+            <MiniCard objectLike={like} />
+          ))}
         </TabPanel>
-        <TabPanel value="matches">
-          {matches && matches.map((like) => <MiniCard likeArray={like} />)}
+        <TabPanel value="match">
+          {matches.map((matches) => (
+            <MiniCard objectLike={matches} />
+          ))}
         </TabPanel>
       </TabsBody>
     </Tabs>

@@ -1,14 +1,12 @@
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
-export default async function getLikeFromMe(token) {
+export default async function setLike(data, token) {
   const response = await axios
-    .get(`${baseUrl}users/matches/from`, {
+    .delete(`${baseUrl}matches`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => res)
-    .catch((err) => err);
-
+    .then((res) => res.data);
   return response;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Logo from "@/app/components/Logo";
 import { baseUrl } from "@/lib/baseUrl";
 import {
   Card,
@@ -46,6 +47,7 @@ export default function SignUpForm({ role }) {
   const [mentionLegal, setMentionLegal] = useState(false);
   const [labelPassword, setLabelPassword] = useState(" * password");
   const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
   // check if the all the fields are πnot empty
 
@@ -58,23 +60,29 @@ export default function SignUpForm({ role }) {
     setIsErrorVerifPassword(false);
     setDisable(true);
     for (const key in input) {
-      if (input[key] !== "") {
+      if (input[key] !== "" && postCode !== "") {
         setDisable(false);
+      } else {
+        setDisable(true);
       }
     }
-
+    if (!mentionLegal) {
+      setDisable(true);
+    }
     if (input.password !== input.verifyPassword) {
       setIsErrorVerifPassword(true);
+      setDisable(true);
     } else {
       setIsErrorVerifPassword(false);
+      setDisable(false);
     }
     if (input.password === mediumPassword) {
       setLabelPassword("fort");
     }
   }, [input, mentionLegal]);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setInput((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -88,22 +96,24 @@ export default function SignUpForm({ role }) {
       setIsLoading(true);
       const numberPostCode = Number(postCode);
       axios
-        .post(
-          `${baseUrl}register`,
-          { ...input, postCode: numberPostCode, type },
-          {
-            headers: {
-              "content-type": "application/json",
-            },
-          }
-        )
-        .then((data) => {
-         // console.log(data);
+        .post(`${baseUrl}register`, {
+          ...input,
+          postCode: numberPostCode,
+          type,
+        })
+        .then(({ headers, data }) => {
           setIsLoading(false);
-          Cookies.set("jwt", data.data.token);
-          Cookies.set("user-id", data.data.user.id);
-          const role = data.data.user.type.toLowerCase();
-          router.push(`/${role}/profil/${data.data.user.id}`);
+          Cookies.set("jwt", headers["authorization"]);
+          Cookies.set("user-id", data.user.id);
+          const role =
+            data.user.type.toLowerCase() === "student"
+              ? "students"
+              : "companies";
+          Cookies.set("roleUser", role);
+          router.push(`/${role}/profil/${data.user.id}`);
+        })
+        .catch((err) => {
+          console.log(err.response);
         });
     }
   };
@@ -113,11 +123,9 @@ export default function SignUpForm({ role }) {
       <CardHeader
         variant="filled"
         color="black"
-        className="mb-4 py-1 grid rounded-lg h-16 md:h-28 place-items-center text-white bg-black3"
+        className="mb-2 py-1 grid rounded-lg h-24 md:h-40  place-items-center bg-black"
       >
-        <Typography variant="h4" className="">
-          Inscription
-        </Typography>
+        <Logo />
       </CardHeader>
       <form className="mt-8 mb-2 mx-2 " onSubmit={handleSubmit}>
         <div className="mb-4 flex w-full flex-col gap-6">
@@ -239,9 +247,18 @@ export default function SignUpForm({ role }) {
           checked={mentionLegal}
         />
         {errorMessage && (
-          <Alert className="duration-700" color="red">
-            {errorMessage}
-          </Alert>
+          <>
+            <Alert
+              show={errorMessage}
+              dismissible={{
+                onClose: () => setErrorMessage(""),
+              }}
+              className="duration-700"
+              color="gray"
+            >
+              {errorMessage}
+            </Alert>
+          </>
         )}
         <Button
           disabled={disable}

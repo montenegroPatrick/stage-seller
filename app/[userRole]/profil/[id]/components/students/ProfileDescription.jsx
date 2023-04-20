@@ -1,11 +1,9 @@
 "use client";
 
-import { Input, Typography } from "@material-tailwind/react";
-import Cookies from "js-cookie";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { updateUser } from "@/lib/users/updateUser";
+import { Input, Textarea, Typography } from "@material-tailwind/react";
+import { RxCrossCircled } from "react-icons/rx";
+import { GrValidate } from "react-icons/gr";
+import { useEffect } from "react";
 export default function ProfileDescription({
   isSettings,
   setIsSettings,
@@ -14,12 +12,18 @@ export default function ProfileDescription({
   input,
   handleChange,
 }) {
-  // console.log(currentUser);
   if (isSettings) {
     return (
-      <Input
+      <Textarea
+        error={input.description.length < 4}
+        icon={
+          input.description !== "" ? (
+            <GrValidate className="text-green" />
+          ) : (
+            <RxCrossCircled className="text-red" />
+          )
+        }
         onChange={handleChange}
-        className="rounded-xl p-2 border-white bg-transparent border-2  "
         value={input.description}
         name="description"
         label="description de ta personnalité"

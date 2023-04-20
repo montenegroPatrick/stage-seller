@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import ModalSettingsSkills from "./ModalSettingsSkills";
 import { getSkills } from "@/lib/skills/getSkills";
 import { usePathname } from "next/navigation";
+import ModalSettingsSkillsStages from "./ModalSettingsSkillsStage";
+import Cookies from "js-cookie";
+import Loading from "@/app/loading";
 
 export default function Skills({
   classes,
@@ -11,17 +14,37 @@ export default function Skills({
   setShowSettings,
   show,
   skills,
+  stages,
+  setInputStages,
 }) {
+  if (!skills) {
+    return;
+  }
+  const token = Cookies.get("jwt");
+  const [skillsList, setSkillsList] = useState([]);
+  const getSkillsData = async () =>
+    getSkills(token).then((skills) => setSkillsList(skills));
+  //todo//
+  useEffect(() => {
+    getSkillsData();
+  }, []);
+  const skillsStage = skillsList.filter((skill) =>
+    skills.map((skillStudent) => {
+      console.log(skillStudent.id);
+    })
+  );
   return (
     <section className={classes}>
-      <div className="flex gap-3 m-1">
-        {skills &&
-          skills.map((skill) => (
+      <div className="flex flex-wrap gap-3 m-1">
+        {skillsStage &&
+          skillsStage.map((skill) => (
             <Avatar
+              key={skill.id}
               variant="rounded"
-              alt="javascript"
-              src={`https://img.shields.io/badge/-${skill}-black?style=for-the-badge&logo=${skill}&logoColor=61DAFB&color=ffffff`}
-              className="border-2 w-7 h-7 border-whiteSmoke hover:z-10"
+              size="xxl"
+              alt={skill.name}
+              src={`https://img.shields.io/badge/-${skill.name}-black?style=for-the-badge&logo=${skill.name}&logoColor=61DAFB&color=white`}
+              className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
             />
           ))}
         {isSettings && (
@@ -34,9 +57,23 @@ export default function Skills({
                 {" "}
                 +{" "}
               </div>
-              <p>SKILLS</p>
+              <p>{stages ? "STAGES-SKILLS" : "SKILLS"}</p>
             </div>
-            <ModalSettingsSkills showSettings={show} skills={skills} />
+            {stages ? (
+              <ModalSettingsSkillsStages
+                stages={stages}
+                showSettings={show}
+                skills={skills}
+                setInputStages={setInputStages}
+              />
+            ) : (
+              <ModalSettingsSkills
+                stages={stages}
+                showSettings={show}
+                skills={skills}
+                setInputStages={setInputStages}
+              />
+            )}
           </>
         )}
       </div>

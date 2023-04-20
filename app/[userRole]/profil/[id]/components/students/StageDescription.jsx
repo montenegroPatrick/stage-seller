@@ -11,25 +11,13 @@ export default function StageDescription({
   input,
   handleChange,
   setInput,
+  handleSubmit,
 }) {
-  // const token = Cookies.get("jwt");
-  // const [input, setInput] = useState({});
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setInput((prev) => ({ ...prev, [name]: value }));
-  // };
-  // const handleSubmit = async (event) => {
-  //   // todo fetch put avec les nouvelles data
-  //   event.preventDefault();
-  //   await updateUser(token, currentUser.id, input);
-  //   setIsSettings(!isSettings);
-  // };
   const [showSettings, setShowSettings] = useState(false);
   if (isSettings) {
     return (
-      <div className=" flex flex-col gap-2  ">
+      <div className=" flex flex-col gap-2 w-full ">
         <Input
-          className="rounded-xl  mb-2 p-2 border-white bg-transparent border-2 "
           type="text"
           value={input.description}
           onChange={handleChange}
@@ -37,7 +25,6 @@ export default function StageDescription({
           label="description de ta recherche"
         />
         <Input
-          className="rounded-xl mb-2 w-full p-2 border-white bg-transparent border-2 "
           type="date"
           value={input.starDate}
           onChange={handleChange}
@@ -45,7 +32,6 @@ export default function StageDescription({
           label="la date de début de stage"
         />
         <Input
-          className="rounded-xl w-full p-2 border-white bg-transparent border-2 "
           type="number"
           value={input.duration}
           onChange={handleChange}
@@ -53,7 +39,6 @@ export default function StageDescription({
           label="la durée souhaitée en mois"
         />
         <Input
-          className="rounded-xl p-2 border-white bg-transparent border-2 "
           type="text"
           value={input.location}
           onChange={handleChange}
@@ -76,9 +61,11 @@ export default function StageDescription({
           />
         </div>
         <Skills
+          stages={true}
           show={showSettings}
           skills={input.skills}
           isSettings={isSettings}
+          setInputStages={setInput}
           setShowSettings={setShowSettings}
         />
       </div>

@@ -19,16 +19,17 @@ import { addSkills } from "@/lib/users/addSkills";
 import { RxCross2 } from "react-icons/rx";
 import { addOrUpdateStages } from "@/lib/stages/addOrUpdateStages";
 
-export default function ModalSettingsSkills({
+export default function ModalSettingsSkillsStages({
   showSettings,
   student,
   stages,
   setInputStages,
 }) {
   const token = Cookies.get("jwt");
-  const userId = Cookies.get("user-id");
   const [open, setOpen] = useState(false);
-  const [userSkills, setUserSkills] = useState(student ? student.skills : []);
+  const [stageSkills, setStageSkills] = useState(
+    student ? student.stages.map((stage) => stage.skills) : []
+  );
   // skill List fixed who's get with the function getSkills
   const [skillsList, setSkillsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,43 +45,31 @@ export default function ModalSettingsSkills({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event);
-    setIsLoading(true);
+    handleOpen();
+    // setIsLoading(true);
     // todo the api execpted the ID of the skills
-    const dataSkillUpdate = userSkills.map((skillName) =>
-      skillsList.filter((skill) => skill.name === skillName)
-    );
-    const skillListIds = { skillList: [] };
-    dataSkillUpdate.map((object) =>
-      object.map((data) => skillListIds.skillList.push(data.id))
-    );
-    // input Stage for update or add
-
-    const response = await addSkills(token, userId, skillListIds);
-    if (response) {
-      setIsLoading(false);
-      setOpen(!open);
-    } else {
-      setIsLoading(false);
-      setErrorMessage(response.message);
-    }
   };
 
   const handleChange = (event) => {
-    console.log(event);
-    if (userSkills.includes(event)) {
-      setUserSkills(userSkills);
+    if (stageSkills.includes(event)) {
+      const newSkillsArray = stageSkills.filter((skill) => skill !== event);
+
+      setStageSkills(newSkillsArray);
     } else {
-      const userSkillsArray = [...userSkills, event];
-      setUserSkills(userSkillsArray);
+      const userSkillsArray = [...stageSkills, event];
+      setStageSkills(userSkillsArray);
+
+      const dataSkillUpdate = userSkillsArray.map((skillName) =>
+        skillsList.filter((skill) => skill.name === skillName)
+      );
+      console.log(dataSkillUpdate);
+      const skillIds = [];
+      dataSkillUpdate.map((object) =>
+        object.map((data) => skillIds.push(data.id))
+      );
+      console.log(skillIds);
+      setInputStages((prev) => ({ ...prev, skills: skillIds }));
     }
-  };
-  const handleRemoveEvent = (event) => {
-    // console.log(event.target.parentElement.firstChild);
-    const newArraySkills = [...userSkills];
-    newArraySkills.filter((skill) => skill.id !== event.target.id);
-    // newArraySkills.remove(event.target.parentElement.firstChild);
-    setUserSkills(newArraySkills);
   };
   return (
     <Fragment>
@@ -101,7 +90,7 @@ export default function ModalSettingsSkills({
         <form onSubmit={handleSubmit}>
           <DialogBody divider>
             <div className="flex flex-row">
-              {userSkills.map((skill, index) => (
+              {stageSkills.map((skill, index) => (
                 <div className="flex ">
                   <Avatar
                     key={index}
@@ -111,7 +100,6 @@ export default function ModalSettingsSkills({
                     src={`https://img.shields.io/badge/-${skill}-black?style=for-the-badge&logo=${skill}&logoColor=61DAFB&color=white`}
                     className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
                   />
-                  <RxCross2 onClick={handleRemoveEvent} />
                 </div>
               ))}
             </div>

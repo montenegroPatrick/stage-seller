@@ -2,19 +2,23 @@
 import { Avatar, Typography } from "@material-tailwind/react";
 import Skills from "./Skills";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import getAllUsers from "@/lib/users/getAllUsers";
 
-export default function MiniCard({ likeArray }) {
-  const [user, setUser] = useState();
-  const users = async () =>
-    await getAllUsers(token).then((data) => setUser(data));
-  const userForCard = user.filter(
-    (user) => user.id === likeArray.map((like) => like.receiver.id)
-  );
-  console.log(user);
+export default function MiniCard({ objectLike }) {
+  const token = Cookies.get("jwt");
+  const [users, setUsers] = useState();
+
   useEffect(() => {
-    users();
+    const getDataUsers = async () =>
+      await getAllUsers(token).then((data) => setUsers(data));
+    getDataUsers();
   }, []);
-  console.log("userForMiniCard", userForCard);
+  const userForCard =
+    users && users.find((user) => user.id === objectLike.user.id);
+  if (!userForCard) {
+    return;
+  }
   return (
     <section className="bg-transparent rounded-lg p-3 mb-3">
       <div className="flex gap-5 bg-transparent ">
@@ -26,8 +30,8 @@ export default function MiniCard({ likeArray }) {
           className="border-2 border-whiteSmoke hover:z-10  bg-cover"
         />
         <div className="flex w-4/5 justify-between">
-          <Typography variant="h5">Name</Typography>
-          <Typography variant="paragraph">Frontend Lead @Apple</Typography>
+          <Typography variant="h5">{userForCard.companyName}</Typography>
+          <Typography variant="paragraph">{userForCard.companyName}</Typography>
         </div>
       </div>
       <Skills />
