@@ -5,20 +5,20 @@ import CompanySkills from "./CompanySkills";
 import CompanyNameAvatar from "./CompanyNameAvatar";
 import CompanyDescription from "./CompanyDescription";
 
-
 export default function CompanyProfileForVisitor({ otherUser }) {
-
-const {companyName,
-  description,
-  siret,
-  city,
-  postCode,
-  profilImage,
-  skills,
-  id,
-  stages,
-  connectedUserId,
-  email} = otherUser
+  const {
+    companyName,
+    description,
+    siret,
+    city,
+    postCode,
+    profilImage,
+    skills,
+    id,
+    stages,
+    connectedUserId,
+    email,
+  } = otherUser;
 
   return (
     <>
@@ -30,15 +30,17 @@ const {companyName,
       </div>
       <section className="flex flex-col md:flex-row w-full 2xl:w-[90vw] mx-auto">
         <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col">
-          <CompanyNameAvatar companyName={companyName} picture={profilImage} city={city} postCode={postCode}/>
-          <div className="w-full flex flex-col xl:flex-row justify-between px-5 mx-auto bg-magenta">
-            <CompanySkills skills={skills} />
-            <CompanyStage stages={stages} />
-          </div>
+          <CompanyNameAvatar
+            companyName={companyName}
+            picture={profilImage}
+            city={city}
+            postCode={postCode}
+          />
+          <CompanySkills skills={skills} />
         </div>
         <div className="w-full md:w-[50%] mx-auto my-5 border-dashed md:border-l-2 md:border-black">
           <CompanyDescription description={description} />
-          <CompanyMatch />
+          <CompanyStage stages={stages} />
         </div>
       </section>
     </>
