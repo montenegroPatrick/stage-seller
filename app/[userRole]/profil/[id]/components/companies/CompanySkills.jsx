@@ -44,7 +44,7 @@ export default function CompanySkills({ skills, submitForm }) {
 
   return (
     <div className="w-full xl:w-[50%] flex flex-col items-center px-2 py-5 my-5 mx-auto relative">
-      <h2 className="text-3xl 2xl:text-4xl text-center">
+      <h2 className="text-2xl 2xl:text-3xl text-center">
         Technologies
       </h2>
       <div className={`mt-5 w-full bg-white mx-auto rounded-lg flex flex-wrap justify-evenly py-4 px-2 gap-[6px] border border-black`}>

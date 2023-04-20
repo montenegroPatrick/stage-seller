@@ -15,7 +15,7 @@ export default function CardMatch({
   const router = useRouter();
 
   return (
-    <div className=" my-2 border border-black rounded-lg flex flex-col justify-center items-center lg:flex-row text-black px-4 py-4 lg:justify-around bg-graySand">
+    <div className=" my-2 border border-black rounded-lg flex flex-col justify-center items-center lg:flex-row text-black px-4 py-2 lg:justify-around bg-graySand">
       <div>
         <h3 className="text-xl">
           Kechiche Younes{firstName} {lastName}

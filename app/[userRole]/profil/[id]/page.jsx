@@ -44,7 +44,15 @@ export default async function Profil({ params }) {
     github: null,
     lastConnected: null,
     skills: [],
-    stages: [],
+    stages: [{
+      id: 2,
+      description: 'Ma description',
+      location: 'paris',
+      start_date: '20/04/2023',
+      is_remote_friendly: true,
+      duration: '3 mois',
+      skills: ['Angular', 'Assembleur', 'Swift', 'Flutter']
+    }],
   };
 
   const otherUser = {

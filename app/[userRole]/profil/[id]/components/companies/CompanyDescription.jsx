@@ -17,8 +17,8 @@ export default function CompanyDescription({ description, submitForm }) {
       <h2
         className={
           settings
-            ? `text-3xl 2xl:text-4xl text-center text-black md:mb-10`
-            : `text-3xl 2xl:text-4xl text-center text-black`
+            ? `text-2xl 2xl:text-3xl text-center text-black md:mb-10`
+            : `text-2xl 2xl:text-3xl text-center text-black`
         }
       >
         DESCRIPTION

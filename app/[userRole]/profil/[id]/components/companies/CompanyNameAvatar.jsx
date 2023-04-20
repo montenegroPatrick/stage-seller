@@ -34,33 +34,37 @@ export default function CompanyNameAvatar({
       >
         <div className="w-full md:min-h-[35vh] flex flex-col border-l-purple-200 p-5 border-dotted border-b-2 border-black relative">
           <div className="mb-3 pt-0">
+          <p className="mt-3 italic underline text-sm">Nom de l'entreprise</p>
             <input
               value={userCompanyName}
               onChange={(e) => setCompanyName(e.target.value)}
               type="text"
               placeholder="Nom de l'entreprise"
-              className="mt-3 px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full font-normal"
+              className="px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full font-normal"
             />
           </div>
           <div className="mb-3 pt-0">
+          <p className="mt-3 italic underline text-sm">Localisation de l'entreprise</p>
             <input
               value={userCity}
               onChange={(e) => setUserCity(e.target.value)}
               type="text"
               placeholder="Ville"
-              className="mt-3 px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full"
+              className="px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full"
             />
           </div>
           <div className="mb-3 pt-0">
+          <p className="mt-3 italic underline text-sm">Code postal</p>
             <input
               value={userPostCode}
               onChange={(e) => setUserPostCode(e.target.value)}
               type="text"
               placeholder="Code postal"
-              className="mt-3 px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full"
+              className="px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full"
             />
           </div>
           <div className="mb-3 pt-0">
+          <p className="mt-3 italic underline text-sm">Image ou logo de l'entreprise</p>
             <input
               value=""
               onChange={(e) => setProfileImage(e.target.files[0])}
@@ -68,7 +72,7 @@ export default function CompanyNameAvatar({
               multiple={false}
               accept="image/png,image/jpeg,image/gif,image/svg+xml,application/pdf"
               placeholder="Logo de l'entreprise"
-              className="mt-3 px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full"
+              className="px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full"
             />
             <p className="pl-2 text-rhubard">png, pdf, jpeg, gif, svg, pdf.</p>
           </div>

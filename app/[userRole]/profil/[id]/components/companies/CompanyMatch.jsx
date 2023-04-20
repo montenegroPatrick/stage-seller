@@ -7,11 +7,11 @@ export default function CompanyMatch({ company }) {
   const [activeTab, setActiveTab] = useState("tabs-like");
 
   return (
-    <div className=" mx-auto w-full border-black">
+    <div className=" mx-auto  w-[90%] border-black">
       <div className="rounded-t-lg">
         <div className="flex justify-around items-center px-5 py-8 border-b border-black">
           <div>
-            <h3 className="text-3xl 2xl:text-4xl leading-6 text-black text-center">
+            <h3 className="text-2xl 2xl:text-3xl leading-6 text-black text-center">
               VOS INTERACTIONS
             </h3>
           </div>
@@ -53,7 +53,7 @@ export default function CompanyMatch({ company }) {
           </div>
         </div>
       </div>
-      <div className="min-h-[20vh] max-h-40vh rounded-b-lg bg-white p-8 flex flex-col items-center overflow-y-scroll">
+      <div className="min-h-[20vh] max-h-50vh rounded-b-lg bg-white py-4 px-8 flex flex-col items-center overflow-y-scroll">
         <div
           className={`opacity-${
             activeTab === "tabs-like" ? "100" : "0 hidden"
