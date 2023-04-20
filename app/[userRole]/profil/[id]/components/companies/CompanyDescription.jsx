@@ -13,12 +13,12 @@ export default function CompanyDescription({ description, submitForm }) {
   };
 
   return (
-    <div className="relative w-full md:min-h-[35vh] flex flex-col items-center p-5 mx-auto border-dashed border-t-2 border-b-2 md:border-t-0 border-magenta px-auto md:mb-0">
+    <div className="relative w-full md:min-h-[35vh] flex flex-col items-center p-5 mx-auto border-dotted border-t-2 border-b-2 md:border-t-0 border-black px-auto md:mb-0">
       <h2
         className={
           settings
-            ? `text-3xl 2xl:text-4xl text-center text-blackNext md:mb-10 font-normal`
-            : `text-3xl 2xl:text-4xl text-center text-blackNext font-normal`
+            ? `text-3xl 2xl:text-4xl text-center text-black md:mb-10 font-normal`
+            : `text-3xl 2xl:text-4xl text-center text-black font-normal`
         }
       >
         DESCRIPTION
@@ -49,7 +49,7 @@ export default function CompanyDescription({ description, submitForm }) {
           </div>
         </form>
       ) : (
-        <p className="my-8 px-12 xl:text-lg 2xl:text-xl xl:px-18 text-blackNext dark:text-gray-400 first-letter:text-4xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100 first-letter:mr-1 first-letter:float-left">
+        <p className="my-8 px-12 xl:text-lg 2xl:text-xl xl:px-18 text-black dark:text-gray-400 first-letter:text-4xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100 first-letter:mr-1 first-letter:float-left">
           {userDescription === ""
             ? "Description non renseignée."
             : userDescription}

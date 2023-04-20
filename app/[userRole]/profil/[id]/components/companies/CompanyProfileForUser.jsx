@@ -35,7 +35,7 @@ export default function CompanyProfileForUser({ userProfilePage }) {
   return (
     <>
       <div className="sticky flex flex-col items-center scrolling-animation">
-        <h2 className="text-5xl md:text-6xl font-normal text-blackNext text-center py-6">
+        <h2 className="text-5xl md:text-6xl font-normal text-black text-center py-6">
           PROFIL
         </h2>
         <div className="w-full 2xl:w-[90vw] bg-black h-[1px]" />
@@ -54,7 +54,7 @@ export default function CompanyProfileForUser({ userProfilePage }) {
             <CompanyStage stages={stages} submitForm={handleSubmit}/>
           </div>
         </div>
-        <div className="w-full md:w-[50%] mx-auto my-5 border-dashed md:border-l-2 border-magenta">
+        <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l-2 border-black">
           <CompanyDescription
             description={description}
             submitForm={handleSubmit}

@@ -11,7 +11,7 @@ export default function CompanyMatch({ company }) {
       <div className="rounded-t-lg">
         <div className="flex justify-around items-center px-5 py-8 border-b border-black">
           <div>
-            <h3 className="text-3xl 2xl:text-4xl leading-6 text-blackNext text-center font-normal">
+            <h3 className="text-3xl 2xl:text-4xl leading-6 text-black text-center font-normal">
               VOS INTERACTIONS
             </h3>
           </div>
@@ -23,7 +23,7 @@ export default function CompanyMatch({ company }) {
                 className={`${
                   activeTab === "tabs-like"
                     ? "border-magenta text-magenta"
-                    : "border-transparent text-blackNext hover:text-gray-700 hover:border-green-500"
+                    : "border-transparent text-black hover:text-gray-700 hover:border-green-500"
                 } whitespace-no-wrap py-4 px-1 border-b-2 text-lg focus:outline-none uppercase`}
                 onClick={() => setActiveTab("tabs-like")}
               >
@@ -33,7 +33,7 @@ export default function CompanyMatch({ company }) {
                 className={`${
                   activeTab === "tabs-liked"
                     ? "border-magenta text-magenta"
-                    : "border-transparent text-blackNext hover:text-gray-700 hover:border-green-500"
+                    : "border-transparent text-black hover:text-gray-700 hover:border-green-500"
                 } ml-8 whitespace-no-wrap py-4 px-1 border-b-2 text-lg focus:outline-none uppercase`}
                 onClick={() => setActiveTab("tabs-liked")}
               >
@@ -43,7 +43,7 @@ export default function CompanyMatch({ company }) {
                 className={`${
                   activeTab === "tabs-match"
                     ? "border-magenta text-magenta"
-                    : "border-transparent text-blackNext hover:text-gray-700 hover:border-green-500"
+                    : "border-transparent text-black hover:text-gray-700 hover:border-green-500"
                 } ml-8 whitespace-no-wrap py-4 px-1 border-b-2 text-lg focus:outline-none uppercase`}
                 onClick={() => setActiveTab("tabs-match")}
               >

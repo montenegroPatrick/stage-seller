@@ -111,13 +111,13 @@ export default function ProfileCarte({ user }) {
     <div className="relative hover:scale-105 ">
       <a
         href="#"
-        className="relative block overflow-hidden rounded-lg bg-white border border-blackNext p-4 sm:p-6 lg:p-8 mt-4 mx-2"
+        className="relative block overflow-hidden rounded-lg bg-white border border-black p-4 sm:p-6 lg:p-8 mt-4 mx-2"
       >
         <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
 
         <div className="sm:flex sm:justify-between sm:gap-4">
           <div>
-            <h3 className="text-lg font-bold text-blackNext sm:text-3xl ">
+            <h3 className="text-lg font-bold text-black sm:text-3xl ">
               {role === "students"
                 ? `${lastName}  ${firstName}`
                 : `${companyName}`}

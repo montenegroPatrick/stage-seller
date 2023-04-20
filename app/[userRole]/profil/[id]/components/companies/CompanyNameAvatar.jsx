@@ -32,7 +32,7 @@ export default function CompanyNameAvatar({
           setSettings(!settings);
         }}
       >
-        <div className="w-full md:min-h-[35vh] flex flex-col border-l-purple-200 p-5 border-dotted border-b-2 border-magenta relative">
+        <div className="w-full md:min-h-[35vh] flex flex-col border-l-purple-200 p-5 border-dotted border-b-2 border-black relative">
           <div className="mb-3 pt-0">
             <input
               value={userCompanyName}
@@ -85,8 +85,8 @@ export default function CompanyNameAvatar({
   }
 
   return (
-    <div className="w-full md:h-35vh flex flex-col justify-between border-l-purple-200 p-5 border-dashed border-b-2 border-magenta relative">
-      <h2 className="text-3xl 2xl:text-4xl text-center text-blackNext">
+    <div className="w-full md:h-35vh flex flex-col justify-between border-l-purple-200 p-5 border-dotted border-b-2 border-black relative">
+      <h2 className="text-3xl 2xl:text-4xl text-center text-black">
         {companyName}
       </h2>
       <p className="text-center text-lg 2xl:text-xl text-teal-800 italic">

@@ -20,7 +20,7 @@ export default function CompanyStage({ stages }) {
 
   return (
     <div className="w-full xl:w-[50%] flex flex-col items-center rounded-xl px-2 py-5 mx-auto my-5 bg-white relative">
-      <h2 className="text-3xl 2xl:text-4xl text-blackNext text-center font-normal">
+      <h2 className="text-3xl 2xl:text-4xl text-black text-center font-normal">
         Profil recherché
       </h2>
 
@@ -37,22 +37,22 @@ export default function CompanyStage({ stages }) {
           </ul>
         </div>
         <article className="flex flex-col items-center">
-          <h3 className="text-xl underline mt-3 text-magenta text-center">
+          <h3 className="text-xl mt-3 text-magenta text-center">
             Description du stage proposé
           </h3>
-          <p className="mt-3 text-lg">{description}Ceci est ma description</p>
+          <p className="mt-0.5">{description}Ceci est ma description</p>
         </article>
         <article className="flex flex-col items-center">
-          <h3 className="text-xl underline mt-3 text-magenta text-center">
+          <h3 className="text-xl mt-3 text-magenta text-center">
             Localisation
           </h3>
-          <p className="mt-3 text-lg">{location}Paris</p>
+          <p className="mt-0.5">{location}Paris</p>
         </article>
         <article className="flex flex-col items-center">
-          <h3 className="text-xl underline mt-3 text-magenta text-center">
+          <h3 className="text-xl mt-3 text-magenta text-center">
             Remote friendly
           </h3>
-          <p className="text-lg">{is_remote_friendly ? "Oui" : "Non"}</p>
+          <p className="mt-0.5">{is_remote_friendly ? "Oui" : "Non"}</p>
         </article>
         <div className="text-center">
           <p className="font-md mt-3 text-teal-800 font-semibold text-center leading-tight">À partir du 24 mars{start_date}</p>

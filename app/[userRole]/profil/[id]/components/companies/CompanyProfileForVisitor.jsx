@@ -23,7 +23,7 @@ const {companyName,
   return (
     <>
       <div className="sticky flex flex-col items-center scrolling-animation">
-        <h2 className="text-4xl sm:text-4xl md:text-5xl text-blackNext text-center py-6 px-8">
+        <h2 className="text-4xl sm:text-4xl md:text-5xl text-black text-center py-6 px-8">
           Profil
         </h2>
         <div className="w-full 2xl:w-[90vw] bg-black h-[1px]" />

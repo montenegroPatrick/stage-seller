@@ -18,7 +18,7 @@ module.exports = withMT({
         whiteBody: "#fefefe",
         navBlack: "#161b22",
         magenta: "#b73a58",
-        graySand: "#e5ccaf",
+        graySand: "#dbdad9",
         grayLilac: "#d4cacd",
         grayAgathe: "#b3b1a2",
         palePink: "#edcdc3",
