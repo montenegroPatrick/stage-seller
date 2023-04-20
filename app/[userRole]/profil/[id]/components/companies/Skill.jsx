@@ -4,7 +4,7 @@ export default function Skill({ children, bgColor }) {
   //   </div>);
   return (
 
-    <span className={`${bgColor} text-white text-sm font-medium px-2 py-0.5 rounded font-jetbrains text-center`}>
+    <span className={` text-blackNext text-sm font-medium px-2 py-0.5 rounded text-center border border-blackNext `}>
       {children}
     </span>
   );

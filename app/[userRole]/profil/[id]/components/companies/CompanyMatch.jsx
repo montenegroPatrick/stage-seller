@@ -11,12 +11,12 @@ export default function CompanyMatch({ company }) {
       <div className="rounded-t-lg">
         <div className="flex justify-around items-center px-5 py-8 border-b border-black">
           <div>
-            <h3 className="underline text-2xl sm:text-3xl 2xl:text-4xl leading-6 text-blackNext text-center font-baskerville">
-              Vos interactions
+            <h3 className="text-3xl 2xl:text-4xl leading-6 text-blackNext text-center font-normal">
+              VOS INTERACTIONS
             </h3>
           </div>
         </div>
-        <div className="px-4 py-2 sm:p-2 font-chivo">
+        <div className="px-4 py-2 sm:p-2">
           <div className="">
             <nav className="flex justify-around border-b border-black pb-1">
               <button
@@ -24,7 +24,7 @@ export default function CompanyMatch({ company }) {
                   activeTab === "tabs-like"
                     ? "border-magenta text-magenta"
                     : "border-transparent text-blackNext hover:text-gray-700 hover:border-green-500"
-                } whitespace-no-wrap py-4 px-1 border-b-2 font-medium text-lg focus:outline-none`}
+                } whitespace-no-wrap py-4 px-1 border-b-2 text-lg focus:outline-none uppercase`}
                 onClick={() => setActiveTab("tabs-like")}
               >
                 Ils m'ont liké
@@ -34,7 +34,7 @@ export default function CompanyMatch({ company }) {
                   activeTab === "tabs-liked"
                     ? "border-magenta text-magenta"
                     : "border-transparent text-blackNext hover:text-gray-700 hover:border-green-500"
-                } ml-8 whitespace-no-wrap py-4 px-1 border-b-2 font-medium text-lg focus:outline-none`}
+                } ml-8 whitespace-no-wrap py-4 px-1 border-b-2 text-lg focus:outline-none uppercase`}
                 onClick={() => setActiveTab("tabs-liked")}
               >
                 J'ai liké
@@ -44,7 +44,7 @@ export default function CompanyMatch({ company }) {
                   activeTab === "tabs-match"
                     ? "border-magenta text-magenta"
                     : "border-transparent text-blackNext hover:text-gray-700 hover:border-green-500"
-                } ml-8 whitespace-no-wrap py-4 px-1 border-b-2 font-medium text-lg focus:outline-none`}
+                } ml-8 whitespace-no-wrap py-4 px-1 border-b-2 text-lg focus:outline-none uppercase`}
                 onClick={() => setActiveTab("tabs-match")}
               >
                 Match
@@ -53,7 +53,7 @@ export default function CompanyMatch({ company }) {
           </div>
         </div>
       </div>
-      <div className="min-h-[10vh] max-h-30vh rounded-b-lg bg-white p-8 flex flex-col items-center overflow-y-scroll">
+      <div className="min-h-[20vh] max-h-40vh rounded-b-lg bg-white p-8 flex flex-col items-center overflow-y-scroll">
         <div
           className={`opacity-${
             activeTab === "tabs-like" ? "100" : "0 hidden"

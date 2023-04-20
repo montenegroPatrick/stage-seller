@@ -13,15 +13,15 @@ export default function CompanyDescription({ description, submitForm }) {
   };
 
   return (
-    <div className="relative w-full md:min-h-[35vh] flex flex-col items-center p-5 mx-auto border-dotted border-t-2 border-b-2 md:border-t-0 border-magenta px-auto md:mb-0">
+    <div className="relative w-full md:min-h-[35vh] flex flex-col items-center p-5 mx-auto border-dashed border-t-2 border-b-2 md:border-t-0 border-magenta px-auto md:mb-0">
       <h2
         className={
           settings
-            ? `font-baskerville text-2xl sm:text-3xl 2xl:text-4xl text-center text-blackNext underline md:mb-10`
-            : `font-baskerville text-2xl sm:text-3xl 2xl:text-4xl text-center text-blackNext underline `
+            ? `text-3xl 2xl:text-4xl text-center text-blackNext md:mb-10 font-normal`
+            : `text-3xl 2xl:text-4xl text-center text-blackNext font-normal`
         }
       >
-        Description
+        DESCRIPTION
       </h2>
       {settings ? (
         <form

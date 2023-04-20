@@ -5,6 +5,10 @@ import {
   jetBrains,
   lobster,
   baskerville,
+  bebasNeue,
+  abril,
+  pt,
+  raleWay
 } from "@/assets/font";
 import "@/assets/globals.css";
 
@@ -22,9 +26,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={` ${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable} ${baskerville.variable}`}
+      className={` ${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable} ${baskerville.variable} ${bebasNeue.variable} ${abril.variable} ${pt.variable} ${raleWay.variable}`}
     >
-      <body className="font-chivo gradient bg-white ">
+      <body className="font-raleWay uppercase tracking-tighter gradient bg-white ">
         <ReactQueryWrapper>
           <NavBar />
           {children}

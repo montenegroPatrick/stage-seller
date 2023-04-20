@@ -29,7 +29,7 @@ module.exports = withMT({
         blueDark: "#434f58",
         violetBright: "#653f76",
         rhubard: "#661a24",
-        roseBrown: "#825f62"
+        roseBrown: "#825f62",
       },
       spacing: {
         "5vh": "5vh",
@@ -60,6 +60,11 @@ module.exports = withMT({
         jetbrains: ["var(--font-jetbrains)"],
         lobster: ["var(--font-lobster)"],
         baskerville: ["var(--font-baskerville)"],
+        abril: ["var(--font-abril)"],
+        bebasNeue: ["var(--font-bebasNeue)"],
+        pt: ["var(--font-pt)"],
+        quickSand: ["var(--font-quickSand)"],
+        raleWay: ["var(--font-raleWay)"],
       },
     },
     plugins: [require("@tailwindcss/forms")],

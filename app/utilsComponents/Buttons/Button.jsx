@@ -4,7 +4,7 @@ export default function Button({ children, onClick }) {
     <div>
       <button
         onClick={onClick}
-        className="hover:scale-105 shadow-lg mr-1 px-3 py-2 bg-blue-700 hover:bg-indigo-700 text-white text-sm md:text-md font-chivo rounded-lg gradient"
+        className="mr-1 px-3 py-1 text-white text-sm md:text-md uppercase bg-blackNext rounded-full hover:bg-white hover:text-blackNext hover:border hover:border-blackNext "
       >
         {children}
       </button>

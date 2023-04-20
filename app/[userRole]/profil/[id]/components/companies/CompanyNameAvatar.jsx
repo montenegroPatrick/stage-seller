@@ -39,7 +39,7 @@ export default function CompanyNameAvatar({
               onChange={(e) => setCompanyName(e.target.value)}
               type="text"
               placeholder="Nom de l'entreprise"
-              className="mt-3 px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full"
+              className="mt-3 px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full font-normal"
             />
           </div>
           <div className="mb-3 pt-0">
@@ -85,11 +85,11 @@ export default function CompanyNameAvatar({
   }
 
   return (
-    <div className="w-full md:h-35vh flex flex-col justify-between border-l-purple-200 p-5 border-dotted border-b-2 border-magenta relative">
-      <h2 className="text-2xl sm:text-3xl 2xl:text-4xl text-center text-blackNext font-baskerville">
+    <div className="w-full md:h-35vh flex flex-col justify-between border-l-purple-200 p-5 border-dashed border-b-2 border-magenta relative">
+      <h2 className="text-3xl 2xl:text-4xl text-center text-blackNext">
         {companyName}
       </h2>
-      <p className="text-center text-lg 2xl:text-xl text-green-500">
+      <p className="text-center text-lg 2xl:text-xl text-teal-800 italic">
         {city}, {postCode}
       </p>
       <div className="w-[100%] py-5">

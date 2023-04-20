@@ -70,11 +70,8 @@ export default function NavBar() {
     >
       <div className="w-full 2xl:w-[90vw] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 text-whiteSmoke items-center m-auto border-b border-black">
         <Link href="/">
-          <h1 className="font-lobster flex items-end text-3xl 2xl:text-4xl text-black w-24">
-            Stage{" "}
-            <span className="bg-black tracking-wide text-white text-xl 2xl:text-2xl text-medium font-lobster px-0.5">
-              Seller
-            </span>
+          <h1 className="font-lobster flex items-end text-3xl 2xl:text-4xl text-black w-24 normal-case">
+            StageSeller
           </h1>
         </Link>
         <div className={data ? ` hidden w-[85%] xl:justify-between xl:flex xl:items-center text-black3 ` : 'hidden xl:justify-between xl:flex xl:items-center text-black3 '}>
@@ -120,7 +117,7 @@ export default function NavBar() {
             </>
           ) : (
             <Link href="/sign-in" >
-              <Button>Se connecter</Button>
+              <Button>SE CONNECTER</Button>
             </Link>
           )}
         </div>

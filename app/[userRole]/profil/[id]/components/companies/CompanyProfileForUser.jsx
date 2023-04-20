@@ -35,12 +35,12 @@ export default function CompanyProfileForUser({ userProfilePage }) {
   return (
     <>
       <div className="sticky flex flex-col items-center scrolling-animation">
-        <h2 className=" font-baskerville text-4xl sm:text-4xl md:text-5xl text-blackNext text-center py-6 px-8">
-          Profil
+        <h2 className="text-5xl md:text-6xl font-normal text-blackNext text-center py-6">
+          PROFIL
         </h2>
         <div className="w-full 2xl:w-[90vw] bg-black h-[1px]" />
       </div>
-      <section className="flex flex-col md:flex-row font-mono w-full 2xl:w-[90vw] mx-auto">
+      <section className="flex flex-col md:flex-row w-full 2xl:w-[90vw] mx-auto">
         <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col">
           <CompanyNameAvatar
             companyName={companyName}
@@ -54,7 +54,7 @@ export default function CompanyProfileForUser({ userProfilePage }) {
             <CompanyStage stages={stages} submitForm={handleSubmit}/>
           </div>
         </div>
-        <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l-2 border-magenta">
+        <div className="w-full md:w-[50%] mx-auto my-5 border-dashed md:border-l-2 border-magenta">
           <CompanyDescription
             description={description}
             submitForm={handleSubmit}
