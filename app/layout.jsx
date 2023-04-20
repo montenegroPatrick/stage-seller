@@ -8,7 +8,7 @@ import {
   bebasNeue,
   abril,
   pt,
-  raleWay
+  raleWay,
 } from "@/assets/font";
 import "@/assets/globals.css";
 
@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={` ${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable} ${baskerville.variable} ${bebasNeue.variable} ${abril.variable} ${pt.variable} ${raleWay.variable}`}
     >
-      <body className="font-raleWay font-light uppercase bg-white ">
+      <body className="font-raleWay font-light uppercase  ">
         <ReactQueryWrapper>
           <NavBar />
           {children}

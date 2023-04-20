@@ -16,23 +16,21 @@ export default async function Profil({ params }) {
   const id = cookieStore.get("user-id")?.value;
   const connectedUserId = cookieStore.get("user-id")?.value;
   const token = cookieStore.get("jwt")?.value;
-  
+
   if (!params.id || !token) {
     redirect("/sign-in");
   }
-  console.log(params.id);
 
   const userProfilePage = await getUser(token, params.id);
 
-  
   //if it's not the profil user return the profil who's clicked
-  
+
   if (!userProfilePage) {
     console.log("no user je suis dans la page de profil ");
     redirect("/");
   }
 
-  
+  console.log("userConnected", userProfilePage);
 
   const role = userProfilePage.type === "STUDENT" ? "students" : "companies";
   if (role && params.userRole !== role) {
@@ -52,7 +50,6 @@ export default async function Profil({ params }) {
       </NavBarMarginContainer>
     );
   }
-
 
   //si on est l'user connecter on peut faire getUser sinon il faut un getProfilCompany fetch('/api/users/type/company') => !role.filter ((user)=> user.id === params.id)
   return (

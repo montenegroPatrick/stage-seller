@@ -4,6 +4,7 @@ import Skills from "./Skills";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import getAllUsers from "@/lib/users/getAllUsers";
+import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
 
 export default function MiniCard({ objectLike }) {
   const token = Cookies.get("jwt");
@@ -17,7 +18,7 @@ export default function MiniCard({ objectLike }) {
   const userForCard =
     users && users.find((user) => user.id === objectLike.user.id);
   if (!userForCard) {
-    return;
+    return <SkeletonLoader />;
   }
   return (
     <section className="bg-transparent rounded-lg p-3 mb-3">

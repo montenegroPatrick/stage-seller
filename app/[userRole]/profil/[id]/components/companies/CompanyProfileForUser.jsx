@@ -39,7 +39,6 @@ export default function CompanyProfileForUser({ userProfilePage }) {
     } else {
       setMessage("Erreur lors de la modification");
     }
-    console.log(newDataUser);
   };
 
   return (

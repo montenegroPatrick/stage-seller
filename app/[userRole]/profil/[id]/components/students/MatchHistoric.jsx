@@ -41,8 +41,8 @@ export default function MatchHistoric({ currentUser }) {
   }, []);
 
   return (
-    <Tabs value="like in">
-      <TabsHeader>
+    <Tabs className="relative glassMorph" value="like in">
+      <TabsHeader className="bg-transparent">
         <Tab value="like in">like in</Tab>
         <Tab value="like out">like out</Tab>
         <Tab value="match">Match</Tab>

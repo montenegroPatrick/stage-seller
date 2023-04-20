@@ -15,7 +15,7 @@ export async function addOrUpdateStages(token, data, student) {
             }
           )
           .then((res) => res)
-          .catch((err) => err.message)
+          .catch((err) => err.response)
       : await axios
           .post(`${baseUrl}stages`, data, {
             headers: {
@@ -23,6 +23,6 @@ export async function addOrUpdateStages(token, data, student) {
             },
           })
           .then((res) => res)
-          .catch((err) => err);
+          .catch((err) => err.response);
   return response;
 }

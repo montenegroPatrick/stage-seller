@@ -16,7 +16,7 @@ export async function POST(req) {
 
   const data = await res.json();
   const token = data.token;
-  console.log(data);
+
   return NextResponse({
     statusCode: 200,
     body: {

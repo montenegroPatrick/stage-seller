@@ -16,15 +16,15 @@ export default function ImageProfile({
   student,
 }) {
   return (
-    <Card className=" lg:relative grid h-full w-full items-end justify-center text-center">
+    <Card className="shadows-text relative grid h-[20vh] lg:h-[30vh] w-[20vh] lg:w-[30vh] items-end justify-center text-center rounded-full">
       <CardHeader
         color="transparent"
-        className="absolute inset-0 m-0  w-full rounded-xl bg-[url('https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')] bg-cover bg-center"
+        className="absolute rounded-full inset-0 m-0  w-full bg-[url('https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')] bg-cover bg-center"
       >
         {" "}
-        <div className="to-bg-black-10 lg:absolute inset-0 h-full w-full bg-gradient-to-t from-black/90 via-black/80" />
+        <div className="to-bg-black-10 inset-0 h-full w-full bg-gradient-to-t from-black/90 via-black/80" />
       </CardHeader>
-      <CardBody className="hidden lg:block relative px-6 md:px-12">
+      <CardBody className="block relative px-6 md:px-12">
         {isSettings && (
           <Input
             variant="standard"
@@ -33,16 +33,6 @@ export default function ImageProfile({
             label="update your picture"
           />
         )}
-        <Typography variant="h5" className=" text-gray-400">
-          {`${student.firstName} ${student.lastName}`}
-        </Typography>
-
-        <Skills
-          isSettings={isSettings}
-          setShowSettings={setShowSettings}
-          show={show}
-          classes="flex "
-        />
       </CardBody>
     </Card>
   );

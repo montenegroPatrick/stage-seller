@@ -1,8 +1,10 @@
 "use client";
 
+import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
+import GetReposGithub from "@/lib/users/getReposGithub";
 import { Input } from "@material-tailwind/react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function GithubProjects({
   isSettings,
@@ -13,29 +15,37 @@ export default function GithubProjects({
   input,
 }) {
   // false data to try
-  const [indexProjectInView, setIndexProjectInView] = useState(1);
-  const repos = {
-    data: [
-      {
-        id: 1,
-        name: "test1",
-        description: "je suis le repo numéro 1",
-        topics: ["test1", "test1topic", "array"],
-      },
-      {
-        id: 2,
-        name: "test2",
-        description: "je suis le repo numéro 2",
-        topics: ["test1", "test1topic", "array"],
-      },
-      {
-        id: 3,
-        name: "test3",
-        description: "je suis le repo numéro 3",
-        topics: ["test1", "test1topic", "array"],
-      },
-    ],
+
+  const [repos, setRepos] = useState();
+  const getRepos = () => {
+    GetReposGithub(currentUser.github).then((res) => setRepos(res.data));
   };
+  useEffect(() => {
+    getRepos();
+  }, []);
+  const [indexProjectInView, setIndexProjectInView] = useState(1);
+  // const data = {
+  //   data: [
+  //     {
+  //       id: 1,
+  //       name: "test1",
+  //       description: "je suis le repo numéro 1",
+  //       topics: ["test1", "test1topic", "array"],
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "test2",
+  //       description: "je suis le repo numéro 2",
+  //       topics: ["test1", "test1topic", "array"],
+  //     },
+  //     {
+  //       id: 3,
+  //       name: "test3",
+  //       description: "je suis le repo numéro 3",
+  //       topics: ["test1", "test1topic", "array"],
+  //     },
+  //   ],
+  // };
   // const handleChange = (event) => {
   //   const { name, value } = event.target;
   //   setInput((prev) => ({ ...prev, [name]: value }));
@@ -47,6 +57,9 @@ export default function GithubProjects({
   //   setIsSettings(!isSettings);
   //   //router.refresh();
   // };
+  if (!repos) {
+    return <SkeletonLoader />;
+  }
   return (
     <section className="flex flex-row items-center justify-center w-full h-full group projectShadow rounded-3xl shadows-text ">
       {isSettings ? (
@@ -70,7 +83,7 @@ export default function GithubProjects({
           />{" "}
         </div>
       ) : (
-        repos.data
+        repos
           .filter((repo, index) => {
             return index === indexProjectInView;
           })
@@ -79,7 +92,7 @@ export default function GithubProjects({
               <div
                 className="font-bold text-md md:text-xl lg:text-7xl cursor-pointer hover:scale-110"
                 onClick={() => {
-                  const indexRepos = Object.keys(repos.data);
+                  const indexRepos = Object.keys(repos);
 
                   if (indexProjectInView > 0) {
                     setIndexProjectInView(indexProjectInView - 1);
@@ -119,9 +132,7 @@ export default function GithubProjects({
                 className="font-bold text-xl md:text-5xl lg:text-7xl
                cursor-pointer duration-700"
                 onClick={() => {
-                  if (
-                    indexProjectInView === Math.max(...Object.keys(repos.data))
-                  ) {
+                  if (indexProjectInView === Math.max(...Object.keys(repos))) {
                     setIndexProjectInView(0);
                   } else {
                     setIndexProjectInView(indexProjectInView + 1);

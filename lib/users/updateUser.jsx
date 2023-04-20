@@ -10,6 +10,6 @@ export async function updateUser(token, id, data) {
       },
     })
     .then((res) => res)
-    .catch((err) => err);
+    .catch((err) => err.response);
   return response;
 }

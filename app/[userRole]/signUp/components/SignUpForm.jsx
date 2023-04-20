@@ -58,7 +58,7 @@ export default function SignUpForm({ role }) {
     setErrorMessage("");
     setIsErrorEmail(false);
     setIsErrorVerifPassword(false);
-    setDisable(true);
+    setDisable(false);
     for (const key in input) {
       if (input[key] !== "" && postCode !== "") {
         setDisable(false);
@@ -71,10 +71,8 @@ export default function SignUpForm({ role }) {
     }
     if (input.password !== input.verifyPassword) {
       setIsErrorVerifPassword(true);
-      setDisable(true);
     } else {
       setIsErrorVerifPassword(false);
-      setDisable(false);
     }
     if (input.password === mediumPassword) {
       setLabelPassword("fort");
