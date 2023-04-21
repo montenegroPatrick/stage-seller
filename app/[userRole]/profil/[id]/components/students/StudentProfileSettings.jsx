@@ -35,6 +35,7 @@ export default function StudentProfilSettings({
     firstname: student.firstName ?? "",
     localisation: student.city ?? "",
     github: student.github ?? "",
+    resume: student.resume ?? "",
     profileImage: student.profileImage ?? "",
     description: student.description ?? "",
     skills: student.skills ?? [],
@@ -113,7 +114,7 @@ export default function StudentProfilSettings({
 
   return (
     <div className=" flex flex-col  h-full w-full gap-5 min-h-[calc(100vh-4rem)] font-mono text-black3 bg-blue">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5 ">
+      <div className="flex flex-col gap-5 ">
         <div className=" overflow-hidden">
           <ImageProfile
             isSettings={isSettings}
@@ -125,7 +126,10 @@ export default function StudentProfilSettings({
 
         <div className="flex flex-row flex-wrap  justify-between lg:w-full ">
           {/* image de profile en background avec dessus nom prenom lieu skills  */}
-          <div className="flex flex-col gap-4 items-center border-4 p-5 rounded-xl w-screen">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 items-center border-4 p-5 rounded-xl w-screen"
+          >
             <p className="p-2 ">Information personnelle</p>
             <Input
               error={lastname === ""}
@@ -233,9 +237,9 @@ export default function StudentProfilSettings({
                 </Alert>
               </>
             )}
-          </div>
+          </form>
         </div>
-      </form>
+      </div>
       <section className="flex flex-col ">
         {/* cv link / profile description / stage description / mathHistoric / githubProject / */}
         <form

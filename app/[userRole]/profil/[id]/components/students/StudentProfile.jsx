@@ -13,6 +13,7 @@ import { SlSocialLinkedin } from "react-icons/sl";
 import { MdLocationOn } from "react-icons/md";
 import Link from "next/link";
 import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
+import { RxResume } from "react-icons/rx";
 export default function StudentProfile({ id, student }) {
   const [openTuto, setOpenTuto] = useState(false);
   useEffect(() => {
@@ -49,6 +50,12 @@ export default function StudentProfile({ id, student }) {
                 <Link href={student.github}>{`${
                   student.github ? `https://github.com/${student.github}` : ""
                 }`}</Link>
+              </div>
+              <div className="text-[0.7rem]  font-bold flex flex-row items-center gap-2">
+                <RxResume />
+                <Link href={`/students/profil/${student.id}/resume`}>
+                  mon CV
+                </Link>
               </div>
               <div>
                 <Suspense fallback={<SkeletonLoader />}>
