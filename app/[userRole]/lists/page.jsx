@@ -13,7 +13,7 @@ export default async function Lists({ params }) {
 
   const usersData = getAllUsers(token);
   const users = await usersData;
-  console.log("lists page", users);
+
   return (
     <NavBarMarginContainer classes="min-h-[calc(100vh-4rem)]">
       <div className="flex flex-col items-center mb-20 bg-white scrolling-animation">

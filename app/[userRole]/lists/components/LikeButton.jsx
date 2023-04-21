@@ -7,36 +7,54 @@ import { useEffect, useState } from "react";
 import getLikeFromMe from "@/lib/users/getLikeFromMe";
 import Loading from "@/app/loading";
 import deleteLike from "@/lib/matches/deleteLike";
+import unLike from "@/lib/matches/deleteLike";
+import getLikeToMe from "@/lib/users/getLikeToMe";
+import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
 
 export default function LikeButton({ userReceivingId }) {
   const token = Cookies.get("jwt");
   const [isLike, setIsLike] = useState(false);
-  const [likes, setLikes] = useState();
-
-  const getLikes = async () =>
-    await getLikeFromMe(token).then(({ data }) => {
-      console.log("data likeFRome ", data);
-      // data.map(() => {
-      //   setIsLike(true);
-      // });
-      setLikes(data);
+  const [likesFromMe, setLikesFromMe] = useState();
+  const [likesToMe, setLikesToMe] = useState();
+  const getLikesToMe = async () =>
+    await getLikeToMe(token).then((res) => {
+      if (res.data) {
+        setLikesToMe(res.data);
+      }
     });
+  const getLikesFromMe = async () =>
+    await getLikeFromMe(token).then(({ data }) => {
+      setLikesFromMe(data);
+    });
+  const newArrayLikesFromMe =
+    likesFromMe &&
+    likesFromMe.filter((like) => like.user.id === userReceivingId);
+
+  //const matches = likesToMe.find((likeTo) => likesFromMe.find((likeFrom) => likeFrom. ))
 
   useEffect(() => {
-    getLikes();
-  }, []);
+    getLikesToMe();
+    getLikesFromMe();
+  }, [isLike]);
+  console.log("likesFromeMe", likesFromMe);
 
   const handleClick = () => {
-    const data = { receiver: userReceivingId };
-    if (!isLike) {
+    const userClickedId = likesFromMe.find(
+      (like) => like.user.id === userReceivingId
+    );
+    console.log(userClickedId);
+
+    if (!userClickedId) {
+      const data = { receiver: userReceivingId };
+      setIsLike(true);
       setLike(data, token);
     } else {
-      setIsLike(!isLike);
-      //const idMatches = deleteLike(token);
+      unLike(token, userClickedId.matchId);
+      setIsLike(false);
     }
   };
-  if (!likes) {
-    return <Loading />;
+  if (!likesFromMe) {
+    return <SkeletonLoader />;
   }
 
   return (

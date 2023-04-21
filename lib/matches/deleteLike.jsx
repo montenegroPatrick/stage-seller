@@ -1,12 +1,13 @@
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
-export default async function deleteLike(data, token, id) {
+export default async function unLike(token, id) {
   const response = await axios
-    .delete(`${baseUrl}matches/${id}`, data, {
+    .delete(`${baseUrl}matches/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => res.data);
+    .then((res) => res.data)
+    .catch((err) => err.response);
   return response;
 }

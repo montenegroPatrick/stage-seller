@@ -10,6 +10,7 @@ import { baseUrl } from "@/lib/baseUrl";
 import uploadFile from "@/lib/users/uploadFile";
 import Button from "@/app/utilsComponents/Buttons/Button";
 import ButtonForm from "../companies/ButtonForm";
+import { imageUrl } from "@/lib/imageUrl";
 export default function ImageProfile({
   isSettings,
   setShowSettings,
@@ -41,12 +42,7 @@ export default function ImageProfile({
         color="transparent"
         className="rounded-full  w-full  bg-cover bg-center"
       >
-        {
-          <img
-            src={`http://franck-roger-server.eddi.cloud/uploads/${student.profileImage}`}
-            className=""
-          />
-        }
+        {<img src={`${imageUrl}${student.profileImage}`} className="" />}
         {/* <div className="to-bg-black-10 inset-0 h-full w-full bg-gradient-to-t from-black/90 via-black/80" /> */}
       </CardHeader>
       <CardBody className="block px-6 md:px-12">

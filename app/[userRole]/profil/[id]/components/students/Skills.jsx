@@ -29,7 +29,7 @@ export default function Skills({
   const [userSkills, setUserSkills] = useState(skills ?? []);
   const getSkillsData = () =>
     getSkills(token).then((skills) => setSkillsList(skills));
-  //todo//
+
   useEffect(() => {
     getSkillsData();
   }, [show, skillsStateStage, userSkills]);
