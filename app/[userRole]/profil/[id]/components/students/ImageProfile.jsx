@@ -1,13 +1,5 @@
 "use client";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-  Avatar,
-  Input,
-} from "@material-tailwind/react";
-import Skills from "./Skills";
+import { Card, CardHeader, CardBody, Input } from "@material-tailwind/react";
 import { MdAddAPhoto } from "react-icons/md";
 export default function ImageProfile({
   isSettings,

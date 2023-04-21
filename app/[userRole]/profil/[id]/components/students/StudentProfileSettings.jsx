@@ -40,14 +40,17 @@ export default function StudentProfilSettings({
     profileImage: student.profileImage ?? "",
     description: student.description ?? "",
   });
+  const { stages } = student;
+  console.log(stages);
   const [inputStages, setInputStages] = useState({
-    description: student.stages.description ?? "",
-    startDate: student.stages.start_date ?? "",
-    duration: student.stages.duration ?? "",
-    location: student.stages.location ?? "",
-    isRemoteFriendly: student.stages.isRemoteFriendly ?? false,
-    isTravelFriendly: student.stages.isTravelFriendly ?? false,
-    skills: student.stages.map((stage) => stage.skills) ?? [],
+    stages,
+    // description: stage.description ?? "",
+    // startDate: stage.start_date ?? "",
+    // duration: stage.duration ?? "",
+    // location: stage.location ?? "",
+    // isRemoteFriendly: stage.isRemoteFriendly ?? false,
+    // isTravelFriendly: stage.isTravelFriendly ?? false,
+    // skills: stage.map((stage) => stage.skills) ?? [],
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -94,7 +97,7 @@ export default function StudentProfilSettings({
       student
     );
     switch (createOrUpdateStages.status) {
-      case 204:
+      case 200:
         setStageMessage("Changement effectué");
         break;
       case 422:

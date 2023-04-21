@@ -13,6 +13,7 @@ import getLikeToMe from "@/lib/users/getLikeToMe";
 import Cookies from "js-cookie";
 import MiniCard from "./MiniCard";
 import Loading from "@/app/loading";
+import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
 
 export default function MatchHistoric({ currentUser }) {
   //todo map des likes in like out match de l'utilisateur
@@ -50,19 +51,28 @@ export default function MatchHistoric({ currentUser }) {
 
       <TabsBody className="w-full h-full scroll-smooth">
         <TabPanel value="like in">
-          {likeSend.map((like) => (
-            <MiniCard objectLike={like} />
-          ))}
+          {likeSend &&
+            likeSend.map((like) => (
+              <Suspense fallback={<SkeletonLoader />}>
+                <MiniCard objectLike={like} />
+              </Suspense>
+            ))}
         </TabPanel>
         <TabPanel value="like out">
-          {likeRecieve.map((like) => (
-            <MiniCard objectLike={like} />
-          ))}
+          {likeRecieve &&
+            likeRecieve.map((like) => (
+              <Suspense fallback={<SkeletonLoader />}>
+                <MiniCard objectLike={like} />
+              </Suspense>
+            ))}
         </TabPanel>
         <TabPanel value="match">
-          {matches.map((matches) => (
-            <MiniCard objectLike={matches} />
-          ))}
+          {matches &&
+            matches.map((like) => (
+              <Suspense fallback={<SkeletonLoader />}>
+                <MiniCard objectLike={like} />
+              </Suspense>
+            ))}
         </TabPanel>
       </TabsBody>
     </Tabs>

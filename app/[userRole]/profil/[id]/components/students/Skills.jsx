@@ -22,10 +22,10 @@ export default function Skills({
   // if (!skills) {
   //   return;
   // }
+  console.log("skills on skills comp", skills);
   const token = Cookies.get("jwt");
   const [skillsList, setSkillsList] = useState([]);
   const [skillsStateStage, setSkillsStateStage] = useState(skills ?? []);
-
   const [userSkills, setUserSkills] = useState(skills ?? []);
   const getSkillsData = () =>
     getSkills(token).then((skills) => setSkillsList(skills));

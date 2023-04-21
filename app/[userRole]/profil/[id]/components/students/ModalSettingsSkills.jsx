@@ -28,7 +28,7 @@ export default function ModalSettingsSkills({
   const token = Cookies.get("jwt");
   const userId = Cookies.get("user-id");
   const [open, setOpen] = useState(false);
-
+  console.log("userSkills", userSkills);
   // skill List fixed who's get with the function getSkills
   const [skillsList, setSkillsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,22 +41,6 @@ export default function ModalSettingsSkills({
     getSkillsData();
     showSettings && handleOpen();
   }, [showSettings]);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    setIsLoading(true);
-    // todo the api execpted the ID of the skills
-    const skillListIds = { skillList: [...userSkills] };
-    const response = await addSkills(token, userId, skillListIds);
-    if (response) {
-      setIsLoading(false);
-      setOpen(!open);
-    } else {
-      setIsLoading(false);
-      setErrorMessage(response.message);
-    }
-  };
 
   const handleChange = (event) => {
     console.log(userSkills);
@@ -80,6 +64,26 @@ export default function ModalSettingsSkills({
       dataSkillUpdate.map((objectSkill) => skillIds.push(objectSkill.id));
     }
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setIsLoading(true);
+    // todo the api execpted the ID of the skills
+    const ids = userSkills.map((skill) => skill.id);
+    console.log(ids);
+    const skillListIds = { skillList: ids };
+    console.log("skillListIds", skillListIds);
+    const response = await addSkills(token, userId, skillListIds);
+    if (response) {
+      setIsLoading(false);
+      setOpen(!open);
+    } else {
+      setIsLoading(false);
+      setErrorMessage(response.message);
+    }
+  };
+
   const handleRemoveAll = (event) => {
     setUserSkills([]);
   };

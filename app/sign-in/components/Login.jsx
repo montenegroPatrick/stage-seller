@@ -48,9 +48,13 @@ export default function LogIn() {
         Cookies.set("roleUser", role);
         router.push(`/${role}/profil/${data.user.id}`);
       })
-      .catch(({ response }) => {
+      .catch((err) => {
         setIsLoading(false);
-        setErrorMessage(response.data.error);
+        if (!err.response) {
+          setErrorMessage(err.message);
+        } else {
+          setErrorMessage(err.response.data.error);
+        }
       });
   };
 

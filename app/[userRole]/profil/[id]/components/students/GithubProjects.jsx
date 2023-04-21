@@ -24,6 +24,7 @@ export default function GithubProjects({
     getRepos();
   }, []);
   const [indexProjectInView, setIndexProjectInView] = useState(1);
+  console.log(repos);
   // const data = {
   //   data: [
   //     {
@@ -58,7 +59,7 @@ export default function GithubProjects({
   //   //router.refresh();
   // };
   if (!repos) {
-    return <SkeletonLoader />;
+    return;
   }
   return (
     <section className="flex flex-row items-center justify-center w-full h-full group projectShadow rounded-3xl shadows-text ">
@@ -90,7 +91,7 @@ export default function GithubProjects({
           .map((repo, index) => (
             <div key={repo.id} className="flex items-center">
               <div
-                className="font-bold text-md md:text-xl lg:text-7xl cursor-pointer hover:scale-110"
+                className="font-bold md:text-5xl lg:text-7xl cursor-pointer hover:scale-110"
                 onClick={() => {
                   const indexRepos = Object.keys(repos);
 
@@ -105,7 +106,7 @@ export default function GithubProjects({
                 {"<"}{" "}
               </div>
               <Link
-                href="#"
+                href={repo.html_url}
                 target="_blank"
                 className="h-full flex flex-col justify-center "
               >
