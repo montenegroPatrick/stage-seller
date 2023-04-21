@@ -1,12 +1,13 @@
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
-export default async function deleteLike(data, token, id) {
+
+export default async function uploadFile(token, id, data) {
   const response = await axios
-    .delete(`${baseUrl}matches/${id}`, data, {
+    .post(`${baseUrl}users/${id}/upload`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => res.data);
-  return response;
+    .then((res) => res)
+    .catch((err) => err);
 }

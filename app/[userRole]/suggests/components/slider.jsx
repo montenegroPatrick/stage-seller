@@ -1,14 +1,31 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
 import img1 from "@/public/chien-smoking.jpg";
 import img2 from "@/public/company.jpeg";
 import ProfileCarte from "../../lists/components/CardProfile";
-const images = [img1, img2];
+import getSuggest from "@/lib/suggests/getSuggests";
+import Cookies from "js-cookie";
+
 export default function Slider() {
   console.log(img1);
+  const token = Cookies.get("jwt");
+  const [usersToDisplay, setUsersToDisplay] = useState([]);
+  const getUsersToDisplay = () =>
+    getSuggest(token).then((res) => {
+      console.log(res);
+      if (res.status === 404) {
+        setUsersToDisplay(null);
+      } else {
+        setUsersToDisplay(res.data);
+      }
+    });
+  useEffect(() => {
+    getUsersToDisplay();
+  }, []);
+  console.log("users on sliders", usersToDisplay);
 
   const [sliderRef] = useKeenSlider();
   const user = {
@@ -53,6 +70,9 @@ export default function Slider() {
       },
     ],
   };
+  if (usersToDisplay === null) {
+    return <h1>no users to display</h1>;
+  }
   return (
     <>
       <div className=" h-[calc(100vh-4rem)] w-full flex justify-center items-center ">

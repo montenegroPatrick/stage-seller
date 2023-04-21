@@ -35,7 +35,6 @@ export default function StudentProfilSettings({
     firstname: student.firstName ?? "",
     localisation: student.city ?? "",
     github: student.github ?? "",
-    githubApi: student.githubApi ?? "",
     profileImage: student.profileImage ?? "",
     description: student.description ?? "",
     skills: student.skills ?? [],

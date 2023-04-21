@@ -6,23 +6,24 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import getLikeFromMe from "@/lib/users/getLikeFromMe";
 import Loading from "@/app/loading";
+import deleteLike from "@/lib/matches/deleteLike";
 
 export default function LikeButton({ userReceivingId }) {
   const token = Cookies.get("jwt");
   const [isLike, setIsLike] = useState(false);
   const [likes, setLikes] = useState();
 
+  const getLikes = async () =>
+    await getLikeFromMe(token).then(({ data }) => {
+      console.log("data likeFRome ", data);
+      // data.map(() => {
+      //   setIsLike(true);
+      // });
+      setLikes(data);
+    });
+
   useEffect(() => {
-    const getLikes = async () =>
-      await getLikeFromMe(token).then(({ data }) => {
-        console.log(data);
-        data.map(() => {
-          setIsLike(true);
-        });
-        setLikes(data);
-      });
     getLikes();
-    console.log("Alllike", likes);
   }, []);
 
   const handleClick = () => {
@@ -30,9 +31,9 @@ export default function LikeButton({ userReceivingId }) {
     if (!isLike) {
       setLike(data, token);
     } else {
-      //todo remove like
+      setIsLike(!isLike);
+      //const idMatches = deleteLike(token);
     }
-    setIsLike(!isLike);
   };
   if (!likes) {
     return <Loading />;
