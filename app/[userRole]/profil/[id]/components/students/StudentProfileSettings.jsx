@@ -19,7 +19,6 @@ import {
 import Button from "@/app/utilsComponents/Buttons/Button";
 import { RxCrossCircled } from "react-icons/rx";
 import { GrValidate } from "react-icons/gr";
-import ErrorMessage from "@/app/utilsComponents/Error/ErrorMessage";
 
 export default function StudentProfilSettings({
   isSettings,
@@ -39,6 +38,7 @@ export default function StudentProfilSettings({
     githubApi: student.githubApi ?? "",
     profileImage: student.profileImage ?? "",
     description: student.description ?? "",
+    skills: student.skills ?? [],
   });
   const { stages } = student;
   console.log(stages);
@@ -211,6 +211,7 @@ export default function StudentProfilSettings({
             />
             <Skills
               stage={false}
+              setInput={setInput}
               isSettings={isSettings}
               student={student}
               skills={student.skills}

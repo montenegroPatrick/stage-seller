@@ -24,6 +24,7 @@ export default function ModalSettingsSkills({
   userSkills,
   setUserSkills,
   student,
+  setInputUser,
 }) {
   const token = Cookies.get("jwt");
   const userId = Cookies.get("user-id");
@@ -68,20 +69,11 @@ export default function ModalSettingsSkills({
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setIsLoading(true);
     // todo the api execpted the ID of the skills
-    const ids = userSkills.map((skill) => skill.id);
-    console.log(ids);
-    const skillListIds = { skillList: ids };
-    console.log("skillListIds", skillListIds);
-    const response = await addSkills(token, userId, skillListIds);
-    if (response) {
-      setIsLoading(false);
-      setOpen(!open);
-    } else {
-      setIsLoading(false);
-      setErrorMessage(response.message);
-    }
+    const skillIds = userSkills.map((skill) => skill.id);
+
+    setInputUser((prev) => ({ ...prev, skills: skillIds }));
+    handleOpen();
   };
 
   const handleRemoveAll = (event) => {
