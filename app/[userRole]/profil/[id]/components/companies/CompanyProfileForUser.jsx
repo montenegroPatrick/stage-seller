@@ -8,39 +8,16 @@ import ErrorAlert from "@/app/utilsComponents/Error/ErrorAlert";
 import CompanyNameAvatar from "./CompanyNameAvatar";
 import CompanyDescription from "./CompanyDescription";
 import { getSkills } from "@/lib/skills/getSkills";
-
+import LoaderSkeleton from "@/app/utilsComponents/Loaders/LoaderSkeleton";
 import { updateUser } from "@/lib/users/updateUser";
 import { useState, useEffect } from "react";
 
 export default function CompanyProfileForUser({ userProfilePage }) {
-  const {
-    companyName,
-    description,
-    siret,
-    city,
-    postCode,
-    profilImage,
-    skills,
-    id,
-    stages,
-    connectedUserId,
-    email,
-  } = userProfilePage;
-
   const token = Cookies.get("jwt");
   const [userData, setUserData] = useState(userProfilePage);
   const [message, setMessage] = useState("");
-
-  const [allSkills, setAllSkills] = useState([
-    { id: 1, type: "hard", name: "React" },
-    { id: 2, type: "hard", name: "Symfony" },
-    { id: 3, type: "hard", name: "Next" },
-    { id: 4, type: "hard", name: "Laravel" },
-    { id: 5, type: "hard", name: "Python" },
-    { id: 6, type: "hard", name: "MySQL" },
-  ]);
-
-   //Fetch list of all skills
+  const [allSkills, setAllSkills] = useState([]);
+  //Fetch list of all skills
   useEffect(() => {
     const fetchData = async () => {
       const listSkills = await getSkills(token);
@@ -52,14 +29,13 @@ export default function CompanyProfileForUser({ userProfilePage }) {
 
   const handleSubmit = async (newData) => {
     setMessage("");
-    const newDataUser = { ...userData, ...newData };
 
+    //const newDataUser = { ...userData, ...newData };
     try {
-      const response = await updateUser(token, id, newData);
-
+      const response = await updateUser(token, userData.id, newData);
       if (response.status === 204) {
         setMessage("Modifications validées");
-        setUserData(newDataUser);
+        // setUserData((previous) => ({ ...previous, ...newData }));
       } else {
         setMessage("Erreur lors de la modification");
       }
@@ -67,6 +43,8 @@ export default function CompanyProfileForUser({ userProfilePage }) {
       setMessage("Erreur lors de la modification");
     }
   };
+
+
 
   return (
     <>
@@ -86,43 +64,54 @@ export default function CompanyProfileForUser({ userProfilePage }) {
       <section className="flex flex-col md:flex-row w-full 2xl:w-[90vw] mx-auto">
         <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col">
           <CompanyNameAvatar
-            companyName={companyName}
-            picture={profilImage}
-            city={city}
-            postCode={postCode}
+            companyName={userData.companyName}
+            picture={userData.profilImage}
+            city={userData.city}
+            postCode={userData.postCode}
             submitForm={handleSubmit}
+            setMessage={setMessage}
           />
           <div className="w-full flex flex-col xl:flex-row justify-between px-5 mx-auto">
-            <CompanySkills
-              skills={skills}
-              submitForm={handleSubmit}
-              token={token}
-              allSkills={allSkills}
-              setMessage={setMessage}
-            />
-            {stages.length > 0 ? (
-              stages.map((stage) => (
-                <CompanyStage
-                  currentStage={stage}
-                  setMessage={setMessage}
+            {allSkills.length > 0 ? (
+              <>
+                <CompanySkills
+                  skills={userData.skills}
+                  submitForm={handleSubmit}
                   token={token}
-                  key={stage.id}
                   allSkills={allSkills}
+                  setMessage={setMessage}
                 />
-              ))
+                {userData.stages.length || !userData.stages ? (
+                  userData.stages.map((stage) => (
+                    <CompanyStage
+                      currentStage={stage}
+                      setMessage={setMessage}
+                      token={token}
+                      key={stage.id}
+                      allSkills={allSkills}
+                    />
+                  ))
+                ) : (
+                  <CompanyStage
+                    currentStage={[]}
+                    setMessage={setMessage}
+                    token={token}
+                    allSkills={allSkills}
+                  />
+                )}
+              </>
             ) : (
-              <CompanyStage
-                currentStage={[]}
-                setMessage={setMessage}
-                token={token}
-                allSkills={allSkills}
-              />
+              <>
+                {/* <SkeletonLoaderCard /> */}
+                <LoaderSkeleton />
+                <LoaderSkeleton />
+              </>
             )}
           </div>
         </div>
         <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l-2 border-black">
           <CompanyDescription
-            description={description}
+            description={userData.description}
             submitForm={handleSubmit}
           />
           <CompanyMatch />

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import SettingButton from "./SettingButton";
 import ButtonForm from "./ButtonForm";
 import InputFormCompany from "./InputFormCompany";
@@ -11,6 +11,7 @@ export default function CompanyNameAvatar({
   companyName,
   profileImage,
   submitForm,
+  setMessage
 }) {
 
   const [settings, setSettings] = useState(false);
@@ -19,6 +20,10 @@ export default function CompanyNameAvatar({
   const [userCompanyName, setCompanyName] = useState(companyName);
   const [userProfileImage, setProfileImage] = useState(profileImage);
 
+  useEffect(() => {
+    setMessage("");
+  }, [settings]);
+
   if (settings) {
     return (
       <form
@@ -26,9 +31,9 @@ export default function CompanyNameAvatar({
           event.preventDefault();
           submitForm({
             city: userCity,
-            postCode: userPostCode,
+            postCode: parseInt(userPostCode),
             companyName: userCompanyName,
-            profileImage: userProfileImage,
+            // profileImage: userProfileImage,
           });
           setSettings(!settings);
         }}
@@ -48,7 +53,8 @@ export default function CompanyNameAvatar({
           <p className="mt-3 italic underline text-sm">Localisation de l'entreprise</p>
             <input
               value={userCity}
-              onChange={(e) => setUserCity(e.target.value)}
+              onChange={(e) => {
+                setUserCity(e.target.value)}}
               type="text"
               placeholder="Ville"
               className="px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full"
@@ -92,10 +98,10 @@ export default function CompanyNameAvatar({
   return (
     <div className="w-full md:h-35vh flex flex-col justify-between border-l-purple-200 p-5 border-dotted border-b-2 border-black relative">
       <h2 className="text-3xl 2xl:text-4xl text-center text-black">
-        {companyName}
+        {userCompanyName}
       </h2>
       <p className="text-center text-lg 2xl:text-xl text-teal-800 italic">
-        {city}, {postCode}
+        {userCity}, {userPostCode}
       </p>
       <div className="w-[100%] py-5">
         <Image
