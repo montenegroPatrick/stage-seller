@@ -18,7 +18,7 @@ export default function CompanyStage({
   const [stage, setStage] = useState(currentStage);
   const [stageToSend, setStageToSend] = useState([]);
   const [listAllSkills, setListAllSkills] = useState(allSkills);
-  console.log("le selct", selectedSkills);
+
   useEffect(() => {
     setMessage("");
   }, [settings]);
@@ -66,8 +66,7 @@ export default function CompanyStage({
       setMessage("Erreur lors de la modification");
     }
   };
-
-  if (settings && stage) {
+  if (settings && stage.length > 0) {
     return (
       <div className="w-full xl:w-[50%] flex flex-col items-center rounded-xl py-5 mx-auto my-5 bg-white relative">
         <h2 className="text-2xl 2xl:text-3xl text-black text-center ">
@@ -190,7 +189,7 @@ export default function CompanyStage({
         </div>
       </div>
     );
-  } else if (settings && !stage) {
+  } else if (settings && !stage.length > 0 ) {
     return (
       <div className="w-full xl:w-[50%] flex flex-col items-center rounded-xl px-2 py-5 mx-auto my-5 bg-white relative">
         <h2 className="text-2xl 2xl:text-3xl text-black text-center ">
@@ -214,7 +213,7 @@ export default function CompanyStage({
                   <label className="text-md mx-auto px-4 text-paleKaki font-medium">
                     <input
                       type="checkbox"
-                      checked={selectedSkills.includes(skill) ? true : false}
+                      checked={selectedSkills > 0 || selectedSkills.includes(skill) ? true : false}
                       onChange={() => handleSelectSkill(skill)}
                       required
                     />
@@ -318,8 +317,8 @@ export default function CompanyStage({
       <h2 className="text-2xl 2xl:text-3xl text-black text-center">
         Profil recherché
       </h2>
-      <section className="w-full border border-black rounded-lg py-4 px-2">
-        {stage ? (
+      <section className="mt-5 w-full border border-black rounded-lg py-4 px-2">
+        {stage.length > 0 ? (
           <>
             <div className="flex flex-wrap justify-center">
               <h3 className="text-xl font-medium text-magenta text-center">

@@ -86,7 +86,3 @@ export default function LikeButton({ userReceivingId }) {
     </>
   );
 }
-
-LikeButton.propTypes = {
-  userReceivingId: PropTypes.number.isRequired,
-};
