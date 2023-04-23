@@ -27,7 +27,7 @@ export default function ContactForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await SendMessageToUs(token, input);
-    console.log("response of message send", response);
+
     if (!response.status) {
       switch (response.response) {
         case 401:

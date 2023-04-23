@@ -61,8 +61,7 @@ export default function ModalSettingsSkillsStages({
       const skillToPush = skillsList.find((skill) => skill.name === event);
       const stageSkillsArray = [];
       stageSkillsArray.push(skillToPush);
-      console.log("je set");
-      console.log(stageSkillsArray);
+
       setStageSkills([...stageSkills, stageSkillsArray]);
 
       const dataSkillUpdate = stageSkills.map((stage) =>
@@ -111,7 +110,7 @@ export default function ModalSettingsSkillsStages({
                     variant="rounded"
                     size="xxl"
                     alt={obj.name}
-                    src={`https://img.shields.io/badge/-${obj.name}-black?style=for-the-badge&logo=${obj.name}&logoColor=61DAFB&color=white`}
+                    src={`https://img.shields.io/badge/-${obj.name}-black?style=for-the-badge&logo=${obj.name}&color=white`}
                     className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
                   />
                 </div>

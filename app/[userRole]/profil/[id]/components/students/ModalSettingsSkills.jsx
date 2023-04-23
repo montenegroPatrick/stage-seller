@@ -29,7 +29,7 @@ export default function ModalSettingsSkills({
   const token = Cookies.get("jwt");
   const userId = Cookies.get("user-id");
   const [open, setOpen] = useState(false);
-  console.log("userSkills", userSkills);
+
   // skill List fixed who's get with the function getSkills
   const [skillsList, setSkillsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +44,6 @@ export default function ModalSettingsSkills({
   }, [showSettings]);
 
   const handleChange = (event) => {
-    console.log(userSkills);
     const clickedOnExistedSkill = userSkills.find(
       (skill) => skill.name === event
     );
@@ -106,7 +105,7 @@ export default function ModalSettingsSkills({
                       variant="rounded"
                       size="xxl"
                       alt={skill.name}
-                      src={`https://img.shields.io/badge/-${skill.name}-black?style=for-the-badge&logo=${skill.name}&logoColor=61DAFB&color=white`}
+                      src={`https://img.shields.io/badge/-${skill.name}-black?style=for-the-badge&logo=${skill.name}&color=white`}
                       className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
                     />
                   </div>

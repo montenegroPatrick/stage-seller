@@ -22,7 +22,7 @@ export default function Skills({
   // if (!skills) {
   //   return;
   // }
-  console.log("skills on skills comp", skills);
+
   const token = Cookies.get("jwt");
   const [skillsList, setSkillsList] = useState([]);
   const [skillsStateStage, setSkillsStateStage] = useState(skills ?? []);
@@ -45,7 +45,7 @@ export default function Skills({
                   variant="rounded"
                   alt={objSkill.name}
                   className="border-2 w-20 lg:w-20 h-5 border-whiteSmoke hover:z-10"
-                  src={`https://img.shields.io/badge/-${objSkill.name}-black?style=for-the-badge&logo=${objSkill.name}&logoColor=61DAFB&color=white`}
+                  src={`https://img.shields.io/badge/-${objSkill.name}-black?style=for-the-badge&logo=${objSkill.name}&color=white`}
                 />
               ))
             )
@@ -56,7 +56,7 @@ export default function Skills({
                 variant="rounded"
                 alt={skill.name}
                 className="border-2 w-20 lg:w-20 h-5 border-whiteSmoke hover:z-10"
-                src={`https://img.shields.io/badge/-${skill.name}-black?style=for-the-badge&logo=${skill.name}&logoColor=61DAFB&color=white`}
+                src={`https://img.shields.io/badge/-${skill.name}-black?style=for-the-badge&logo=${skill.name}&color=white`}
               />
             ))}
         {isSettings && (

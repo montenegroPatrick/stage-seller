@@ -1,3 +1,4 @@
+"use client";
 import { Fragment, useEffect, useState } from "react";
 import {
   Button,
@@ -7,16 +8,27 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { FiSettings } from "react-icons/fi";
+import { updateUser } from "@/lib/users/updateUser";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
-export default function Tuto({ openTuto, type }) {
-  const [open, setOpen] = useState(openTuto);
-
-  const handleOpen = () => setOpen(!open);
-
+export default function Tuto({ openTuto, setOpenTuto, type, student }) {
+  const router = useRouter();
+  const token = Cookies.get("jwt");
+  const handleOpen = () => {
+    setOpenTuto(!openTuto);
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await updateUser(token, student.id, { showTuto: false }).then(() => {
+      handleOpen();
+      router.refresh();
+    });
+  };
   return (
     <Fragment>
       <Dialog
-        open={open}
+        open={openTuto}
         handler={handleOpen}
         animate={{
           mount: { scale: 1, y: 0 },
@@ -45,7 +57,7 @@ export default function Tuto({ openTuto, type }) {
           </p>
         </DialogBody>
         <DialogFooter>
-          <Button variant="gradient" color="blue" onClick={handleOpen}>
+          <Button variant="gradient" color="blue" onClick={handleSubmit}>
             <span>OK</span>
           </Button>
         </DialogFooter>

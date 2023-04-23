@@ -1,14 +1,13 @@
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
-
-export default async function uploadFile(token, id, data) {
+export default async function setMatch(token, matchId) {
   const response = await axios
-    .post(`${baseUrl}users/${id}/upload`, data, {
+    .put(`${baseUrl}matches/${matchId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => res)
+    .then((res) => res.data)
     .catch((err) => err.response);
   return response;
 }

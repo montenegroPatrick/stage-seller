@@ -130,7 +130,7 @@ export default function SignUpForm({ role }) {
           {role === "companies" ? (
             <>
               <Input
-                className="w-full"
+                className="w-full "
                 label="nom de l'entreprise"
                 name="companyName"
                 value={input.companyName}
@@ -138,7 +138,7 @@ export default function SignUpForm({ role }) {
                 type="text"
               />
               <Input
-                className="w-full"
+                className="w-full  "
                 value={input.siret}
                 name="siret"
                 onChange={handleChange}
@@ -149,14 +149,14 @@ export default function SignUpForm({ role }) {
           ) : (
             <>
               <Input
-                className="w-full"
+                className="w-full "
                 label="nom"
                 name="lastname"
                 value={input.lastname}
                 onChange={handleChange}
               />
               <Input
-                className="w-full"
+                className="w-full "
                 name="firstname"
                 onChange={handleChange}
                 value={input.firstname}
@@ -168,7 +168,7 @@ export default function SignUpForm({ role }) {
           <Input
             error={isErrorEmail}
             name="email"
-            className="w-full"
+            className="w-full "
             value={input.email}
             onChange={handleChange}
             label="* Email"
@@ -176,7 +176,7 @@ export default function SignUpForm({ role }) {
           />
           <Input
             name="address"
-            className="w-full"
+            className="w-full "
             value={input.address}
             onChange={handleChange}
             label="* adresse postale"

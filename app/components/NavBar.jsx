@@ -25,19 +25,12 @@ export default function NavBar() {
   const [textColor, setTextColor] = useState("#000000");
   const [data, setData] = useState(null);
   const path = usePathname();
-  //const id = path.slice(-1);
 
   const handleNav = () => {
     setMobileNav(!mobileNav);
   };
 
-  // const { data, isLoading, isError } = useQuery({
-  //   queryKey: ["user"],
-  //   queryFn: () => getUser(token, id),
-  // });
-  // console.log("navbar", data);
   const getData = async () => getUser(token, id).then((user) => setData(user));
-  //  console.log("dataNavBar", data);
 
   useEffect(() => {
     if (token && id) {
@@ -74,7 +67,13 @@ export default function NavBar() {
             StageSeller
           </h1>
         </Link>
-        <div className={data ? ` hidden w-[85%] xl:justify-between xl:flex xl:items-center text-black3 ` : 'hidden xl:justify-between xl:flex xl:items-center text-black3 '}>
+        <div
+          className={
+            data
+              ? ` hidden w-[85%] xl:justify-between xl:flex xl:items-center text-black3 `
+              : "hidden xl:justify-between xl:flex xl:items-center text-black3 "
+          }
+        >
           {data ? (
             <>
               <Link
@@ -116,7 +115,7 @@ export default function NavBar() {
               <Button onClick={handleLogout}>Se déconnecter</Button>
             </>
           ) : (
-            <Link href="/sign-in" >
+            <Link href="/sign-in">
               <Button>SE CONNECTER</Button>
             </Link>
           )}

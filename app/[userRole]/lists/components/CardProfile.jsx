@@ -22,6 +22,8 @@ import {
 } from "@material-tailwind/react";
 import { imageUrl } from "@/lib/imageUrl";
 import Skills from "../../profil/[id]/components/students/Skills";
+import { Suspense } from "react";
+import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard";
 
 export default function ProfileCarte({ user }) {
   //TODO regarder si le user.role est company ou student pour éventuellement changer des champs dynamiquement
@@ -84,6 +86,9 @@ export default function ProfileCarte({ user }) {
                   ? "le télétravail c'est la vie"
                   : "travailler au bureau y'a rien de mieu"}
               </dt>
+              <dd className="text-xs text-red-900">
+                {`${stage.start_date} pour une durée de ${stage.duration}`}{" "}
+              </dd>
               <dd className="text-xs text-red-900">
                 {`${stage.start_date} pour une durée de ${stage.duration}`}{" "}
               </dd>
