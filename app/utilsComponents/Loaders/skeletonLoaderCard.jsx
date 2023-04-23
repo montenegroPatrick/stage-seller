@@ -1,3 +1,4 @@
+import "./styles.css";
 export default function SkeletonLoaderCard() {
   return (
     <div className="card">

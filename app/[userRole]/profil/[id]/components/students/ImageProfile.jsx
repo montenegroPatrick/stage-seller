@@ -26,7 +26,6 @@ export default function ImageProfile({
   }, []);
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("handleSubmit file", file);
     const formData = new FormData();
     formData.append("file", file);
     formData.append("type", "profile_photo");
@@ -60,7 +59,7 @@ export default function ImageProfile({
           className="flex cursor-pointer flex-col items-center justify-center "
           for="avatar"
         >
-          Choose a profile picture:
+          Choisis ta photo
           <input
             name="avatar"
             id="avatar"
@@ -90,10 +89,10 @@ export default function ImageProfile({
     );
   }
   return (
-    <div className="relative h-[20vh] lg:h-[30vh] w-[20vh] lg:w-[30vh] rounded-full">
+    <div className="relative p-2 h-[20vh] lg:h-[30vh] w-[20vh] lg:w-[30vh] rounded-full">
       <img
         src={`${imageUrl}${student.profileImage}`}
-        className="absolute top-0 left-0 rounded-full h-full w-full "
+        className="absolute p-2 top-0 left-0 rounded-full h-full w-full "
       />
 
       {/* <div className="to-bg-black-10 inset-0 h-full w-full bg-gradient-to-t from-black/90 via-black/80" /> */}

@@ -9,6 +9,7 @@ import unLike from "@/lib/matches/unLike";
 import getLikeToMe from "@/lib/users/getLikeToMe";
 import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
 import setMatch from "@/lib/matches/setMatch";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function LikeButton({ userReceivingId }) {
   const token = Cookies.get("jwt");
@@ -16,24 +17,19 @@ export default function LikeButton({ userReceivingId }) {
   const [isLike, setIsLike] = useState(false);
   const [likesFromMe, setLikesFromMe] = useState();
   const [likesToMe, setLikesToMe] = useState();
-
+  const path = usePathname();
+  const router = useRouter();
   const getLikesToMe = async () =>
     await getLikeToMe(token).then((res) => {
       if (res.data) {
         setLikesToMe(res.data);
       }
     });
-
   const getLikesFromMe = async () =>
     await getLikeFromMe(token).then(({ data }) => {
-      console.log("dans le fetch", data);
       setLikesFromMe(data);
       data.map((data) => {
-        if (data.user.id === userReceivingId) {
-          setIsLike(true);
-        } else {
-          setIsLike(false);
-        }
+        data.user.id === userReceivingId && setIsLike(true);
       });
     });
 
@@ -55,7 +51,7 @@ export default function LikeButton({ userReceivingId }) {
       // await foundMatches();
     };
     fetch();
-  }, [isLike]);
+  }, [isLike, path]);
 
   const handleClick = async () => {
     await getLikesFromMe();
@@ -72,6 +68,7 @@ export default function LikeButton({ userReceivingId }) {
       setIsLike(false);
       unLike(token, userClickedId.matchId).then((res) => console.log(res));
     }
+    router.refresh();
   };
   // if (!likesFromMe) {
   //   return
@@ -79,7 +76,7 @@ export default function LikeButton({ userReceivingId }) {
 
   return (
     <>
-      <button onClick={handleClick} className="absolute top-7 right-5 ">
+      <button onClick={handleClick} className="absolute top-10 right-7 ">
         {isLike ? (
           <AiFillHeart className="text-red-500" />
         ) : (

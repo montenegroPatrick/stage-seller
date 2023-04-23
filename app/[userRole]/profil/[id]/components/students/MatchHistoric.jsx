@@ -50,7 +50,7 @@ export default function MatchHistoric({ currentUser }) {
     return (
       <section className="p-5">
         <p>tes likes et matchs seront visible ici</p>
-        <Link href={`/companies/lists`}>
+        <Link href={`/companies/lists`} className="underline p-5">
           {" "}
           Clique ici pour commencer à liker tes entreprises préférées
         </Link>

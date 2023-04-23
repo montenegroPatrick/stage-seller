@@ -72,7 +72,7 @@ export default function Slider() {
   // };
   if (usersToDisplay === null) {
     return (
-      <aside className="h-80vh w-screen flex flex-col items-center text-xl gap-10 p-28 m-5 text-justify">
+      <aside className="h-screen w-screen flex flex-col text-sm items-center lg:text-xl gap-10 p-5 lg:p-28 m-5 text-justify">
         <h1>
           Nous sommes navré nous n'avons pas d'entreprises à vous proposer pour
           le moment

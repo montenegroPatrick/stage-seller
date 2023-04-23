@@ -36,7 +36,7 @@ export default function Skills({
 
   return (
     <section className={classes}>
-      <div className="flex flex-wrap gap-3 m-1">
+      <div className="flex flex-wrap  w-full gap-1 lg:gap-3 m-1">
         {skillsStateStage && stages
           ? skillsStateStage.map((skill) =>
               skill.map((objSkill) => (
@@ -44,7 +44,7 @@ export default function Skills({
                   key={objSkill.id}
                   variant="rounded"
                   alt={objSkill.name}
-                  className="border-2 w-20 lg:w-20 h-5 border-whiteSmoke hover:z-10"
+                  className="border-2  w-20 h-5 border-whiteSmoke hover:z-10"
                   src={`https://img.shields.io/badge/-${objSkill.name}-black?style=for-the-badge&logo=${objSkill.name}&color=white`}
                 />
               ))
@@ -55,7 +55,7 @@ export default function Skills({
                 key={skill.id}
                 variant="rounded"
                 alt={skill.name}
-                className="border-2 w-20 lg:w-20 h-5 border-whiteSmoke hover:z-10"
+                className="border-2 w-20 h-5 border-whiteSmoke hover:z-10"
                 src={`https://img.shields.io/badge/-${skill.name}-black?style=for-the-badge&logo=${skill.name}&color=white`}
               />
             ))}

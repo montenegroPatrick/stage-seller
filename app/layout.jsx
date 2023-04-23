@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
       lang="fr"
       className={` ${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable} ${baskerville.variable} ${bebasNeue.variable} ${abril.variable} ${pt.variable} ${raleWay.variable}`}
     >
-      <body className="font-raleWay font-light md:uppercase">
+      <body className="font-raleWay font-light">
         <ReactQueryWrapper>
           <NavBar />
           {children}

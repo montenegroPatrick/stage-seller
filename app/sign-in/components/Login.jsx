@@ -56,7 +56,6 @@ export default function LogIn() {
         } else {
           setErrorMessage(err.response.data.error);
         }
-
       });
   };
 
@@ -64,7 +63,7 @@ export default function LogIn() {
     <NavBarMarginContainer>
       <div className="flex w-full h-screen items-center justify-center p-4 bg-white ">
         <div className="w-full h-full bg-whiteSmoke text-whiteSmoke p-8 sm:p-14 rounded-lg flex flex-col items-center">
-          <Logo />
+          <Logo width={100} height={100} />
           <div>
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-600">
               Connexion
