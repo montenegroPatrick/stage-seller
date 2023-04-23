@@ -69,13 +69,18 @@ export default function ContactForm() {
         className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
       >
         <div className="mb-4 flex flex-col gap-6">
-          <Input size="lg" label="Name" />
+          <Input
+            size="lg"
+            label="Name"
+            className="shadow-inputShadow focus:shadow-lg text-black3"
+          />
           <Input
             size="lg"
             label="Email"
             onChange={handleChange}
             name="email"
             value={input.email}
+            className="shadow-inputShadow focus:shadow-lg text-black3"
           />
           <Textarea
             type="text"
@@ -84,6 +89,7 @@ export default function ContactForm() {
             label="votre message"
             name="textBody"
             value={input.textBody}
+            className="shadow-inputShadow focus:shadow-lg text-black3"
           />
         </div>
 

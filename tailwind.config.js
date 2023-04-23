@@ -10,6 +10,9 @@ module.exports = withMT({
   ],
   theme: {
     extend: {
+      boxShadow: {
+        inputShadow: "inset 1px 2px 5px rgb(200, 200, 220);",
+      },
       colors: {
         black1: "#111111",
         black2: "#222222",
