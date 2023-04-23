@@ -2,6 +2,7 @@ import axios from "axios";
 import { baseUrl } from "../baseUrl";
 
 export async function updateUser(token, id, data) {
+
   const response = await axios
     .put(`${baseUrl}users/${id}`, data, {
       headers: {

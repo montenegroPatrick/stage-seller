@@ -77,14 +77,14 @@ export default function NavBar() {
           {data ? (
             <>
               <Link
-                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
+                className="font-jetbrains text-black text-sm underline hover:text-magenta underline-offset-1 hover:text-indigo-700"
                 target="_blank"
                 href="https://oclock.io/methode"
               >
                 La méthode O'Clock
               </Link>
               <Link
-                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
+                className="font-jetbrains text-black text-sm underline hover:text-magenta underline-offset-1 "
                 href={`/${
                   data.type === "STUDENT" ? "students" : "companies"
                 }/profil/${data.id}`}
@@ -94,7 +94,7 @@ export default function NavBar() {
                   : data.companyName}
               </Link>
               <Link
-                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
+                className="font-jetbrains text-black text-sm underline hover:text-magenta underline-offset-1 "
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
                 }/lists`}
@@ -104,7 +104,7 @@ export default function NavBar() {
                   : "Tous les étudiants"}
               </Link>
               <Link
-                className="font-jetbrains text-magenta text-sm 2xl:text-base underline underline-offset-1 hover:text-indigo-700"
+                className="font-jetbrains text-black text-sm underline hover:text-magenta underline-offset-1 "
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
                 }/suggests`}
@@ -156,7 +156,7 @@ export default function NavBar() {
                   : "Tous les étudiants"}
               </Link>
               <Link
-                className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
+                className="text-2xl py-4 text-white hover:text-indigo-700 ease-in duration-300"
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
                 }/suggests`}
@@ -165,7 +165,7 @@ export default function NavBar() {
               </Link>
               <Link
                 onClick={handleNav}
-                className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
+                className="text-2xl py-2 text-white hover:text-indigo-700 ease-in duration-300"
                 href={`/${
                   data.type === "STUDENT" ? "students" : "companies"
                 }/profil/${data.id}`}

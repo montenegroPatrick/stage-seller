@@ -12,6 +12,7 @@ export default function CompanyNameAvatar({
   profileImage,
   submitForm,
 }) {
+
   const [settings, setSettings] = useState(false);
   const [userCity, setUserCity] = useState(city);
   const [userPostCode, setUserPostCode] = useState(postCode);
@@ -98,7 +99,7 @@ export default function CompanyNameAvatar({
       </p>
       <div className="w-[100%] py-5">
         <Image
-          src={"/company.jpeg"}
+          src={profileImage ? profileImage : "/company.jpeg"}
           width={200}
           height={200}
           className="mx-auto rounded-md"

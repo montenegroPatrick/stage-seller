@@ -50,11 +50,13 @@ export default function LogIn() {
       })
       .catch((err) => {
         setIsLoading(false);
+
         if (!err.response) {
           setErrorMessage(err.message);
         } else {
           setErrorMessage(err.response.data.error);
         }
+
       });
   };
 
