@@ -93,7 +93,7 @@ export default function CompanyProfileForUser({ userProfilePage }) {
                   ))
                 ) : (
                   <CompanyStage
-                    currentStage={[]}
+                    currentStage={{}}
                     setMessage={setMessage}
                     token={token}
                     allSkills={allSkills}
