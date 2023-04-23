@@ -13,11 +13,13 @@ export default function CompanySkills({
   setMessage,
 }) {
   const [settings, setSettings] = useState(false);
-  const [currentSkills, setCurrentSkills] = useState(skills);
-  const [selectedSkills, setSelectedSkills] = useState(skills);
+  const [selectedSkills, setSelectedSkills] = useState([]);
   const [listAllSkills, setListAllSkills] = useState(allSkills);
 
-  console.log("je suis dans mon skill", selectedSkills);
+  useEffect(() => {
+    setSelectedSkills(skills);
+  }, [skills]);
+
   useEffect(() => {
     setMessage("");
   }, [settings]);
@@ -28,13 +30,15 @@ export default function CompanySkills({
       const skillToAdd = listAllSkills.filter((skill) => skill.id === skillId);
       setSelectedSkills((previous) => [...previous, ...skillToAdd]);
     } else {
-      const newSelectedSkills = selectedSkills.filter(
-        (selectedSkill) => selectedSkill.id !== skillId
+      setSelectedSkills((previous) =>
+        previous.filter(
+          (selectedSkill) => selectedSkill.id !== skillId
+        )
       );
-      setSelectedSkills([...newSelectedSkills]);
     }
   };
-
+  useEffect(()=>{
+  }, [selectedSkills])
   return (
     <div className="w-full xl:w-[50%] flex flex-col items-center px-2 py-5 my-5 mx-auto relative">
       <h2 className="text-2xl 2xl:text-3xl text-center">Technologies</h2>
@@ -45,7 +49,8 @@ export default function CompanySkills({
           <form
             onSubmit={(event) => {
               event.preventDefault();
-              submitForm({ skills: [...selectedSkills] });
+              const selectedIds = selectedSkills.map((skill) => skill.id);
+              submitForm({ skills: selectedIds });
               setSettings(!settings);
             }}
           >
@@ -68,14 +73,14 @@ export default function CompanySkills({
             </ul>
             <ButtonForm />
           </form>
-        ) : currentSkills.length > 0 ? (
+        ) : selectedSkills.length > 0 ? (
           <ul className="flex flex-wrap justify-center">
-            {currentSkills.map((skill) => (
+            {selectedSkills.map((skill) => (
               <li key={skill.id} className="p-2">
                 <Skill
-                  checked={selectedSkills.some(
-                    (selectedSkill) => selectedSkill.id === skill.id
-                  )}
+                // checked={selectedSkills.some(
+                //   (selectedSkill) => selectedSkill.id === skill.id
+                // )}
                 >
                   {skill.name}
                 </Skill>

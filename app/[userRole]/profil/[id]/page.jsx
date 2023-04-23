@@ -11,15 +11,9 @@ import getAllUsers from "@/lib/users/getAllUsers";
 import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
 
 
-import StudentProfilView from "@/app/[userRole]/profil/[id]/components/students/StudentProfilView";
-import getAllUsers from "@/lib/users/getAllUsers";
-import { cookies } from "next/headers";
-
-import { getUser } from "@/lib/users/getUser";
-
 import StudentProfileForVisitor from "./components/students/studentProfileForVisitor";
 
-import StudentProfile from "@/app/[userRole]/profil/[id]/components/students/StudentProfile";
+//import StudentProfile from "@/app/[userRole]/profil/[id]/components/students/StudentProfile";
 import StudentProfilView from "@/app/[userRole]/profil/[id]/components/students/StudentProfilView";
 import CompanyProfileForUser from "@/app/[userRole]/profil/[id]/components/companies/CompanyProfileForUser";
 import CompanyProfileForVisitor from "@/app/[userRole]/profil/[id]/components/companies/CompanyProfileForVisitor";
@@ -32,9 +26,11 @@ export default async function Profil({ params }) {
   const connectedUserId = cookieStore.get("user-id")?.value;
   const token = cookieStore.get("jwt")?.value;
 
+
   if (!params.id || !token) {
     redirect("/sign-in");
   }
+
 
   const userProfilePage = await getUser(token, params.id);
 
