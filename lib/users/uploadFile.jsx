@@ -1,10 +1,9 @@
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
 
-export async function updateUser(token, id, data) {
-
+export default async function uploadFile(token, id, data) {
   const response = await axios
-    .put(`${baseUrl}users/${id}`, data, {
+    .post(`${baseUrl}users/${id}/upload`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

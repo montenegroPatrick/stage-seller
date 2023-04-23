@@ -1,15 +1,14 @@
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
 
-export async function updateUser(token, id, data) {
-
+export default async function SendMessageToUs(token, body) {
   const response = await axios
-    .put(`${baseUrl}users/${id}`, data, {
+    .post(`${baseUrl}mail`, body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
     .then((res) => res)
-    .catch((err) => err.response);
+    .catch((err) => err);
   return response;
 }

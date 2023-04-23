@@ -117,20 +117,20 @@ export default function SignUpForm({ role }) {
   };
 
   return (
-    <Card className="flex flex-col w-full" color="transparent" shadow={true}>
+    <Card className="flex flex-col w-full " color="transparent" shadow={true}>
       <CardHeader
         variant="filled"
         color="black"
-        className="mb-2 py-1 grid rounded-lg h-24 md:h-40  place-items-center bg-black"
+        className="mb-2 py-1 grid rounded-lg h-24 md:h-40  place-items-center bg-transparent"
       >
         <Logo />
       </CardHeader>
       <form className="mt-8 mb-2 mx-2 " onSubmit={handleSubmit}>
-        <div className="mb-4 flex w-full flex-col gap-6">
+        <div className="mb-4 flex w-full flex-col gap-6 ">
           {role === "companies" ? (
             <>
               <Input
-                className="w-full"
+                className="w-full shadow-inputShadow focus:shadow-lg text-black3"
                 label="nom de l'entreprise"
                 name="companyName"
                 value={input.companyName}
@@ -138,7 +138,7 @@ export default function SignUpForm({ role }) {
                 type="text"
               />
               <Input
-                className="w-full"
+                className="w-full shadow-inputShadow focus:shadow-lg text-black3 "
                 value={input.siret}
                 name="siret"
                 onChange={handleChange}
@@ -149,14 +149,14 @@ export default function SignUpForm({ role }) {
           ) : (
             <>
               <Input
-                className="w-full"
+                className="w-full shadow-inputShadow focus:shadow-lg text-black3"
                 label="nom"
                 name="lastname"
                 value={input.lastname}
                 onChange={handleChange}
               />
               <Input
-                className="w-full"
+                className="w-full shadow-inputShadow focus:shadow-lg text-black3 "
                 name="firstname"
                 onChange={handleChange}
                 value={input.firstname}
@@ -168,7 +168,7 @@ export default function SignUpForm({ role }) {
           <Input
             error={isErrorEmail}
             name="email"
-            className="w-full"
+            className="w-full shadow-inputShadow focus:shadow-lg text-black3"
             value={input.email}
             onChange={handleChange}
             label="* Email"
@@ -176,7 +176,7 @@ export default function SignUpForm({ role }) {
           />
           <Input
             name="address"
-            className="w-full"
+            className="w-full shadow-inputShadow focus:shadow-lg text-black3"
             value={input.address}
             onChange={handleChange}
             label="* adresse postale"
@@ -184,7 +184,7 @@ export default function SignUpForm({ role }) {
           />
           <Input
             name="city"
-            className="w-full"
+            className="w-full shadow-inputShadow focus:shadow-lg text-black3"
             value={input.city}
             onChange={handleChange}
             label="* city"
@@ -192,7 +192,7 @@ export default function SignUpForm({ role }) {
           />
           <Input
             name="postCode"
-            className="w-full"
+            className="w-full shadow-inputShadow focus:shadow-lg text-black3"
             value={postCode}
             onChange={(event) => setPostCode(event.target.value)}
             label="* code postale"
@@ -200,7 +200,7 @@ export default function SignUpForm({ role }) {
           />
           <Input
             name="password"
-            className="w-full"
+            className="w-full shadow-inputShadow focus:shadow-lg text-black3"
             value={input.password}
             type="password"
             onChange={handleChange}
@@ -217,7 +217,7 @@ export default function SignUpForm({ role }) {
           <Input
             name="verifyPassword"
             error={isErrorVerifPassword}
-            className="w-full"
+            className="w-full shadow-inputShadow focus:shadow-lg text-black3"
             onChange={handleChange}
             value={input.verifyPassword}
             type="password"
@@ -229,7 +229,7 @@ export default function SignUpForm({ role }) {
             <Typography
               variant="small"
               color="gray"
-              className="flex items-center font-normal"
+              className="flex items-center font-normal "
             >
               J'accepte les
               <Link
@@ -261,7 +261,7 @@ export default function SignUpForm({ role }) {
         <Button
           disabled={disable}
           type="submit"
-          className="mt-6 bg-black3"
+          className="mt-6 bg-black/[0.2] text-black3"
           fullWidth
         >
           {isLoading ? "loading..." : "s'inscrire"}

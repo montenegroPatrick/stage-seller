@@ -19,7 +19,7 @@ import {
 import Button from "@/app/utilsComponents/Buttons/Button";
 import { RxCrossCircled } from "react-icons/rx";
 import { GrValidate } from "react-icons/gr";
-import ErrorMessage from "@/app/utilsComponents/Error/ErrorMessage";
+import ResumeForm from "../../resume/components/resumeForm";
 
 export default function StudentProfilSettings({
   isSettings,
@@ -36,19 +36,33 @@ export default function StudentProfilSettings({
     firstname: student.firstName ?? "",
     localisation: student.city ?? "",
     github: student.github ?? "",
-    githubApi: student.githubApi ?? "",
     profileImage: student.profileImage ?? "",
     description: student.description ?? "",
+    skills: student.skills ?? [],
   });
-  const [inputStages, setInputStages] = useState({
-    description: student.stages.description ?? "",
-    startDate: student.stages.start_date ?? "",
-    duration: student.stages.duration ?? "",
-    location: student.stages.location ?? "",
-    isRemoteFriendly: student.stages.isRemoteFriendly ?? false,
-    isTravelFriendly: student.stages.isTravelFriendly ?? false,
-    skills: student.stages.map((stage) => stage.skills) ?? [],
-  });
+  const { stages } = student;
+
+  const [inputStages, setInputStages] = useState(
+    stages
+      ? stages.map((stage) => ({
+          description: stage.description ?? "",
+          startDate: stage.start_date ?? "",
+          duration: stage.duration ?? "",
+          location: stage.location ?? "",
+          isRemoteFriendly: stage.isRemoteFriendly ?? false,
+          isTravelFriendly: stage.isTravelFriendly ?? false,
+          skills: stage.skills ?? [],
+        }))
+      : {
+          description: "",
+          startDate: "",
+          duration: "",
+          location: "",
+          isRemoteFriendly: false,
+          isTravelFriendly: false,
+          skills: [],
+        }
+  );
   const handleChange = (event) => {
     const { name, value } = event.target;
     setInput((prev) => ({ ...prev, [name]: value }));
@@ -68,9 +82,9 @@ export default function StudentProfilSettings({
   // };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //console.log(input);
+
     const responseUserUpdate = await updateUser(token, student.id, input);
-    console.log(responseUserUpdate);
+
     switch (responseUserUpdate.status) {
       case 204:
         setProfilMessage("Changement effectué");
@@ -94,7 +108,7 @@ export default function StudentProfilSettings({
       student
     );
     switch (createOrUpdateStages.status) {
-      case 204:
+      case 200:
         setStageMessage("Changement effectué");
         break;
       case 422:
@@ -111,7 +125,7 @@ export default function StudentProfilSettings({
 
   return (
     <div className=" flex flex-col  h-full w-full gap-5 min-h-[calc(100vh-4rem)] font-mono text-black3 bg-blue">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5 ">
+      <div className="flex flex-col gap-5 ">
         <div className=" overflow-hidden">
           <ImageProfile
             isSettings={isSettings}
@@ -120,10 +134,13 @@ export default function StudentProfilSettings({
             student={student}
           />
         </div>
-
+        <ResumeForm student={student} />
         <div className="flex flex-row flex-wrap  justify-between lg:w-full ">
           {/* image de profile en background avec dessus nom prenom lieu skills  */}
-          <div className="flex flex-col gap-4 items-center border-4 p-5 rounded-xl w-screen">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 items-center border-4 p-5 rounded-xl w-screen"
+          >
             <p className="p-2 ">Information personnelle</p>
             <Input
               error={lastname === ""}
@@ -208,6 +225,7 @@ export default function StudentProfilSettings({
             />
             <Skills
               stage={false}
+              setInput={setInput}
               isSettings={isSettings}
               student={student}
               skills={student.skills}
@@ -230,11 +248,11 @@ export default function StudentProfilSettings({
                 </Alert>
               </>
             )}
-          </div>
+          </form>
         </div>
-      </form>
+      </div>
       <section className="flex flex-col ">
-        {/* cv link / profile description / stage description / mathHistoric / githubProject / */}
+        {/* cv link / profile description / stage description / mathHistoric */}
         <form
           onSubmit={handleSubmitStages}
           className="flex flex-col gap-2 h-full flex-wrap items-center lg:w-full justify-between rounded-xl border-4 p-5"
@@ -264,19 +282,6 @@ export default function StudentProfilSettings({
           )}
           <Button type="submit">Confirmer</Button>
         </form>
-        <div className="lg:flex w-full h-1/3 max-h-[100rem]">
-          <div className="items-center w-full">
-            {/* <GithubProjects
-              setIsSettings={setIsSettings}
-              isSettings={isSettings}
-              setShowSettings={setShowSettings}
-              currentUser={student}
-              input={input}
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-            /> */}
-          </div>
-        </div>
       </section>
     </div>
   );

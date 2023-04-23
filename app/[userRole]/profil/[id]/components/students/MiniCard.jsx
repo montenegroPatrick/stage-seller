@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import getAllUsers from "@/lib/users/getAllUsers";
 import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
+import { imageUrl } from "@/lib/imageUrl";
+import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard";
+import Link from "next/link";
 
 export default function MiniCard({ objectLike }) {
   const token = Cookies.get("jwt");
@@ -17,25 +20,28 @@ export default function MiniCard({ objectLike }) {
   }, []);
   const userForCard =
     users && users.find((user) => user.id === objectLike.user.id);
+
   if (!userForCard) {
-    return <SkeletonLoader />;
+    return <SkeletonLoaderCard />;
   }
   return (
-    <section className="bg-transparent rounded-lg p-3 mb-3">
-      <div className="flex gap-5 bg-transparent ">
-        <Avatar
-          size="lg"
-          variant="rounded"
-          alt="php"
-          src="https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-          className="border-2 border-whiteSmoke hover:z-10  bg-cover"
-        />
-        <div className="flex w-4/5 justify-between">
-          <Typography variant="h5">{userForCard.companyName}</Typography>
-          <Typography variant="paragraph">{userForCard.companyName}</Typography>
+    <section className="bg-transparent rounded-3xl p-3 mb-3">
+      <Link href={`/companies/profil/${userForCard.id}`}>
+        <div className="flex gap-5 glassMorph bg-gray-200/[0.3] shadows-text p-3 items-center justify-start rounded-3xl ">
+          <Avatar
+            size="lg"
+            variant="rounded"
+            alt="php"
+            src={`${imageUrl}${userForCard.profileImage}`}
+            className="border-2 border-whiteSmoke hover:z-10  bg-cover"
+          />
+          <div className="flex w-4/5 justify-between">
+            <Typography variant="h5">{userForCard.companyName}</Typography>
+
+            <Skills skills={userForCard.skills} />
+          </div>
         </div>
-      </div>
-      <Skills />
+      </Link>
     </section>
   );
 }

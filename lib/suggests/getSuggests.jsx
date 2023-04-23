@@ -1,12 +1,14 @@
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
-export default async function setLike(data, token) {
+
+export default async function getSuggest(token) {
   const response = await axios
-    .delete(`${baseUrl}matches`, data, {
+    .get(`${baseUrl}users/suggest`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => res.data);
+    .then((res) => res)
+    .catch((err) => err.response);
   return response;
 }

@@ -24,6 +24,7 @@ export default function ModalSettingsSkills({
   userSkills,
   setUserSkills,
   student,
+  setInputUser,
 }) {
   const token = Cookies.get("jwt");
   const userId = Cookies.get("user-id");
@@ -42,24 +43,7 @@ export default function ModalSettingsSkills({
     showSettings && handleOpen();
   }, [showSettings]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    setIsLoading(true);
-    // todo the api execpted the ID of the skills
-    const skillListIds = { skillList: [...userSkills] };
-    const response = await addSkills(token, userId, skillListIds);
-    if (response) {
-      setIsLoading(false);
-      setOpen(!open);
-    } else {
-      setIsLoading(false);
-      setErrorMessage(response.message);
-    }
-  };
-
   const handleChange = (event) => {
-    console.log(userSkills);
     const clickedOnExistedSkill = userSkills.find(
       (skill) => skill.name === event
     );
@@ -80,6 +64,17 @@ export default function ModalSettingsSkills({
       dataSkillUpdate.map((objectSkill) => skillIds.push(objectSkill.id));
     }
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // todo the api execpted the ID of the skills
+    const skillIds = userSkills.map((skill) => skill.id);
+
+    setInputUser((prev) => ({ ...prev, skills: skillIds }));
+    handleOpen();
+  };
+
   const handleRemoveAll = (event) => {
     setUserSkills([]);
   };
@@ -110,7 +105,7 @@ export default function ModalSettingsSkills({
                       variant="rounded"
                       size="xxl"
                       alt={skill.name}
-                      src={`https://img.shields.io/badge/-${skill.name}-black?style=for-the-badge&logo=${skill.name}&logoColor=61DAFB&color=white`}
+                      src={`https://img.shields.io/badge/-${skill.name}-black?style=for-the-badge&logo=${skill.name}&color=white`}
                       className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
                     />
                   </div>

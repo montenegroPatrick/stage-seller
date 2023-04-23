@@ -8,7 +8,6 @@ import Button from "@/app/utilsComponents/Buttons/Button";
 
 export default function StudentProfilView({ student, id }) {
   const [isSettings, setIsSettings] = useState(false);
-
   return (
     <div className="text-black3 w-full p-5">
       <Button

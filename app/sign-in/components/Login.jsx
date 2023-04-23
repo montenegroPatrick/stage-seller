@@ -50,14 +50,20 @@ export default function LogIn() {
       })
       .catch((err) => {
         setIsLoading(false);
-        setErrorMessage(err.message);
+
+        if (!err.response) {
+          setErrorMessage(err.message);
+        } else {
+          setErrorMessage(err.response.data.error);
+        }
+
       });
   };
 
   return (
     <NavBarMarginContainer>
-      <div className="flex w-full h-screen items-center justify-center p-4 bg-black1 ">
-        <div className="w-full h-full bg-black text-whiteSmoke p-8 sm:p-14 rounded-lg flex flex-col items-center">
+      <div className="flex w-full h-screen items-center justify-center p-4 bg-white ">
+        <div className="w-full h-full bg-whiteSmoke text-whiteSmoke p-8 sm:p-14 rounded-lg flex flex-col items-center">
           <Logo />
           <div>
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-600">
@@ -73,7 +79,11 @@ export default function LogIn() {
               </Link>
             </p>
           </div>
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <form
+            method="post"
+            className="mt-8 space-y-6"
+            onSubmit={handleSubmit}
+          >
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="flex flex-col gap-2">
               <Input
@@ -84,6 +94,7 @@ export default function LogIn() {
                 onChange={handleChange}
                 autoComplete="email"
                 required
+                className="shadow-inputShadow  focus:shadow-lg text-black3"
               />
 
               <Input
@@ -95,6 +106,7 @@ export default function LogIn() {
                 type="password"
                 autoComplete="current-password"
                 required
+                className="shadow-inputShadow focus:shadow-lg text-black3"
               />
             </div>
 
