@@ -13,7 +13,7 @@ export default function SignUpTabs({ userRole }) {
   return (
     <NavBarMarginContainer classes="w-full text-center flex justify-center items-center">
       <section className="w-full md:w-3/6 mt-5">
-        <Tabs className="text-black" value={userRole}>
+        <Tabs className="text-black z-0" value={userRole}>
           <TabsHeader className="mb-5">
             <Tab value="companies">
               <div className="">Entreprises</div>

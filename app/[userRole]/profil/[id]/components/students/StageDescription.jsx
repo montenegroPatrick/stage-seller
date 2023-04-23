@@ -59,11 +59,12 @@ export default function StageDescription({
           />
           <div className="flex flex-wrap justify-between rounded-xl p-2  bg-transparent border-2 ">
             <Checkbox
+              id="checkRemoteFriendly"
               label="coche la case si tu souhaite travailler en full-remote"
               className=" p-0 w-5 h-5 min-w-0"
               type="checkbox"
-              name="remoteFriendly"
-              checked={input.remote}
+              name="isRemoteFriendly"
+              checked={input.isRemoteFriendly}
               onChange={() =>
                 setInput((prev) => ({
                   ...prev,
@@ -72,11 +73,12 @@ export default function StageDescription({
               }
             />
             <Checkbox
+              id="checkTravelFriendly"
               label="coche la case si tu peux/souhaite te déplacer"
               className=" p-0 w-5 h-5 min-w-0"
               type="checkbox"
-              name="remoteFriendly"
-              checked={input.remote}
+              name="isTravelFriendly"
+              checked={input.isTravelFriendly}
               onChange={() =>
                 setInput((prev) => ({
                   ...prev,
@@ -104,7 +106,7 @@ export default function StageDescription({
       {currentUser.stages.length > 0 ? (
         currentUser.stages.map((stage) => (
           <div className="p-5 glassMorph w-full text-left flex border border-black flex-col gap-16 float-right rounded-lg ">
-            <h2 className="text-xl text-bold border-b border-black py-2">
+            <h2 className="text-xl text-bold border-b border-black py-2 md:uppercase">
               ma recherche
             </h2>
             <p className="">
@@ -188,9 +190,9 @@ export default function StageDescription({
             </li>
             <li className=" py-2 flex flex-row-reverse items-center gap-2 border-b border-black">
               <FcWorkflow />
-              <p>
+              <div>
                 <p>tu souhaite travailler à distance rdv mode edit</p>
-              </p>
+              </div>
             </li>
             <li className=" py-2 flex flex-row-reverse items-center gap-2 border-b border-black">
               <FcWorkflow />

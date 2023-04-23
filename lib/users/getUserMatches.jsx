@@ -8,7 +8,7 @@ export default async function getUserMatches(token) {
       },
     })
     .then((res) => res)
-    .catch((err) => err);
+    .catch((err) => err.response);
 
   return response;
 }

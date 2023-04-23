@@ -10,7 +10,7 @@ import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard
 import Link from "next/link";
 import LikeButton from "@/app/[userRole]/lists/components/LikeButton";
 
-export default function MiniCard({ objectLike }) {
+export default function MiniCard({ objectLike, matches }) {
   const token = Cookies.get("jwt");
   const [users, setUsers] = useState();
 
@@ -19,8 +19,9 @@ export default function MiniCard({ objectLike }) {
       await getAllUsers(token).then((data) => setUsers(data));
     getDataUsers();
   }, []);
-  const userForCard =
-    users && users.find((user) => user.id === objectLike.user.id);
+  const userForCard = matches
+    ? users && users.find((user) => user.id === objectLike.id)
+    : users && users.find((user) => user.id === objectLike.user.id);
 
   if (!userForCard) {
     return <SkeletonLoaderCard />;

@@ -15,7 +15,6 @@ import "@/assets/globals.css";
 import Footer from "@/app/components/Footer";
 import NavBar from "@/app/components/NavBar";
 
-import ReactQueryWrapper from "./reactQuerryWrapper";
 export const revalidate = 0;
 export const metadata = {
   title: "StageSeller",
@@ -29,11 +28,9 @@ export default function RootLayout({ children }) {
       className={` ${inter.variable} ${roboto.variable} ${chivo.variable} ${jetBrains.variable} ${lobster.variable} ${baskerville.variable} ${bebasNeue.variable} ${abril.variable} ${pt.variable} ${raleWay.variable}`}
     >
       <body className="font-raleWay font-light">
-        <ReactQueryWrapper>
-          <NavBar />
-          {children}
-          <Footer />
-        </ReactQueryWrapper>
+        <NavBar />
+        {children}
+        <Footer />
       </body>
     </html>
   );

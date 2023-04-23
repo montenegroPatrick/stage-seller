@@ -27,9 +27,17 @@ export default function GithubProjects({
 
   if (!repos) {
     return (
-      <section className="">
-        quand ton pseudo github sera renseigné tes repos seront visible ici par
-        les visiteurs sous forme de slider
+      <section className="flex flex-col text-center gap-2 items-center justify-center underline">
+        <p> Ton pseudo github n'existe pas ! </p>
+        <p>
+          {" "}
+          Si tu le renseigne en mode EDIT les visiteurs pourront accèder à tes
+          repository publics.{" "}
+        </p>
+        <p>
+          On te conseille bien documenter tes repos sur github, l'affichage se
+          fait par rapport à ses données.
+        </p>
       </section>
     );
   }

@@ -120,7 +120,6 @@ export default function SignUpForm({ role }) {
     <Card className="flex flex-col w-full " color="transparent" shadow={true}>
       <CardHeader
         variant="filled"
-        color="black"
         className="mb-2 py-1 grid rounded-lg h-24 md:h-40  place-items-center bg-transparent"
       >
         <Logo height={100} width={100} />
