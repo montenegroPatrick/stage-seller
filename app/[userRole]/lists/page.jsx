@@ -25,7 +25,7 @@ export default async function Lists({ params }) {
         </h2>
         <div className="w-full max-w-[80vw] bg-black h-[1px]" />
       </div>
-      <div className="flex flex-wrap justify-around">
+      <div className="flex flex-wrap gap-5 justify-around">
         {users &&
           users.map((user) => {
             return <CardProfile key={user.id} user={user} />;

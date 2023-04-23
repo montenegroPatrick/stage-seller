@@ -8,6 +8,7 @@ import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
 import { imageUrl } from "@/lib/imageUrl";
 import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard";
 import Link from "next/link";
+import LikeButton from "@/app/[userRole]/lists/components/LikeButton";
 
 export default function MiniCard({ objectLike }) {
   const token = Cookies.get("jwt");
@@ -25,23 +26,24 @@ export default function MiniCard({ objectLike }) {
     return <SkeletonLoaderCard />;
   }
   return (
-    <section className="bg-transparent rounded-3xl p-3 mb-3">
-      <Link href={`/companies/profil/${userForCard.id}`}>
-        <div className="flex gap-5 glassMorph bg-gray-200/[0.3] shadows-text p-3 items-center justify-start rounded-3xl ">
-          <Avatar
-            size="lg"
-            variant="rounded"
-            alt="php"
-            src={`${imageUrl}${userForCard.profileImage}`}
-            className="border-2 border-whiteSmoke hover:z-10  bg-cover"
-          />
-          <div className="flex w-4/5 justify-between">
-            <Typography variant="h5">{userForCard.companyName}</Typography>
-
-            <Skills skills={userForCard.skills} />
+    <section className="bg-transparent cardProfile boxShadow-inputShadow rounded-3xl p-3 mb-3">
+      <div className="flex gap-5  bg-gray-200/[0.3] shadows-text p-3 items-center justify-start rounded-3xl ">
+        <Avatar
+          size="lg"
+          variant="rounded"
+          alt="php"
+          src={`${imageUrl}${userForCard.profileImage}`}
+          className="border-2 border-whiteSmoke hover:z-10  bg-cover"
+        />
+        <div className="flex flex-col gap-2 w-4/5 justify-between">
+          <Link href={`/companies/profil/${userForCard.id}`}>
+            <h6 className="text-md lg:text-xl">{userForCard.companyName}</h6>
+          </Link>
+          <div className="hidden lg:block">
+            <Skills classes="w-full " skills={userForCard.skills} />
           </div>
         </div>
-      </Link>
+      </div>
     </section>
   );
 }

@@ -93,9 +93,14 @@ export default function StudentProfilSettings({
         setProfilMessage(
           "vos renseignements sont incomplet, merci de les completer avant de les envoyer"
         );
+      case 500:
+        setProfilMessage(
+          "Nous rencontrons des problèmes avec le serveur merci de revalider vos données "
+        );
       default:
         break;
     }
+
     router.refresh();
   };
 

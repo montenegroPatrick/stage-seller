@@ -3,7 +3,7 @@ import "./styles.css";
 export default function SkeletonLoader() {
   return (
     <div className="w-full h-full">
-      <div class="loader">
+      <div className="loader">
         <div>
           <ul>
             <li>

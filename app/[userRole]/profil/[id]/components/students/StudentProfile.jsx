@@ -5,16 +5,15 @@ import ProfileDescription from "./ProfileDescription";
 import StageDescription from "./StageDescription";
 import Skills from "./Skills";
 import MatchHistoric from "./MatchHistoric";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Tuto from "./Tuto";
-import { Typography } from "@material-tailwind/react";
+
 import { VscGithub } from "react-icons/vsc";
 import { SlSocialLinkedin } from "react-icons/sl";
 import { MdLocationOn } from "react-icons/md";
 import Link from "next/link";
-import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
+
 import { RxResume } from "react-icons/rx";
-import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard";
 
 export default function StudentProfile({ id, student }) {
   const [openTuto, setOpenTuto] = useState(false);
@@ -37,7 +36,7 @@ export default function StudentProfile({ id, student }) {
 
           <section className="flex flex-wrap flex-row justify-between w-full">
             <div className="flex flex-col gap-5 w-full ">
-              <h3 className=" text-xl font-extrabold">{`${student.firstName} ${student.lastName}`}</h3>
+              <h3 className=" text-xl py-5 font-extrabold">{`${student.firstName} ${student.lastName}`}</h3>
               <div className="flex flex-row items-center gap-2">
                 <MdLocationOn />
                 <h6 className=" text-[0.7rem]  font-bold">{`${student.city}`}</h6>

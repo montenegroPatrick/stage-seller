@@ -50,7 +50,7 @@ export default function Footer() {
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="flex justify-center items-center sm:justify-start">
             <Link href="/contact">contactez-nous</Link>
-            <Logo />
+            <Logo height={70} width={70} />
           </div>
 
           <p className="mt-4 text-center text-sm  lg:mt-0 lg:text-right ">

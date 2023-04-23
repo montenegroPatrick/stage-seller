@@ -123,7 +123,7 @@ export default function SignUpForm({ role }) {
         color="black"
         className="mb-2 py-1 grid rounded-lg h-24 md:h-40  place-items-center bg-transparent"
       >
-        <Logo />
+        <Logo height={100} width={100} />
       </CardHeader>
       <form className="mt-8 mb-2 mx-2 " onSubmit={handleSubmit}>
         <div className="mb-4 flex w-full flex-col gap-6 ">
