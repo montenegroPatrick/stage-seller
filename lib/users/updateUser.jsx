@@ -9,6 +9,7 @@ export async function updateUser(token, id, data) {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => {return res})
-    .catch((err) => {return err.response});
+    .then((res) => res)
+    .catch((err) => err.response);
+  return response;
 }

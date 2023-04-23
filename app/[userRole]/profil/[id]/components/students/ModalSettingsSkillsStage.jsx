@@ -21,15 +21,12 @@ import { addOrUpdateStages } from "@/lib/stages/addOrUpdateStages";
 
 export default function ModalSettingsSkillsStages({
   showSettings,
-  student,
-  stages,
+  stageSkills,
+  setStageSkills,
   setInputStages,
 }) {
   const token = Cookies.get("jwt");
   const [open, setOpen] = useState(false);
-  const [stageSkills, setStageSkills] = useState(
-    student ? student.stages.map((stage) => stage.skills) : []
-  );
   // skill List fixed who's get with the function getSkills
   const [skillsList, setSkillsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,25 +48,41 @@ export default function ModalSettingsSkillsStages({
   };
 
   const handleChange = (event) => {
-    if (stageSkills.includes(event)) {
-      const newSkillsArray = stageSkills.filter((skill) => skill !== event);
+    const clickedOnExistedSkill = stageSkills.find((stage) =>
+      stage.find((skill) => skill.name === event)
+    );
 
+    if (clickedOnExistedSkill !== undefined) {
+      const newSkillsArray = stageSkills.filter((skill) =>
+        skill.filter((skill) => skill.name !== event)
+      );
       setStageSkills(newSkillsArray);
     } else {
-      const userSkillsArray = [...stageSkills, event];
-      setStageSkills(userSkillsArray);
+      const skillToPush = skillsList.find((skill) => skill.name === event);
+      const stageSkillsArray = [];
+      stageSkillsArray.push(skillToPush);
+      console.log("je set");
+      console.log(stageSkillsArray);
+      setStageSkills([...stageSkills, stageSkillsArray]);
 
-      const dataSkillUpdate = userSkillsArray.map((skillName) =>
-        skillsList.filter((skill) => skill.name === skillName)
+      const dataSkillUpdate = stageSkills.map((stage) =>
+        stage.map((skillOnStage) =>
+          skillsList.find(
+            (skillOnList) => skillOnList.name === skillOnStage.name
+          )
+        )
       );
-      console.log(dataSkillUpdate);
+
       const skillIds = [];
       dataSkillUpdate.map((object) =>
         object.map((data) => skillIds.push(data.id))
       );
-      console.log(skillIds);
+
       setInputStages((prev) => ({ ...prev, skills: skillIds }));
     }
+  };
+  const handleRemove = () => {
+    setStageSkills([]);
   };
   return (
     <Fragment>
@@ -87,64 +100,69 @@ export default function ModalSettingsSkillsStages({
           Voici tes skills, tu peux en rajouter en selectionnant dans la liste
           ci-dessous
         </DialogHeader>
-        <form onSubmit={handleSubmit}>
-          <DialogBody divider>
-            <div className="flex flex-row">
-              {stageSkills.map((skill, index) => (
+
+        <DialogBody divider>
+          <div className="flex flex-row">
+            {stageSkills.map((skill) =>
+              skill.map((obj) => (
                 <div className="flex ">
                   <Avatar
-                    key={index}
+                    key={obj.id}
                     variant="rounded"
                     size="xxl"
-                    alt={skill}
-                    src={`https://img.shields.io/badge/-${skill}-black?style=for-the-badge&logo=${skill}&logoColor=61DAFB&color=white`}
+                    alt={obj.name}
+                    src={`https://img.shields.io/badge/-${obj.name}-black?style=for-the-badge&logo=${obj.name}&logoColor=61DAFB&color=white`}
                     className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
                   />
                 </div>
-              ))}
-            </div>
-            <div className="py-5 ">
-              <Select
-                error={errorMessage}
-                multiple
-                variant="static"
-                aria-multiselectable
-                label="choisit tes skills parmis cette liste"
-                onChange={handleChange}
-                animate={{
-                  mount: { y: 0 },
-                  unmount: { y: 25 },
-                }}
-              >
-                {skillsList &&
-                  skillsList.map((skill) => (
-                    <Option key={skill.id} value={skill.name}>
-                      {skill.name}
-                    </Option>
-                  ))}
-              </Select>
-              {errorMessage && <p>{errorMessage}</p>}
-            </div>
-          </DialogBody>
-
-          <DialogFooter>
-            <Button
-              variant="text"
-              color="red"
-              onClick={handleOpen}
-              className="mr-1"
+              ))
+            )}
+          </div>
+          <div className="py-5 ">
+            <Select
+              error={errorMessage}
+              multiple
+              variant="static"
+              aria-multiselectable
+              label="choisit tes skills parmis cette liste"
+              onChange={handleChange}
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
             >
-              <span>Cancel</span>
-            </Button>
-            <Button variant="gradient" color="blue" type="submit">
-              {isLoading ? (
-                <span>Loading...</span>
-              ) : (
-                <span>Confirm Change</span>
-              )}
-            </Button>
-          </DialogFooter>
-        </form>
+              {skillsList &&
+                skillsList.map((skill) => (
+                  <Option key={skill.id} value={skill.name}>
+                    {skill.name}
+                  </Option>
+                ))}
+            </Select>
+            {errorMessage && <p>{errorMessage}</p>}
+          </div>
+        </DialogBody>
+
+        <DialogFooter>
+          <Button
+            variant="text"
+            color="red"
+            onClick={handleRemove}
+            className="mr-1"
+          >
+            remove all
+          </Button>
+          <Button
+            variant="text"
+            color="red"
+            onClick={handleOpen}
+            className="mr-1"
+          >
+            <span>Cancel</span>
+          </Button>
+          <Button variant="gradient" color="blue" onClick={handleOpen}>
+            {isLoading ? <span>Loading...</span> : <span>Confirm Change</span>}
+          </Button>
+        </DialogFooter>
       </Dialog>
     </Fragment>
   );

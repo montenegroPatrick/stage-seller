@@ -5,6 +5,7 @@ import CardProfile from "@/app/[userRole]/lists/components/CardProfile";
 import { cookies } from "next/headers";
 //Fetch function
 import getAllUsers from "@/lib/users/getAllUsers";
+import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
 
 export default async function Lists({ params }) {
   const token = cookies().get("jwt")?.value;

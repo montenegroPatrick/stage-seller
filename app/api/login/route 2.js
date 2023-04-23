@@ -23,7 +23,6 @@ export async function POST(req, res) {
       return res.json();
     })
     .then((data) => {
-      //console.log(data);
       req.cookies.set("jwt", `${data.token}`);
       const instance = headers();
       //   let response = NextResponse.next();

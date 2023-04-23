@@ -21,96 +21,20 @@ export default async function Profil({ params }) {
   const connectedUserId = cookieStore.get("user-id")?.value;
   const token = cookieStore.get("jwt")?.value;
 
-  // if (!params.id || !token) {
-  //   redirect("/sign-in");
-  // }
-  // const userData = {
-  //   id: 2,
-  //   email: "younes@seller.com",
-  //   type: "STUDENT",
-  //   companyName: "Mon entreprise",
-  //   siret: null,
-  //   firstName: "Babi girl",
-  //   lastName: "kechiche kechihce",
-  //   address: "Front O'ffice main street",
-  //   postCode: 78180,
-  //   city: "Montigny-le-Bretonneux",
-  //   isUserActive: true,
-  //   showTuto: true,
-  //   isProfileCompleted: false,
-  //   profileImage: "",
-  //   description:
-  //     "Je suis dire, je suis soupir, plus rien ne m'inspire. Pourtant, rien qu'un brin de scintillement me ferait frémir. Y'a rien à dire, personne ne m'aime, on m'évite, on m'ignore. La faune m'embête, la flore me snobe, méprise mon sort. Je m'appelle Albert, le merle noir et gris. Je m'appelle Albert Pompourrie, Je m'appelle Albert, le merle maudit, le merle maudit.",
-  //   resume: null,
-  //   linkedin: null,
-  //   github: "",
-  //   lastConnected: null,
-  //   skills: [
-  //     { id: 1, type: "hard", name: "React" },
-  //   ],
-  //   stages: [
-  //     {
-  //       id: 1,
-  //       description: "présente toi en quelque motsscscsc",
-  //       startDate: "2023-04-30T00:00:00+02:00",
-  //       duration: 5,
-  //       location: "Corse, bastia",
-  //       isRemoteFriendly: true,
-  //       isTravelFriendly: false,
-  //       skills: [
-  //         { id: 5, type: "hard", name: "Python" },
-  //         { id: 6, type: "hard", name: "MySQL" },
-  //       ],
-  //     },
-  //   ],
-  // };
+  if (!params.id || !token) {
+    redirect("/sign-in");
+  }
 
-   //const userProfilePage = await getUser(token, params.id);
+  const userProfilePage = await getUser(token, params.id);
 
-   const userProfilePage = {
-     id: 2,
-     email: "younes@seller.com",
-     type: "COMPANY",
-     companyName: "Mon entreprise",
-     siret: null,
-     firstName: "Younesss youness",
-     lastName: "kechiche kechihce",
-     address: "Front O'ffice main street",
-     postCode: 78180,
-     city: "Montigny-le-Bretonneux",
-     isUserActive: true,
-     showTuto: true,
-     isProfileCompleted: false,
-     profileImage: "",
-     description:
-       "Je suis dire, je suis soupir, plus rien ne m'inspire. Pourtant, rien qu'un brin de scintillement me ferait frémir. Y'a rien à dire, personne ne m'aime, on m'évite, on m'ignore. La faune m'embête, la flore me snobe, méprise mon sort. Je m'appelle Albert, le merle noir et gris. Je m'appelle Albert Pompourrie, Je m'appelle Albert, le merle maudit, le merle maudit.",
-     resume: null,
-     linkedin: null,
-     github: "",
-     lastConnected: null,
-     skills: [
-       { id: 1, type: "hard", name: "React" },
-       { id: 2, type: "hard", name: "Symfony" },
-       { id: 3, type: "hard", name: "Next" },
-       
-     ],
-     stages: [
-       {
-         id: 1,
-         description: "présente toi en quelque motsscscsc",
-         startDate: "2023-04-30T00:00:00+02:00",
-         duration: 5,
-         location: "Corse, bastia",
-         isRemoteFriendly: true,
-         isTravelFriendly: false,
-         skills: [
-           { id: 5, type: "hard", name: "Python" },
-           { id: 6, type: "hard", name: "MySQL" },
-         ],
-       },
-     ],
-   };
+  //if it's not the profil user return the profil who's clicked
 
+  if (!userProfilePage) {
+    console.log("no user je suis dans la page de profil ");
+    redirect("/");
+  }
+
+  
    //if it's not the profil user return the profil who's clicked
    if (!userProfilePage) {
      redirect("/");
@@ -132,6 +56,7 @@ export default async function Profil({ params }) {
        </NavBarMarginContainer>
      );
    }
+
 
   //si on est l'user connecter on peut faire getUser sinon il faut un getProfilCompany fetch('/api/users/type/company') => !role.filter ((user)=> user.id === params.id)
   return (

@@ -21,14 +21,14 @@ import { addOrUpdateStages } from "@/lib/stages/addOrUpdateStages";
 
 export default function ModalSettingsSkills({
   showSettings,
+  userSkills,
+  setUserSkills,
   student,
-  stages,
-  setInputStages,
 }) {
   const token = Cookies.get("jwt");
   const userId = Cookies.get("user-id");
   const [open, setOpen] = useState(false);
-  const [userSkills, setUserSkills] = useState(student ? student.skills : []);
+
   // skill List fixed who's get with the function getSkills
   const [skillsList, setSkillsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,18 +44,10 @@ export default function ModalSettingsSkills({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event);
+
     setIsLoading(true);
     // todo the api execpted the ID of the skills
-    const dataSkillUpdate = userSkills.map((skillName) =>
-      skillsList.filter((skill) => skill.name === skillName)
-    );
-    const skillListIds = { skillList: [] };
-    dataSkillUpdate.map((object) =>
-      object.map((data) => skillListIds.skillList.push(data.id))
-    );
-    // input Stage for update or add
-
+    const skillListIds = { skillList: [...userSkills] };
     const response = await addSkills(token, userId, skillListIds);
     if (response) {
       setIsLoading(false);
@@ -67,20 +59,29 @@ export default function ModalSettingsSkills({
   };
 
   const handleChange = (event) => {
-    console.log(event);
-    if (userSkills.includes(event)) {
-      setUserSkills(userSkills);
+    console.log(userSkills);
+    const clickedOnExistedSkill = userSkills.find(
+      (skill) => skill.name === event
+    );
+    if (clickedOnExistedSkill !== undefined) {
+      const newSkillsArray = userSkills.filter(
+        (skill) => (skill) => skill.name !== event
+      );
+      setUserSkills(newSkillsArray);
     } else {
-      const userSkillsArray = [...userSkills, event];
-      setUserSkills(userSkillsArray);
+      const skillToAdd = skillsList.find((skill) => skill.name === event);
+      setUserSkills([...userSkills, skillToAdd]);
+
+      const dataSkillUpdate = userSkills.map(
+        (skill) => skill.name === skillsList.map((skill) => skill.name)
+      );
+
+      const skillIds = [];
+      dataSkillUpdate.map((objectSkill) => skillIds.push(objectSkill.id));
     }
   };
-  const handleRemoveEvent = (event) => {
-    // console.log(event.target.parentElement.firstChild);
-    const newArraySkills = [...userSkills];
-    newArraySkills.filter((skill) => skill.id !== event.target.id);
-    // newArraySkills.remove(event.target.parentElement.firstChild);
-    setUserSkills(newArraySkills);
+  const handleRemoveAll = (event) => {
+    setUserSkills([]);
   };
   return (
     <Fragment>
@@ -101,19 +102,19 @@ export default function ModalSettingsSkills({
         <form onSubmit={handleSubmit}>
           <DialogBody divider>
             <div className="flex flex-row">
-              {userSkills.map((skill, index) => (
-                <div className="flex ">
-                  <Avatar
-                    key={index}
-                    variant="rounded"
-                    size="xxl"
-                    alt={skill}
-                    src={`https://img.shields.io/badge/-${skill}-black?style=for-the-badge&logo=${skill}&logoColor=61DAFB&color=white`}
-                    className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
-                  />
-                  <RxCross2 onClick={handleRemoveEvent} />
-                </div>
-              ))}
+              {userSkills &&
+                userSkills.map((skill) => (
+                  <div className="flex ">
+                    <Avatar
+                      key={skill.id}
+                      variant="rounded"
+                      size="xxl"
+                      alt={skill.name}
+                      src={`https://img.shields.io/badge/-${skill.name}-black?style=for-the-badge&logo=${skill.name}&logoColor=61DAFB&color=white`}
+                      className="border-2 w-20 h-7 border-whiteSmoke hover:z-10"
+                    />
+                  </div>
+                ))}
             </div>
             <div className="py-5 ">
               <Select
@@ -140,6 +141,14 @@ export default function ModalSettingsSkills({
           </DialogBody>
 
           <DialogFooter>
+            <Button
+              variant="text"
+              color="red"
+              onClick={handleRemoveAll}
+              className="mr-1"
+            >
+              <span>Remove All</span>
+            </Button>
             <Button
               variant="text"
               color="red"

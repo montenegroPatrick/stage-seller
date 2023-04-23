@@ -14,7 +14,8 @@ export default function LikeButton({ userReceivingId }) {
 
   useEffect(() => {
     const getLikes = async () =>
-      await getLikeFromMe(token).then((data) => {
+      await getLikeFromMe(token).then(({ data }) => {
+        console.log(data);
         data.map(() => {
           setIsLike(true);
         });
