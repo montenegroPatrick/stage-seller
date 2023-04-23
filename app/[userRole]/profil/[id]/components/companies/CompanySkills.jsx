@@ -2,85 +2,86 @@
 import Skill from "./Skill";
 import ButtonForm from "./ButtonForm";
 import SettingButton from "./SettingButton";
-
-import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import { getSkills } from "@/lib/skills/getSkills";
+import { all } from "axios";
 
-export default function CompanySkills({ skills, submitForm }) {
-  const token = Cookies.get("jwt");
-  const [allSkills, setAllSkills] = useState(["React", "Php", "Python", "tailwind"]);
+export default function CompanySkills({
+  skills,
+  submitForm,
+  allSkills,
+  setMessage,
+}) {
   const [settings, setSettings] = useState(false);
-  const [userSkills, setUserSkills] = useState(skills);
-  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [currentSkills, setCurrentSkills] = useState(skills);
+  const [selectedSkills, setSelectedSkills] = useState(skills);
+  const [listAllSkills, setListAllSkills] = useState(allSkills);
 
-  // //Fetch list of all skills
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const listSkills = await getSkills(token);
-  //     setAllSkills(listSkills);
-  //   };
-  //   fetchData();
-  // }, []);
-
-  //Push userSkills into selectedSkills for checked them into checkbox
+  console.log("je suis dans mon skill", selectedSkills);
   useEffect(() => {
-    setSelectedSkills(skills);
-  }, [skills]);
+    setMessage("");
+  }, [settings]);
 
-  const handleSelectSkill = (skill) => {
-    if (!selectedSkills.includes(skill)) {
-      setSelectedSkills([...selectedSkills, skill]);
+  //Recip skill and add or delete of the state
+  const handleSelectSkill = (skillId) => {
+    if (!selectedSkills.some((selectedSkill) => selectedSkill.id === skillId)) {
+      const skillToAdd = listAllSkills.filter((skill) => skill.id === skillId);
+      setSelectedSkills((previous) => [...previous, ...skillToAdd]);
     } else {
-      handleDeselectSkill(skill);
+      const newSelectedSkills = selectedSkills.filter(
+        (selectedSkill) => selectedSkill.id !== skillId
+      );
+      setSelectedSkills([...newSelectedSkills]);
     }
-  };
-
-  const handleDeselectSkill = (skill) => {
-    setSelectedSkills(
-      selectedSkills.filter((selectedSkill) => selectedSkill !== skill)
-    );
   };
 
   return (
     <div className="w-full xl:w-[50%] flex flex-col items-center px-2 py-5 my-5 mx-auto relative">
-      <h2 className="text-2xl 2xl:text-3xl text-center">
-        Technologies
-      </h2>
-      <div className={`mt-5 w-full bg-white mx-auto rounded-lg flex flex-wrap justify-evenly py-4 px-2 gap-[6px] border border-black`}>
+      <h2 className="text-2xl 2xl:text-3xl text-center">Technologies</h2>
+      <div
+        className={`mt-5 w-full bg-white mx-auto rounded-lg flex flex-wrap justify-evenly py-4 px-2 gap-[6px] border border-black`}
+      >
         {settings ? (
           <form
             onSubmit={(event) => {
               event.preventDefault();
-              submitForm({skills: [...selectedSkills]});
+              submitForm({ skills: [...selectedSkills] });
+              setSettings(!settings);
             }}
           >
             <ul className="flex flex-wrap justify-center">
-              {allSkills.map((skill) => (
-                <li key={skill}>
+              {listAllSkills.map((skill) => (
+                <li key={skill.id} className="p-2">
                   <label className="text-lg mx-auto px-4 text-paleKaki font-medium">
                     <input
                       type="checkbox"
-                      checked={selectedSkills.includes(skill)}
-                      onChange={() => handleSelectSkill(skill)}
+                      value={skill.id}
+                      checked={selectedSkills.some(
+                        (selectedSkill) => selectedSkill.id === skill.id
+                      )}
+                      onChange={() => handleSelectSkill(skill.id)}
                     />
-                    {skill}
+                    {skill.name}
                   </label>
                 </li>
               ))}
             </ul>
             <ButtonForm />
           </form>
-        ) : userSkills.length > 0 ? (
-          userSkills.map((skill, index) => (
-            <ul>
-              <li>
-                <Skill key={index} bgColor="bg-blueDark">
-                  {skill}
+        ) : currentSkills.length > 0 ? (
+          <ul className="flex flex-wrap justify-center">
+            {currentSkills.map((skill) => (
+              <li key={skill.id} className="p-2">
+                <Skill
+                  checked={selectedSkills.some(
+                    (selectedSkill) => selectedSkill.id === skill.id
+                  )}
+                >
+                  {skill.name}
                 </Skill>
               </li>
-            </ul>
-          ))
+            ))}
+          </ul>
         ) : (
           <p>Pas de skills renseignés</p>
         )}

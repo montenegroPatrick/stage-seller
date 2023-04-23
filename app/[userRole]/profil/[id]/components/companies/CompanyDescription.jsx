@@ -35,7 +35,7 @@ export default function CompanyDescription({ description, submitForm }) {
           <div className="mb-3 w-full ">
             <textarea
               type="text"
-              value={userDescription}
+              value={userDescription ? userDescription : ""}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Description"
               className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-lg border border-slate-300 outline-none focus:outline-none focus:ring w-full"
@@ -49,8 +49,8 @@ export default function CompanyDescription({ description, submitForm }) {
           </div>
         </form>
       ) : (
-        <p className="my-8 px-12 xl:text-lg 2xl:text-xl xl:px-18 text-black dark:text-gray-400 first-letter:text-4xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100 first-letter:mr-1 first-letter:float-left">
-          {userDescription === ""
+        <p className="my-8 px-12 text-md xl:text-lg xl:px-18 text-black dark:text-gray-400 first-letter:text-4xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100 first-letter:mr-1 first-letter:float-left">
+          {!userDescription
             ? "Description non renseignée."
             : userDescription}
         </p>

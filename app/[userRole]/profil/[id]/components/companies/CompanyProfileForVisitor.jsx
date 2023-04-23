@@ -30,6 +30,7 @@ export default function CompanyProfileForVisitor({ otherUser }) {
       </div>
       <section className="flex flex-col md:flex-row w-full 2xl:w-[90vw] mx-auto">
         <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col">
+          
           <CompanyNameAvatar
             companyName={companyName}
             picture={profilImage}
