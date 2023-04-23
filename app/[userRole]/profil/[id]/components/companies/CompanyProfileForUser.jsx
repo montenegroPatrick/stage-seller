@@ -30,37 +30,42 @@ export default function CompanyProfileForUser({ userProfilePage }) {
   const token = Cookies.get("jwt");
   const [userData, setUserData] = useState(userProfilePage);
   const [message, setMessage] = useState("");
-  
+
   const [allSkills, setAllSkills] = useState([
-    { id: 1, type: 'hard', name: 'React' },
-    { id: 2, type: 'hard', name: 'Symfony' },
-    { id: 3, type: 'hard', name: 'Next' },
-    { id: 4, type: 'hard', name: 'Laravel' },
-    { id: 5, type: 'hard', name: 'Python' },
-    { id: 6, type: 'hard', name: 'MySQL' }
+    { id: 1, type: "hard", name: "React" },
+    { id: 2, type: "hard", name: "Symfony" },
+    { id: 3, type: "hard", name: "Next" },
+    { id: 4, type: "hard", name: "Laravel" },
+    { id: 5, type: "hard", name: "Python" },
+    { id: 6, type: "hard", name: "MySQL" },
   ]);
 
-  // //Fetch list of all skills
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const listSkills = await getSkills(token);
-  //     setAllSkills(listSkills);
-  //   };
-  //   fetchData();
-  // }, []);
-  // /*  ******************** */
+   //Fetch list of all skills
+  useEffect(() => {
+    const fetchData = async () => {
+      const listSkills = await getSkills(token);
+      setAllSkills(listSkills);
+    };
+    fetchData();
+  }, []);
+  /*  ******************** */
 
   const handleSubmit = async (newData) => {
     setMessage("");
     const newDataUser = { ...userData, ...newData };
-    setUserData(newDataUser);
-    const response = await updateUser(newDataUser);
-    if (response.ok) {
-      setMessage("Modifications validées");
-    } else {
+
+    try {
+      const response = await updateUser(token, id, newData);
+
+      if (response.status === 204) {
+        setMessage("Modifications validées");
+        setUserData(newDataUser);
+      } else {
+        setMessage("Erreur lors de la modification");
+      }
+    } catch (error) {
       setMessage("Erreur lors de la modification");
     }
-    console.log(newDataUser);
   };
 
   return (
@@ -72,10 +77,9 @@ export default function CompanyProfileForUser({ userProfilePage }) {
         <div className="w-full 2xl:w-[90vw] bg-black h-[1px]" />
         {message ? (
           message === "Modifications validées" ? (
-            <ErrorAlert color={'green'} message={message} />
-            
+            <ErrorAlert color={"green"} message={message} />
           ) : (
-            <ErrorAlert color={'red'} message={message} />
+            <ErrorAlert color={"red"} message={message} />
           )
         ) : null}
       </div>
@@ -108,9 +112,10 @@ export default function CompanyProfileForUser({ userProfilePage }) {
               ))
             ) : (
               <CompanyStage
-                currentStage={null}
+                currentStage={[]}
                 setMessage={setMessage}
                 token={token}
+                allSkills={allSkills}
               />
             )}
           </div>

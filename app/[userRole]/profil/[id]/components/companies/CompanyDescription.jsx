@@ -35,7 +35,7 @@ export default function CompanyDescription({ description, submitForm }) {
           <div className="mb-3 w-full ">
             <textarea
               type="text"
-              value={userDescription}
+              value={userDescription ? userDescription : ""}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Description"
               className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-lg border border-slate-300 outline-none focus:outline-none focus:ring w-full"

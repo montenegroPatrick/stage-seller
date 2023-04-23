@@ -16,7 +16,9 @@ export default function CompanyStage({
   const [settings, setSettings] = useState(false);
   const [selectedSkills, setSelectedSkills] = useState(currentStage.skills);
   const [stage, setStage] = useState(currentStage);
-  
+  const [stageToSend, setStageToSend] = useState([]);
+  const [listAllSkills, setListAllSkills] = useState(allSkills);
+  console.log("le selct", selectedSkills);
   useEffect(() => {
     setMessage("");
   }, [settings]);
@@ -67,7 +69,7 @@ export default function CompanyStage({
 
   if (settings && stage) {
     return (
-      <div className="w-full xl:w-[50%] flex flex-col items-center rounded-xl px-2 py-5 mx-auto my-5 bg-white relative">
+      <div className="w-full xl:w-[50%] flex flex-col items-center rounded-xl py-5 mx-auto my-5 bg-white relative">
         <h2 className="text-2xl 2xl:text-3xl text-black text-center ">
           Profil recherché
         </h2>
@@ -84,16 +86,18 @@ export default function CompanyStage({
               Skills requis pour le stage
             </p>
             <ul className="flex flex-wrap justify-center">
-              {allSkills.map((skill) => (
+              {listAllSkills.map((skill) => (
                 <li key={skill.id}>
                   <label className="text-md mx-auto px-4 text-paleKaki font-medium">
                     <input
                       type="checkbox"
-                      checked={selectedSkills.includes(skill)}
+                      checked={selectedSkills.some(
+                        (selectedSkill) => selectedSkill.id === skill.id
+                      )}
                       onChange={() => handleSelectSkill(skill)}
                       required
                     />
-                    {skill}
+                    {skill.name}
                   </label>
                 </li>
               ))}
@@ -106,7 +110,7 @@ export default function CompanyStage({
               value={stage.description}
               onChange={(e) => setStage({ description: e.target.value })}
               placeholder="Description du stage"
-              className="px-3 py-3 placeholder-slate-300 text-slate-600 relative text-center bg-white rounded text-lg border border-slate-300 outline-none focus:outline-none focus:ring w-full"
+              className="px-3 py-3 placeholder-slate-300 text-slate-600 relative text-center bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full"
               required
             />
             <p className="mt-3 italic underline text-sm">Lieu du stage</p>
@@ -127,7 +131,7 @@ export default function CompanyStage({
                   <input
                     type="radio"
                     value={true}
-                    checked={stage.is_remote_friendly}
+                    checked={stage.isRemoteFriendly}
                     onChange={(e) =>
                       setStage({ is_remote_friendly: e.target.value })
                     }
@@ -139,7 +143,7 @@ export default function CompanyStage({
                   <input
                     type="radio"
                     value={false}
-                    checked={stage.is_remote_friendly}
+                    checked={!stage.isRemoteFriendly}
                     onChange={(e) =>
                       setStage({ is_remote_friendly: e.target.value })
                     }
@@ -152,7 +156,7 @@ export default function CompanyStage({
 
             <p className="mt-3 italic underline text-sm">Début du stage</p>
             <input
-              value={stage.start_date}
+              value={stage.startDate}
               onChange={(e) => setStage({ start_date: e.target.value })}
               type="date"
               placeholder="Date de début du stage"
@@ -205,16 +209,16 @@ export default function CompanyStage({
               Skills requis pour le stage
             </p>
             <ul className="flex flex-wrap justify-center">
-              {allSkills.map((skill) => (
+              {listAllSkills.map((skill) => (
                 <li key={skill.id}>
                   <label className="text-md mx-auto px-4 text-paleKaki font-medium">
                     <input
                       type="checkbox"
-                      checked={selectedSkills.includes(skill)}
+                      checked={selectedSkills.includes(skill) ? true : false}
                       onChange={() => handleSelectSkill(skill)}
                       required
                     />
-                    {skill}
+                    {skill.name}
                   </label>
                 </li>
               ))}
@@ -227,7 +231,7 @@ export default function CompanyStage({
               value={""}
               onChange={(e) => setStage({ description: e.target.value })}
               placeholder="Description du stage"
-              className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-lg border border-slate-300 outline-none focus:outline-none focus:ring w-full"
+              className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full"
               required
             />
             <p className="mt-3 italic underline text-sm">Lieu du stage</p>
@@ -351,7 +355,7 @@ export default function CompanyStage({
             </article>
             <div className="text-center">
               <p className="font-md mt-3 text-teal-800 font-semibold text-center leading-tight">
-                À partir du {stage.start_date}
+                À partir du {stage.startDate}
               </p>
               <p className="font-md mt-3 text-teal-800 font-semibold text-center leading-tight">
                 Pour une durée de {stage.duration} mois
@@ -359,7 +363,7 @@ export default function CompanyStage({
             </div>
           </>
         ) : (
-          <p>Pas de stage proposé</p>
+          <p className="text-center">Pas de stage proposé</p>
         )}
       </section>
       <div
