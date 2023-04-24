@@ -30,9 +30,9 @@ import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard
 import { MdLocationOn } from "react-icons/md";
 import { FcWorkflow } from "react-icons/fc";
 
-export default function ProfileCarte({ user }) {
+export default function ProfileCarte({ user, classes }) {
   //TODO regarder si le user.role est company ou student pour éventuellement changer des champs dynamiquement
-  //console.log("user dans card profil", user);
+
   const {
     lastName,
     firstName,
@@ -49,24 +49,28 @@ export default function ProfileCarte({ user }) {
   const role = companyName ? "companies" : "students";
 
   return (
-    <div className="relative  ">
-      <Link
+    <div className={classes}>
+      <div
         href={`${role}/profil/${id}`}
-        className="relative flex flex-col cardProfile boxShadow-inputShadow gap-10 w-50vh md:h-96 md:w-70vh  overflow-hidden rounded-2xl  p-4 sm:p-6 lg:p-8 mx-2"
+        className="relative flex flex-col cardProfile boxShadow-inputShadow gap-8 w-50vh md:h-96 md:w-70vh  overflow-hidden rounded-2xl  p-4 sm:p-6 lg:p-8 mx-2"
       >
         {/* <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span> */}
-
+        <div className="w-full h-fit flex flex-row-reverse pl-10 py-2">
+          <LikeButton userReceivingId={id} />
+        </div>
         <div className="sm:flex sm:justify-between sm:gap-4">
           <div>
-            <h3 className="text-lg font-semibold text-black space-x-1 sm:text-3xl ">
-              {role === "students"
-                ? `${lastName.slice(0, 10)}  ${firstName.slice(0, 10)}`
-                : `${
-                    companyName.length > 35
-                      ? `${companyName.slice(0, 20)}...`
-                      : companyName
-                  }`}
-            </h3>
+            <Link href={`${role}/profil/${id}`}>
+              <h3 className="text-lg grow font-semibold text-black space-x-1 sm:text-3xl ">
+                {role === "students"
+                  ? `${lastName.slice(0, 10)}  ${firstName.slice(0, 10)}`
+                  : `${
+                      companyName.length > 35
+                        ? `${companyName.slice(0, 20)}...`
+                        : companyName
+                    }`}
+              </h3>
+            </Link>
             <div className="flex items-center gap-2">
               <RiMailSendLine />
               <h4>{email}</h4>
@@ -79,7 +83,7 @@ export default function ProfileCarte({ user }) {
             </div>
           </div>
 
-          <div className="hidden sm:block sm:shrink-0">
+          <div className="hidden sm:flex mr-5 justify-between ">
             {profileImage ? (
               <img
                 alt={profileImage}
@@ -127,8 +131,7 @@ export default function ProfileCarte({ user }) {
             </div>
           </dl>
         </div>
-      </Link>
-      <LikeButton userReceivingId={id} />
+      </div>
     </div>
   );
 }

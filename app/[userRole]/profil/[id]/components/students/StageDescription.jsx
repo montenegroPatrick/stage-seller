@@ -28,76 +28,79 @@ export default function StageDescription({
   if (isSettings) {
     return (
       <>
-        <div className=" flex flex-col gap-2 w-full ">
-          <Textarea
-            type="text"
-            value={input.description}
-            onChange={handleChange}
-            name="description"
-            label="description de ta recherche"
-          />
-          <Input
-            type="date"
-            value={input.starDate}
-            onChange={handleChange}
-            name="startDate"
-            label="la date de début de stage"
-          />
-          <Input
-            type="number"
-            value={input.duration}
-            onChange={handleChange}
-            name="duration"
-            label="la durée souhaitée en mois"
-          />
-          <Input
-            type="text"
-            value={input.location}
-            onChange={handleChange}
-            name="location"
-            label="le lieux souhaité"
-          />
-          <div className="flex flex-wrap justify-between rounded-xl p-2  bg-transparent border-2 ">
-            <Checkbox
-              id="checkRemoteFriendly"
-              label="coche la case si tu souhaite travailler en full-remote"
-              className=" p-0 w-5 h-5 min-w-0"
-              type="checkbox"
-              name="isRemoteFriendly"
-              checked={input.isRemoteFriendly}
-              onChange={() =>
-                setInput((prev) => ({
-                  ...prev,
-                  isRemoteFriendly: !input.isRemoteFriendly,
-                }))
-              }
+        {input.map((input, index) => (
+          <div key={index} className=" flex flex-col gap-2 w-full ">
+            <Textarea
+              type="text"
+              value={input.description}
+              onChange={handleChange}
+              name="description"
+              label="description de ta recherche"
             />
-            <Checkbox
-              id="checkTravelFriendly"
-              label="coche la case si tu peux/souhaite te déplacer"
-              className=" p-0 w-5 h-5 min-w-0"
-              type="checkbox"
-              name="isTravelFriendly"
-              checked={input.isTravelFriendly}
-              onChange={() =>
-                setInput((prev) => ({
-                  ...prev,
-                  isTravelFriendly: !input.isTravelFriendly,
-                }))
-              }
+            <Input
+              type="date"
+              value={input.starDate}
+              onChange={handleChange}
+              name="startDate"
+              label="la date de début de stage"
+            />
+            <Input
+              type="number"
+              value={input.duration}
+              onChange={handleChange}
+              name="duration"
+              label="la durée souhaitée en mois"
+            />
+            <Input
+              type="text"
+              value={input.location}
+              onChange={handleChange}
+              name="location"
+              label="le lieux souhaité"
+            />
+            <div className="flex flex-wrap justify-between rounded-xl p-2  bg-transparent border-2 ">
+              <Checkbox
+                id="checkRemoteFriendly"
+                label="coche la case si tu souhaite travailler en full-remote"
+                className=" p-0 w-5 h-5 min-w-0"
+                type="checkbox"
+                name="isRemoteFriendly"
+                checked={input.isRemoteFriendly}
+                onChange={() =>
+                  setInput((prev) => ({
+                    ...prev,
+                    isRemoteFriendly: !input.isRemoteFriendly,
+                  }))
+                }
+              />
+              <Checkbox
+                id="checkTravelFriendly"
+                label="coche la case si tu peux/souhaite te déplacer"
+                className=" p-0 w-5 h-5 min-w-0"
+                type="checkbox"
+                name="isTravelFriendly"
+                checked={input.isTravelFriendly}
+                onChange={() =>
+                  setInput((prev) => ({
+                    ...prev,
+                    isTravelFriendly: !input.isTravelFriendly,
+                  }))
+                }
+              />
+            </div>
+
+            {/* skills STAGE */}
+            <Skills
+              stages={true}
+              student={currentUser}
+              show={showSettings}
+              skills={skills}
+              isSettings={isSettings}
+              setInputStages={setInput}
+              setShowSettings={setShowSettings}
             />
           </div>
-          {/* skills STAGE */}
-          <Skills
-            stages={true}
-            student={currentUser}
-            show={showSettings}
-            skills={skills}
-            isSettings={isSettings}
-            setInputStages={setInput}
-            setShowSettings={setShowSettings}
-          />
-        </div>
+        ))}
       </>
     );
   }
@@ -105,7 +108,10 @@ export default function StageDescription({
     <>
       {currentUser.stages.length > 0 ? (
         currentUser.stages.map((stage) => (
-          <div className="p-5 glassMorph w-full text-left flex border border-black flex-col gap-16 float-right rounded-lg ">
+          <div
+            key={stage.id}
+            className="p-5 glassMorph w-full text-left flex border border-black flex-col gap-16 float-right rounded-lg "
+          >
             <h2 className="text-xl text-bold border-b border-black py-2 md:uppercase">
               ma recherche
             </h2>

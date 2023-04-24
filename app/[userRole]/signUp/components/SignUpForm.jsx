@@ -111,7 +111,7 @@ export default function SignUpForm({ role }) {
           router.push(`/${role}/profil/${data.user.id}`);
         })
         .catch((err) => {
-          console.log(err.response);
+          setErrorMessage("une erreur est survenue veuillez réessayer");
         });
     }
   };
@@ -246,7 +246,7 @@ export default function SignUpForm({ role }) {
         {errorMessage && (
           <>
             <Alert
-              show={errorMessage}
+              show={!!errorMessage}
               dismissible={{
                 onClose: () => setErrorMessage(""),
               }}

@@ -14,10 +14,6 @@ import {
 import { getSkills } from "@/lib/skills/getSkills";
 
 import Cookies from "js-cookie";
-import { updateUser } from "@/lib/users/updateUser";
-import { addSkills } from "@/lib/users/addSkills";
-import { RxCross2 } from "react-icons/rx";
-import { addOrUpdateStages } from "@/lib/stages/addOrUpdateStages";
 
 export default function ModalSettingsSkillsStages({
   showSettings,
@@ -39,13 +35,6 @@ export default function ModalSettingsSkillsStages({
     getSkillsData();
     showSettings && handleOpen();
   }, [showSettings]);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    handleOpen();
-    // setIsLoading(true);
-    // todo the api execpted the ID of the skills
-  };
 
   const handleChange = (event) => {
     const clickedOnExistedSkill = stageSkills.find((stage) =>
@@ -77,7 +66,7 @@ export default function ModalSettingsSkillsStages({
         object.map((data) => skillIds.push(data.id))
       );
 
-      setInputStages((prev) => ({ ...prev, skills: skillIds }));
+      setInputStages((prev) => [{ ...prev, skills: skillIds }]);
     }
   };
   const handleRemove = () => {

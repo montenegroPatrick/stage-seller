@@ -24,7 +24,6 @@ export default function MatchHistoric({ currentUser }) {
   const [matches, setMatches] = useState([]);
   const [likeSend, setLikeSend] = useState([]);
   const [likeRecieve, setLikeRecieve] = useState([]);
-  console.log("matches", matches);
   // data
   const getMatches = async () =>
     getUserMatches(token).then((res) => {
@@ -76,24 +75,24 @@ export default function MatchHistoric({ currentUser }) {
           value="like émis"
         >
           {likeSend.length > 0 &&
-            likeSend.map((like) => (
-              <Suspense fallback={<SkeletonLoaderCard />}>
+            likeSend.map((like, index) => (
+              <Suspense key={index} fallback={<SkeletonLoaderCard />}>
                 <MiniCard objectLike={like} matches={false} />
               </Suspense>
             ))}
         </TabPanel>
         <TabPanel className="flex flex-col gap-5" value="like reçu">
           {likeRecieve.length > 0 &&
-            likeRecieve.map((like) => (
-              <Suspense fallback={<SkeletonLoaderCard />}>
+            likeRecieve.map((like, index) => (
+              <Suspense key={index} fallback={<SkeletonLoaderCard />}>
                 <MiniCard objectLike={like} matches={false} />
               </Suspense>
             ))}
         </TabPanel>
         <TabPanel className="flex flex-col gap-5" value="match">
           {matches.length > 0 &&
-            matches.map((like) => (
-              <Suspense fallback={<SkeletonLoaderCard />}>
+            matches.map((like, index) => (
+              <Suspense key={index} fallback={<SkeletonLoaderCard />}>
                 <MiniCard objectLike={like} matches={true} />
               </Suspense>
             ))}

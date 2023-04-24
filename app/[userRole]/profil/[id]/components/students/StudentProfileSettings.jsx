@@ -43,10 +43,10 @@ export default function StudentProfilSettings({
   const { stages } = student;
 
   const [inputStages, setInputStages] = useState(
-    stages
+    stages.length > 0
       ? stages.map((stage) => ({
-          description: stage.description ?? "",
-          startDate: stage.start_date ?? "",
+          description: stage.description,
+          startDate: stage.startDate ?? "",
           duration: stage.duration ?? "",
           location: stage.location ?? "",
           isRemoteFriendly: stage.isRemoteFriendly ?? false,
@@ -69,17 +69,11 @@ export default function StudentProfilSettings({
   };
   const handleChangeStages = (event) => {
     const { name, value } = event.target;
-    setInputStages((prev) => ({ ...prev, [name]: value }));
+    if (name === "startDate") {
+    }
+    setInputStages((prev) => [{ ...prev, [name]: value }]);
   };
-  // const checkInputNotEmpty = (inputObject) => {
-  //   for (const input of inputObject) {
-  //     if (input === "") {
-  //       return false;
-  //     } else {
-  //       return true;
-  //     }
-  //   }
-  // };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -242,7 +236,7 @@ export default function StudentProfilSettings({
             {profilMessage && (
               <>
                 <Alert
-                  show={profilMessage}
+                  show={!!profilMessage}
                   dismissible={{
                     onClose: () => setProfilMessage(""),
                   }}
@@ -274,7 +268,7 @@ export default function StudentProfilSettings({
           {stageMessage && (
             <>
               <Alert
-                show={stageMessage}
+                show={!!stageMessage}
                 dismissible={{
                   onClose: () => setStageMessage(""),
                 }}

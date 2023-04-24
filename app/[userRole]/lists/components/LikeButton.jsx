@@ -15,18 +15,25 @@ import getUserMatches from "@/lib/users/getUserMatches";
 
 export default function LikeButton({ userReceivingId }) {
   const token = Cookies.get("jwt");
+
   const [matches, setMatches] = useState();
   const [isMatch, setIsMatch] = useState(false);
+  const [isMatchOpen, setIsMatchOpen] = useState(false);
   const [isLike, setIsLike] = useState(false);
   const [likesFromMe, setLikesFromMe] = useState();
   const [likesToMe, setLikesToMe] = useState();
   const path = usePathname();
   const router = useRouter();
+
   const getMatchesOfUser = async () => {
     await getUserMatches(token).then((res) => {
       if (res.data) {
         setMatches(res.data);
-        res.data.map(() => setIsMatch(true));
+        res.data.map((match) => {
+          if (match.id === userReceivingId) {
+            setIsMatch(true);
+          }
+        });
       }
     });
   };
@@ -50,11 +57,12 @@ export default function LikeButton({ userReceivingId }) {
       const theMatch = likesToMe.find(
         (likeTo) => likeTo.user.id === userReceivingId
       );
-      console.log("the Match", theMatch);
       theMatch &&
-        (await setMatch(token, theMatch.matchId).then(() => setIsMatch(true)));
+        (await setMatch(token, theMatch.matchId).then(() =>
+          setIsMatchOpen(true)
+        ));
     } else {
-      setIsMatch(false);
+      setIsMatchOpen(false);
     }
   };
 
@@ -71,7 +79,6 @@ export default function LikeButton({ userReceivingId }) {
     await getLikesFromMe();
     await getLikesToMe();
     await foundMatches();
-    console.log("likesFromMe on handleClick", likesFromMe);
     if (!isMatch) {
       const userClickedId =
         likesFromMe &&
@@ -86,18 +93,17 @@ export default function LikeButton({ userReceivingId }) {
         unLike(token, userClickedId.matchId);
       }
     }
-    router.refresh();
   };
-  console.log("matches", matches);
-  if (isMatch) {
+
+  if (isMatchOpen) {
     return <TheMath openMatch={isMatch} setIsMatch={setIsMatch} />;
   }
 
   return (
     <>
-      <button onClick={handleClick} className="absolute top-2 right-4 ">
+      <button onClick={handleClick} className="">
         {isMatch ? (
-          <AiFillHeart className="text-red-500" />
+          <AiFillHeart className="text-black" />
         ) : isLike ? (
           <AiFillHeart className="text-red-500" />
         ) : (
