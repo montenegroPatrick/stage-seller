@@ -36,24 +36,24 @@ export default function StudentProfile({ id, student }) {
 
           <section className="flex flex-wrap flex-row justify-between w-full">
             <div className="flex flex-col gap-5 w-full ">
-              <h3 className=" text-xl py-5 font-extrabold">{`${student.firstName} ${student.lastName}`}</h3>
+              <h3 className=" text-xl md:uppercase py-5 font-extrabold">{`${student.firstName} ${student.lastName}`}</h3>
               <div className="flex flex-row items-center gap-2">
                 <MdLocationOn />
-                <h6 className=" text-[0.7rem]  font-bold">{`${student.city}`}</h6>
+                <h6 className="font-bold">{`${student.city}`}</h6>
               </div>
-              <div className="text-[0.7rem]  font-bold flex flex-row items-center gap-2">
+              <div className="  font-bold flex flex-row items-center gap-2">
                 <SlSocialLinkedin />
                 <Link href={student.linkedin ?? ""}>{`${
                   student.linkedin ? student.linkedin : ""
                 }`}</Link>
               </div>
-              <div className="text-[0.7rem]  font-bold flex flex-row items-center gap-2">
+              <div className="  font-bold flex flex-row items-center gap-2">
                 <VscGithub />
                 <Link href={student.github ?? ""}>{`${
                   student.github ? `https://github.com/${student.github}` : ""
                 }`}</Link>
               </div>
-              <div className="text-[0.7rem]  font-bold flex flex-row items-center gap-2">
+              <div className="  font-bold flex flex-row items-center gap-2">
                 <RxResume />
                 <Link href={`/students/profil/${student.id}/resume`}>
                   mon CV

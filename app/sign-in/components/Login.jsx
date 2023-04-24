@@ -6,7 +6,6 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import cookie from "cookie";
 
 import { baseUrl } from "@/lib/baseUrl";
 import axios from "axios";
@@ -31,12 +30,12 @@ export default function LogIn() {
     setErrorMessage("");
   }, [input]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorMessage("");
     setIsLoading(true);
     const { email, password } = input;
-    axios
+    await axios
       .post(`${baseUrl}login`, { email, password })
       .then(({ headers, data }) => {
         setIsLoading(false);
@@ -68,7 +67,7 @@ export default function LogIn() {
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-black">
               Connexion
             </h2>
-            <p className="mt-2 text-center text-sm text-black">
+            <div className="mt-2 text-center text-sm text-black">
               ou{" "}
               <Link
                 href="/students/signUp"
@@ -76,7 +75,7 @@ export default function LogIn() {
               >
                 créer un compte
               </Link>
-            </p>
+            </div>
           </div>
           <form
             method="post"

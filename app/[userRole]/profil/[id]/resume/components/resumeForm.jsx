@@ -21,7 +21,6 @@ export default function ResumeForm({ student }) {
   }, []);
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("handleSubmit file", file);
     const formData = new FormData();
     formData.append("file", file);
     formData.append("type", "resume");
@@ -53,7 +52,7 @@ export default function ResumeForm({ student }) {
       <div>
         <label
           className="flex cursor-pointer flex-col items-center justify-center "
-          for="resume"
+          htmlFor="resume"
         >
           Choisis ton cv :
           <RxResume />
@@ -71,7 +70,7 @@ export default function ResumeForm({ student }) {
       {message && (
         <>
           <Alert
-            show={message}
+            show={!!message}
             dismissible={{
               onClose: () => setMessage(""),
             }}

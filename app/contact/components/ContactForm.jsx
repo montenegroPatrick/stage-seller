@@ -99,7 +99,7 @@ export default function ContactForm() {
         {message && (
           <>
             <Alert
-              show={message}
+              show={!!message}
               dismissible={{
                 onClose: () => setMessage(""),
               }}

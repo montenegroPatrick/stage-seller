@@ -1,33 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import Image from "next/image";
-import img1 from "@/public/chien-smoking.jpg";
-import img2 from "@/public/company.jpeg";
+
 import ProfileCarte from "../../lists/components/CardProfile";
-import getSuggest from "@/lib/suggests/getSuggests";
-import Cookies from "js-cookie";
-import Logo from "@/app/components/Logo";
+
 import { useRouter } from "next/navigation";
 import Button from "@/app/utilsComponents/Buttons/Button";
 
-export default function Slider() {
-  const token = Cookies.get("jwt");
-  const [usersToDisplay, setUsersToDisplay] = useState([]);
-  const getUsersToDisplay = () =>
-    getSuggest(token).then((res) => {
-      if (res.status === 404) {
-        setUsersToDisplay(null);
-      } else {
-        setUsersToDisplay(res.data);
-      }
-    });
-  useEffect(() => {
-    getUsersToDisplay();
-  }, []);
+export default function Slider({ usersToDisplay }) {
   const router = useRouter();
   const [sliderRef] = useKeenSlider();
+
   // const user = {
   //   id: 2,
   //   email: "younes@seller.com",
@@ -70,6 +54,7 @@ export default function Slider() {
   //     },
   //   ],
   // };
+
   if (usersToDisplay === null) {
     return (
       <aside className="h-screen w-screen flex flex-col text-sm items-center lg:text-xl gap-10 p-5 lg:p-28 m-5 text-justify">
@@ -88,16 +73,14 @@ export default function Slider() {
   }
   return (
     <>
-      <div className=" h-[calc(100vh-4rem)] w-full flex justify-center items-center ">
-        <div
-          ref={sliderRef}
-          className="keen-slider flex justify-center items-center w-1/2 "
-        >
-          <div className="keen-slider__slide w-1/2">
-            {usersToDisplay.map((user) => {
-              <ProfileCarte user={user} />;
-            })}
-          </div>
+      <div className="h-[calc(100vh-4rem)] flex justify-center items-center">
+        <div ref={sliderRef} className="keen-slider">
+          {usersToDisplay.map((user, index) => (
+            <ProfileCarte
+              classes={`keen-slider__slide number-slide${index + 1}`}
+              user={user}
+            />
+          ))}
         </div>
       </div>
     </>

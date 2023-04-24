@@ -28,9 +28,10 @@ export default async function Profil({ params }) {
   const token = cookieStore.get("jwt")?.value;
   const roleUser = cookieStore.get("roleUser")?.value;
 
-  // if (!params.id || !token) {
-  //   redirect("/sign-in");
-  // }
+  if (!params.id || !token) {
+    redirect("/sign-in");
+  }
+
 
   const userProfilePage = await getUser(token, params.id);
 
@@ -40,12 +41,13 @@ export default async function Profil({ params }) {
     redirect("/");
   }
 
-  //const role = userProfilePage.type === "STUDENT" ? "students" : "companies";
-  // if (role && params.userRole !== role) {
-  //   console.log(otherUser);
+
+
+
   if (roleUser !== params.userRole) {
     const users = await getAllUsers(token);
     const otherUser = users.find((user) => user.id === parseInt(params.id));
+
     return (
       <NavBarMarginContainer classes="min-h-[calc(100vh-4rem)] ">
         {params.userRole === "students" ? (

@@ -57,7 +57,7 @@ export default function ImageProfile({
       >
         <label
           className="flex cursor-pointer flex-col items-center justify-center "
-          for="avatar"
+          htmlFor="avatar"
         >
           Choisis ta photo
           <input
@@ -74,7 +74,7 @@ export default function ImageProfile({
         {message && (
           <>
             <Alert
-              show={message}
+              show={!!message}
               dismissible={{
                 onClose: () => setMessage(""),
               }}

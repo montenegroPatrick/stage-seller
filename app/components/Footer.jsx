@@ -44,7 +44,7 @@ export default function Footer() {
     // </footer>
     <footer
       aria-label="Site Footer"
-      className="bg-black border-t text-white border-magenta"
+      className="bg-black border-t mt-10 text-white border-magenta"
     >
       <div className="mx-auto max-w-screen-xl px-4 py-2">
         <div className="sm:flex sm:items-center sm:justify-between">
