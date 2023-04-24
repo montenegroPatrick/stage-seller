@@ -26,6 +26,7 @@ export default function MiniCard({ objectLike, matches }) {
   if (!userForCard) {
     return <SkeletonLoaderCard />;
   }
+
   return (
     <section className="bg-transparent cardProfile boxShadow-inputShadow rounded-3xl p-3 mb-3">
       <div className="flex gap-5  bg-gray-200/[0.3] shadows-text p-3 items-center justify-start rounded-3xl ">

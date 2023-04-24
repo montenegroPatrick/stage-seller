@@ -1,13 +1,10 @@
 //Components
-import CompanyMatch from "../companyProfileForUser/CompanyMatch";
 import CompanyStage from "../companyProfileForUser/CompanyStage";
 import CompanySkills from "../companyProfileForUser/CompanySkills";
 import CompanyNameAvatar from "../companyProfileForUser/CompanyNameAvatar";
 import CompanyDescription from "../companyProfileForUser/CompanyDescription";
 
 export default function CompanyProfileForVisitor({ otherUser }) {
-  console.log("mon other user ", otherUser);
-
   return (
     <>
       <div className="sticky flex flex-col items-center scrolling-animation">
