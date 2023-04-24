@@ -65,7 +65,6 @@ export default function CompanyMatch({ company }) {
           <CardMatch />
           <CardMatch />
           <CardMatch />
-          
         </div>
         <div
           className={`opacity-${

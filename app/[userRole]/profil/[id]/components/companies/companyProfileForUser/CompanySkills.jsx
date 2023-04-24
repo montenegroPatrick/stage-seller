@@ -1,5 +1,5 @@
 "use client";
-import Skill from "./Skill";
+import Skill from "../Skill";
 import ButtonForm from "./ButtonForm";
 import SettingButton from "./SettingButton";
 import { useState, useEffect } from "react";
@@ -11,6 +11,7 @@ export default function CompanySkills({
   submitForm,
   allSkills,
   setMessage,
+  visitor
 }) {
   const [settings, setSettings] = useState(false);
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -21,7 +22,9 @@ export default function CompanySkills({
   }, [skills]);
 
   useEffect(() => {
-    setMessage("");
+    if (typeof setMessage === "function") {
+      setMessage("");
+    }
   }, [settings]);
 
   //Recip skill and add or delete of the state
@@ -31,14 +34,11 @@ export default function CompanySkills({
       setSelectedSkills((previous) => [...previous, ...skillToAdd]);
     } else {
       setSelectedSkills((previous) =>
-        previous.filter(
-          (selectedSkill) => selectedSkill.id !== skillId
-        )
+        previous.filter((selectedSkill) => selectedSkill.id !== skillId)
       );
     }
   };
-  useEffect(()=>{
-  }, [selectedSkills])
+  useEffect(() => {}, [selectedSkills]);
   return (
     <div className="w-full xl:w-[50%] flex flex-col items-center px-2 py-5 my-5 mx-auto relative">
       <h2 className="text-2xl 2xl:text-3xl text-center">Technologies</h2>
@@ -91,12 +91,16 @@ export default function CompanySkills({
           <p>Pas de skills renseignés</p>
         )}
       </div>
-      <div
-        onClick={() => setSettings(!settings)}
-        className="absolute top-0 right-0"
-      >
-        <SettingButton />
-      </div>
+      {!visitor ? (
+        <div
+          onClick={() => setSettings(!settings)}
+          className="absolute top-0 right-0"
+        >
+          <SettingButton />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

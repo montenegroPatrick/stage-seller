@@ -1,9 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SettingButton from "./SettingButton";
-import InputFormCompany from "./InputFormCompany";
+import InputFormCompany from "../InputFormCompany";
 
-export default function CompanyDescription({ description, submitForm }) {
+export default function CompanyDescription({ description, submitForm, visitor }) {
   const [settings, setSettings] = useState(false);
   const [userDescription, setDescription] = useState(description);
 
@@ -11,6 +11,12 @@ export default function CompanyDescription({ description, submitForm }) {
     const newDescription = event.target.value;
     setDescription(newDescription);
   };
+
+  useEffect(() => {
+    if (typeof setMessage === "function") {
+      setMessage("");
+    }
+  }, [settings]);
 
   return (
     <div className="relative w-full md:min-h-[35vh] flex flex-col items-center p-5 mx-auto border-dotted border-t-2 border-b-2 md:border-t-0 border-black px-auto md:mb-0">
@@ -27,7 +33,7 @@ export default function CompanyDescription({ description, submitForm }) {
         <form
           className="w-full"
           onSubmit={(event) => {
-            event.preventDefault()
+            event.preventDefault();
             submitForm({ description: userDescription });
             setSettings(!settings);
           }}
@@ -50,18 +56,20 @@ export default function CompanyDescription({ description, submitForm }) {
         </form>
       ) : (
         <p className="my-8 px-12 text-md xl:text-lg xl:px-18 text-black dark:text-gray-400 first-letter:text-4xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100 first-letter:mr-1 first-letter:float-left">
-          {!userDescription
-            ? "Description non renseignée."
-            : userDescription}
+          {!userDescription ? "Description non renseignée." : userDescription}
         </p>
       )}
 
-      <div
-        onClick={() => setSettings(!settings)}
-        className="absolute top-2 right-2"
-      >
-        <SettingButton />
-      </div>
+      {!visitor ? (
+        <div
+          onClick={() => setSettings(!settings)}
+          className="absolute top-0 right-0"
+        >
+          <SettingButton />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

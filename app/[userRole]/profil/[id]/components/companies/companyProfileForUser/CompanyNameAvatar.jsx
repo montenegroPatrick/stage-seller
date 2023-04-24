@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import SettingButton from "./SettingButton";
 import ButtonForm from "./ButtonForm";
-import InputFormCompany from "./InputFormCompany";
+import InputFormCompany from "../InputFormCompany";
 
 export default function CompanyNameAvatar({
   city,
@@ -11,9 +11,9 @@ export default function CompanyNameAvatar({
   companyName,
   profileImage,
   submitForm,
-  setMessage
+  setMessage,
+  visitor
 }) {
-
   const [settings, setSettings] = useState(false);
   const [userCity, setUserCity] = useState(city);
   const [userPostCode, setUserPostCode] = useState(postCode);
@@ -21,7 +21,9 @@ export default function CompanyNameAvatar({
   const [userProfileImage, setProfileImage] = useState(profileImage);
 
   useEffect(() => {
-    setMessage("");
+    if (typeof setMessage === "function") {
+      setMessage("");
+    }
   }, [settings]);
 
   if (settings) {
@@ -40,7 +42,7 @@ export default function CompanyNameAvatar({
       >
         <div className="w-full md:min-h-[35vh] flex flex-col border-l-purple-200 p-5 border-dotted border-b-2 border-black relative">
           <div className="mb-3 pt-0">
-          <p className="mt-3 italic underline text-sm">Nom de l'entreprise</p>
+            <p className="mt-3 italic underline text-sm">Nom de l'entreprise</p>
             <input
               value={userCompanyName}
               onChange={(e) => setCompanyName(e.target.value)}
@@ -50,18 +52,21 @@ export default function CompanyNameAvatar({
             />
           </div>
           <div className="mb-3 pt-0">
-          <p className="mt-3 italic underline text-sm">Localisation de l'entreprise</p>
+            <p className="mt-3 italic underline text-sm">
+              Localisation de l'entreprise
+            </p>
             <input
               value={userCity}
               onChange={(e) => {
-                setUserCity(e.target.value)}}
+                setUserCity(e.target.value);
+              }}
               type="text"
               placeholder="Ville"
               className="px-3 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-md border border-slate-300 outline-none focus:outline-none focus:ring w-full"
             />
           </div>
           <div className="mb-3 pt-0">
-          <p className="mt-3 italic underline text-sm">Code postal</p>
+            <p className="mt-3 italic underline text-sm">Code postal</p>
             <input
               value={userPostCode}
               onChange={(e) => setUserPostCode(e.target.value)}
@@ -71,7 +76,9 @@ export default function CompanyNameAvatar({
             />
           </div>
           <div className="mb-3 pt-0">
-          <p className="mt-3 italic underline text-sm">Image ou logo de l'entreprise</p>
+            <p className="mt-3 italic underline text-sm">
+              Image ou logo de l'entreprise
+            </p>
             <input
               value=""
               onChange={(e) => setProfileImage(e.target.files[0])}
@@ -112,12 +119,16 @@ export default function CompanyNameAvatar({
           alt="Logo ou photo de l'entreprise"
         />
       </div>
-      <div
-        onClick={() => setSettings(!settings)}
-        className="absolute top-2 right-2"
-      >
-        <SettingButton />
-      </div>
+      {!visitor ? (
+        <div
+          onClick={() => setSettings(!settings)}
+          className="absolute top-0 right-0"
+        >
+          <SettingButton />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

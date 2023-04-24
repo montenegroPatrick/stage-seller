@@ -1,8 +1,11 @@
+import Logo from "./components/Logo";
+
 export default function NotFound() {
   return (
     <>
+    <Logo/>
       <h2>Not Found</h2>
-      <p>Could not find requested resource</p>
+      <p>Cette page n'existe pas</p>
     </>
   );
 }
