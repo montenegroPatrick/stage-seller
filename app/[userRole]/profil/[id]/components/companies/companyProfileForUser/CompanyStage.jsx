@@ -70,11 +70,7 @@ export default function CompanyStage({
       );
       if (!response.status) {
         setMessage("Modifications validées");
-        setStage((previous) => ({
-          ...previous,
-          ...stage,
-          skills: [...selectedSkills],
-        }));
+        setStage((previous) => ({ ...previous, ...response }));
       } else {
         setMessage("Erreur lors de la modification");
       }
