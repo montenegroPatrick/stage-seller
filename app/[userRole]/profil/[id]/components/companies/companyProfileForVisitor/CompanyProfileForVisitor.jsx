@@ -1,5 +1,4 @@
 //Components
-import CompanyMatch from "../companyProfileForUser/CompanyMatch";
 import CompanyStage from "../companyProfileForUser/CompanyStage";
 import CompanySkills from "../companyProfileForUser/CompanySkills";
 import CompanyNameAvatar from "../companyProfileForUser/CompanyNameAvatar";
