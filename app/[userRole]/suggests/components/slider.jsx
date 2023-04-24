@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
@@ -54,8 +54,8 @@ export default function Slider({ usersToDisplay }) {
   //     },
   //   ],
   // };
-
-  if (usersToDisplay === null) {
+  console.log(usersToDisplay);
+  if (!usersToDisplay) {
     return (
       <aside className="h-screen w-screen flex flex-col text-sm items-center lg:text-xl gap-10 p-5 lg:p-28 m-5 text-justify">
         <h1>
