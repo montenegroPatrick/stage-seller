@@ -36,16 +36,6 @@ export default function NavBar() {
     if (token && id) {
       getData();
     }
-    // const changeColor = () => {
-    //   if (window.scrollY >= 90) {
-    //     setColor("#ffffff");
-    //     setTextColor("#000000");
-    //   } else {
-    //     setColor("transparent");
-    //     setTextColor("#ffffff");
-    //   }
-    // };
-    // window.addEventListener("scroll", changeColor);
   }, [path]);
 
   const handleLogout = () => {
@@ -57,10 +47,7 @@ export default function NavBar() {
     setData(null);
   };
   return (
-    <header
-      //style={{ backgroundColor: `${color}` }}
-      className=" fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-20 ease-in duration-300 bg-white"
-    >
+    <header className=" fixed h-[3.5rem] sm:h-[4rem] left-0 top-0 w-full z-20 ease-in duration-300 bg-white">
       <div className="w-full 2xl:w-[90vw] h-[3.5rem] sm:h-[4rem] flex justify-between py-2 px-4 items-center m-auto border-b border-black bg-white">
         <Link href="/">
           <h1 className="font-lobster flex items-end text-3xl 2xl:text-4xl text-black w-24 normal-case">
@@ -77,24 +64,22 @@ export default function NavBar() {
           {data ? (
             <>
               <Link
-                className="font-jetbrains text-black text-sm underline hover:text-magenta underline-offset-1 hover:text-indigo-700"
+                className="font-jetbrains text-black text-sm xl:text-md underline hover:text-magenta underline-offset-1 "
                 target="_blank"
                 href="https://oclock.io/methode"
               >
                 La méthode O'Clock
               </Link>
               <Link
-                className="font-jetbrains text-black text-sm underline hover:text-magenta underline-offset-1 "
+                className="font-jetbrains text-black text-sm xl:text-md underline hover:text-magenta underline-offset-1 "
                 href={`/${
                   data.type === "STUDENT" ? "students" : "companies"
                 }/profil/${data.id}`}
               >
-                {data.type !== "COMPANY"
-                  ? `${data.lastName} ${data.firstName}`
-                  : data.companyName}
+                Mon profil
               </Link>
               <Link
-                className="font-jetbrains text-black text-sm underline hover:text-magenta underline-offset-1 "
+                className="font-jetbrains text-black text-sm xl:text-md underline hover:text-magenta underline-offset-1 "
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
                 }/lists`}
@@ -104,12 +89,12 @@ export default function NavBar() {
                   : "Tous les étudiants"}
               </Link>
               <Link
-                className="font-jetbrains text-black text-sm underline hover:text-magenta underline-offset-1 "
+                className="font-jetbrains text-black text-sm xl:text-md underline hover:text-magenta underline-offset-1 "
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
                 }/suggests`}
               >
-                Suggestions by stageSeller
+                Suggestions by StageSeller
               </Link>
 
               <Button onClick={handleLogout}>Se déconnecter</Button>
@@ -124,9 +109,9 @@ export default function NavBar() {
         {/* Mobile Menu */}
         <div onClick={handleNav} className="block xl:hidden z-10">
           {mobileNav ? (
-            <AiOutlineClose size={20} style={{ color: `${textColor}` }} />
+            <AiOutlineClose size={20} style={{ color: `white` }} />
           ) : (
-            <AiOutlineMenu size={20} style={{ color: `${textColor}` }} />
+            <AiOutlineMenu size={20} style={{ color: `black` }} />
           )}
         </div>
         <div
@@ -137,8 +122,9 @@ export default function NavBar() {
           }
         >
           <Link
-            className="text-2xl py-2 hover:text-indigo-700 ease-in duration-300"
+            className="text-2xl py-2 hover:text-indigo-700 text-white ease-in duration-300"
             href="https://oclock.io/"
+            target="_blank"
             onClick={handleNav}
           >
             La méthode O'Clock
@@ -146,7 +132,7 @@ export default function NavBar() {
           {data ? (
             <>
               <Link
-                className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
+                className="text-2xl py-4 hover:text-indigo-700 text-white ease-in duration-300"
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
                 }/lists`}
@@ -161,7 +147,7 @@ export default function NavBar() {
                   data.type === "STUDENT" ? "companies" : "students"
                 }/suggests`}
               >
-                Suggestions by stageSeller
+                Suggestions by StageSeller
               </Link>
               <Link
                 onClick={handleNav}
@@ -170,13 +156,11 @@ export default function NavBar() {
                   data.type === "STUDENT" ? "students" : "companies"
                 }/profil/${data.id}`}
               >
-                {data.type !== "COMPANY"
-                  ? `${data.lastName} ${data.firstName}`
-                  : data.companyName}
+                Mon profil
               </Link>
               <Link
                 onClick={handleLogout}
-                className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
+                className="text-2xl py-4 hover:text-indigo-700 ease-in text-white duration-300"
                 href="/"
               >
                 Se déconnecter
@@ -185,7 +169,7 @@ export default function NavBar() {
           ) : (
             <Link
               onClick={handleNav}
-              className="text-2xl py-4 hover:text-indigo-700 ease-in duration-300"
+              className="text-2xl py-4 hover:text-indigo-700 ease-in text-white duration-300"
               href="/sign-in"
             >
               Se connecter

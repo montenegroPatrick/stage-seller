@@ -23,25 +23,25 @@ export default function CompanyProfileForVisitor({ otherUser }) {
             picture={otherUser.profilImage}
             city={otherUser.city}
             postCode={otherUser.postCode}
-            visitor="true"
+            visitor={true}
           />
-          <CompanySkills skills={otherUser.skills} visitor="true" />
+          <CompanySkills skills={otherUser.skills} visitor={true} />
         </div>
         <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l-2 md:border-black">
           <CompanyDescription
             description={otherUser.description}
-            visitor="true"
+            visitor={true}
           />
           {otherUser.stages.length || !otherUser.stages ? (
             otherUser.stages.map((stage) => (
               <CompanyStage
                 currentStage={stage}
                 key={stage.id}
-                visitor="true"
+                visitor={true}
               />
             ))
           ) : (
-            <CompanyStage currentStage={{}} visitor="true" />
+            <CompanyStage currentStage={{}} visitor={true} />
           )}
         </div>
       </section>
