@@ -1,5 +1,5 @@
 "use client";
-import ButtonForm from "@/app/[userRole]/profil/[id]/components/companies/ButtonForm";
+import ButtonForm from "@/app/[userRole]/profil/[id]/components/companies/companyProfileForUser/ButtonForm";
 import SendMessageToUs from "@/lib/contact/sendMessageToUs";
 import {
   Card,
