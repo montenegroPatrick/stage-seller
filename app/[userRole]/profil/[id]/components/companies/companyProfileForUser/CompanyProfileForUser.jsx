@@ -11,7 +11,7 @@ import { getSkills } from "@/lib/skills/getSkills";
 import LoaderSkeleton from "@/app/utilsComponents/Loaders/LoaderSkeleton";
 import { updateUser } from "@/lib/users/updateUser";
 import { useState, useEffect } from "react";
-import CompanyMatch from "./CompanyMatch";
+import MatchHistoricCompanies from "./MatchHistoricCompanies";
 
 export default function CompanyProfileForUser({ userProfilePage }) {
   const token = Cookies.get("jwt");
@@ -69,7 +69,7 @@ export default function CompanyProfileForUser({ userProfilePage }) {
             postCode={userData.postCode}
             submitForm={handleSubmit}
             setMessage={setMessage}
-            visitor="false"
+            visitor={false}
           />
           <div className="w-full flex flex-col xl:flex-row justify-between px-5 mx-auto">
             {allSkills.length > 0 ? (
@@ -80,7 +80,7 @@ export default function CompanyProfileForUser({ userProfilePage }) {
                   token={token}
                   allSkills={allSkills}
                   setMessage={setMessage}
-                  visitor="false"
+                  visitor={false}
                 />
                 {userData.stages.length || !userData.stages ? (
                   userData.stages.map((stage) => (
@@ -90,7 +90,7 @@ export default function CompanyProfileForUser({ userProfilePage }) {
                       token={token}
                       key={stage.id}
                       allSkills={allSkills}
-                      visitor="false"
+                      visitor={false}
                     />
                   ))
                 ) : (
@@ -99,7 +99,7 @@ export default function CompanyProfileForUser({ userProfilePage }) {
                     setMessage={setMessage}
                     token={token}
                     allSkills={allSkills}
-                    visitor="false"
+                    visitor={false}
                   />
                 )}
               </>
@@ -115,9 +115,10 @@ export default function CompanyProfileForUser({ userProfilePage }) {
           <CompanyDescription
             description={userData.description}
             submitForm={handleSubmit}
-            visitor="false"
+            visitor={false}
           />
-          <CompanyMatch />
+          {/* <CompanyMatch /> */}
+          <MatchHistoricCompanies />
         </div>
       </section>
     </>

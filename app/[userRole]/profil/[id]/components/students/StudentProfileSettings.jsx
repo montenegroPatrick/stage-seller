@@ -44,7 +44,7 @@ export default function StudentProfilSettings({
 
   const [inputStages, setInputStages] = useState(
     stages.length > 0
-      ? stages.map((stage) => ({
+      ? stages.find((stage) => ({
           description: stage.description,
           startDate: stage.startDate ?? "",
           duration: stage.duration ?? "",
@@ -71,7 +71,7 @@ export default function StudentProfilSettings({
     const { name, value } = event.target;
     if (name === "startDate") {
     }
-    setInputStages((prev) => [{ ...prev, [name]: value }]);
+    setInputStages((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (event) => {

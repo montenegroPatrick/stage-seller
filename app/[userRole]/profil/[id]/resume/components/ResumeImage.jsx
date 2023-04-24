@@ -8,22 +8,21 @@ export default function ResumeImage({ user }) {
   const router = useRouter();
   return (
     <NavBarMarginContainer>
-      <aside className="m-5 p-10 flex flex-col font-bold gap-4">
+      {/* <aside className="m-5 p-10 flex flex-col font-bold gap-4"> */}
+      <div className="p-5">
         <Button
-          className="p-5"
+          className="p-10"
           onClick={() => {
             router.back();
           }}
         >
           Back
         </Button>
-        <div className="flex items-center justify-center h-screen w-screen">
-          <img
-            className=" p-10 w-fit h-fit"
-            src={`${imageUrl}${user.resume}`}
-          />
-        </div>
-      </aside>
+      </div>
+      <div className="flex items-center justify-center h-screen w-screen">
+        <img className=" p-5 w-fit h-fit" src={`${imageUrl}${user.resume}`} />
+      </div>
+      {/* </aside> */}
     </NavBarMarginContainer>
   );
 }
