@@ -32,6 +32,7 @@ import { FcWorkflow } from "react-icons/fc";
 
 export default function ProfileCarte({ user, classes }) {
   //TODO regarder si le user.role est company ou student pour éventuellement changer des champs dynamiquement
+  const options = { day: "numeric", month: "numeric", year: "numeric" };
 
   const {
     lastName,
@@ -116,10 +117,13 @@ export default function ProfileCarte({ user, classes }) {
                       : "travailler au bureau y'a rien de mieu"}
                   </p>
                 </dt>
-                <dd className="text-xs flex gap-2 items-center text-red-900">
+                <dd className="text-sm flex gap-2 items-center text-red-900">
                   <BsCalendar2DateFill color="black" />
                   <p>
-                    {`${stage.startDate.slice(0, 10)} pour une durée de ${
+                    {/* {`${stage.startDate.slice(0, 10)} pour une durée de ${
+                      stage.duration
+                    } mois`} */}
+                    {`À partir du ${new Date(stage.startDate).toLocaleDateString("fr-FR", options)} pour une durée de ${
                       stage.duration
                     } mois`}
                   </p>

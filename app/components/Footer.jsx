@@ -49,7 +49,7 @@ export default function Footer() {
       <div className="mx-auto max-w-screen-xl px-4 py-2">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="flex justify-center items-center sm:justify-start">
-            <Link href="/contact">contactez-nous</Link>
+            <Link href="/contact">Contactez-nous</Link>
             <Logo height={70} width={70} />
           </div>
 
