@@ -57,7 +57,7 @@ export default function StageDescription({
             name="location"
             label="le lieux souhaité"
           />
-          <div className="flex flex-wrap justify-between rounded-xl p-2  bg-transparent border-2 ">
+          <div className="flex flex-wrap text-sm gap-2 justify-between rounded-xl p-2  bg-transparent border-2 ">
             <Checkbox
               id="checkRemoteFriendly"
               label="coche la case si tu souhaite travailler en full-remote"
