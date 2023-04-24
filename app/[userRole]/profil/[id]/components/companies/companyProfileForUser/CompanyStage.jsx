@@ -114,7 +114,7 @@ export default function CompanyStage({
   //     .split("T")[0];
   //   return isoDate;
   // }
-  if (settings && Object.keys(stage).length === 7) {
+  if (settings && Object.keys(stage).length >= 7) {
     return (
       <div className="w-full xl:w-[50%] flex flex-col items-center rounded-xl py-5 mx-auto my-5 bg-white relative">
         <h2 className="text-2xl 2xl:text-3xl text-black text-center ">

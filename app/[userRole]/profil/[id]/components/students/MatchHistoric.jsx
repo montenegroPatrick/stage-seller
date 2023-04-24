@@ -54,7 +54,7 @@ export default function MatchHistoric({ currentUser }) {
   ) {
     return (
       <section className="p-5 flex flex-col gap-2 underline text-center">
-        <p>tes likes et matchs seront visible ici</p>
+        <p>Tes likes et matchs seront visible ici</p>
         <Link href={`/companies/lists`} className="underline p-5 text-blue-500">
           {" "}
           Clique ici pour commencer à liker tes entreprises préférées
