@@ -61,7 +61,7 @@ export default function ResumeForm({ student }) {
             id="resume"
             type="file"
             onChange={(event) => handleChange(event)}
-            className="cursor-pointer"
+            className="cursor-pointer border-0 p-5 w-50vh"
             label=""
           />
         </label>

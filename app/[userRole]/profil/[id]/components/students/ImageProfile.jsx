@@ -60,13 +60,13 @@ export default function ImageProfile({
           htmlFor="avatar"
         >
           Choisis ta photo
+          <MdAddAPhoto size={20} />
           <input
             name="avatar"
             id="avatar"
             type="file"
             onChange={(event) => handleChange(event)}
             className=" border-0 p-5 w-50vh"
-            icon={<MdAddAPhoto size={20} />}
             label=""
           />
         </label>

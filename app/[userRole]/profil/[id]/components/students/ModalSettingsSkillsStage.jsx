@@ -84,7 +84,7 @@ export default function ModalSettingsSkillsStages({
           unmount: { scale: 0.9, y: -100 },
         }}
       >
-        <DialogHeader>
+        <DialogHeader className="text-lg ">
           Voici tes skills, tu peux en rajouter en selectionnant dans la liste
           ci-dessous
         </DialogHeader>
