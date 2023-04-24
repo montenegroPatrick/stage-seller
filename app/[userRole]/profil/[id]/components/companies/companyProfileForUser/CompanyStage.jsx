@@ -1,6 +1,6 @@
 "use client";
 
-import Skill from "./Skill";
+import Skill from "../Skill";
 import { useEffect, useState } from "react";
 import ButtonForm from "./ButtonForm";
 import SettingButton from "./SettingButton";
@@ -12,6 +12,7 @@ export default function CompanyStage({
   setMessage,
   token,
   allSkills,
+  visitor,
 }) {
   const [settings, setSettings] = useState(false);
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -33,7 +34,9 @@ export default function CompanyStage({
   }, [currentStage]);
 
   useEffect(() => {
-    setMessage("");
+    if (typeof setMessage === "function") {
+      setMessage("");
+    }
   }, [settings]);
 
   const handleSelectSkill = (skill) => {
@@ -448,12 +451,16 @@ export default function CompanyStage({
           <p className="text-center">Pas de stage proposé</p>
         )}
       </section>
-      <div
-        onClick={() => setSettings(!settings)}
-        className="absolute top-0 right-0"
-      >
-        <SettingButton />
-      </div>
+      {!visitor ? (
+        <div
+          onClick={() => setSettings(!settings)}
+          className="absolute top-0 right-0"
+        >
+          <SettingButton />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

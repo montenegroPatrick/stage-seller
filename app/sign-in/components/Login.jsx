@@ -62,13 +62,13 @@ export default function LogIn() {
   return (
     <NavBarMarginContainer>
       <div className="flex w-full h-screen items-center justify-center p-4 bg-white ">
-        <div className="w-full h-full bg-whiteSmoke text-whiteSmoke p-8 sm:p-14 rounded-lg flex flex-col items-center">
+        <div className="w-full h-full bg-whiteSmoke text-white p-8 sm:p-14 rounded-lg flex flex-col items-center">
           <Logo width={100} height={100} />
           <div>
-            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-600">
+            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-black">
               Connexion
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
+            <p className="mt-2 text-center text-sm text-black">
               ou{" "}
               <Link
                 href="/students/signUp"
@@ -108,7 +108,6 @@ export default function LogIn() {
                 className="shadow-inputShadow focus:shadow-lg text-black3"
               />
             </div>
-
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
@@ -138,11 +137,11 @@ export default function LogIn() {
             <div>
               <button
                 type="submit"
-                className="group relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="group relative flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon
-                    className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+                    className="h-5 w-5 text-white group-hover:text-indigo-400"
                     aria-hidden="true"
                   />
                 </span>
