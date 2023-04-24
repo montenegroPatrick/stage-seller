@@ -41,15 +41,15 @@ export default function Tuto({ openTuto, setOpenTuto, type, student }) {
             Nous t'invitons à le remplir attentivement car c'est la clé de ta
             réussite en tant
             {type === "companies"
-              ? "qu'entreprise en recherche de stagiaire motivé"
-              : "que candidat motivé"}
+              ? " qu'entreprise en recherche de stagiaire motivé"
+              : " que candidat motivé"}
             .
           </p>
           <p>
-            premièrement à la fin de ce mini tuto tu arriveras sur la page que
-            tout le monde peut voir, en haut à gauche il y a un petit bouton
-            settings <FiSettings className="inline-block mb-1" /> <br />
-            qui te permettra de passer en mode settings ou tu pourras modifier
+            Premièrement, à la fin de ce mini tuto tu arriveras sur la page
+            visible par tous, en haut à gauche il y a un petit bouton settings{" "}
+            <FiSettings className="inline-block mb-1" /> <br />
+            qui te permettra de passer en mode settings où tu pourras modifier
             ton profil. Clique sur OK pour continuer et compléter ton profil !
           </p>
         </DialogBody>
