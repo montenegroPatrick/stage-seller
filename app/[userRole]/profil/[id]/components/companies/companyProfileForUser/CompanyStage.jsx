@@ -412,7 +412,7 @@ export default function CompanyStage({
               <h3 className="text-xl font-medium text-magenta text-center">
                 Stage skills
               </h3>
-              <ul className="flex flex-wrap w-full justify-center gap-2">
+              <ul className="flex flex-wrap w-full justify-center gap-2 mt-3">
                 {stage.skills.map((skill) => (
                   <li key={skill.id}>
                     <Skill>{skill.name}</Skill>
@@ -424,28 +424,28 @@ export default function CompanyStage({
               <h3 className="text-xl mt-3 font-medium text-magenta text-center">
                 Description du stage proposé
               </h3>
-              <p className="mt-0.5 text-center">{stage.description}</p>
+              <p className="mt-0.5 text-center text-lg">{stage.description}</p>
             </article>
             <article className="flex flex-col mb-3 items-center">
               <h3 className="text-xl mt-3 font-medium text-magenta text-center">
                 Localisation
               </h3>
-              <p className="mt-0.5">{stage.location}</p>
+              <p className="mt-0.5 text-lg">{stage.location}</p>
             </article>
             <article className="flex flex-col mb-3 items-center">
               <h3 className="text-xl mt-3 font-medium text-magenta text-center">
                 Remote friendly
               </h3>
-              <p className="mt-0.5">
+              <p className="mt-0.5 text-lg">
                 {stage.is_remote_friendly ? "Oui" : "Non"}
               </p>
             </article>
             <div className="text-center">
-              <p className="font-md mt-3 text-teal-800 font-semibold text-center leading-tight">
+              <p className="text-lg mt-3 text-teal-800 font-semibold text-center leading-tight">
                 À partir du{" "}
                 {new Date(stage.startDate).toLocaleDateString("fr-FR", options)}
               </p>
-              <p className="font-md mt-3 text-teal-800 font-semibold text-center leading-tight">
+              <p className="text-lg mt-3 text-teal-800 font-semibold text-center leading-tight">
                 Pour une durée de {stage.duration} mois
               </p>
             </div>

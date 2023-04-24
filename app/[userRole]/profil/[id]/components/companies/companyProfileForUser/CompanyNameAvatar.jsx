@@ -12,7 +12,7 @@ export default function CompanyNameAvatar({
   profileImage,
   submitForm,
   setMessage,
-  visitor
+  visitor,
 }) {
   const [settings, setSettings] = useState(false);
   const [userCity, setUserCity] = useState(city);

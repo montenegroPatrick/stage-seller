@@ -71,7 +71,7 @@ export default function CompanyProfileForUser({ userProfilePage }) {
             setMessage={setMessage}
             visitor={false}
           />
-          <div className="w-full flex flex-col xl:flex-row justify-between px-5 mx-auto">
+          <div className="w-full flex flex-col xl:flex-row justify-between sm:px-5 mx-auto">
             {allSkills.length > 0 ? (
               <>
                 <CompanySkills
