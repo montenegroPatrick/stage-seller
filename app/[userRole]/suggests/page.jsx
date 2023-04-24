@@ -13,6 +13,9 @@ export default async function Suggests() {
   const usersToDisplay = await getSuggest(token).then((res) => res.data);
   return (
     <NavBarMarginContainer>
+      <h2 className="bg-white text-4xl sm:text-4xl md:text-5xl text-black text-center py-6 px-8">
+          Nos suggestions
+        </h2>
       <Slider usersToDisplay={usersToDisplay} />
     </NavBarMarginContainer>
   );

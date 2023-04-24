@@ -16,10 +16,10 @@ export default function SignUpTabs({ userRole }) {
         <Tabs className="text-black z-0" value={userRole}>
           <TabsHeader className="mb-5">
             <Tab value="companies">
-              <div className="">Entreprises</div>
+              <div className="text-lg font-semibold">Entreprises</div>
             </Tab>
             <Tab value="students">
-              <div className="">Elèves</div>
+              <div className="text-lg font-semibold">Elèves</div>
             </Tab>
           </TabsHeader>
           <TabsBody>

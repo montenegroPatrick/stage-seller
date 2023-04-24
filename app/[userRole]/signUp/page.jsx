@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function SignUp({ params }) {
   return (
-    <div className=" bg-whiteSmoke shadows-text ">
+    <div className=" bg-whiteSmoke font-semibold">
       <SignUpTabs userRole={params.userRole} />
     </div>
   );

@@ -55,7 +55,7 @@ export default function CompanyDescription({ description, submitForm, visitor })
           </div>
         </form>
       ) : (
-        <p className="my-8 px-12 text-md xl:text-lg xl:px-18 text-black dark:text-gray-400 first-letter:text-4xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100 first-letter:mr-1 first-letter:float-left">
+        <p className="my-8 px-4 sm:px-12 text-lg xl:text-xl xl:px-18 text-black dark:text-gray-400 first-letter:text-4xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100 first-letter:mr-1 first-letter:float-left">
           {!userDescription ? "Description non renseignée." : userDescription}
         </p>
       )}
