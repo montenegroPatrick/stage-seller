@@ -104,7 +104,7 @@ export default function CompanyNameAvatar({
 
   return (
     <div className="w-full md:h-35vh flex flex-col justify-between border-l-purple-200 p-5 border-dotted border-b-2 border-black relative">
-      <h2 className="text-3xl 2xl:text-4xl text-center text-black">
+      <h2 className="text-3xl 2xl:text-5xl text-center text-black">
         {userCompanyName}
       </h2>
       <p className="text-center text-lg 2xl:text-xl text-teal-800 italic">

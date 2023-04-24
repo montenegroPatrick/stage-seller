@@ -70,6 +70,11 @@ export default function CompanyStage({
       );
       if (!response.status) {
         setMessage("Modifications validées");
+        setStage((previous) => ({
+          ...previous,
+          ...stage,
+          skills: [...selectedSkills],
+        }));
       } else {
         setMessage("Erreur lors de la modification");
       }
@@ -95,6 +100,8 @@ export default function CompanyStage({
       console.log("la reponse de mon fetch", response);
       if (!response.status) {
         setMessage("Modifications validées");
+
+        setStage((previous) => ({ ...previous, ...response }));
       } else {
         setMessage("Erreur lors de la modification");
       }
@@ -111,7 +118,7 @@ export default function CompanyStage({
   //     .split("T")[0];
   //   return isoDate;
   // }
-  if (settings && Object.keys(stage).length === 8) {
+  if (settings && Object.keys(stage).length === 7) {
     return (
       <div className="w-full xl:w-[50%] flex flex-col items-center rounded-xl py-5 mx-auto my-5 bg-white relative">
         <h2 className="text-2xl 2xl:text-3xl text-black text-center ">
@@ -257,7 +264,7 @@ export default function CompanyStage({
         </div>
       </div>
     );
-  } else if (settings && Object.keys(stage).length < 8) {
+  } else if (settings && Object.keys(stage).length < 7) {
     return (
       <div className="w-full xl:w-[50%] flex flex-col items-center rounded-xl px-2 py-5 mx-auto my-5 bg-white relative">
         <h2 className="text-2xl 2xl:text-3xl text-black text-center ">
