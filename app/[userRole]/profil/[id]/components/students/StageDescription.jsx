@@ -118,7 +118,7 @@ export default function StageDescription({
             <p className="">
               {stage.description
                 ? stage.description
-                : "la description de votre recherche apparaitra ici. cliquer sur le boutton settings pour la modifier"}
+                : "La description de votre recherche apparaitra ici. cliquer sur le boutton settings pour la modifier"}
             </p>
             <ul className="grid place-content-end gap-1">
               <li className=" py-2 flex flex-row-reverse items-center gap-2 border-b border-black">
@@ -127,7 +127,7 @@ export default function StageDescription({
                   {" "}
                   {stage.startDate
                     ? stage.startDate.slice(0, 10)
-                    : "la date souhaitée apparaitra ici"}
+                    : "La date souhaitée apparaitra ici"}
                 </p>
               </li>
               <li className=" py-2 flex flex-row-reverse items-center gap-2 border-b border-black ">
@@ -135,7 +135,7 @@ export default function StageDescription({
                 <p>
                   {stage.duration
                     ? stage.duration
-                    : "la durée souhaitée apparaitra ici"}
+                    : "La durée souhaitée apparaitra ici"}
                 </p>
               </li>
 
@@ -143,16 +143,16 @@ export default function StageDescription({
                 <FcWorkflow />
                 <p>
                   {stage.isRemoteFriendly
-                    ? "je préfère être en télétravail"
-                    : "je préfère le présentiel"}
+                    ? "Je préfère être en télétravail"
+                    : "Je préfère le présentiel"}
                 </p>
               </li>
               <li className=" py-2 flex flex-row-reverse items-center gap-2 border-b border-black">
                 <FcWorkflow />
                 <p>
                   {stage.isTravelFriendly
-                    ? "je peux me déplacer"
-                    : "impossibilité de se déplacer"}
+                    ? "Je peux me déplacer"
+                    : "Impossibilité de se déplacer"}
                 </p>
               </li>
 
@@ -162,7 +162,7 @@ export default function StageDescription({
               <li className=" py-2  flex flex-row-reverse items-center gap-2">
                 {/* !skills STAGE */}
                 <div className="flex items-center gap-2">
-                  <p className=" w-full">skills pour la recherche = </p>
+                  <p className=" w-full">Skills pour la recherche = </p>
                   <Skills
                     stages={true}
                     show={showSettings}
@@ -179,39 +179,39 @@ export default function StageDescription({
       ) : (
         <div className="p-5 w-full text-left flex border border-black flex-col gap-16 float-right rounded-lg ">
           <h2 className="text-xl text-bold border-b border-black py-2">
-            ma recherche
+            Ma recherche
           </h2>
           <p className="">
-            la description de votre recherche apparaitra ici. cliquer sur le
+            La description de votre recherche apparaitra ici. cliquer sur le
             boutton settings pour la modifier
           </p>
           <ul className="grid place-content-end gap-1">
             <li className=" py-2 flex flex-row-reverse items-center gap-2 border-b border-black">
               <BsCalendar2DateFill />
-              <p>la date souhaitée</p>
+              <p>La date souhaitée</p>
             </li>
             <li className=" py-2 flex flex-row-reverse items-center gap-2 border-b border-black ">
               <GiDuration />
-              <p>la durée de ton stage</p>
+              <p>La durée de ton stage</p>
             </li>
             <li className=" py-2 flex flex-row-reverse items-center gap-2 border-b border-black">
               <FcWorkflow />
               <div>
-                <p>tu souhaite travailler à distance rdv mode edit</p>
+                <p>Tu souhaite travailler à distance rdv mode edit</p>
               </div>
             </li>
             <li className=" py-2 flex flex-row-reverse items-center gap-2 border-b border-black">
               <FcWorkflow />
-              <p>tu peux te déplacer ? Renseigne le en mode EDIT</p>
+              <p>Tu peux te déplacer ? Renseigne le en mode EDIT</p>
             </li>
             <li className=" py-2  flex flex-row-reverse items-center gap-2">
-              <p>le lieu du stage</p>
+              <p>Le lieu du stage</p>
             </li>
             <li className=" py-2  flex flex-row-reverse items-center gap-2">
               {/* !skills STAGE */}
               <div className="flex items-center gap-2">
                 <p className="text-[0.7rem] w-full">
-                  skills pour la recherche = les skills seront ci-dessous
+                  Skills pour la recherche = les skills seront ci-dessous
                 </p>
               </div>
             </li>

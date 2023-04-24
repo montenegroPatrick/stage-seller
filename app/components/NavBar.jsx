@@ -64,14 +64,14 @@ export default function NavBar() {
           {data ? (
             <>
               <Link
-                className="font-jetbrains text-black text-sm xl:text-md underline hover:text-magenta underline-offset-1 "
+                className="font-jetbrains text-black text-sm xl:text-md 2xl:text-lg underline hover:text-magenta underline-offset-1 "
                 target="_blank"
                 href="https://oclock.io/methode"
               >
                 La méthode O'Clock
               </Link>
               <Link
-                className="font-jetbrains text-black text-sm xl:text-md underline hover:text-magenta underline-offset-1 "
+                className="font-jetbrains text-black text-sm xl:text-md 2xl:text-lg underline hover:text-magenta underline-offset-1 "
                 href={`/${
                   data.type === "STUDENT" ? "students" : "companies"
                 }/profil/${data.id}`}
@@ -79,7 +79,7 @@ export default function NavBar() {
                 Mon profil
               </Link>
               <Link
-                className="font-jetbrains text-black text-sm xl:text-md underline hover:text-magenta underline-offset-1 "
+                className="font-jetbrains text-black text-sm xl:text-md 2xl:text-lg underline hover:text-magenta underline-offset-1 "
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
                 }/lists`}
@@ -89,7 +89,7 @@ export default function NavBar() {
                   : "Tous les étudiants"}
               </Link>
               <Link
-                className="font-jetbrains text-black text-sm xl:text-md underline hover:text-magenta underline-offset-1 "
+                className="font-jetbrains text-black text-sm xl:text-md 2xl:text-lg underline hover:text-magenta underline-offset-1 "
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
                 }/suggests`}
