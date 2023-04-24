@@ -1,7 +1,7 @@
 "use client";
 import Cookies from "js-cookie";
 //Components
-import CompanyMatch from "./CompanyMatch";
+
 import CompanyStage from "./CompanyStage";
 import CompanySkills from "./CompanySkills";
 import ErrorAlert from "@/app/utilsComponents/Error/ErrorAlert";
@@ -11,6 +11,7 @@ import { getSkills } from "@/lib/skills/getSkills";
 import LoaderSkeleton from "@/app/utilsComponents/Loaders/LoaderSkeleton";
 import { updateUser } from "@/lib/users/updateUser";
 import { useState, useEffect } from "react";
+import MatchHistoricCompanies from "./MatchHistoricCompanies";
 
 export default function CompanyProfileForUser({ userProfilePage }) {
   const token = Cookies.get("jwt");
@@ -116,7 +117,8 @@ export default function CompanyProfileForUser({ userProfilePage }) {
             submitForm={handleSubmit}
             visitor={false}
           />
-          <CompanyMatch />
+          {/* <CompanyMatch /> */}
+          <MatchHistoricCompanies />
         </div>
       </section>
     </>

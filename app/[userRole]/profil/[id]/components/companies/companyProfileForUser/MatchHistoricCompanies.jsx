@@ -11,15 +11,13 @@ import getUserMatches from "@/lib/users/getUserMatches";
 import getLikeFromMe from "@/lib/users/getLikeFromMe";
 import getLikeToMe from "@/lib/users/getLikeToMe";
 import Cookies from "js-cookie";
-import MiniCard from "./MiniCard";
-import Loading from "@/app/loading";
-import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
+
 import Link from "next/link";
 import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard";
-import { matchesMiddleware } from "next/dist/shared/lib/router/router";
-import CardMatch from "../companies/companyProfileForUser/CardMatch";
 
-export default function MatchHistoric({ currentUser }) {
+import CardMatch from "./CardMatch";
+
+export default function MatchHistoricCompanies() {
   //todo map des likes in like out match de l'utilisateur
   const token = Cookies.get("jwt");
   const [matches, setMatches] = useState([]);
@@ -62,35 +60,40 @@ export default function MatchHistoric({ currentUser }) {
       </section>
     );
   }
+  console.log("matchHistoricCompanie", likeSend, likeRecieve);
   return (
-    <Tabs className=" rounded-3xl" value="">
-      <TabsHeader className="bg-gray-100">
+    <Tabs className="relative rounded-3xl" value="like émis">
+      <TabsHeader className="sticky top-0 bg-gray-100 left-0 right-0  ">
         <Tab value="like émis">like émis</Tab>
         <Tab value="like reçu">like reçu</Tab>
         <Tab value="match">Match</Tab>
       </TabsHeader>
-      <TabsBody className="mt-5 scroll-smooth ">
-        <TabPanel className="" value="like émis">
+
+      <TabsBody className="mt-5 scroll-smooth">
+        <TabPanel
+          className="flex bg-whiteSmoke/[0.2] flex-col gap-5"
+          value="like émis"
+        >
           {likeSend.length > 0 &&
             likeSend.map((like, index) => (
               <Suspense key={index} fallback={<SkeletonLoaderCard />}>
-                <MiniCard objectLike={like} matches={false} />
+                <CardMatch objectLike={like} matches={false} />
               </Suspense>
             ))}
         </TabPanel>
-        <TabPanel className="" value="like reçu">
+        <TabPanel className="flex flex-col gap-5" value="like reçu">
           {likeRecieve.length > 0 &&
             likeRecieve.map((like, index) => (
               <Suspense key={index} fallback={<SkeletonLoaderCard />}>
-                <MiniCard objectLike={like} matches={false} />
+                <CardMatch objectLike={like} matches={false} />
               </Suspense>
             ))}
         </TabPanel>
-        <TabPanel className="" value="match">
+        <TabPanel className="flex flex-col gap-5" value="match">
           {matches.length > 0 &&
             matches.map((like, index) => (
               <Suspense key={index} fallback={<SkeletonLoaderCard />}>
-                <MiniCard objectLike={like} matches={true} />
+                <CardMatch objectLike={like} matches={true} />
               </Suspense>
             ))}
         </TabPanel>

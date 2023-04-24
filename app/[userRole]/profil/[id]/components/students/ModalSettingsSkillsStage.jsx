@@ -66,7 +66,7 @@ export default function ModalSettingsSkillsStages({
         object.map((data) => skillIds.push(data.id))
       );
 
-      setInputStages((prev) => [{ ...prev, skills: skillIds }]);
+      setInputStages((prev) => ({ ...prev, skills: skillIds }));
     }
   };
   const handleRemove = () => {

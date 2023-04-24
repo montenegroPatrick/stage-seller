@@ -1,5 +1,4 @@
 //Dependancies and hooks
-import { Suspense } from "react";
 
 import { redirect } from "next/navigation";
 
@@ -32,7 +31,6 @@ export default async function Profil({ params }) {
     redirect("/sign-in");
   }
 
-
   const userProfilePage = await getUser(token, params.id);
 
   //if it's not the profil user return the profil who's clicked
@@ -40,9 +38,6 @@ export default async function Profil({ params }) {
   if (!userProfilePage) {
     redirect("/");
   }
-
-
-
 
   if (roleUser !== params.userRole) {
     const users = await getAllUsers(token);
