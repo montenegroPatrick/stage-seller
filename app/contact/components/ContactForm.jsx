@@ -62,7 +62,7 @@ export default function ContactForm() {
       </Typography>
       <Typography color="gray" className="mt-1 font-normal">
         <p>Entrer votre nom, email et votre message</p>
-        <p>On vous repondra dès les meilleurs délai</p>
+        <p>On vous repondra dans les meilleurs délai</p>
       </Typography>
       <form
         onSubmit={handleSubmit}

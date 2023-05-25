@@ -27,7 +27,7 @@ export default function StudentProfilSettings({
   student,
 }) {
   const token = Cookies.get("jwt");
-  // todo mettre les données récupérer de la bdd
+
   const router = useRouter();
   const [profilMessage, setProfilMessage] = useState("");
   const [stageMessage, setStageMessage] = useState("");
@@ -70,7 +70,9 @@ export default function StudentProfilSettings({
   const handleChangeStages = (event) => {
     const { name, value } = event.target;
     if (name === "startDate") {
+      // do nothing
     }
+    //else
     setInputStages((prev) => ({ ...prev, [name]: value }));
   };
 

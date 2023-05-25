@@ -2,6 +2,7 @@
 
 import Logo from "@/app/components/Logo";
 import { baseUrl } from "@/lib/baseUrl";
+import { BsDot } from "react-icons/bs";
 import {
   Card,
   Checkbox,
@@ -16,6 +17,7 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { checkPassword } from "../checkPassword";
 
 export default function SignUpForm({ role }) {
   const [input, setInput] = useState(
@@ -41,6 +43,7 @@ export default function SignUpForm({ role }) {
   );
   const [postCode, setPostCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [passwordNotValid, setPasswordNotValid] = useState([]);
   const [disable, setDisable] = useState(true);
   const [isErrorEmail, setIsErrorEmail] = useState(false);
   const [isErrorVerifPassword, setIsErrorVerifPassword] = useState(false);
@@ -49,7 +52,7 @@ export default function SignUpForm({ role }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
-  // check if the all the fields are πnot empty
+  // check if the all the fields are not empty
 
   const mediumPassword =
     /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
@@ -69,12 +72,15 @@ export default function SignUpForm({ role }) {
     if (!mentionLegal) {
       setDisable(true);
     }
+    if (input.password !== "") {
+      checkPassword(input.password, setPasswordNotValid);
+    }
     if (input.password !== input.verifyPassword) {
       setIsErrorVerifPassword(true);
     } else {
       setIsErrorVerifPassword(false);
     }
-    if (input.password === mediumPassword) {
+    if (mediumPassword.test(input.password)) {
       setLabelPassword("fort");
     }
   }, [input, mentionLegal]);
@@ -92,7 +98,6 @@ export default function SignUpForm({ role }) {
       setErrorMessage("Les champs obligatoire doivent être rempli");
     } else {
       setIsLoading(true);
-      const numberPostCode = Number(postCode);
       axios
         .post(`${baseUrl}register`, {
           ...input,
@@ -222,7 +227,17 @@ export default function SignUpForm({ role }) {
             type="password"
             label="* password verification"
           />
+          <ul className="flex flex-col gap-1">
+            {passwordNotValid.length > 0 &&
+              passwordNotValid.map((error, index) => (
+                <li className="flex gap-2" key={index}>
+                  <span>{BsDot}</span>
+                  {error}
+                </li>
+              ))}
+          </ul>
         </div>
+
         <Checkbox
           label={
             <Typography

@@ -7,7 +7,6 @@ import getSuggest from "@/lib/suggests/getSuggests";
 import getUserMatches from "@/lib/users/getUserMatches";
 
 export default async function Suggests() {
-  //todo fetch user qui a le plus de point commun entre eux
   const cookieStore = cookies();
   const token = cookieStore.get("jwt")?.value;
 
@@ -22,8 +21,8 @@ export default async function Suggests() {
   return (
     <NavBarMarginContainer>
       <h2 className="bg-white text-4xl sm:text-4xl md:text-5xl text-black text-center py-6 px-8">
-          Nos suggestions
-        </h2>
+        Nos suggestions
+      </h2>
       <Slider usersToDisplay={usersToDisplay} />
     </NavBarMarginContainer>
   );
