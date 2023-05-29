@@ -1,1 +1,1 @@
-export const baseUrl = "http://franck-roger-server.eddi.cloud/api/";
+export const baseUrl = "http://localhost:8000/api/";

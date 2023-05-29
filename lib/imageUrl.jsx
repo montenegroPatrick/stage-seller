@@ -1,1 +1,1 @@
-export const imageUrl = "http://franck-roger-server.eddi.cloud/uploads/";
+export const imageUrl = "http://localhost:8000/uploads/";

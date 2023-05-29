@@ -9,13 +9,13 @@ import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
 import { Suspense } from "react";
 import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard";
 
-export const cache = "no-store";
 export default async function Lists({ params }) {
   const token = cookies().get("jwt")?.value;
   const role = params.userRole;
 
   const usersData = getAllUsers(token);
   const users = await usersData;
+  console.log(users);
 
   return (
     <NavBarMarginContainer classes="min-h-[calc(100vh-4rem)]">

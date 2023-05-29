@@ -58,6 +58,7 @@ export default function SignUpForm({ role }) {
     /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
 
   useEffect(() => {
+    setLabelPassword("* password-faible");
     setErrorMessage("");
     setIsErrorEmail(false);
     setIsErrorVerifPassword(false);
@@ -75,13 +76,16 @@ export default function SignUpForm({ role }) {
     if (input.password !== "") {
       checkPassword(input.password, setPasswordNotValid);
     }
+    if (passwordNotValid.length > 0) {
+      setDisable(true);
+    }
     if (input.password !== input.verifyPassword) {
       setIsErrorVerifPassword(true);
     } else {
       setIsErrorVerifPassword(false);
     }
     if (mediumPassword.test(input.password)) {
-      setLabelPassword("fort");
+      setLabelPassword("* password-fort");
     }
   }, [input, mentionLegal]);
 
@@ -101,7 +105,7 @@ export default function SignUpForm({ role }) {
       axios
         .post(`${baseUrl}register`, {
           ...input,
-          postCode: numberPostCode,
+          postCode: Number(postCode),
           type,
         })
         .then(({ headers, data }) => {
@@ -116,6 +120,7 @@ export default function SignUpForm({ role }) {
           router.push(`/${role}/profil/${data.user.id}`);
         })
         .catch((err) => {
+          setIsLoading(false);
           setErrorMessage("une erreur est survenue veuillez réessayer");
         });
     }

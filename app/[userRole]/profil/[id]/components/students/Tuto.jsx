@@ -26,8 +26,9 @@ export default function Tuto({ openTuto, setOpenTuto, type, student }) {
     });
   };
   return (
-    <Fragment>
+    <div className="">
       <Dialog
+        size="xxl"
         open={openTuto}
         handler={handleOpen}
         animate={{
@@ -35,8 +36,8 @@ export default function Tuto({ openTuto, setOpenTuto, type, student }) {
           unmount: { scale: 0.9, y: -100 },
         }}
       >
-        <DialogHeader>{`Bienvenue sur ton profil ${student.lastName} ${student.firstName}! `}</DialogHeader>
-        <DialogBody className="flex flex-col gap-2" divider>
+        <DialogHeader className="text-md">{`Bienvenue sur ton profil ${student.lastName} ${student.firstName}! `}</DialogHeader>
+        <DialogBody className="flex flex-col gap-2 text-sm" divider>
           <p>
             Nous t'invitons à le remplir attentivement car c'est la clé de ta
             réussite en tant
@@ -59,6 +60,6 @@ export default function Tuto({ openTuto, setOpenTuto, type, student }) {
           </Button>
         </DialogFooter>
       </Dialog>
-    </Fragment>
+    </div>
   );
 }
