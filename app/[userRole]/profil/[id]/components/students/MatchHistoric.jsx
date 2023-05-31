@@ -12,14 +12,11 @@ import getLikeFromMe from "@/lib/users/getLikeFromMe";
 import getLikeToMe from "@/lib/users/getLikeToMe";
 import Cookies from "js-cookie";
 import MiniCard from "./MiniCard";
-import Loading from "@/app/loading";
-import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
+
 import Link from "next/link";
 import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard";
-import { matchesMiddleware } from "next/dist/shared/lib/router/router";
-import CardMatch from "../companies/companyProfileForUser/CardMatch";
 
-export default function MatchHistoric({ currentUser }) {
+export default function MatchHistoric() {
   //todo map des likes in like out match de l'utilisateur
   const token = Cookies.get("jwt");
   const [matches, setMatches] = useState([]);
@@ -46,7 +43,6 @@ export default function MatchHistoric({ currentUser }) {
     };
     fetch();
   }, []);
-
   if (
     (likeRecieve.length === 0) &
     (matches.length === 0) &
@@ -63,7 +59,7 @@ export default function MatchHistoric({ currentUser }) {
     );
   }
   return (
-    <Tabs className=" rounded-3xl" value="">
+    <Tabs className=" rounded-3xl" value="like émis">
       <TabsHeader className="bg-gray-100">
         <Tab value="like émis">like émis</Tab>
         <Tab value="like reçu">like reçu</Tab>

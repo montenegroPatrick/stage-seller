@@ -12,9 +12,14 @@ import { updateUser } from "@/lib/users/updateUser";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-export default function Tuto({ openTuto, setOpenTuto, type, student }) {
+export default function Tuto({ type, student }) {
   const router = useRouter();
   const token = Cookies.get("jwt");
+  const [openTuto, setOpenTuto] = useState(false);
+
+  useEffect(() => {
+    student.showTuto ? setOpenTuto(true) : setOpenTuto(false);
+  }, []);
   const handleOpen = () => {
     setOpenTuto(!openTuto);
   };
@@ -26,9 +31,9 @@ export default function Tuto({ openTuto, setOpenTuto, type, student }) {
     });
   };
   return (
-    <div className="">
+    <Fragment>
       <Dialog
-        size="xxl"
+        size="xl"
         open={openTuto}
         handler={handleOpen}
         animate={{
@@ -60,6 +65,6 @@ export default function Tuto({ openTuto, setOpenTuto, type, student }) {
           </Button>
         </DialogFooter>
       </Dialog>
-    </div>
+    </Fragment>
   );
 }

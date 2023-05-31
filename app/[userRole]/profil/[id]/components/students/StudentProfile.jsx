@@ -1,11 +1,9 @@
-"use client";
 import GithubProjects from "./GithubProjects";
 import ImageProfile from "./ImageProfile";
 import ProfileDescription from "./ProfileDescription";
 import StageDescription from "./StageDescription";
 import Skills from "./Skills";
-import MatchHistoric from "./MatchHistoric";
-import { useEffect, useState } from "react";
+
 import Tuto from "./Tuto";
 
 import { VscGithub } from "react-icons/vsc";
@@ -15,21 +13,12 @@ import Link from "next/link";
 
 import { RxResume } from "react-icons/rx";
 
+import MatchHistoric from "./MatchHistoric";
+
 export default function StudentProfile({ id, student }) {
-  const [openTuto, setOpenTuto] = useState(false);
-
-  useEffect(() => {
-    student.showTuto ? setOpenTuto(true) : setOpenTuto(false);
-  }, []);
-
   return (
     <div className="shadows-text glassMorph rounded-lg lg:p-20 flex flex-col w-full lg:flex-row font-mono text-black3">
-      <Tuto
-        openTuto={openTuto}
-        setOpenTuto={setOpenTuto}
-        student={student}
-        type="students"
-      />
+      <Tuto student={student} type="students" />
       <section className="flex flex-row justify-between">
         <div className="flex lg:flex-col gap-5 w-full lg:h-full border-dotted border-r-2 border-black pr-4">
           <ImageProfile student={student} />
@@ -74,7 +63,7 @@ export default function StudentProfile({ id, student }) {
       </section>
       <section className="grow flex flex-col gap-10 ">
         <div className=" order-2  overflow-hidden z-0 p-5 overflow-y-scroll h-50vh items-center w-full ">
-          <MatchHistoric currentUser={student} />
+          <MatchHistoric />
         </div>
         <div className="w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow order-1">
           <article className="text-left w-full">
