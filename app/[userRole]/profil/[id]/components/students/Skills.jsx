@@ -36,7 +36,7 @@ export default function Skills({
 
   return (
     <section className={classes}>
-      <div className="flex flex-wrap  w-full gap-1 lg:gap-3 m-1">
+      <div className="flex flex-row-reverse flex-wrap-reverse  w-full gap-1 lg:gap-3 m-1">
         {skillsStateStage && stages
           ? skillsStateStage.map((skill) =>
               skill.map((objSkill) => (

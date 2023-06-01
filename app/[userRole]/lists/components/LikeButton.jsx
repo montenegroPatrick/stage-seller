@@ -104,13 +104,9 @@ export default function LikeButton({ userReceivingId }) {
   return (
     <>
       <button onClick={handleClick} className="">
-        {isMatch ? (
-          <Button addClasses="font-bold">Match</Button>
-        ) : isLike ? (
-          <Button addClasses="font-bold ">interest sent</Button>
-        ) : (
-          <Button addClasses="font-bold ">send interest</Button>
-        )}
+        <Button addClasses="lowercase">
+          {isMatch ? "it's match" : isLike ? "interest sent" : "send interest"}
+        </Button>
       </button>
     </>
   );

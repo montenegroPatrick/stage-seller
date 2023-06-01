@@ -99,6 +99,10 @@ export default function NavBar() {
 
               <Button onClick={handleLogout}>Se déconnecter</Button>
             </>
+          ) : path === "/sign-in" ? (
+            <Link href="/">
+              <Button>Home-page</Button>
+            </Link>
           ) : (
             <Link href="/sign-in">
               <Button>SE CONNECTER</Button>
@@ -172,9 +176,9 @@ export default function NavBar() {
             <Link
               onClick={handleNav}
               className="text-2xl py-4 hover:text-indigo-700 ease-in text-white duration-300"
-              href="/sign-in"
+              href={path === "/sign-in" ? "/" : "/sign-in"}
             >
-              Se connecter
+              {path === "/sign-in" ? "home-page" : "se connecter"}
             </Link>
           )}
         </div>
