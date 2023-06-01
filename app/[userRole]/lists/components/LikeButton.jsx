@@ -12,6 +12,7 @@ import setMatch from "@/lib/matches/setMatch";
 import { usePathname, useRouter } from "next/navigation";
 import TheMath from "../../components/TheMatch";
 import getUserMatches from "@/lib/users/getUserMatches";
+import Button from "@/app/utilsComponents/Buttons/Button";
 
 export default function LikeButton({ userReceivingId }) {
   const token = Cookies.get("jwt");
@@ -54,6 +55,7 @@ export default function LikeButton({ userReceivingId }) {
 
   const foundMatches = async () => {
     if (likesToMe) {
+      console.log(likesToMe);
       const theMatch = likesToMe.find(
         (likeTo) => likeTo.user.id === userReceivingId
       );
@@ -103,11 +105,11 @@ export default function LikeButton({ userReceivingId }) {
     <>
       <button onClick={handleClick} className="">
         {isMatch ? (
-          <AiFillHeart className="text-black" />
+          <Button addClasses="font-bold">Match</Button>
         ) : isLike ? (
-          <AiFillHeart className="text-red-500" />
+          <Button addClasses="font-bold ">interest sent</Button>
         ) : (
-          <AiOutlineHeart className="text-red-500" />
+          <Button addClasses="font-bold ">send interest</Button>
         )}
       </button>
     </>

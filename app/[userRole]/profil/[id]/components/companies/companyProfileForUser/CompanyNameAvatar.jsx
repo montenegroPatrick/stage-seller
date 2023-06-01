@@ -4,33 +4,53 @@ import { useState, useEffect } from "react";
 import SettingButton from "./SettingButton";
 import ButtonForm from "./ButtonForm";
 import InputFormCompany from "../InputFormCompany";
+import uploadFile from "@/lib/users/uploadFile";
+import { imageUrl } from "@/lib/imageUrl";
 
 export default function CompanyNameAvatar({
-  city,
-  postCode,
-  companyName,
-  profileImage,
   submitForm,
   setMessage,
   visitor,
+  user,
+  token,
 }) {
   const [settings, setSettings] = useState(false);
-  const [userCity, setUserCity] = useState(city);
-  const [userPostCode, setUserPostCode] = useState(postCode);
-  const [userCompanyName, setCompanyName] = useState(companyName);
-  const [userProfileImage, setProfileImage] = useState(profileImage);
-
+  const [userCity, setUserCity] = useState(user.city);
+  const [userPostCode, setUserPostCode] = useState(user.postCode);
+  const [userCompanyName, setCompanyName] = useState(user.companyName);
+  const [userProfileImage, setUserProfileImage] = useState(user.profileImage);
   useEffect(() => {
     if (typeof setMessage === "function") {
       setMessage("");
     }
   }, [settings]);
-
+  const handleChangeImage = (event) => {
+    setUserProfileImage(event.target.files[0]);
+  };
   if (settings) {
     return (
       <form
         onSubmit={(event) => {
           event.preventDefault();
+          const formData = new FormData();
+          formData.append("file", userProfileImage);
+          formData.append("type", "profile_photo");
+          uploadFile(token, user.id, formData).then((res) => {
+            switch (res.status) {
+              case 500:
+                setMessage(
+                  "une erreur est survenue lors de l'enregistrement de l'image réessayer plus tard"
+                );
+                break;
+              case 200:
+                setMessage("image chargée");
+                break;
+              case 400:
+                setMessage("merci de choisir un fichier");
+              default:
+                break;
+            }
+          });
           submitForm({
             city: userCity,
             postCode: parseInt(userPostCode),
@@ -80,8 +100,7 @@ export default function CompanyNameAvatar({
               Image ou logo de l'entreprise
             </p>
             <input
-              value=""
-              onChange={(e) => setProfileImage(e.target.files[0])}
+              onChange={(event) => handleChangeImage(event)}
               type="file"
               multiple={false}
               accept="image/png,image/jpeg,image/gif,image/svg+xml,application/pdf"
@@ -110,12 +129,10 @@ export default function CompanyNameAvatar({
       <p className="text-center text-lg 2xl:text-xl text-teal-800 italic">
         {userCity}, {userPostCode}
       </p>
-      <div className="w-[100%] py-5">
-        <Image
-          src={profileImage ? profileImage : "/company.jpeg"}
-          width={200}
-          height={200}
-          className="mx-auto rounded-md"
+      <div className="flex justify-center w-[100%] py-5">
+        <img
+          src={`${imageUrl}${user.profileImage}`}
+          className="w-[200px] h-[200px] rounded-md"
           alt="Logo ou photo de l'entreprise"
         />
       </div>

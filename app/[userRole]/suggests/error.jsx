@@ -1,13 +1,14 @@
 "use client"; // Error components must be Client components
 
 import NavBarMarginContainer from "@/app/components/NavBarMarginContainer";
-import Button from "@/app/utilsComponents/Buttons/Button";
-
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { getUser } from "@/lib/users/getUser";
+import Button from "../../utilsComponents/Buttons/Button";
 
 export default function Error({ error, reset }) {
   const router = useRouter();
-
   return (
     <NavBarMarginContainer classes="h-[calc(100vh-4rem)] bg-white">
       <aside className="h-screen w-screen flex flex-col text-sm items-center lg:text-xl gap-10 p-5 lg:p-28 m-5 text-justify">

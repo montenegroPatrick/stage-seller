@@ -1,39 +1,15 @@
-"use client";
-// import {
-//   Card,
-//   CardHeader,
-//   CardBody,
-//   CardFooter,
-//   Typography,
-//   Avatar,
-//   Tooltip,
-// } from "@material-tailwind/react";
 import "./styles.css";
-import Image from "next/image";
 import Link from "next/link";
 import LikeButton from "@/app/[userRole]/lists/components/LikeButton";
 import { RiMailSendLine } from "react-icons/ri";
 import { BsCalendar2DateFill } from "react-icons/bs";
-import {
-  Avatar,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Tooltip,
-  Typography,
-} from "@material-tailwind/react";
 import { imageUrl } from "@/lib/imageUrl";
 import Skills from "../../profil/[id]/components/students/Skills";
-import { Suspense } from "react";
-import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard";
 import { MdLocationOn } from "react-icons/md";
 import { FcWorkflow } from "react-icons/fc";
 
-export default function ProfileCarte({ user, classes }) {
-  //TODO regarder si le user.role est company ou student pour éventuellement changer des champs dynamiquement
+export default function CardProfile({ user, classes }) {
   const options = { day: "numeric", month: "numeric", year: "numeric" };
-
   const {
     lastName,
     firstName,
@@ -123,7 +99,9 @@ export default function ProfileCarte({ user, classes }) {
                     {/* {`${stage.startDate.slice(0, 10)} pour une durée de ${
                       stage.duration
                     } mois`} */}
-                    {`À partir du ${new Date(stage.startDate).toLocaleDateString("fr-FR", options)} pour une durée de ${
+                    {`À partir du ${new Date(
+                      stage.startDate
+                    ).toLocaleDateString("fr-FR", options)} pour une durée de ${
                       stage.duration
                     } mois`}
                   </p>
