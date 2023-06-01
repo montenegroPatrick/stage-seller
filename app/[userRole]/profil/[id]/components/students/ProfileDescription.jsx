@@ -32,7 +32,7 @@ export default function ProfileDescription({
   }
   return (
     <article className=" profile-background glassMorph text-left flex flex-col gap-2 p-5 w-full border border-black rounded-lg">
-      <h2 className="text-xl text-bold border-b md:uppercase border-black py-2">
+      <h2 className="text-xl font-bold border-b md:uppercase border-black py-2">
         Biographie
       </h2>
       <Typography variant="paragraph" className="">

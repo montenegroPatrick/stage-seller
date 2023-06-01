@@ -235,7 +235,7 @@ export default function SignUpForm({ role }) {
           <ul className="flex flex-col gap-1">
             {passwordNotValid.length > 0 &&
               passwordNotValid.map((error, index) => (
-                <li className="flex gap-2" key={index}>
+                <li className="flex gap-2 font-bold" key={index}>
                   <span>{BsDot}</span>
                   {error}
                 </li>

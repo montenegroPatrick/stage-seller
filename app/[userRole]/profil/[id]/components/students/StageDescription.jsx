@@ -111,7 +111,7 @@ export default function StageDescription({
             key={stage.id}
             className="p-5 glassMorph w-full text-left flex border border-black flex-col gap-16 float-right rounded-lg "
           >
-            <h2 className="text-xl text-bold border-b border-black py-2 md:uppercase">
+            <h2 className="text-xl font-bold border-b border-black py-2 md:uppercase">
               Ma recherche
             </h2>
             <p className="">
@@ -161,7 +161,6 @@ export default function StageDescription({
               <li className=" py-2  flex flex-row-reverse items-center gap-2">
                 {/* !skills STAGE */}
                 <div className="flex items-center gap-2">
-                  <p className=" w-full">Skills pour la recherche = </p>
                   <Skills
                     stages={true}
                     show={showSettings}

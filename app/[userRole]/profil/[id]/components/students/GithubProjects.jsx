@@ -27,12 +27,15 @@ export default function GithubProjects({
 
   if (!repos) {
     return (
-      <section className="flex flex-col text-center gap-2 items-center justify-center underline">
-        <p> Ton pseudo github n'existe pas ! </p>
+      <section className="flex flex-col text-justify gap-2 justify-center">
+        <p className="text-xl font-bold border-b md:uppercase border-black py-2">
+          {" "}
+          Ton pseudo github n'existe pas !{" "}
+        </p>
         <p>
           {" "}
           Si tu le renseigne en mode EDIT les visiteurs pourront accèder à tes
-          repository publics.{" "}
+          repositories publics.{" "}
         </p>
         <p>
           On te conseille bien documenter tes repos sur github, l'affichage se

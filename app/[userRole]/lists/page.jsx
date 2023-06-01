@@ -11,11 +11,9 @@ export default async function Lists({ params }) {
   const role = params.userRole;
 
   const users = await getAllUsers(token);
-  console.log("users", users);
   if (!users) {
     throw new Error("users not found");
   }
-
   return (
     <NavBarMarginContainer classes="min-h-[calc(100vh-4rem)]">
       <div className="flex flex-col items-center mb-20 bg-white scrolling-animation">
@@ -25,10 +23,9 @@ export default async function Lists({ params }) {
         <div className="w-full max-w-[80vw] bg-black h-[1px]" />
       </div>
       <div className="flex flex-wrap gap-5 justify-around">
-        {users &&
-          users.map((user) => {
-            return <CardProfile key={user.id} user={user} />;
-          })}
+        {users.map((user) => {
+          return <CardProfile key={user.id} user={user} />;
+        })}
       </div>
     </NavBarMarginContainer>
   );

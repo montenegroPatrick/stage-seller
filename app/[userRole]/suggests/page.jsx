@@ -23,9 +23,9 @@ export default async function Suggests() {
   const userMatch = await getUserMatches(token).then((res) => res.data);
 
   const usersToDisplay = usersSuggest.filter(
-    (user) => user.id === userMatch.id
+    (user) => user.id !== userMatch.id
   );
-  console.log("suggest", usersToDisplay);
+
   return (
     <NavBarMarginContainer>
       <h2 className="bg-white text-4xl sm:text-4xl md:text-5xl text-black text-center py-6 px-8">

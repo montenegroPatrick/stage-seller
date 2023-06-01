@@ -62,8 +62,13 @@ export default function StudentProfile({ id, student }) {
         {/* image de profile en background avec dessus nom prenom lieu skills  */}
       </section>
       <section className="grow flex flex-col gap-10 ">
-        <div className=" order-2  overflow-hidden z-0 p-5 overflow-y-scroll h-50vh items-center w-full ">
-          <MatchHistoric />
+        <div className="order-2 w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow ">
+          <div className=" overflow-hidden z-0 p-5 overflow-y-scroll h-50vh w-full profile-background glassMorph text-left flex flex-col gap-5 border border-black rounded-lg">
+            <h2 className="text-xl font-bold border-b md:uppercase border-black py-2">
+              Voici tes likes et matchs
+            </h2>
+            <MatchHistoric />
+          </div>
         </div>
         <div className="w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow order-1">
           <article className="text-left w-full">
@@ -72,14 +77,14 @@ export default function StudentProfile({ id, student }) {
           <article className="lg:text-right w-full">
             <StageDescription currentUser={student} />
           </article>
-          <h2 className="text-2xl underline text-center">
-            Voici tes likes et matchs
-          </h2>
         </div>
-        <div className=" lg:flex w-full h-1/3 max-h-[20rem] p-10 order-last">
-          <div className=" items-center w-full ">
-            <GithubProjects currentUser={student} />
-          </div>
+
+        <div className="w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow  h-1/3 max-h-[20rem]  order-last">
+          <aside className="profile-background glassMorph text-left flex flex-col gap-2 p-5 w-full border border-black rounded-lg">
+            <div className="items-center w-full ">
+              <GithubProjects currentUser={student} />
+            </div>
+          </aside>
         </div>
       </section>
     </div>

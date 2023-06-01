@@ -7,7 +7,7 @@ export default async function getAllUsers(token) {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => res)
+    .then((res) => res.data)
     .catch((err) => err.data);
   return response;
 }

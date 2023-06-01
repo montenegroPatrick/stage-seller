@@ -98,7 +98,7 @@ export default function LikeButton({ userReceivingId }) {
   };
 
   if (isMatchOpen) {
-    return <TheMath openMatch={isMatch} setIsMatch={setIsMatch} />;
+    return <TheMath openMatch={isMatch} />;
   }
 
   return (
