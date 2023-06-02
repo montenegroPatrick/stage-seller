@@ -12,9 +12,14 @@ import { updateUser } from "@/lib/users/updateUser";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-export default function Tuto({ openTuto, setOpenTuto, type, student }) {
+export default function Tuto({ type, student }) {
   const router = useRouter();
   const token = Cookies.get("jwt");
+  const [openTuto, setOpenTuto] = useState(false);
+
+  useEffect(() => {
+    student.showTuto ? setOpenTuto(true) : setOpenTuto(false);
+  }, []);
   const handleOpen = () => {
     setOpenTuto(!openTuto);
   };
@@ -28,6 +33,7 @@ export default function Tuto({ openTuto, setOpenTuto, type, student }) {
   return (
     <Fragment>
       <Dialog
+        size="xl"
         open={openTuto}
         handler={handleOpen}
         animate={{
@@ -35,8 +41,8 @@ export default function Tuto({ openTuto, setOpenTuto, type, student }) {
           unmount: { scale: 0.9, y: -100 },
         }}
       >
-        <DialogHeader>{`Bienvenue sur ton profil ${student.lastName} ${student.firstName}! `}</DialogHeader>
-        <DialogBody className="flex flex-col gap-2" divider>
+        <DialogHeader className="text-md">{`Bienvenue sur ton profil ${student.lastName} ${student.firstName}! `}</DialogHeader>
+        <DialogBody className="flex flex-col gap-2 text-sm" divider>
           <p>
             Nous t'invitons à le remplir attentivement car c'est la clé de ta
             réussite en tant

@@ -1,7 +1,6 @@
 "use client";
 
 //Components
-import Logo from "./Logo";
 import Button from "../utilsComponents/Buttons/Button";
 
 //Dependancies anc hooks
@@ -21,8 +20,6 @@ export default function NavBar() {
   const token = Cookies.get("jwt");
   const router = useRouter();
   const [mobileNav, setMobileNav] = useState(false);
-  const [color, setColor] = useState("bg-gray-800");
-  const [textColor, setTextColor] = useState("#000000");
   const [data, setData] = useState(null);
   const path = usePathname();
 
@@ -71,6 +68,7 @@ export default function NavBar() {
                 La méthode O'Clock
               </Link>
               <Link
+                onClick={handleNav}
                 className="font-jetbrains text-black text-sm xl:text-md 2xl:text-lg underline hover:text-magenta underline-offset-1 "
                 href={`/${
                   data.type === "STUDENT" ? "students" : "companies"
@@ -79,6 +77,7 @@ export default function NavBar() {
                 Mon profil
               </Link>
               <Link
+                onClick={handleNav}
                 className="font-jetbrains text-black text-sm xl:text-md 2xl:text-lg underline hover:text-magenta underline-offset-1 "
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
@@ -89,6 +88,7 @@ export default function NavBar() {
                   : "Tous les étudiants"}
               </Link>
               <Link
+                onClick={handleNav}
                 className="font-jetbrains text-black text-sm xl:text-md 2xl:text-lg underline hover:text-magenta underline-offset-1 "
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
@@ -99,6 +99,10 @@ export default function NavBar() {
 
               <Button onClick={handleLogout}>Se déconnecter</Button>
             </>
+          ) : path === "/sign-in" ? (
+            <Link href="/">
+              <Button>Home-page</Button>
+            </Link>
           ) : (
             <Link href="/sign-in">
               <Button>SE CONNECTER</Button>
@@ -132,6 +136,7 @@ export default function NavBar() {
           {data ? (
             <>
               <Link
+                onClick={handleNav}
                 className="text-2xl py-4 hover:text-indigo-700 text-white ease-in duration-300"
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
@@ -142,6 +147,7 @@ export default function NavBar() {
                   : "Tous les étudiants"}
               </Link>
               <Link
+                onClick={handleNav}
                 className="text-2xl py-4 text-white hover:text-indigo-700 ease-in duration-300"
                 href={`${
                   data.type === "STUDENT" ? "companies" : "students"
@@ -170,9 +176,9 @@ export default function NavBar() {
             <Link
               onClick={handleNav}
               className="text-2xl py-4 hover:text-indigo-700 ease-in text-white duration-300"
-              href="/sign-in"
+              href={path === "/sign-in" ? "/" : "/sign-in"}
             >
-              Se connecter
+              {path === "/sign-in" ? "home-page" : "se connecter"}
             </Link>
           )}
         </div>

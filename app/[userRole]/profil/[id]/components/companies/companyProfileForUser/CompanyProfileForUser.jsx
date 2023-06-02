@@ -15,7 +15,6 @@ import MatchHistoricCompanies from "./MatchHistoricCompanies";
 
 export default function CompanyProfileForUser({ userProfilePage }) {
   const token = Cookies.get("jwt");
-  const [userData, setUserData] = useState(userProfilePage);
   const [message, setMessage] = useState("");
   const [allSkills, setAllSkills] = useState([]);
   //Fetch list of all skills
@@ -30,10 +29,9 @@ export default function CompanyProfileForUser({ userProfilePage }) {
 
   const handleSubmit = async (newData) => {
     setMessage("");
-
     //const newDataUser = { ...userData, ...newData };
     try {
-      const response = await updateUser(token, userData.id, newData);
+      const response = await updateUser(token, userProfilePage.id, newData);
       if (response.status === 204) {
         setMessage("Modifications validées");
         // setUserData((previous) => ({ ...previous, ...newData }));
@@ -63,10 +61,8 @@ export default function CompanyProfileForUser({ userProfilePage }) {
       <section className="flex flex-col md:flex-row w-full 2xl:w-[90vw] mx-auto">
         <div className="w-[100%] md:w-[50%] mx-auto my-5 h-full flex flex-col">
           <CompanyNameAvatar
-            companyName={userData.companyName}
-            picture={userData.profilImage}
-            city={userData.city}
-            postCode={userData.postCode}
+            token={token}
+            user={userProfilePage}
             submitForm={handleSubmit}
             setMessage={setMessage}
             visitor={false}
@@ -75,15 +71,15 @@ export default function CompanyProfileForUser({ userProfilePage }) {
             {allSkills.length > 0 ? (
               <>
                 <CompanySkills
-                  skills={userData.skills}
+                  skills={userProfilePage.skills}
                   submitForm={handleSubmit}
                   token={token}
                   allSkills={allSkills}
                   setMessage={setMessage}
                   visitor={false}
                 />
-                {userData.stages.length || !userData.stages ? (
-                  userData.stages.map((stage) => (
+                {userProfilePage.stages.length || !userProfilePage.stages ? (
+                  userProfilePage.stages.map((stage) => (
                     <CompanyStage
                       currentStage={stage}
                       setMessage={setMessage}
@@ -113,7 +109,7 @@ export default function CompanyProfileForUser({ userProfilePage }) {
         </div>
         <div className="w-full md:w-[50%] mx-auto my-5 border-dotted md:border-l-2 border-black">
           <CompanyDescription
-            description={userData.description}
+            description={userProfilePage.description}
             submitForm={handleSubmit}
             visitor={false}
           />

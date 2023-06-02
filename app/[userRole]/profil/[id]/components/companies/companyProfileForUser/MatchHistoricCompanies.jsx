@@ -60,7 +60,7 @@ export default function MatchHistoricCompanies() {
       </section>
     );
   }
-  console.log("matchHistoricCompanie", likeSend, likeRecieve);
+
   return (
     <Tabs className="relative rounded-3xl" value="like émis">
       <TabsHeader className="sticky top-0 bg-gray-100 left-0 right-0  ">
