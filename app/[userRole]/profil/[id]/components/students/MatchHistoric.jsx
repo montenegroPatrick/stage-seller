@@ -6,7 +6,7 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, use, useEffect, useState } from "react";
 import getUserMatches from "@/lib/users/getUserMatches";
 import getLikeFromMe from "@/lib/users/getLikeFromMe";
 import getLikeToMe from "@/lib/users/getLikeToMe";
@@ -19,10 +19,13 @@ import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard
 export default function MatchHistoric() {
   //todo map des likes in like out match de l'utilisateur
   const token = Cookies.get("jwt");
+  // const matches = use(getUserMatches(token))?.data;
+  // const likeSend = use(getLikeFromMe(token))?.data;
+  // const likeRecieve = use(getLikeToMe(token))?.data;
   const [matches, setMatches] = useState([]);
   const [likeSend, setLikeSend] = useState([]);
   const [likeRecieve, setLikeRecieve] = useState([]);
-  // data
+
   const getMatches = async () =>
     getUserMatches(token).then((res) => {
       setMatches(res.data);

@@ -61,7 +61,7 @@ export default function Skills({
             ))}
         {isSettings && (
           <>
-            <div className="flex gap-2">
+            <div className="flex justify-center gap-2">
               <div
                 onClick={() => setShowSettings(!show)}
                 className="px-1 rounded-md overflow-hidden bg-gray-500 w-fit"

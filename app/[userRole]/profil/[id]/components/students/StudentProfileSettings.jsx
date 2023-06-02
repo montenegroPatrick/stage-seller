@@ -116,6 +116,10 @@ export default function StudentProfilSettings({
         setStageMessage(
           "vos renseignements sont incomplet, merci de les completer avant de les envoyer"
         );
+      case 500:
+        setStageMessage(
+          "nous rencontrons des problèmes avec le serveur merci de réessayer ultérieurement"
+        );
       default:
         break;
     }
@@ -137,7 +141,6 @@ export default function StudentProfilSettings({
         </div>
         <ResumeForm student={student} />
         <div className="flex flex-row flex-wrap  justify-between lg:w-full ">
-          {/* image de profile en background avec dessus nom prenom lieu skills  */}
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-4 items-center border-4 p-5 rounded-xl w-screen"
@@ -267,6 +270,7 @@ export default function StudentProfilSettings({
             input={inputStages}
             handleChange={handleChangeStages}
           />
+
           {stageMessage && (
             <>
               <Alert

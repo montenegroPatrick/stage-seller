@@ -32,14 +32,14 @@ export default function StudentProfile({ id, student }) {
               </div>
               <div className="  font-bold flex flex-row items-center gap-2">
                 <SlSocialLinkedin />
-                <Link href={student.linkedin ?? ""}>{`${
+                <Link target="_blanck" href={student.linkedin ?? ""}>{`${
                   student.linkedin ? student.linkedin : ""
                 }`}</Link>
               </div>
               <div className="  font-bold flex flex-row items-center gap-2">
                 <VscGithub />
-                <Link href={student.github ?? ""}>{`${
-                  student.github ? `https://github.com/${student.github}` : ""
+                <Link target="_blanck" href={student.github ?? ""}>{`${
+                  student.github ? `${student.github}` : ""
                 }`}</Link>
               </div>
               <div className="  font-bold flex flex-row items-center gap-2">

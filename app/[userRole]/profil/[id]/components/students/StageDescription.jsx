@@ -89,15 +89,17 @@ export default function StageDescription({
           </div>
 
           {/* skills STAGE */}
-          <Skills
-            stages={true}
-            student={currentUser}
-            show={showSettings}
-            skills={skills}
-            isSettings={isSettings}
-            setInputStages={setInput}
-            setShowSettings={setShowSettings}
-          />
+          <div className="flex justify-center">
+            <Skills
+              stages={true}
+              student={currentUser}
+              show={showSettings}
+              skills={skills}
+              isSettings={isSettings}
+              setInputStages={setInput}
+              setShowSettings={setShowSettings}
+            />
+          </div>
         </div>
       </>
     );

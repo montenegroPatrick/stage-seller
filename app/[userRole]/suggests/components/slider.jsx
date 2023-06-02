@@ -9,6 +9,7 @@ export default function Slider({ usersToDisplay }) {
   const [sliderRef] = useKeenSlider();
 
   if (usersToDisplay.length < 1) {
+    throw new Error("no result");
   }
   return (
     <>
