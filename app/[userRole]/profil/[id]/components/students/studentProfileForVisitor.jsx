@@ -3,7 +3,7 @@ import ImageProfile from "./ImageProfile";
 import ProfileDescription from "./ProfileDescription";
 import StageDescription from "./StageDescription";
 import Skills from "./Skills";
-import MatchHistoric from "./MatchHistoric";
+
 import { Suspense } from "react";
 
 import { VscGithub } from "react-icons/vsc";
@@ -64,21 +64,15 @@ export default function StudentProfileForVisitor({ id, student }) {
         </div> */}
         <div className="w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow order-1">
           <article className="text-left w-full">
-            <Suspense fallback={<SkeletonLoader />}>
-              <ProfileDescription currentUser={student} />
-            </Suspense>
+            <ProfileDescription currentUser={student} />
           </article>
           <article className="lg:text-right w-full">
-            <Suspense fallback={<SkeletonLoader />}>
-              <StageDescription currentUser={student} />
-            </Suspense>
+            <StageDescription currentUser={student} />
           </article>
         </div>
         <div className=" lg:flex w-full h-1/3 max-h-[20rem] p-10 order-last">
           <div className=" items-center w-full ">
-            <Suspense fallback={<SkeletonLoader />}>
-              <GithubProjects currentUser={student} />
-            </Suspense>
+            <GithubProjects currentUser={student} />
           </div>
         </div>
       </section>

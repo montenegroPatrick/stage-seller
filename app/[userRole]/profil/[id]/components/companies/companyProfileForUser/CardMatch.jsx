@@ -10,7 +10,6 @@ import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard
 import getAllUsers from "@/lib/users/getAllUsers";
 
 export default function CardMatch({ objectLike, matches }) {
-  console.log("plouf", objectLike);
   const router = useRouter();
   const token = Cookies.get("jwt");
   const [users, setUsers] = useState();

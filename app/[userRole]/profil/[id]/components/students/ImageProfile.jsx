@@ -92,7 +92,7 @@ export default function ImageProfile({
     <div className="relative p-2 h-[20vh] lg:h-[30vh] w-[20vh] lg:w-[30vh] rounded-full">
       <img
         src={`${imageUrl}${student.profileImage}`}
-        className="absolute p-2 top-0 left-0 rounded-full h-full w-full "
+        className="absolute p-2 top-0 left-0 rounded-full h-full w-full"
       />
 
       {/* <div className="to-bg-black-10 inset-0 h-full w-full bg-gradient-to-t from-black/90 via-black/80" /> */}

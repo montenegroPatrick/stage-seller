@@ -7,12 +7,11 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 
-export default function TheMath({ openMatch, setIsMatch }) {
+export default function TheMatch({ openMatch }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(!open);
-    setIsMatch(false);
   };
 
   useEffect(() => {
@@ -30,8 +29,10 @@ export default function TheMath({ openMatch, setIsMatch }) {
       >
         <DialogHeader>It's a match</DialogHeader>
         <DialogBody divider>
-          Prochainement ici on aura possibilité de dialoguer avec l'employeur
-          intérréssé
+          <p>
+            Prochainement à ce stade il y aura la possibilité d'ouvrir un chat
+            entre les deux utilisateurs et pleins d'autres fonctionnalitées
+          </p>
         </DialogBody>
         <DialogFooter>
           <Button variant="gradient" color="green" onClick={handleOpen}>

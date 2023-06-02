@@ -13,8 +13,6 @@ import { cookies } from "next/headers";
 import { getUser } from "@/lib/users/getUser";
 
 import StudentProfileForVisitor from "./components/students/studentProfileForVisitor";
-
-//import StudentProfile from "@/app/[userRole]/profil/[id]/components/students/StudentProfile";
 import StudentProfilView from "@/app/[userRole]/profil/[id]/components/students/StudentProfilView";
 import CompanyProfileForUser from "@/app/[userRole]/profil/[id]/components/companies/companyProfileForUser/CompanyProfileForUser";
 import CompanyProfileForVisitor from "@/app/[userRole]/profil/[id]/components/companies/companyProfileForVisitor/CompanyProfileForVisitor";
@@ -22,10 +20,8 @@ import CompanyProfileForVisitor from "@/app/[userRole]/profil/[id]/components/co
 export default async function Profil({ params }) {
   //Verification user
   const cookieStore = cookies();
-  const id = cookieStore.get("user-id")?.value;
-  const connectedUserId = cookieStore.get("user-id")?.value;
-  const token = cookieStore.get("jwt")?.value;
   const roleUser = cookieStore.get("roleUser")?.value;
+  const token = cookieStore.get("jwt")?.value;
 
   if (!params.id || !token) {
     redirect("/sign-in");
@@ -38,7 +34,7 @@ export default async function Profil({ params }) {
   if (!userProfilePage) {
     redirect("/");
   }
-
+  // if we have a different role we must be a visitor
   if (roleUser !== params.userRole) {
     const users = await getAllUsers(token);
     const otherUser = users.find((user) => user.id === parseInt(params.id));
@@ -49,7 +45,7 @@ export default async function Profil({ params }) {
           <StudentProfileForVisitor id={params.id} student={otherUser} />
         ) : (
           <CompanyProfileForVisitor
-            connectedUserId={connectedUserId}
+            connectedUserId={params.id}
             otherUser={otherUser}
           />
         )}
@@ -57,14 +53,14 @@ export default async function Profil({ params }) {
     );
   }
 
-  //si on est l'user connecter on peut faire getUser sinon il faut un getProfilCompany fetch('/api/users/type/company') => !role.filter ((user)=> user.id === params.id)
+  // 1.we can't see the other profil with the same userRole, so if my userRole match with the role on url, i'm the profil user ! we are verifying the id on back-end (tokenId === userID)
   return (
     <NavBarMarginContainer classes="max-w-[95vw]  min-h-[calc(100vh-4rem)] mx-auto">
       {params.userRole === "students" ? (
         <StudentProfilView id={params.id} student={userProfilePage} />
       ) : (
         <CompanyProfileForUser
-          connectedUserId={connectedUserId}
+          connectedUserId={params.id}
           userProfilePage={userProfilePage}
         />
       )}

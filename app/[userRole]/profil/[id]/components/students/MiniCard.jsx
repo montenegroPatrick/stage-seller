@@ -37,9 +37,9 @@ export default function MiniCard({ objectLike, matches }) {
           src={`${imageUrl}${userForCard.profileImage}`}
           className="border-2 border-whiteSmoke hover:z-10  bg-cover"
         />
-        <div className="flex flex-col gap-2 w-4/5 justify-between">
+        <div className="flex gap-2 w-4/5 justify-between">
           <Link href={`/companies/profil/${userForCard.id}`}>
-            <h6 className="text-md lg:text-xl">{userForCard.companyName}</h6>
+            <h6 className="text-md  lg:text-xl">{userForCard.companyName}</h6>
           </Link>
           <div className="hidden lg:block">
             <Skills classes="w-full " skills={userForCard.skills} />
