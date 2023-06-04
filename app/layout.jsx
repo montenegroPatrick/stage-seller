@@ -9,8 +9,8 @@ import {
   abril,
   pt,
   raleWay,
-} from "@/assets/font";
-import "@/assets/globals.css";
+} from "@/app/assets/font";
+import "./assets/globals.css";
 
 import Footer from "@/app/components/Footer";
 import NavBar from "@/app/components/NavBar";
