@@ -14,10 +14,6 @@ import {
 import { getSkills } from "@/lib/skills/getSkills";
 
 import Cookies from "js-cookie";
-import { updateUser } from "@/lib/users/updateUser";
-import { addSkills } from "@/lib/users/addSkills";
-import { RxCross2 } from "react-icons/rx";
-import { addOrUpdateStages } from "@/lib/stages/addOrUpdateStages";
 
 export default function ModalSettingsSkills({
   showSettings,

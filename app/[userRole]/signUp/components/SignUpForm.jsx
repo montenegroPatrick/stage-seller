@@ -58,7 +58,9 @@ export default function SignUpForm({ role }) {
     /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
 
   useEffect(() => {
-    setLabelPassword("* password-faible");
+    if (!!input.password) {
+      setLabelPassword("* password-faible");
+    }
     setErrorMessage("");
     setIsErrorEmail(false);
     setIsErrorVerifPassword(false);

@@ -19,15 +19,12 @@ export default async function Suggests() {
     }
   });
 
-  const usersMatch = await getUserMatches(token).then((res) => res.data);
-  console.log("matches", usersMatch);
+  // const usersMatch = await getUserMatches(token).then((res) => res.data);
 
-  const usersLiked = await getLikeFromMe(token).then((res) => res.data);
-  console.log("liked", usersLiked);
-  // const usersToDisplay = usersSuggest.filter(
-  //   (userSuggest) =>
-  //     usersMatch.map((match) => match.user.id !== userSuggest.id) &
-  //     usersLiked.map((liked) => liked.user.id === userSuggest.id)
+  // const usersLiked = await getLikeFromMe(token).then((res) => res.data);
+
+  // const usersToDisplay = usersSuggest.filter((user) =>
+  //   usersLiked.find((liked) => user.id !== liked.user.id)
   // );
 
   return (

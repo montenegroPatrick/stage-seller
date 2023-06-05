@@ -39,7 +39,7 @@ export default function StudentProfile({ id, student }) {
               <div className="  font-bold flex flex-row items-center gap-2">
                 <VscGithub />
                 <Link target="_blanck" href={student.github ?? ""}>{`${
-                  student.github ? `${student.github}` : ""
+                  student.github ? `https://github.com/ ${student.github}` : ""
                 }`}</Link>
               </div>
               <div className="  font-bold flex flex-row items-center gap-2">
