@@ -29,7 +29,7 @@ export default function CardProfile({ user, classes }) {
     <div className={classes}>
       <div
         href={`${role}/profil/${id}`}
-        className="relative flex flex-col gap-4 cardProfile w-50vh h-45vh md:h-30vh rounded-lg md:w-70vh p-8 overflow-hidden mx-2"
+        className="relative flex flex-col gap-4 lg:justify-around cardProfile w-50vh h-40vh rounded-lg md:w-70vh p-8 overflow-hidden mx-2"
       >
         {/* <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span> */}
 
@@ -78,15 +78,15 @@ export default function CardProfile({ user, classes }) {
         </div>
 
         <div className="flex flex-col ">
-          <p className="w-full max-h-[5rem] boxShadow-inputShadow text-sm text-gray-700  overflow-y-auto hide-scrollBar rounded-lg py-2 px-2 ">
+          <p className="hidden lg:block w-full max-h-[5rem] boxShadow-inputShadow text-sm text-gray-700  overflow-y-auto hide-scrollBar rounded-lg py-2 px-2 ">
             {description ? description : "Pas de description"}
           </p>
 
-          <dl className="w-full mt-6 flex justify-between gap-4 sm:gap-6">
+          <dl className="flex w-full mt-6  justify-between gap-4 sm:gap-6">
             {stages.map((stage) => (
               <div
                 key={stage.id}
-                className="flex flex-col gap-3 flex-wrap w-1/2"
+                className="hidden lg:flex lg:flex-col gap-3 flex-wrap w-1/2"
               >
                 <dt className="text-sm flex gap-2 items-center font-medium text-gray-800">
                   <FcWorkflow />

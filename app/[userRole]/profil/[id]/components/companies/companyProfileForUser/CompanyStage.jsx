@@ -20,8 +20,6 @@ export default function CompanyStage({
   const [listAllSkills, setListAllSkills] = useState(allSkills);
   const options = { day: "numeric", month: "numeric", year: "numeric" };
 
-  console.log("La valeur de mon stage actuel ", stage);
-
   function handleChange(event) {
     const { name, value } = event.target;
     setStage((prev) => ({ ...prev, [name]: value }));
@@ -50,9 +48,13 @@ export default function CompanyStage({
   };
 
   const handleDeselectSkill = (skill) => {
-    setSelectedSkills(
-      selectedSkills.filter((selectedSkill) => selectedSkill !== skill)
+    console.log(skill);
+    console.log(selectedSkills);
+
+    const newSelectedSkills = selectedSkills.filter(
+      (skillSelected) => skillSelected.id !== skill.id
     );
+    setSelectedSkills(newSelectedSkills);
   };
 
   const handleSubmitPutForm = async () => {

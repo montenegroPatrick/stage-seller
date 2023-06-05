@@ -49,14 +49,14 @@ export default function ModalSettingsSkillsStages({
       // setStageSkills(newSkillsArray);
     } else {
       const skillToPush = skillsList.find((skill) => skill.name === event);
-      console.log("skillTopusj", skillToPush);
+
       const stageSkillsArray = [];
       stageSkillsArray.push(skillToPush);
 
       setStageSkills([...stageSkills, stageSkillsArray]);
     }
   };
-  console.log("stage", stageSkills);
+  // click on confirm Button,
   const handleClick = () => {
     open && handleOpen();
     const dataSkillUpdate = stageSkills.map((stage) =>
@@ -68,6 +68,7 @@ export default function ModalSettingsSkillsStages({
       ? transformSkillsOnId(dataSkillUpdate)
       : transformSkillsOnId(stageSkills);
   };
+  //transform for update DB, db await an array of skill's id
   const transformSkillsOnId = (listToTransform) => {
     const skillIds = [];
     listToTransform.map((object) =>

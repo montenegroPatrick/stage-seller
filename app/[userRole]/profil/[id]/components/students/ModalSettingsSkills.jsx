@@ -19,7 +19,6 @@ export default function ModalSettingsSkills({
   showSettings,
   userSkills,
   setUserSkills,
-  student,
   setInputUser,
 }) {
   const token = Cookies.get("jwt");
