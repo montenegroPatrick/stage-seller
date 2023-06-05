@@ -12,20 +12,20 @@ import { updateUser } from "@/lib/users/updateUser";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-export default function Tuto({ type, student }) {
+export default function Tuto({ role, user }) {
   const router = useRouter();
   const token = Cookies.get("jwt");
   const [openTuto, setOpenTuto] = useState(false);
 
   useEffect(() => {
-    student.showTuto ? setOpenTuto(true) : setOpenTuto(false);
+    user.showTuto ? setOpenTuto(true) : setOpenTuto(false);
   }, []);
   const handleOpen = () => {
     setOpenTuto(!openTuto);
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await updateUser(token, student.id, { showTuto: false }).then(() => {
+    await updateUser(token, user.id, { showTuto: false }).then(() => {
       handleOpen();
       router.refresh();
     });
@@ -41,12 +41,16 @@ export default function Tuto({ type, student }) {
           unmount: { scale: 0.9, y: -100 },
         }}
       >
-        <DialogHeader className="text-md">{`Bienvenue sur ton profil ${student.lastName} ${student.firstName}! `}</DialogHeader>
+        {role === "student" ? (
+          <DialogHeader className="text-md">{`Bienvenue sur ton profil ${user.lastName} ${student.firstName}! `}</DialogHeader>
+        ) : (
+          <DialogHeader className="text-md">{`Bienvenue sur ton profil ${user.CompanyName} ! `}</DialogHeader>
+        )}
         <DialogBody className="flex flex-col gap-2 text-sm" divider>
           <p>
             Nous t'invitons à le remplir attentivement car c'est la clé de ta
             réussite en tant
-            {type === "companies"
+            {role === "companies"
               ? " qu'entreprise en recherche de stagiaire motivé"
               : " que candidat motivé"}
             .

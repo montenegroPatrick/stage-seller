@@ -13,6 +13,7 @@ export default function GithubProjects({
   handleSubmit,
   handleChange,
   input,
+  visitor,
 }) {
   // false data to try
   // let repos;
@@ -20,6 +21,7 @@ export default function GithubProjects({
   const [repos, setRepos] = useState();
   const getRepos = () => {
     GetReposGithub(currentUser.github).then((res) => {
+      console.log(res);
       switch (res.status) {
         case 404:
           setRepos(undefined);
@@ -39,21 +41,23 @@ export default function GithubProjects({
   console.log(repos);
   if (!repos) {
     return (
-      <section className="flex flex-col text-justify gap-2 justify-center">
-        <p className="text-xl font-bold border-b md:uppercase border-black py-2">
-          {" "}
-          Ton pseudo github n'existe pas !{" "}
-        </p>
-        <p>
-          {" "}
-          Si tu le renseigne en mode EDIT les visiteurs pourront accèder à tes
-          repositories publics.{" "}
-        </p>
-        <p>
-          On te conseille bien documenter tes repos sur github, l'affichage se
-          fait par rapport à ses données.
-        </p>
-      </section>
+      !visitor && (
+        <section className="flex flex-col text-justify gap-2 justify-center">
+          <p className="text-xl font-bold border-b md:uppercase border-black py-2">
+            {" "}
+            Ton pseudo github n'existe pas !{" "}
+          </p>
+          <p>
+            {" "}
+            Si tu le renseigne en mode EDIT les visiteurs pourront accèder à tes
+            repositories publics.{" "}
+          </p>
+          <p>
+            On te conseille bien documenter tes repos sur github, l'affichage se
+            fait par rapport à ses données.
+          </p>
+        </section>
+      )
     );
   }
   return (

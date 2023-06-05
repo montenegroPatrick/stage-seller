@@ -6,6 +6,7 @@ import ButtonForm from "./ButtonForm";
 import InputFormCompany from "../InputFormCompany";
 import uploadFile from "@/lib/users/uploadFile";
 import { imageUrl } from "@/lib/imageUrl";
+import { useRouter } from "next/navigation";
 
 export default function CompanyNameAvatar({
   submitForm,
@@ -19,6 +20,7 @@ export default function CompanyNameAvatar({
   const [userPostCode, setUserPostCode] = useState(user.postCode);
   const [userCompanyName, setCompanyName] = useState(user.companyName);
   const [userProfileImage, setUserProfileImage] = useState(user.profileImage);
+  const router = useRouter();
   useEffect(() => {
     if (typeof setMessage === "function") {
       setMessage("");
@@ -43,6 +45,7 @@ export default function CompanyNameAvatar({
                 );
                 break;
               case 200:
+                setUserProfileImage(res.data);
                 setMessage("image chargée");
                 break;
               case 400:
@@ -57,6 +60,7 @@ export default function CompanyNameAvatar({
             companyName: userCompanyName,
             // profileImage: userProfileImage,
           });
+          router.refresh();
           setSettings(!settings);
         }}
       >

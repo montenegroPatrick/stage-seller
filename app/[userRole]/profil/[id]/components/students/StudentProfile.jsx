@@ -15,45 +15,53 @@ import { RxResume } from "react-icons/rx";
 
 import MatchHistoric from "./MatchHistoric";
 
-export default function StudentProfile({ id, student }) {
+export default function StudentProfile({ role, user }) {
   return (
-    <div className="shadows-text glassMorph rounded-lg lg:p-20 flex flex-col w-full lg:flex-row font-mono text-black3">
-      <Tuto student={student} type="students" />
+    <div className="shadows-text glassMorph rounded-lg lg:p-20 flex flex-col w-full xl:flex-row font-mono text-black3">
+      <Tuto user={user} role={role} />
       <section className="flex flex-row justify-between">
-        <div className="flex lg:flex-col gap-5 w-full lg:h-full border-dotted border-r-2 border-black pr-4">
-          <ImageProfile student={student} />
+        <div className="flex xl:flex-col gap-5 w-full lg:h-full border-dotted border-r-2 border-black pr-4">
+          <ImageProfile user={user} />
 
           <section className="flex flex-wrap flex-row justify-between w-full">
             <div className="flex flex-col gap-5 w-full ">
-              <h3 className=" text-xl md:uppercase py-5 font-extrabold">{`${student.firstName} ${student.lastName}`}</h3>
+              <h3 className=" text-xl md:uppercase py-5 font-extrabold">
+                {role === "students"
+                  ? `${user.firstName} ${user.lastName}`
+                  : `${user.companyName}`}
+              </h3>
               <div className="flex flex-row items-center gap-2">
                 <MdLocationOn />
-                <h6 className="font-bold">{`${student.city}`}</h6>
+                <h6 className="font-bold">{`${user.city}`}</h6>
               </div>
               <div className="  font-bold flex flex-row items-center gap-2">
                 <SlSocialLinkedin />
-                <Link target="_blanck" href={student.linkedin ?? ""}>{`${
-                  student.linkedin ? student.linkedin : ""
+                <Link target="_blanck" href={user.linkedin ?? ""}>{`${
+                  user.linkedin ? user.linkedin : ""
                 }`}</Link>
               </div>
-              <div className="  font-bold flex flex-row items-center gap-2">
-                <VscGithub />
-                <Link target="_blanck" href={student.github ?? ""}>{`${
-                  student.github ? `https://github.com/ ${student.github}` : ""
-                }`}</Link>
-              </div>
-              <div className="  font-bold flex flex-row items-center gap-2">
-                <RxResume />
-                <Link href={`/students/profil/${student.id}/resume`}>
-                  mon CV
-                </Link>
-              </div>
+              {role === "students" && (
+                <>
+                  <div className="  font-bold flex flex-row items-center gap-2">
+                    <VscGithub />
+                    <Link target="_blanck" href={user.github ?? ""}>{`${
+                      user.github ? `https://github.com/ ${user.github}` : ""
+                    }`}</Link>
+                  </div>
+
+                  <div className="  font-bold flex flex-row items-center gap-2">
+                    <RxResume />
+                    <Link href={`/students/profil/${user.id}/resume`}>
+                      mon CV
+                    </Link>
+                  </div>
+                </>
+              )}
               <div>
                 <Skills
                   stages={false}
                   classes="flex flex-col gap-1"
-                  userId={id}
-                  skills={student.skills}
+                  skills={user.skills}
                 />
               </div>
             </div>
@@ -72,20 +80,21 @@ export default function StudentProfile({ id, student }) {
         </div>
         <div className="w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow order-1">
           <article className="text-left w-full">
-            <ProfileDescription currentUser={student} />
+            <ProfileDescription currentUser={user} />
           </article>
           <article className="lg:text-right w-full">
-            <StageDescription currentUser={student} />
+            <StageDescription currentUser={user} />
           </article>
         </div>
-
-        <div className="w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow  h-1/3 max-h-[20rem]  order-last">
-          <aside className="profile-background glassMorph text-left flex flex-col gap-2 p-5 w-full border border-black rounded-lg">
-            <div className="items-center w-full ">
-              <GithubProjects currentUser={student} />
-            </div>
-          </aside>
-        </div>
+        {role === "students" && (
+          <div className="w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow  h-1/3 max-h-[20rem]  order-last">
+            <aside className="profile-background glassMorph text-left flex flex-col gap-2 p-5 w-full border border-black rounded-lg">
+              <div className="items-center w-full ">
+                <GithubProjects currentUser={user} />
+              </div>
+            </aside>
+          </div>
+        )}
       </section>
     </div>
   );

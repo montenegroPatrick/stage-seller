@@ -42,12 +42,7 @@ export default function ModalSettingsSkillsStages({
     const clickedOnExistedSkill = stageSkills.find((stage) =>
       stage.find((skill) => skill.name === event)
     );
-    if (clickedOnExistedSkill !== undefined) {
-      // const newSkillsArray = stageSkills.filter((skill) =>
-      //   skill.filter((skill) => skill.name !== event)
-      // );
-      // setStageSkills(newSkillsArray);
-    } else {
+    if (clickedOnExistedSkill === undefined) {
       const skillToPush = skillsList.find((skill) => skill.name === event);
 
       const stageSkillsArray = [];

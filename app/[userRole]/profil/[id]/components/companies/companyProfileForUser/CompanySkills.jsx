@@ -11,7 +11,7 @@ export default function CompanySkills({
   submitForm,
   allSkills,
   setMessage,
-  visitor
+  visitor,
 }) {
   const [settings, setSettings] = useState(false);
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -38,7 +38,12 @@ export default function CompanySkills({
       );
     }
   };
-  useEffect(() => {}, [selectedSkills]);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const selectedIds = selectedSkills.map((skill) => skill.id);
+    await submitForm({ skills: selectedIds });
+    setSettings(!settings);
+  };
   return (
     <div className="w-full xl:w-[50%] flex flex-col items-center px-2 py-5 my-5 mx-auto relative">
       <h2 className="text-2xl 2xl:text-3xl text-center">Technologies</h2>
@@ -46,14 +51,7 @@ export default function CompanySkills({
         className={`mt-5 w-full bg-white mx-auto rounded-lg flex flex-wrap justify-evenly py-4 px-2 gap-[6px] border border-black`}
       >
         {settings ? (
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              const selectedIds = selectedSkills.map((skill) => skill.id);
-              submitForm({ skills: selectedIds });
-              setSettings(!settings);
-            }}
-          >
+          <form onSubmit={handleSubmit}>
             <ul className="flex flex-wrap justify-center">
               {listAllSkills.map((skill) => (
                 <li key={skill.id} className="p-2">

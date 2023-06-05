@@ -41,14 +41,7 @@ export default async function Profil({ params }) {
 
     return (
       <NavBarMarginContainer classes="min-h-[calc(100vh-4rem)] ">
-        {params.userRole === "students" ? (
-          <StudentProfileForVisitor id={params.id} student={otherUser} />
-        ) : (
-          <CompanyProfileForVisitor
-            connectedUserId={params.id}
-            otherUser={otherUser}
-          />
-        )}
+        <StudentProfileForVisitor role={params.userRole} user={otherUser} />
       </NavBarMarginContainer>
     );
   }
@@ -56,19 +49,7 @@ export default async function Profil({ params }) {
   // 1.we can't see the other profil with the same userRole, so if my userRole match with the role on url, i'm the profil user ! we are verifying the id on back-end (tokenId === userID)
   return (
     <NavBarMarginContainer classes="max-w-[95vw]  min-h-[calc(100vh-4rem)] mx-auto">
-      <StudentProfilView id={params.id} student={userProfilePage} />
+      <StudentProfilView role={params.userRole} user={userProfilePage} />
     </NavBarMarginContainer>
   );
-}
-{
-  /* <NavBarMarginContainer classes="max-w-[95vw]  min-h-[calc(100vh-4rem)] mx-auto">
-      {params.userRole === "students" ? (
-        <StudentProfilView id={params.id} student={userProfilePage} />
-      ) : (
-        <CompanyProfileForUser
-          connectedUserId={params.id}
-          userProfilePage={userProfilePage}
-        />
-      )}
-    </NavBarMarginContainer> */
 }

@@ -15,7 +15,7 @@ export default function ImageProfile({
   isSettings,
   setShowSettings,
   show,
-  student,
+  user,
 }) {
   const token = Cookies.get("jwt");
   const [file, setFile] = useState(null);
@@ -29,7 +29,7 @@ export default function ImageProfile({
     const formData = new FormData();
     formData.append("file", file);
     formData.append("type", "profile_photo");
-    uploadFile(token, student.id, formData).then((res) => {
+    uploadFile(token, user.id, formData).then((res) => {
       switch (res.status) {
         case 500:
           setMessage(
@@ -91,7 +91,7 @@ export default function ImageProfile({
   return (
     <div className="relative p-2 h-[20vh] lg:h-[30vh] w-[20vh] lg:w-[30vh] rounded-full">
       <img
-        src={`${imageUrl}${student.profileImage}`}
+        src={`${imageUrl}${user.profileImage}`}
         className="absolute p-2 top-0 left-0 rounded-full h-full w-full"
       />
 

@@ -6,7 +6,7 @@ import StudentProfile from "./StudentProfile";
 import { useState } from "react";
 import Button from "@/app/utilsComponents/Buttons/Button";
 
-export default function StudentProfilView({ student, id }) {
+export default function StudentProfilView({ user, role }) {
   const [isSettings, setIsSettings] = useState(false);
   return (
     <div className="text-black3 w-full p-5">
@@ -19,12 +19,13 @@ export default function StudentProfilView({ student, id }) {
       </Button>
       {isSettings ? (
         <StudentProfilSettings
+          role={role}
           isSettings={isSettings}
           setIsSettings={setIsSettings}
-          student={student}
+          user={user}
         />
       ) : (
-        <StudentProfile student={student} studentId={id} />
+        <StudentProfile user={user} role={role} />
       )}
     </div>
   );

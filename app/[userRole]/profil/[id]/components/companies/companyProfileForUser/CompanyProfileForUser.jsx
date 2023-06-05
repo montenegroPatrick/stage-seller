@@ -17,6 +17,8 @@ export default function CompanyProfileForUser({ userProfilePage }) {
   const token = Cookies.get("jwt");
   const [message, setMessage] = useState("");
   const [allSkills, setAllSkills] = useState([]);
+  const [updatedUser, setUpdatedUser] = useState(userProfilePage);
+
   //Fetch list of all skills
   useEffect(() => {
     const fetchData = async () => {
@@ -30,15 +32,13 @@ export default function CompanyProfileForUser({ userProfilePage }) {
   const handleSubmit = async (newData) => {
     setMessage("");
     //const newDataUser = { ...userData, ...newData };
-    try {
-      const response = await updateUser(token, userProfilePage.id, newData);
-      if (response.status === 204) {
-        setMessage("Modifications validées");
-        // setUserData((previous) => ({ ...previous, ...newData }));
-      } else {
-        setMessage("Erreur lors de la modification");
-      }
-    } catch (error) {
+
+    const response = await updateUser(token, userProfilePage.id, newData);
+    console.log(response.status);
+    if (response.status === 204) {
+      setMessage("Modifications validées");
+      setUpdatedUser(...updatedUser, ...newData);
+    } else {
       setMessage("Erreur lors de la modification");
     }
   };
