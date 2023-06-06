@@ -82,7 +82,7 @@ export default function CardProfile({ user, classes }) {
             {description ? description : "Pas de description"}
           </p>
 
-          <dl className="flex w-full mt-6  justify-between gap-4 sm:gap-6">
+          <dl className="flex w-full mt-6 justify-between gap-4 sm:gap-6">
             {stages.map((stage) => (
               <div
                 key={stage.id}
