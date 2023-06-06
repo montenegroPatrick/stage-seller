@@ -4,7 +4,7 @@ import LikeButton from "@/app/[userRole]/lists/components/LikeButton";
 import { RiMailSendLine } from "react-icons/ri";
 import { BsCalendar2DateFill } from "react-icons/bs";
 import { imageUrl } from "@/lib/imageUrl";
-import Skills from "../../profil/[id]/components/students/Skills";
+import Skills from "../../profil/[id]/components/users/Skills";
 import { MdLocationOn } from "react-icons/md";
 import { FcWorkflow } from "react-icons/fc";
 

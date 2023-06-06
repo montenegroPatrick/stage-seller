@@ -6,6 +6,10 @@ import { useRouter } from "next/navigation";
 
 export default function ResumeImage({ user }) {
   const router = useRouter();
+
+  if (!user) {
+    throw new Error("not found");
+  }
   return (
     <NavBarMarginContainer>
       {/* <aside className="m-5 p-10 flex flex-col font-bold gap-4"> */}

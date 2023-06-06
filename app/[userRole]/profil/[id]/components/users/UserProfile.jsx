@@ -15,10 +15,10 @@ import { RxResume } from "react-icons/rx";
 
 import MatchHistoric from "./MatchHistoric";
 
-export default function StudentProfile({ role, user }) {
+export default function UserProfile({ role, user, visitor }) {
   return (
     <div className="shadows-text glassMorph rounded-lg lg:p-20 flex flex-col w-full xl:flex-row font-mono text-black3">
-      <Tuto user={user} role={role} />
+      {!visitor && <Tuto user={user} role={role} />}
       <section className="flex flex-row justify-between">
         <div className="flex xl:flex-col gap-5 w-full lg:h-full border-dotted border-r-2 border-black pr-4">
           <ImageProfile user={user} />
@@ -51,8 +51,12 @@ export default function StudentProfile({ role, user }) {
 
                   <div className="  font-bold flex flex-row items-center gap-2">
                     <RxResume />
-                    <Link href={`/students/profil/${user.id}/resume`}>
-                      mon CV
+                    <Link
+                      href={`/${
+                        user.type === "STUDENT" ? "students" : "companies"
+                      }/profil/${user.id}/resume`}
+                    >
+                      {visitor ? "voir le cv" : "Mon CV"}
                     </Link>
                   </div>
                 </>
@@ -70,14 +74,16 @@ export default function StudentProfile({ role, user }) {
         {/* image de profile en background avec dessus nom prenom lieu skills  */}
       </section>
       <section className="grow flex flex-col gap-10 ">
-        <div className="order-2 w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow ">
-          <div className=" overflow-hidden z-0 p-5 overflow-y-scroll h-50vh w-full profile-background glassMorph text-left flex flex-col gap-5 border border-black rounded-lg">
-            <h2 className="text-xl font-bold border-b md:uppercase border-black py-2">
-              Voici tes likes et matchs
-            </h2>
-            <MatchHistoric />
+        {!visitor && (
+          <div className="order-2 w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow ">
+            <div className="  z-0 p-5   h-50vh w-full profile-background glassMorph text-left flex flex-col gap-5 border border-black rounded-lg">
+              <h2 className="text-xl font-bold border-b md:uppercase border-black py-2">
+                Voici tes likes et matchs
+              </h2>
+              <MatchHistoric />
+            </div>
           </div>
-        </div>
+        )}
         <div className="w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow order-1">
           <article className="text-left w-full">
             <ProfileDescription currentUser={user} />
@@ -90,7 +96,7 @@ export default function StudentProfile({ role, user }) {
           <div className="w-full p-5 flex flex-col gap-16 items-center lg:justify-between grow  h-1/3 max-h-[20rem]  order-last">
             <aside className="profile-background glassMorph text-left flex flex-col gap-2 p-5 w-full border border-black rounded-lg">
               <div className="items-center w-full ">
-                <GithubProjects currentUser={user} />
+                <GithubProjects visitor={visitor} currentUser={user} />
               </div>
             </aside>
           </div>

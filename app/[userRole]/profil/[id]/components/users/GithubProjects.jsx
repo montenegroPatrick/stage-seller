@@ -21,7 +21,6 @@ export default function GithubProjects({
   const [repos, setRepos] = useState();
   const getRepos = () => {
     GetReposGithub(currentUser.github).then((res) => {
-      console.log(res);
       switch (res.status) {
         case 404:
           setRepos(undefined);
@@ -38,26 +37,31 @@ export default function GithubProjects({
     getRepos();
   }, []);
   const [indexProjectInView, setIndexProjectInView] = useState(1);
-  console.log(repos);
   if (!repos) {
-    return (
-      !visitor && (
-        <section className="flex flex-col text-justify gap-2 justify-center">
-          <p className="text-xl font-bold border-b md:uppercase border-black py-2">
-            {" "}
-            Ton pseudo github n'existe pas !{" "}
-          </p>
-          <p>
-            {" "}
-            Si tu le renseigne en mode EDIT les visiteurs pourront accèder à tes
-            repositories publics.{" "}
-          </p>
-          <p>
-            On te conseille bien documenter tes repos sur github, l'affichage se
-            fait par rapport à ses données.
-          </p>
-        </section>
-      )
+    return !visitor ? (
+      <section className="flex flex-col text-justify gap-2 justify-center">
+        <p className="text-xl font-bold border-b md:uppercase border-black py-2">
+          {" "}
+          Ton pseudo github n'existe pas !{" "}
+        </p>
+        <p>
+          {" "}
+          Si tu le renseigne en mode EDIT les visiteurs pourront accèder à tes
+          repositories publics.{" "}
+        </p>
+        <p>
+          On te conseille bien documenter tes repos sur github, l'affichage se
+          fait par rapport à ses données.
+        </p>
+      </section>
+    ) : (
+      <section className="flex flex-col text-justify gap-2 justify-center">
+        <p className="text-xl font-bold border-b md:uppercase border-black py-2">
+          {" "}
+          Malheureusement l'étudiant n'a pas renseigné son pseudo github pour
+          l'instant{" "}
+        </p>
+      </section>
     );
   }
   return (

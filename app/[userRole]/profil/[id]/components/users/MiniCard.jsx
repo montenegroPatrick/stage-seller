@@ -12,6 +12,7 @@ import LikeButton from "@/app/[userRole]/lists/components/LikeButton";
 
 export default function MiniCard({ objectLike, matches }) {
   const token = Cookies.get("jwt");
+  const role = Cookies.get("roleUser");
   const [users, setUsers] = useState();
 
   useEffect(() => {
@@ -38,8 +39,16 @@ export default function MiniCard({ objectLike, matches }) {
           className="border-2 border-whiteSmoke hover:z-10  bg-cover"
         />
         <div className="flex gap-2 w-4/5 justify-between">
-          <Link href={`/companies/profil/${userForCard.id}`}>
-            <h6 className="text-md  lg:text-xl">{userForCard.companyName}</h6>
+          <Link
+            href={`/${role === "companies" ? "students" : "companies"}/profil/${
+              userForCard.id
+            }`}
+          >
+            <h6 className="text-md  lg:text-xl">
+              {role === "companies"
+                ? `${userForCard.lastName} ${userForCard.firstName}`
+                : userForCard.companyName}
+            </h6>
           </Link>
           <div className="hidden lg:block">
             <Skills classes="w-full " skills={userForCard.skills} />

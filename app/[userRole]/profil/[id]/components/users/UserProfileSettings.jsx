@@ -21,7 +21,7 @@ import { RxCrossCircled } from "react-icons/rx";
 import { GrValidate } from "react-icons/gr";
 import ResumeForm from "../../resume/components/resumeForm";
 
-export default function StudentProfilSettings({
+export default function UserProfilSettings({
   isSettings,
   setIsSettings,
   user,
@@ -153,7 +153,7 @@ export default function StudentProfilSettings({
             user={user}
           />
         </div>
-        {role === "student" && <ResumeForm student={user} />}
+        {role === "students" && <ResumeForm student={user} />}
         <div className="flex flex-row flex-wrap  justify-between lg:w-full ">
           <form
             onSubmit={handleSubmit}

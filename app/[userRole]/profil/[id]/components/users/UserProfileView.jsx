@@ -1,12 +1,12 @@
 "use client";
 
 import { FiSettings } from "react-icons/fi";
-import StudentProfilSettings from "./StudentProfileSettings";
-import StudentProfile from "./StudentProfile";
 import { useState } from "react";
 import Button from "@/app/utilsComponents/Buttons/Button";
+import UserProfilSettings from "./UserProfileSettings";
+import UserProfile from "./UserProfile";
 
-export default function StudentProfilView({ user, role }) {
+export default function UserProFileView({ user, role }) {
   const [isSettings, setIsSettings] = useState(false);
   return (
     <div className="text-black3 w-full p-5">
@@ -18,14 +18,14 @@ export default function StudentProfilView({ user, role }) {
         <p>{isSettings ? "profil" : "edit"}</p>
       </Button>
       {isSettings ? (
-        <StudentProfilSettings
+        <UserProfilSettings
           role={role}
           isSettings={isSettings}
           setIsSettings={setIsSettings}
           user={user}
         />
       ) : (
-        <StudentProfile user={user} role={role} />
+        <UserProfile user={user} role={role} />
       )}
     </div>
   );
