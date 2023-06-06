@@ -11,11 +11,8 @@ import getAllUsers from "@/lib/users/getAllUsers";
 import { cookies } from "next/headers";
 
 import { getUser } from "@/lib/users/getUser";
-
-import StudentProfileForVisitor from "./components/students/studentProfileForVisitor";
-import StudentProfilView from "@/app/[userRole]/profil/[id]/components/students/StudentProfilView";
-import CompanyProfileForUser from "@/app/[userRole]/profil/[id]/components/companies/companyProfileForUser/CompanyProfileForUser";
-import CompanyProfileForVisitor from "@/app/[userRole]/profil/[id]/components/companies/companyProfileForVisitor/CompanyProfileForVisitor";
+import UserProFileView from "./components/users/UserProfileView";
+import UserProfile from "./components/users/UserProfile";
 
 export default async function Profil({ params }) {
   //Verification user
@@ -41,14 +38,7 @@ export default async function Profil({ params }) {
 
     return (
       <NavBarMarginContainer classes="min-h-[calc(100vh-4rem)] ">
-        {params.userRole === "students" ? (
-          <StudentProfileForVisitor id={params.id} student={otherUser} />
-        ) : (
-          <CompanyProfileForVisitor
-            connectedUserId={params.id}
-            otherUser={otherUser}
-          />
-        )}
+        <UserProfile role={params.userRole} user={otherUser} visitor={true} />
       </NavBarMarginContainer>
     );
   }
@@ -56,19 +46,7 @@ export default async function Profil({ params }) {
   // 1.we can't see the other profil with the same userRole, so if my userRole match with the role on url, i'm the profil user ! we are verifying the id on back-end (tokenId === userID)
   return (
     <NavBarMarginContainer classes="max-w-[95vw]  min-h-[calc(100vh-4rem)] mx-auto">
-      <StudentProfilView id={params.id} student={userProfilePage} />
+      <UserProFileView role={params.userRole} user={userProfilePage} />
     </NavBarMarginContainer>
   );
-}
-{
-  /* <NavBarMarginContainer classes="max-w-[95vw]  min-h-[calc(100vh-4rem)] mx-auto">
-      {params.userRole === "students" ? (
-        <StudentProfilView id={params.id} student={userProfilePage} />
-      ) : (
-        <CompanyProfileForUser
-          connectedUserId={params.id}
-          userProfilePage={userProfilePage}
-        />
-      )}
-    </NavBarMarginContainer> */
 }

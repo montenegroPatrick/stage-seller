@@ -35,6 +35,7 @@ export default function ModalSettingsSkills({
     getSkills(token).then((skills) => setSkillsList(skills));
   useEffect(() => {
     getSkillsData();
+    transformSkillsOnId(userSkills);
     showSettings && handleOpen();
   }, [showSettings]);
 
@@ -42,12 +43,7 @@ export default function ModalSettingsSkills({
     const clickedOnExistedSkill = userSkills.find(
       (skill) => skill.name === event
     );
-    if (clickedOnExistedSkill !== undefined) {
-      const newSkillsArray = userSkills.filter(
-        (skill) => (skill) => skill.name !== event
-      );
-      setUserSkills(newSkillsArray);
-    } else {
+    if (clickedOnExistedSkill === undefined) {
       const skillToAdd = skillsList.find((skill) => skill.name === event);
       setUserSkills([...userSkills, skillToAdd]);
 
@@ -59,18 +55,22 @@ export default function ModalSettingsSkills({
       dataSkillUpdate.map((objectSkill) => skillIds.push(objectSkill.id));
     }
   };
-
+  const transformSkillsOnId = (listToTransform) => {
+    const skillIds = [];
+    listToTransform.map((objectSkill) => skillIds.push(objectSkill.id));
+    setInputUser((prev) => ({ ...prev, skills: skillIds }));
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // todo the api execpted the ID of the skills
+    // the api execpted the ID of the skills
     const skillIds = userSkills.map((skill) => skill.id);
 
     setInputUser((prev) => ({ ...prev, skills: skillIds }));
     handleOpen();
   };
 
-  const handleRemoveAll = (event) => {
+  const handleRemoveAll = () => {
     setUserSkills([]);
   };
   return (
@@ -147,7 +147,7 @@ export default function ModalSettingsSkills({
             >
               <span>Cancel</span>
             </Button>
-            <Button variant="gradient" color="blue" type="submit">
+            <Button variant="gradient" color="blue" onClick={handleSubmit}>
               {isLoading ? (
                 <span>Loading...</span>
               ) : (

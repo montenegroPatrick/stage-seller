@@ -4,10 +4,25 @@ import "keen-slider/keen-slider.min.css";
 import { useRouter } from "next/navigation";
 import Button from "@/app/utilsComponents/Buttons/Button";
 import CardProfile from "../../lists/components/CardProfile";
+import { useEffect, useState } from "react";
+import LoaderSkeleton from "@/app/utilsComponents/Loaders/LoaderSkeleton";
 
-export default function Slider({ usersToDisplay }) {
+export default function Slider({ usersSuggest, usersMatch, usersLiked }) {
   const [sliderRef] = useKeenSlider();
+  const [usersToDisplay, setUsersToDisplay] = useState();
 
+  const filter = usersSuggest.filter(
+    (suggestUser) =>
+      !usersMatch.find((user) => user.id === suggestUser.id) &&
+      !usersLiked.find((userLiked) => userLiked.user.id === suggestUser.id)
+  );
+
+  useEffect(() => {
+    setUsersToDisplay(filter);
+  }, [usersSuggest, usersLiked, usersMatch]);
+  if (!usersToDisplay) {
+    return <LoaderSkeleton />;
+  }
   if (usersToDisplay.length < 1) {
     throw new Error("no result");
   }

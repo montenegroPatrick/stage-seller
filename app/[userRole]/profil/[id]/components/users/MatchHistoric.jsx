@@ -19,9 +19,7 @@ import SkeletonLoaderCard from "@/app/utilsComponents/Loaders/skeletonLoaderCard
 export default function MatchHistoric() {
   //todo map des likes in like out match de l'utilisateur
   const token = Cookies.get("jwt");
-  // const matches = use(getUserMatches(token))?.data;
-  // const likeSend = use(getLikeFromMe(token))?.data;
-  // const likeRecieve = use(getLikeToMe(token))?.data;
+
   const [matches, setMatches] = useState([]);
   const [likeSend, setLikeSend] = useState([]);
   const [likeRecieve, setLikeRecieve] = useState([]);
@@ -62,35 +60,32 @@ export default function MatchHistoric() {
     );
   }
   return (
-    <Tabs className=" rounded-3xl" value="like émis">
+    <Tabs
+      className="scroll-smooth overflow-hidden overflow-y-scroll rounded-3xl"
+      value="like émis"
+    >
       <TabsHeader className="bg-gray-100">
         <Tab value="like émis">like émis</Tab>
         <Tab value="like reçu">like reçu</Tab>
         <Tab value="match">Match</Tab>
       </TabsHeader>
-      <TabsBody className="mt-5 scroll-smooth ">
+      <TabsBody className="mt-5 ">
         <TabPanel className="" value="like émis">
           {likeSend.length > 0 &&
             likeSend.map((like, index) => (
-              <Suspense key={index} fallback={<SkeletonLoaderCard />}>
-                <MiniCard objectLike={like} matches={false} />
-              </Suspense>
+              <MiniCard key={index} objectLike={like} matches={false} />
             ))}
         </TabPanel>
         <TabPanel className="" value="like reçu">
           {likeRecieve.length > 0 &&
             likeRecieve.map((like, index) => (
-              <Suspense key={index} fallback={<SkeletonLoaderCard />}>
-                <MiniCard objectLike={like} matches={false} />
-              </Suspense>
+              <MiniCard key={index} objectLike={like} matches={false} />
             ))}
         </TabPanel>
         <TabPanel className="" value="match">
           {matches.length > 0 &&
             matches.map((like, index) => (
-              <Suspense key={index} fallback={<SkeletonLoaderCard />}>
-                <MiniCard objectLike={like} matches={true} />
-              </Suspense>
+              <MiniCard key={index} objectLike={like} matches={true} />
             ))}
         </TabPanel>
       </TabsBody>

@@ -10,7 +10,6 @@ import Loading from "@/app/loading";
 
 export default function Skills({
   classes,
-  student,
   isSettings,
   setShowSettings,
   show,

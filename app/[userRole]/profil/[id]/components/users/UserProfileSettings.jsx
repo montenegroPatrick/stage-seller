@@ -21,26 +21,39 @@ import { RxCrossCircled } from "react-icons/rx";
 import { GrValidate } from "react-icons/gr";
 import ResumeForm from "../../resume/components/resumeForm";
 
-export default function StudentProfilSettings({
+export default function UserProfilSettings({
   isSettings,
   setIsSettings,
-  student,
+  user,
+  role,
 }) {
   const token = Cookies.get("jwt");
 
   const router = useRouter();
   const [profilMessage, setProfilMessage] = useState("");
   const [stageMessage, setStageMessage] = useState("");
-  const [input, setInput] = useState({
-    lastname: student.lastName ?? "",
-    firstname: student.firstName ?? "",
-    localisation: student.city ?? "",
-    github: student.github ?? "",
-    profileImage: student.profileImage ?? "",
-    description: student.description ?? "",
-    skills: student.skills ?? [],
-  });
-  const { stages } = student;
+  const [input, setInput] = useState(
+    role === "students"
+      ? {
+          lastname: user.lastName ?? "",
+          firstname: user.firstName ?? "",
+          localisation: user.city ?? "",
+          github: user.github ?? "",
+          profileImage: user.profileImage ?? "",
+          description: user.description ?? "",
+          skills: user.skills ?? [],
+        }
+      : {
+          companyName: user.companyName ?? "",
+
+          localisation: user.city ?? "",
+          github: user.github ?? "",
+          profileImage: user.profileImage ?? "",
+          description: user.description ?? "",
+          skills: user.skills ?? [],
+        }
+  );
+  const { stages } = user;
 
   const [inputStages, setInputStages] = useState(
     stages.length > 0
@@ -79,7 +92,7 @@ export default function StudentProfilSettings({
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const responseUserUpdate = await updateUser(token, student.id, input);
+    const responseUserUpdate = await updateUser(token, user.id, input);
 
     switch (responseUserUpdate.status) {
       case 204:
@@ -106,7 +119,7 @@ export default function StudentProfilSettings({
     const createOrUpdateStages = await addOrUpdateStages(
       token,
       { ...inputStages, duration },
-      student
+      user
     );
     switch (createOrUpdateStages.status) {
       case 200:
@@ -126,7 +139,8 @@ export default function StudentProfilSettings({
     router.refresh();
   };
   const [showSettings, setShowSettings] = useState(false);
-  const { lastname, firstname, localisation, linkedin, github } = input;
+  const { lastname, companyName, firstname, localisation, linkedin, github } =
+    input;
 
   return (
     <div className=" flex flex-col  h-full w-full gap-5 min-h-[calc(100vh-4rem)] font-mono text-black3 bg-blue">
@@ -136,44 +150,63 @@ export default function StudentProfilSettings({
             isSettings={isSettings}
             setShowSettings={setShowSettings}
             show={showSettings}
-            student={student}
+            user={user}
           />
         </div>
-        <ResumeForm student={student} />
+        {role === "students" && <ResumeForm student={user} />}
         <div className="flex flex-row flex-wrap  justify-between lg:w-full ">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-4 items-center border-4 p-5 rounded-xl w-screen"
           >
             <p className="p-2 ">Information personnelle</p>
-            <Input
-              error={lastname === ""}
-              icon={
-                lastname !== "" ? (
-                  <GrValidate className="text-green" />
-                ) : (
-                  <RxCrossCircled className="text-red" />
-                )
-              }
-              onChange={handleChange}
-              name="lastname"
-              value={lastname}
-              label="ton nom de famille"
-            />
-            <Input
-              error={firstname === ""}
-              icon={
-                firstname !== "" ? (
-                  <GrValidate className="text-green" />
-                ) : (
-                  <RxCrossCircled className="text-red" />
-                )
-              }
-              onChange={handleChange}
-              name="firstname"
-              value={firstname}
-              label="ton prénom"
-            />
+            {role === "students" ? (
+              <>
+                <Input
+                  error={lastname === ""}
+                  icon={
+                    lastname !== "" ? (
+                      <GrValidate className="text-green" />
+                    ) : (
+                      <RxCrossCircled className="text-red" />
+                    )
+                  }
+                  onChange={handleChange}
+                  name="lastname"
+                  value={lastname}
+                  label="ton nom de famille"
+                />
+                <Input
+                  error={firstname === ""}
+                  icon={
+                    firstname !== "" ? (
+                      <GrValidate className="text-green" />
+                    ) : (
+                      <RxCrossCircled className="text-red" />
+                    )
+                  }
+                  onChange={handleChange}
+                  name="firstname"
+                  value={firstname}
+                  label="ton prénom"
+                />
+              </>
+            ) : (
+              <Input
+                error={companyName === ""}
+                icon={
+                  companyName !== "" ? (
+                    <GrValidate className="text-green" />
+                  ) : (
+                    <RxCrossCircled className="text-red" />
+                  )
+                }
+                onChange={handleChange}
+                name="companyName"
+                value={companyName}
+                label="nom de l'entreprise"
+              />
+            )}
             <Input
               error={localisation === ""}
               icon={
@@ -188,20 +221,22 @@ export default function StudentProfilSettings({
               value={localisation}
               label="ta ville"
             />
-            <Input
-              error={github === ""}
-              icon={
-                github !== "" ? (
-                  <GrValidate className="text-green" />
-                ) : (
-                  <RxCrossCircled className="text-red" />
-                )
-              }
-              onChange={handleChange}
-              name="github"
-              value={github}
-              label="ton pseudo github"
-            />
+            {role === "students" && (
+              <Input
+                error={github === ""}
+                icon={
+                  github !== "" ? (
+                    <GrValidate className="text-green" />
+                  ) : (
+                    <RxCrossCircled className="text-red" />
+                  )
+                }
+                onChange={handleChange}
+                name="github"
+                value={github}
+                label="ton pseudo github"
+              />
+            )}
             <Input
               error={linkedin === ""}
               icon={
@@ -222,7 +257,7 @@ export default function StudentProfilSettings({
               isSettings={isSettings}
               setIsSettings={setIsSettings}
               setShowSettings={setShowSettings}
-              currentUser={student}
+              currentUser={user}
               input={input}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
@@ -231,8 +266,8 @@ export default function StudentProfilSettings({
               stage={false}
               setInput={setInput}
               isSettings={isSettings}
-              student={student}
-              skills={student.skills}
+              user={user}
+              skills={user.skills}
               show={showSettings}
               setShowSettings={setShowSettings}
               classes="flex flex-col py-2 gap-1 text-black3"
@@ -265,7 +300,7 @@ export default function StudentProfilSettings({
           <StageDescription
             isSettings={isSettings}
             setIsSettings={setIsSettings}
-            currentUser={student}
+            currentUser={user}
             setInput={setInputStages}
             input={inputStages}
             handleChange={handleChangeStages}

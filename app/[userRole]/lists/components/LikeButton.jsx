@@ -55,7 +55,6 @@ export default function LikeButton({ userReceivingId }) {
 
   const foundMatches = async () => {
     if (likesToMe) {
-      console.log(likesToMe);
       const theMatch = likesToMe.find(
         (likeTo) => likeTo.user.id === userReceivingId
       );

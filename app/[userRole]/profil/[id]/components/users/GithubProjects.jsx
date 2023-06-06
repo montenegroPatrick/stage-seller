@@ -13,6 +13,7 @@ export default function GithubProjects({
   handleSubmit,
   handleChange,
   input,
+  visitor,
 }) {
   // false data to try
   // let repos;
@@ -36,9 +37,8 @@ export default function GithubProjects({
     getRepos();
   }, []);
   const [indexProjectInView, setIndexProjectInView] = useState(1);
-  console.log(repos);
   if (!repos) {
-    return (
+    return !visitor ? (
       <section className="flex flex-col text-justify gap-2 justify-center">
         <p className="text-xl font-bold border-b md:uppercase border-black py-2">
           {" "}
@@ -52,6 +52,14 @@ export default function GithubProjects({
         <p>
           On te conseille bien documenter tes repos sur github, l'affichage se
           fait par rapport à ses données.
+        </p>
+      </section>
+    ) : (
+      <section className="flex flex-col text-justify gap-2 justify-center">
+        <p className="text-xl font-bold border-b md:uppercase border-black py-2">
+          {" "}
+          Malheureusement l'étudiant n'a pas renseigné son pseudo github pour
+          l'instant{" "}
         </p>
       </section>
     );
