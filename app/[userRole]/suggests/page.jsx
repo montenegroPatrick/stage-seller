@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import getSuggest from "@/lib/suggests/getSuggests";
 import getUserMatches from "@/lib/users/getUserMatches";
 import getLikeFromMe from "@/lib/users/getLikeFromMe";
-
+export const revalidate = 0;
 export default async function Suggests() {
   const cookieStore = cookies();
   const token = cookieStore.get("jwt")?.value;
@@ -19,20 +19,21 @@ export default async function Suggests() {
     }
   });
 
-  // const usersMatch = await getUserMatches(token).then((res) => res.data);
+  const usersMatch = await getUserMatches(token).then((res) => res.data);
 
-  // const usersLiked = await getLikeFromMe(token).then((res) => res.data);
-
-  // const usersToDisplay = usersSuggest.filter((user) =>
-  //   usersLiked.find((liked) => user.id !== liked.user.id)
-  // );
+  const usersLiked = await getLikeFromMe(token).then((res) => res.data);
+  // filter for users Match and user already liked
 
   return (
     <NavBarMarginContainer>
       <h2 className="bg-white text-4xl sm:text-4xl md:text-5xl text-black text-center py-6 px-8">
         Nos suggestions
       </h2>
-      <Slider usersToDisplay={usersSuggest} />
+      <Slider
+        usersSuggest={usersSuggest}
+        usersMatch={usersMatch}
+        usersLiked={usersLiked}
+      />
     </NavBarMarginContainer>
   );
 }

@@ -41,8 +41,8 @@ export default function Tuto({ role, user }) {
           unmount: { scale: 0.9, y: -100 },
         }}
       >
-        {role === "student" ? (
-          <DialogHeader className="text-md">{`Bienvenue sur ton profil ${user.lastName} ${student.firstName}! `}</DialogHeader>
+        {role === "students" ? (
+          <DialogHeader className="text-md">{`Bienvenue sur ton profil ${user.lastName} ${user.firstName}! `}</DialogHeader>
         ) : (
           <DialogHeader className="text-md">{`Bienvenue sur ton profil ${user.CompanyName} ! `}</DialogHeader>
         )}

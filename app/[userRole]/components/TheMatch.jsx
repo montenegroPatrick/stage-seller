@@ -16,7 +16,7 @@ export default function TheMatch({ openMatch }) {
 
   useEffect(() => {
     openMatch ? setOpen(true) : setOpen(false);
-  });
+  }, []);
 
   return (
     <Fragment>
