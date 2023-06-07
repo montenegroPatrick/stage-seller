@@ -45,7 +45,7 @@ export default function UserProfile({ role, user, visitor }) {
                   <div className="  font-bold flex flex-row items-center gap-2">
                     <VscGithub />
                     <Link target="_blanck" href={user.github ?? ""}>{`${
-                      user.github ? `https://github.com/ ${user.github}` : ""
+                      user.github ? `https://github.com/${user.github}` : ""
                     }`}</Link>
                   </div>
 

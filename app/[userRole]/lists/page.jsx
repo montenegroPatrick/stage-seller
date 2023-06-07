@@ -5,7 +5,7 @@ import CardProfile from "@/app/[userRole]/lists/components/CardProfile";
 import { cookies } from "next/headers";
 //Fetch function
 import getAllUsers from "@/lib/users/getAllUsers";
-export const revalidate = 0;
+export const cache = "no-store";
 export default async function Lists({ params }) {
   const token = cookies().get("jwt")?.value;
   const role = params.userRole;

@@ -10,6 +10,7 @@ import LoaderSkeleton from "@/app/utilsComponents/Loaders/LoaderSkeleton";
 export default function Slider({ usersSuggest, usersMatch, usersLiked }) {
   const [sliderRef] = useKeenSlider();
   const [usersToDisplay, setUsersToDisplay] = useState();
+  const router = useRouter();
 
   const filter = usersSuggest.filter(
     (suggestUser) =>
@@ -19,6 +20,7 @@ export default function Slider({ usersSuggest, usersMatch, usersLiked }) {
 
   useEffect(() => {
     setUsersToDisplay(filter);
+    router.refresh();
   }, [usersSuggest, usersLiked, usersMatch]);
   if (!usersToDisplay) {
     return <LoaderSkeleton />;

@@ -1,11 +1,10 @@
 "use client";
-import ButtonForm from "@/app/[userRole]/profil/[id]/components/companies/companyProfileForUser/ButtonForm";
+import Button from "@/app/utilsComponents/Buttons/Button";
 import SendMessageToUs from "@/lib/contact/sendMessageToUs";
 import {
   Card,
   Input,
   Checkbox,
-  Button,
   Typography,
   Textarea,
   Alert,
@@ -93,9 +92,9 @@ export default function ContactForm() {
           />
         </div>
 
-        <ButtonForm type="submit" className="mt-6" fullWidth>
+        <Button type="submit" className="mt-6" fullWidth>
           Envoyer
-        </ButtonForm>
+        </Button>
         {message && (
           <>
             <Alert

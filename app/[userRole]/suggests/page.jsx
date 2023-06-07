@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import getSuggest from "@/lib/suggests/getSuggests";
 import getUserMatches from "@/lib/users/getUserMatches";
 import getLikeFromMe from "@/lib/users/getLikeFromMe";
+
 export const revalidate = 0;
 export default async function Suggests() {
   const cookieStore = cookies();

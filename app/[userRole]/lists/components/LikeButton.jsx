@@ -1,13 +1,10 @@
 "use client";
-import PropTypes from "prop-types";
 import setLike from "@/lib/matches/setLike.jsx";
 import Cookies from "js-cookie";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import getLikeFromMe from "@/lib/users/getLikeFromMe";
 import unLike from "@/lib/matches/unLike";
 import getLikeToMe from "@/lib/users/getLikeToMe";
-import SkeletonLoader from "@/app/utilsComponents/Loaders/skeletonLoader";
 import setMatch from "@/lib/matches/setMatch";
 import { usePathname, useRouter } from "next/navigation";
 import TheMath from "../../components/TheMatch";
@@ -59,8 +56,9 @@ export default function LikeButton({ userReceivingId }) {
         (likeTo) => likeTo.user.id === userReceivingId
       );
       theMatch &&
-        (await setMatch(token, theMatch.matchId).then(() =>
-          setIsMatchOpen(true)
+        (await setMatch(token, theMatch.matchId).then(
+          () => setIsMatchOpen(true),
+          setIsMatch(true)
         ));
     } else {
       setIsMatchOpen(false);
@@ -94,6 +92,7 @@ export default function LikeButton({ userReceivingId }) {
         unLike(token, userClickedId.matchId);
       }
     }
+    router.refresh();
   };
 
   if (isMatchOpen) {

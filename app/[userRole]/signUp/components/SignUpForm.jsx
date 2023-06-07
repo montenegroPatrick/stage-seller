@@ -1,5 +1,4 @@
 "use client";
-
 import Logo from "@/app/components/Logo";
 import { baseUrl } from "@/lib/baseUrl";
 import { BsDot } from "react-icons/bs";
