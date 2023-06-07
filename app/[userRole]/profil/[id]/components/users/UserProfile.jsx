@@ -44,18 +44,17 @@ export default function UserProfile({ role, user, visitor }) {
                 <>
                   <div className="  font-bold flex flex-row items-center gap-2">
                     <VscGithub />
-                    <Link target="_blanck" href={user.github ?? ""}>{`${
+                    <Link
+                      target="_blanck"
+                      href={`https://github.com/${user.github}`}
+                    >{`${
                       user.github ? `https://github.com/${user.github}` : ""
                     }`}</Link>
                   </div>
 
                   <div className="  font-bold flex flex-row items-center gap-2">
                     <RxResume />
-                    <Link
-                      href={`/${
-                        user.type === "STUDENT" ? "students" : "companies"
-                      }/profil/${user.id}/resume`}
-                    >
+                    <Link href={`/${role}/profil/${user.id}/resume`}>
                       {visitor ? "voir le cv" : "Mon CV"}
                     </Link>
                   </div>

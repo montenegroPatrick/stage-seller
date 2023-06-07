@@ -9,5 +9,6 @@ export default async function unLike(token, id) {
     })
     .then((res) => res.data)
     .catch((err) => err.response);
+  console.log("unlike", response);
   return response;
 }

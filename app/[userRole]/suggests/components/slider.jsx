@@ -12,11 +12,13 @@ export default function Slider({ usersSuggest, usersMatch, usersLiked }) {
   const [usersToDisplay, setUsersToDisplay] = useState();
   const router = useRouter();
 
-  const filter = usersSuggest.filter(
-    (suggestUser) =>
-      !usersMatch.find((user) => user.id === suggestUser.id) &&
-      !usersLiked.find((userLiked) => userLiked.user.id === suggestUser.id)
-  );
+  const filter =
+    usersSuggest &&
+    usersSuggest.filter(
+      (suggestUser) =>
+        !usersMatch.find((user) => user.id === suggestUser.id) &&
+        !usersLiked.find((userLiked) => userLiked.user.id === suggestUser.id)
+    );
 
   useEffect(() => {
     setUsersToDisplay(filter);

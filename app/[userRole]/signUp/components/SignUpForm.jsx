@@ -57,10 +57,13 @@ export default function SignUpForm({ role }) {
     /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
 
   useEffect(() => {
+    setErrorMessage("");
+    if (disable) {
+      setErrorMessage("veuillez remplir les champs obligatoires");
+    }
     if (!!input.password) {
       setLabelPassword("* password-faible");
     }
-    setErrorMessage("");
     setIsErrorEmail(false);
     setIsErrorVerifPassword(false);
     setDisable(false);
@@ -82,6 +85,7 @@ export default function SignUpForm({ role }) {
     }
     if (input.password !== input.verifyPassword) {
       setIsErrorVerifPassword(true);
+      setDisable(true);
     } else {
       setIsErrorVerifPassword(false);
     }
