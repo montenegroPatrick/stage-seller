@@ -9,7 +9,7 @@ import {
   Abril_Fatface,
   PT_Mono,
   Quicksand,
-  Raleway
+  Raleway,
 } from "next/font/google";
 
 //Roboto
@@ -49,7 +49,6 @@ export const lobster = Lobster({
   variable: "--font-lobster",
 });
 
-
 //Libre Baskerville
 export const baskerville = Libre_Baskerville({
   weight: ["400", "700"],
@@ -57,7 +56,6 @@ export const baskerville = Libre_Baskerville({
   display: "swap",
   variable: "--font-baskerville",
 });
-
 
 //Libre Bebas Neue
 export const bebasNeue = Bebas_Neue({
@@ -85,7 +83,7 @@ export const pt = PT_Mono({
 
 //Libre QuickSand
 export const quickSand = Quicksand({
-  weight: ["300","400","500",'600'],
+  weight: ["300", "400", "500", "600"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-quickSand",
@@ -93,8 +91,8 @@ export const quickSand = Quicksand({
 
 //Libre Raleway
 export const raleWay = Raleway({
-  weight: ["100","200","300","400","500",'600', "700"],
-  style: ['normal', 'italic'],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-raleWay",

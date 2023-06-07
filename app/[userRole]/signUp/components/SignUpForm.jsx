@@ -58,9 +58,7 @@ export default function SignUpForm({ role }) {
 
   useEffect(() => {
     setErrorMessage("");
-    if (disable) {
-      setErrorMessage("veuillez remplir les champs obligatoires");
-    }
+
     if (!!input.password) {
       setLabelPassword("* password-faible");
     }
@@ -71,17 +69,22 @@ export default function SignUpForm({ role }) {
       if (input[key] !== "" && postCode !== "") {
         setDisable(false);
       } else {
+        setErrorMessage("Tous les champs ne sont pas renseignés");
         setDisable(true);
       }
     }
     if (!mentionLegal) {
       setDisable(true);
+      setErrorMessage(
+        "Les mentions légales doivent être acceptées pour pouvoir continuer"
+      );
     }
     if (input.password !== "") {
       checkPassword(input.password, setPasswordNotValid);
     }
     if (passwordNotValid.length > 0) {
       setDisable(true);
+      setErrorMessage("Le mot de passe doit respecter les conditions");
     }
     if (input.password !== input.verifyPassword) {
       setIsErrorVerifPassword(true);
@@ -97,6 +100,9 @@ export default function SignUpForm({ role }) {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setInput((prev) => ({ ...prev, [name]: value }));
+    if (!value) {
+      setErrorMessage(`vous devez remplir le champs ${name}`);
+    }
   };
 
   const handleSubmit = async (event) => {
