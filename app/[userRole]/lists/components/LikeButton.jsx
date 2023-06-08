@@ -56,10 +56,10 @@ export default function LikeButton({ userReceivingId }) {
         (likeTo) => likeTo.user.id === userReceivingId
       );
       theMatch &&
-        (await setMatch(token, theMatch.matchId).then(
-          () => setIsMatchOpen(true),
-          setIsMatch(true)
-        ));
+        (await setMatch(token, theMatch.matchId).then(() => {
+          setIsMatchOpen(true);
+          setIsMatch(true);
+        }));
     } else {
       setIsMatchOpen(false);
     }
@@ -91,16 +91,14 @@ export default function LikeButton({ userReceivingId }) {
         setIsLike(false);
         unLike(token, userClickedId.matchId);
       }
+    } else {
     }
     router.refresh();
   };
 
-  if (isMatchOpen) {
-    return <TheMath openMatch={isMatch} />;
-  }
-
   return (
     <>
+      {isMatchOpen && <TheMath openMatch={isMatch} />}
       <button onClick={handleClick} className="">
         <Button addClasses="lowercase">
           {isMatch ? "it's match" : isLike ? "interest sent" : "send interest"}
